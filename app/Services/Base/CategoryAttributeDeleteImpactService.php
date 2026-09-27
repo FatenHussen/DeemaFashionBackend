@@ -81,7 +81,7 @@ class CategoryAttributeDeleteImpactService
                     'id' => $variant->product?->id,
                     'product_number' => $variant->product?->product_number,
                     'name' => $variant->product?->name,
-                    'image' => $variant->product?->media->first()?->url,
+                    'image' => $variant->product?->image_url,
                     'category' => $variant->product?->category ? [
                         'id' => $variant->product->category->id,
                         'name' => $variant->product->category->name,

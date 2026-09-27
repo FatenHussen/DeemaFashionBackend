@@ -51,6 +51,9 @@ class StoreRequest extends FormRequest
 
             'is_active'            => 'sometimes|boolean',
             'is_restaurant'        => 'sometimes|boolean',
+            'min_order_amount'     => 'nullable|numeric|min:0',
+            'delivery_min_hours'   => 'nullable|integer|min:0',
+            'delivery_max_hours'   => 'nullable|integer|min:0',
             'payment_methods'      => 'nullable|array',
             'payment_methods.*'    => 'required|string|in:cash,online',
             'pricing_tier'         => 'nullable|in:cheap,medium,expensive',

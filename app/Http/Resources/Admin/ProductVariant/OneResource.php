@@ -30,10 +30,8 @@ class OneResource extends JsonResource
                 'price' => $this->product->price,
                 'discount' => $this->product->discount,
                 'country' => $this->product->country,
-                'image' => $this->product->media->first()?->url ?? null,
-                'images' => $this->product->media->map(function ($media) {
-                    return $media->url;
-                }),
+                'image' => $this->product->image_url,
+                'images' => $this->product->listedImageUrls(),
                 'category' => [
                     'id' => $this->product->category->id,
                     'name' => $this->product->category->name,

@@ -5,9 +5,11 @@
 > **آخر تحديث | Last Updated:** 2026-09-27  
 > الملف الشامل السابق يبقى: [`web.md`](./web.md)
 
+**اليوم (27 أيلول):** السلة: أقل طلب + أقرب توصيل + سعر التوصيل. المطعم لحاله فوري (سائق المطعم أو تيك مارت) — [`WEB_CART_CHECKOUT_DELIVERY.md`](./WEB_CART_CHECKOUT_DELIVERY.md)
+
 **اليوم (27 أيلول):** إخفاء الفئة يخفي منتجاتها من القوائم والبحث والأقسام وصفحة المنتج (`404`) — [`WEB_HIDDEN_CATEGORY_PRODUCTS.md`](./WEB_HIDDEN_CATEGORY_PRODUCTS.md)
 
-**اليوم (27 أيلول):** صورة الأيقونة على صفحة المنتج من `icons[].icon` أو `icons[].image` مع `?v=` — [`WEB_ICON_IMAGE.md`](./WEB_ICON_IMAGE.md)
+**اليوم (27 أيلول):** صورة الأيقونة — بعد استبدالها من الداشبورد مسار الملف يتغيّر، اعرضوا `icons[].icon` مع `?v=` — [`WEB_ICON_IMAGE.md`](./WEB_ICON_IMAGE.md)
 
 **اليوم (27 أيلول):** نافذة التقييم تتسكرول لحد زر الإرسال، ومتوسط المنتج في `rating` يتحدث بعد الحفظ — [`WEB_PRODUCT_RATING.md`](./WEB_PRODUCT_RATING.md)
 
@@ -502,12 +504,13 @@ Accept-Language: ar
 
 > **27 أيلول 2026** — [`WEB_ICON_IMAGE.md`](./WEB_ICON_IMAGE.md) · الربط: [`PRODUCT_ICONS_WEB_DASHBOARD.md`](./PRODUCT_ICONS_WEB_DASHBOARD.md)
 
-من `GET /api/user/products/{id}` → `icons[]`. الصورة = `icon` أو `image` (نفس الرابط) ومعه `?v=`. لا تحذفوا `?v=` ولا تثبّتوا SVG في الكود. `icons` فاضي → أخفوا الصف.
+من `GET /api/user/products/{id}` → `icons[]`. الصورة = `icon` أو `image` (نفس الرابط). بعد الاستبدال من الداشبورد اسم الملف يتغيّر وفيه `?v=`. لا تحذفوا `?v=` ولا تثبّتوا SVG. `key` على الرابط مو على `id` فقط. `icons` فاضي → أخفوا الصف.
 
 ```tsx
-{(product.icons ?? []).map((item) => (
-  <img key={item.id} src={item.icon || item.image} alt={item.name} />
-))}
+{(product.icons ?? []).map((item) => {
+  const src = item.icon || item.image;
+  return src ? <img key={src} src={src} alt={item.name} /> : null;
+})}
 ```
 
 ---

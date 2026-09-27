@@ -38,6 +38,9 @@ class SellerRegistrationResource extends JsonResource
             'status' => $this->status ?? 'pending',
             'is_service_provider' => $isServiceProvider,
             'is_restaurant' => $isRestaurant,
+            'min_order_amount' => $this->min_order_amount !== null ? (float) $this->min_order_amount : null,
+            'delivery_min_hours' => $this->delivery_min_hours,
+            'delivery_max_hours' => $this->delivery_max_hours,
             'seller_type' => $type,
             'registered_at' => $this->registered_at,
         ];

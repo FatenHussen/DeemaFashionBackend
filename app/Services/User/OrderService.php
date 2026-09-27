@@ -30,12 +30,16 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 use App\Services\InventoryService;
 use App\Traits\HasCurrencyConversion;
+use Carbon\Carbon;
 
 class OrderService extends BaseService
 {
     use HasCurrencyConversion;
-    public function __construct(Order $model)
-    {
+    public function __construct(
+        Order $model,
+        private CheckoutPolicyService $checkoutPolicy,
+        private CartService $cartService,
+    ) {
         $this->model      = $model;
         $this->resource   = OneResource::class;
         $this->collection = AllResource::class;
@@ -111,8 +115,21 @@ class OrderService extends BaseService
 
             $user = $this->resolveUser();
             $address = $this->resolveAddress($user, $data['address_id']);
+            $policy = $this->checkoutPolicy->forShops(
+                $this->checkoutPolicy->shopsFromVariantIds(
+                    collect($data['items'])->pluck('shop_product_variant_id')->all()
+                )
+            );
+            $choice = ! empty($policy['instant_only'])
+                ? 'asap'
+                : $this->checkoutPolicy->resolveChoice($data);
+            $this->checkoutPolicy->assertDeliveryChoice(
+                $choice,
+                $data['scheduled_delivery_at'] ?? null,
+                $policy
+            );
 
-            $order = $this->createOrder($user, $address, $data);
+            $order = $this->createOrder($user, $address, $data, $choice);
 
             [$basketDiscountPercent, $deliveryPrice] =
                 $this->resolveBasketAndDelivery($order, $data);
@@ -124,6 +141,8 @@ class OrderService extends BaseService
                 $totalQuantity,
                 $orderItems
             ] = $this->addItemsToOrder($order, $data);
+
+            $this->assertMinOrder($policy, (float) $subtotalAfterProductDiscount);
 
             $discounts = $this->applyExternalDiscounts(
                 $order,
@@ -228,6 +247,18 @@ class OrderService extends BaseService
             $totalQuantity,
             $orderItems
         ] = $this->addItemsToOrder(null, $data);
+        $policy = $this->checkoutPolicy->forShops(
+            $this->checkoutPolicy->shopsFromVariantIds(
+                collect($data['items'] ?? [])->pluck('shop_product_variant_id')->all()
+            )
+        );
+        $checkout = $this->cartService->presentCheckout(
+            $this->checkoutPolicy->summarize($policy, (float) $subtotalAfterProductDiscount)
+        );
+        $checkout['delivery_error'] = $this->deliveryChoiceError($data, $policy);
+        if ($checkout['delivery_error'] !== null) {
+            $checkout['can_checkout'] = false;
+        }
         $promotionService = app(PromotionService::class);
         // خصومات عامة + نقاط + اشتراك
         $discounts = $this->applyExternalDiscounts(
@@ -318,8 +349,45 @@ class OrderService extends BaseService
             ]),
             'promotion' => $discounts['promotion'] ?? null,
             'excluded_items' => $discounts['excluded_items'] ?? [],
-            'orderItems' => $formattedItems
+            'orderItems' => $formattedItems,
+            'checkout' => $checkout,
         ];
+    }
+
+    private function deliveryChoiceError(array $data, array $policy): ?string
+    {
+        if (! empty($policy['instant_only'])) {
+            return null;
+        }
+
+        if (!array_key_exists('delivery_choice', $data) && !array_key_exists('is_instant_delivery', $data) && empty($data['scheduled_delivery_at'])) {
+            return null;
+        }
+
+        try {
+            $this->checkoutPolicy->assertDeliveryChoice(
+                $this->checkoutPolicy->resolveChoice($data),
+                isset($data['scheduled_delivery_at']) ? (string) $data['scheduled_delivery_at'] : null,
+                $policy
+            );
+        } catch (CustomExceptionWithMessage $exception) {
+            return __($exception->getTranslationKey(), $exception->getReplacements());
+        }
+
+        return null;
+    }
+
+    private function assertMinOrder(array $policy, float $subtotal): void
+    {
+        $summary = $this->checkoutPolicy->summarize($policy, $subtotal);
+        if ($summary['can_checkout']) {
+            return;
+        }
+
+        throw new CustomExceptionWithMessage('custom.checkout.min_order_remaining', 422, [
+            'min' => $this->convertFormattedPrice($summary['min_order_amount']),
+            'remaining' => $this->convertFormattedPrice($summary['remaining_amount']),
+        ]);
     }
 
     /**
@@ -335,7 +403,7 @@ class OrderService extends BaseService
         return $user->addresses()->findOrFail($addressId);
     }
 
-    private function createOrder(User $user, $address, array $data): Order
+    private function createOrder(User $user, $address, array $data, string $choice): Order
     {
         $paymentMethod = $this->resolvePaymentMethod($data);
 
@@ -343,7 +411,10 @@ class OrderService extends BaseService
             'user_id' => $user->id,
             'user_address_id' => $address->id,
             'cart_type' => $data['cart_type'] ?? CartType::DEFAULT->value,
-            'is_instant_delivery' => $data['is_instant_delivery'] ?? false,
+            'is_instant_delivery' => $choice === 'asap',
+            'scheduled_delivery_at' => $choice === 'scheduled'
+                ? Carbon::parse($data['scheduled_delivery_at'])->seconds(0)
+                : null,
             'status' => OrderStatus::PENDING->value,
             'payment_method_id' => $paymentMethod->id,
             'is_paid' => $paymentMethod->isPaidOnPlacement(),

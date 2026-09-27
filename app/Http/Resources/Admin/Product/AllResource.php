@@ -56,6 +56,8 @@ class AllResource extends JsonResource
             'is_instant_delivery'   => $this->is_instant_delivery,
 
             'thumbnail'             => $this->thumbnail_url,
+            'image'                 => $this->image_url,
+            'images'                => $this->listedImageUrls(),
 
             'vendor' => $this->vendor ? [
                 'id' => $this->vendor->id,
@@ -74,9 +76,6 @@ class AllResource extends JsonResource
                 'rejected' => 'مرفوض',
                 default => null,
             },
-
-            'image'                 => $this->media->first()?->url,
-            'images'                => $this->media->pluck('url'),
 
             'created_at'            => $this->created_at,
         ];

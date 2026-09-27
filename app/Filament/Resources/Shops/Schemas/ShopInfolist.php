@@ -178,6 +178,20 @@ class ShopInfolist
                                         ->falseIcon('heroicon-o-x-circle')
                                         ->trueColor('success')
                                         ->falseColor('gray'),
+
+                                    Infolists\Components\TextEntry::make('min_order_amount')
+                                        ->label(__('custom.shops.min_order_amount'))
+                                        ->placeholder('—'),
+
+                                    Infolists\Components\TextEntry::make('delivery_min_hours')
+                                        ->label(__('custom.shops.delivery_min_hours'))
+                                        ->suffix(' ' . __('custom.shops.hours'))
+                                        ->placeholder('—'),
+
+                                    Infolists\Components\TextEntry::make('delivery_max_hours')
+                                        ->label(__('custom.shops.delivery_max_hours'))
+                                        ->suffix(' ' . __('custom.shops.hours'))
+                                        ->placeholder('—'),
                                 ])
                                 ->columns(4)
                                 ->collapsible(),

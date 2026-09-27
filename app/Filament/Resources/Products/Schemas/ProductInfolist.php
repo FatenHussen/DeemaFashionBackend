@@ -242,7 +242,7 @@ class ProductInfolist
                                 ->schema([
                                     Infolists\Components\ImageEntry::make('thumbnail')
                                         ->label(__('custom.products.thumbnail'))
-                                        ->disk('public')
+                                        ->getStateUsing(fn ($record) => $record->thumbnail_url)
                                         ->size(200)
                                         ->extraAttributes(['class' => 'rounded-xl'])
                                         ->visible(fn($record) => $record->thumbnail)

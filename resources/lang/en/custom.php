@@ -17,6 +17,12 @@ return [
 
     'account_already_exists' => 'Account already exists.',
     'cart_quantity_unavailable' => 'Requested quantity is not available.',
+    'checkout' => [
+        'asap' => 'As soon as possible',
+        'min_order_remaining' => 'Minimum order is :min. :remaining left.',
+        'delivery_time_required' => 'Choose a delivery day and time.',
+        'delivery_too_soon' => 'The earliest allowed time is :earliest.',
+    ],
     // HTTP Status Codes
     'errors' => [
         400 => 'Bad request.',
@@ -128,6 +134,13 @@ return [
         'ratings_count' => 'Ratings Count',
         'is_active' => 'Active',
         'is_free_delivery' => 'Free Delivery',
+        'min_order_amount' => 'Minimum order amount',
+        'min_order_amount_help' => 'Admin can change this any time. The cart shows the last saved value.',
+        'platform_uses_settings' => 'TikMart uses the delivery settings for the minimum amount and the delivery window, not these shop fields.',
+        'delivery_max_before_min' => 'The latest delivery must be greater than or equal to the earliest delivery.',
+        'delivery_min_hours' => 'Earliest delivery (hours)',
+        'delivery_max_hours' => 'Latest delivery (hours)',
+        'delivery_window_help' => 'ASAP window. The customer cannot pick a time earlier than the minimum.',
         'working_hours' => 'Working Hours',
         'day' => 'Day',
         'open' => 'Opening Time',

@@ -7,10 +7,20 @@ use App\Exceptions\NotFoundException;
 use App\Http\Resources\User\Cart\CartItemResource;
 use App\Models\CartItem;
 use App\Models\ShopProductVariant;
+use App\Models\User;
+use App\Traits\HasCurrencyConversion;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Collection;
 
 class CartService
 {
+    use HasCurrencyConversion;
+
+    public function __construct(private CheckoutPolicyService $checkoutPolicy)
+    {
+    }
+
     public function list(int $userId): AnonymousResourceCollection
     {
         $items = CartItem::query()
@@ -20,6 +30,92 @@ class CartService
             ->get();
 
         return CartItemResource::collection($items);
+    }
+
+    public function checkoutSummary(int $userId): array
+    {
+        $items = CartItem::query()
+            ->where('user_id', $userId)
+            ->with(['shopProductVariant.productVariant.product', 'shopProductVariant.shop'])
+            ->get();
+
+        $subtotal = $items->sum(function (CartItem $item) {
+            $price = (float) ($item->shopProductVariant?->productVariant?->final_price ?? 0);
+
+            return $price * (int) $item->quantity;
+        });
+
+        $shops = $items
+            ->map(fn (CartItem $item) => $item->shopProductVariant?->shop)
+            ->filter()
+            ->unique('id')
+            ->values();
+
+        $summary = $this->checkoutPolicy->summarize($this->checkoutPolicy->forShops($shops), $subtotal);
+        $summary['delivery_price'] = $this->resolveCartDeliveryPrice($userId, $items);
+
+        return $this->presentCheckout($summary);
+    }
+
+    public function presentCheckout(array $summary): array
+    {
+        $remaining = (float) $summary['remaining_amount'];
+
+        $payload = [
+            'source' => $summary['source'],
+            'shop_id' => $summary['shop_id'],
+            'min_order_amount' => $this->convertPrice($summary['min_order_amount']),
+            'subtotal' => $this->convertPrice($summary['subtotal']),
+            'remaining_amount' => $this->convertPrice($remaining),
+            'can_checkout' => (bool) $summary['can_checkout'],
+            'delivery_min_hours' => (int) $summary['delivery_min_hours'],
+            'delivery_max_hours' => (int) $summary['delivery_max_hours'],
+            'earliest_delivery_at' => $summary['earliest_delivery_at'],
+            'instant_only' => (bool) ($summary['instant_only'] ?? false),
+            'fulfillment' => $summary['fulfillment'] ?? null,
+            'message' => $remaining > 0
+                ? __('custom.checkout.min_order_remaining', [
+                    'min' => $this->convertFormattedPrice($summary['min_order_amount']),
+                    'remaining' => $this->convertFormattedPrice($remaining),
+                ])
+                : null,
+        ];
+
+        if (array_key_exists('delivery_price', $summary)) {
+            $payload['delivery_price'] = $summary['delivery_price'] === null
+                ? null
+                : $this->convertPrice($summary['delivery_price']);
+        }
+
+        return $payload;
+    }
+
+    /**
+     * Distance fee for the cart, using the customer's default address.
+     * A restaurant is a shop: same fee, and free delivery returns 0.
+     * Hours are not part of this number.
+     */
+    private function resolveCartDeliveryPrice(int $userId, Collection $items): ?float
+    {
+        if ($items->isEmpty()) {
+            return 0.0;
+        }
+
+        $user = User::query()->find($userId);
+        if (! $user || ! $user->addresses()->where('is_default', true)->exists()) {
+            return null;
+        }
+
+        $variantIds = $items->pluck('shop_product_variant_id')->filter()->unique()->values()->all();
+        if ($variantIds === []) {
+            return null;
+        }
+
+        try {
+            return CalculateDeliveryPriceService::handle($user, $variantIds);
+        } catch (CustomExceptionWithMessage|ModelNotFoundException) {
+            return null;
+        }
     }
 
     public function add(int $userId, array $data): CartItemResource

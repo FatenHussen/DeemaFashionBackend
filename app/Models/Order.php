@@ -87,6 +87,18 @@ class Order extends Model
 
     protected $appends = ['affiliate_commission'];
 
+    public function deliverySummary(): array
+    {
+        $asap = (bool) $this->is_instant_delivery;
+
+        return [
+            'delivery_choice' => $asap ? 'asap' : 'scheduled',
+            'delivery_choice_label' => $asap
+                ? __('custom.checkout.asap')
+                : $this->scheduled_delivery_at?->format('Y-m-d H:i'),
+        ];
+    }
+
     //affiliate_commission
     protected function affiliateCommission(): Attribute
     {

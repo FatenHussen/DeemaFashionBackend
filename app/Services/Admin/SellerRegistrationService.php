@@ -70,6 +70,10 @@ class SellerRegistrationService extends BaseService
                 'area_id' => null,
                 'is_active' => true,
                 'is_service_provider' => $isServiceProvider,
+                'is_restaurant' => (bool) $registration->is_restaurant,
+                'min_order_amount' => $registration->min_order_amount,
+                'delivery_min_hours' => $registration->delivery_min_hours,
+                'delivery_max_hours' => $registration->delivery_max_hours,
             ]);
 
             // Handle logo if exists

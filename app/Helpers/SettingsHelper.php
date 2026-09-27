@@ -72,6 +72,9 @@ class SettingsHelper
         return [
             'default_fee'    => self::get('default_delivery_fee', 5.00),
             'free_threshold' => self::get('free_delivery_threshold', 50.00),
+            'tikmart_min_order_amount' => self::get('tikmart_min_order_amount', 0),
+            'tikmart_delivery_min_hours' => self::get('tikmart_delivery_min_hours', 24),
+            'tikmart_delivery_max_hours' => self::get('tikmart_delivery_max_hours', 48),
         ];
     }
 

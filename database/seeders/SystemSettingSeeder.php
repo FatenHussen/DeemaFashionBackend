@@ -99,6 +99,33 @@ class SystemSettingSeeder extends Seeder
                 'description' => 'Minimum order amount for free delivery',
                 'is_active' => true,
             ],
+            [
+                'key' => 'tikmart_min_order_amount',
+                'value' => '0',
+                'type' => 'number',
+                'group' => 'delivery',
+                'title' => 'TikMart minimum order',
+                'description' => 'Minimum cart amount for TikMart orders. Set from the dashboard.',
+                'is_active' => true,
+            ],
+            [
+                'key' => 'tikmart_delivery_min_hours',
+                'value' => '24',
+                'type' => 'number',
+                'group' => 'delivery',
+                'title' => 'TikMart earliest delivery (hours)',
+                'description' => 'Soonest delivery window for TikMart, for example 24 hours.',
+                'is_active' => true,
+            ],
+            [
+                'key' => 'tikmart_delivery_max_hours',
+                'value' => '48',
+                'type' => 'number',
+                'group' => 'delivery',
+                'title' => 'TikMart latest delivery (hours)',
+                'description' => 'Latest delivery window for TikMart, for example 48 hours.',
+                'is_active' => true,
+            ],
         ];
 
         foreach ($settings as $setting) {

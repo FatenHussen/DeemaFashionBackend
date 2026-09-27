@@ -22,6 +22,7 @@ class CartController extends Controller
 
         return $this->sendResponse(data: [
             'items' => $this->cartService->list($userId),
+            'checkout' => $this->cartService->checkoutSummary($userId),
         ]);
     }
 

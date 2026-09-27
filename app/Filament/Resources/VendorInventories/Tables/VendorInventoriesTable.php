@@ -160,13 +160,7 @@ class VendorInventoriesTable
 
     private static function resolveProductImageUrl(Product $product): ?string
     {
-        $media = $product->media->first();
-
-        if ($media && !empty($media->path)) {
-            return asset('storage/' . $media->path);
-        }
-
-        return null;
+        return $product->image_url;
     }
 
     private static function resolveVariantImageUrl(mixed $variant, Product $product): ?string

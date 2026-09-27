@@ -26,7 +26,7 @@ class AllResource extends JsonResource
                 'name' => $this->product->name,
                 'description' => $this->product->description,
                 'price' => $this->product->price,
-                'image' => $this->product->media->first()?->url ?? null,
+                'image' => $this->product->image_url,
                 'category' => [
                     'id' => $this->product->category->id,
                     'name' => $this->product->category->name,

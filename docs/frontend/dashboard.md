@@ -5,11 +5,13 @@
 > **آخر تحديث:** 27 أيلول 2026  
 > يجمع **كل** تعديلات الباك التي تحتاج تنفيذ في الداشبورد (مو بس المنتج).
 
+**اليوم:** طلب المطعم لحاله توصيل فوري، من سائق المطعم أو عامل تيك مارت. السعر من المسافة والساعات ما بتنضرب بالمعامل — [`DASHBOARD_CART_CHECKOUT_DELIVERY.md`](./DASHBOARD_CART_CHECKOUT_DELIVERY.md)
+
 **اليوم:** قائمة البانرات على الشاشة الصغيرة تسكرول وتعرض كل البطاقات — [`DASHBOARD_BANNER_LIST_SCROLL.md`](./DASHBOARD_BANNER_LIST_SCROLL.md)
 
 **اليوم:** إخفاء الفئة (`is_active: false`) يخفي منتجاتها من الموقع والتطبيق، بدون تعطيل المنتجات في الداشبورد — [`DASHBOARD_HIDDEN_CATEGORY_PRODUCTS.md`](./DASHBOARD_HIDDEN_CATEGORY_PRODUCTS.md)
 
-**اليوم:** تغيير صورة الأيقونة ينحفظ، والمعاينة من `image` / `icon` بعد الرد — [`DASHBOARD_ICON_IMAGE.md`](./DASHBOARD_ICON_IMAGE.md)
+**اليوم:** تغيير صورة الأيقونة — النجاح فقط إذا مسار `image` تغيّر. الحد 8MB، والأكبر يرجع 422 — [`DASHBOARD_ICON_IMAGE.md`](./DASHBOARD_ICON_IMAGE.md)
 
 **اليوم:** العروض = شرط (أول طلب / شراء بقيمة / إنشاء حساب) + مكافأة (خصم / توصيل مجاني / هدية) — [`DASHBOARD_PROMOTION_TRIGGERS.md`](./DASHBOARD_PROMOTION_TRIGGERS.md)
 
@@ -869,7 +871,7 @@ file: <products.xlsx>
 
 ### اليوم (25–27 أيلول)
 - [ ] إيقاف الفئة `is_active: false` فقط — لا تعطّلوا منتجاتها — [§27](#27-إخفاء-الفئة-يخفي-منتجاتها)
-- [ ] تغيير صورة الأيقونة في `image`، والمعاينة من الرد مع `?v=` — [§28](#28-تغيير-صورة-الأيقونة)
+- [ ] تغيير صورة الأيقونة: الملف في `image`، والنجاح فقط إذا مسار الرد تغيّر. 422 مو «تم الحفظ» — [§28](#28-تغيير-صورة-الأيقونة)
 - [ ] العروض: شرط + مكافأة (خصم / توصيل مجاني / هدية) — [§29](#29-عروض-شرط--مكافأة)
 - [ ] جداول سلال الزبائن: `start_date` + `delivery_time` للعرض فقط — [§30](#30-تاريخ-ووقت-جدولة-سلة-الزبون)
 - [ ] الطلب: `PATCH .../scheduled-delivery` بصيغة `Y-m-d H:i` — [§31](#31-يوم-ووقت-التوصيل-على-الطلب)
@@ -1172,15 +1174,15 @@ values[0][name][en]=XS
 
 > **27 أيلول 2026** — [`DASHBOARD_ICON_IMAGE.md`](./DASHBOARD_ICON_IMAGE.md)
 
-`POST /api/admin/icons` و `POST /api/admin/icons/{id}` مع `_method=PUT`. `multipart/form-data`. اسم الملف **`image`**. بدون ملف جديد لا ترسلوا `image` ولا رابط قديم كنص.
+`POST /api/admin/icons/{id}` مع `_method=PUT`. `multipart/form-data`. لا تضبطوا `Content-Type` يدوياً. اسم الملف **`image`** من `input.files[0]`. بدون ملف لا ترسلوا `image` ولا رابط قديم كنص.
 
 | الحقل | القاعدة |
 |--------|---------|
 | `image` | اختياري عند التعديل · فاضي = الصورة القديمة |
-| الصيغ | `jpg` `jpeg` `png` `gif` `svg` `webp` · 2MB |
+| الصيغ | `jpg` `jpeg` `png` `gif` `svg` `webp` · 8MB |
 | `name[ar]` / `name[en]` | مطلوبان إذا انرسل `name` |
 
-بعد 200: المعاينة من `data.image` أو `data.icon` ومعه `?v=`. ربط المنتج ما تغيّر: `icon_ids`.
+بعد 200 وفي ملف مُرسَل: قارنوا مسار `data.image` (بدون `?v=`) بالمسار السابق. إذا نفسه، الصورة ما انحفظت — خطأ مو نجاح. إذا تغيّر، المعاينة من `data.image`. 422 اعرضوه كما هو. ربط المنتج ما تغيّر: `icon_ids`.
 
 ---
 

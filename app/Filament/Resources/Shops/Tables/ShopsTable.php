@@ -38,6 +38,19 @@ class ShopsTable
                     ->color('success')
                     ->sortable(),
 
+                Tables\Columns\TextColumn::make('min_order_amount')
+                    ->label(__('custom.shops.min_order_amount'))
+                    ->numeric(decimalPlaces: 2)
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('delivery_min_hours')
+                    ->label(__('custom.shops.delivery_min_hours'))
+                    ->suffix(' ' . __('custom.shops.hours')),
+
+                Tables\Columns\TextColumn::make('delivery_max_hours')
+                    ->label(__('custom.shops.delivery_max_hours'))
+                    ->suffix(' ' . __('custom.shops.hours')),
+
                 Tables\Columns\IconColumn::make('is_active')
                     ->label(__('custom.shops.is_active'))
                     ->boolean()

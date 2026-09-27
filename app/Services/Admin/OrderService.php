@@ -256,9 +256,9 @@ class OrderService extends BaseService
     /* =======================
        🚚 ASSIGN DRIVER
     ======================= */
-    public function assignDriver(int $orderId, int $driverId)
+    public function assignDriver(int $orderId, int $driverId, ?string $scheduledDeliveryAt = null)
     {
-        return DB::transaction(function () use ($orderId, $driverId) {
+        return DB::transaction(function () use ($orderId, $driverId, $scheduledDeliveryAt) {
 
             $order = Order::lockForUpdate()->findOrFail($orderId);
             $assignableStatuses = [
@@ -278,10 +278,16 @@ class OrderService extends BaseService
                 );
             }
 
-            $order->update([
+            $payload = [
                 'driver_id'   => $driverId,
                 'assigned_by' => 'admin',
-            ]);
+            ];
+
+            if ($scheduledDeliveryAt) {
+                $payload['scheduled_delivery_at'] = Carbon::parse($scheduledDeliveryAt)->seconds(0);
+            }
+
+            $order->update($payload);
 
             OrderStatusChanged::dispatch(
                 $order->fresh(),

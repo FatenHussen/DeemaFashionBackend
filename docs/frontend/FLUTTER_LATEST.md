@@ -5,9 +5,11 @@
 > **آخر تحديث | Last Updated:** 2026-09-27  
 > الملف الشامل السابق يبقى: [`flutter.md`](./flutter.md)
 
+**اليوم (27 أيلول):** السلة: أقل طلب + أقرب توصيل + سعر التوصيل. المطعم لحاله فوري (سائق المطعم أو تيك مارت) — [`FLUTTER_CART_CHECKOUT_DELIVERY.md`](./FLUTTER_CART_CHECKOUT_DELIVERY.md)
+
 **اليوم (27 أيلول):** إخفاء الفئة يخفي منتجاتها من القوائم والبحث والأقسام وصفحة المنتج (`404`) — [`FLUTTER_HIDDEN_CATEGORY_PRODUCTS.md`](./FLUTTER_HIDDEN_CATEGORY_PRODUCTS.md)
 
-**اليوم (27 أيلول):** صورة الأيقونة على صفحة المنتج من `icons[].icon` أو `icons[].image` مع `?v=` — [`FLUTTER_ICON_IMAGE.md`](./FLUTTER_ICON_IMAGE.md)
+**اليوم (27 أيلول):** صورة الأيقونة — بعد استبدالها مسار الملف يتغيّر، والكاش على الرابط كامل مع `?v=` مو على `id` — [`FLUTTER_ICON_IMAGE.md`](./FLUTTER_ICON_IMAGE.md)
 
 **اليوم (27 أيلول):** عروض تلقائية — أول طلب أو إنشاء حساب أو شراء بقيمة، والمكافأة خصم أو توصيل مجاني أو هدية — [`FLUTTER_PROMOTION_TRIGGERS.md`](./FLUTTER_PROMOTION_TRIGGERS.md)
 
@@ -508,7 +510,7 @@ final isApprovedMarketer =
 
 > **27 أيلول 2026** — [`FLUTTER_ICON_IMAGE.md`](./FLUTTER_ICON_IMAGE.md)
 
-`icons[]` من `GET /products/{id}`. الصورة = `icon` أو `image` كما رجع، مع `?v=`. لا تقصّوا الاستعلام قبل `Image.network` / `CachedNetworkImage`. مفتاح الكاش = الرابط كامل، مو `id` لحاله. `icons` فاضي → أخفوا الصف. لا أصول SVG محلية بديلة.
+`icons[]` من `GET /products/{id}`. الصورة = `icon` أو `image` كما رجع. بعد الاستبدال من الداشبورد اسم الملف يتغيّر وفيه `?v=`. لا تقصّوا الاستعلام. `cacheKey` = الرابط كامل، مو `id`. `icons` فاضي → أخفوا الصف. لا أصول SVG محلية بديلة.
 
 ---
 

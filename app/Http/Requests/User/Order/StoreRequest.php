@@ -41,7 +41,9 @@ class StoreRequest extends FormRequest
                 'string',
                 Rule::in(array_map(fn (CartType $case) => $case->value, CartType::cases())),
             ],
-            'is_instant_delivery' => ['required', 'boolean'],
+            'delivery_choice' => ['nullable', 'string', Rule::in(['asap', 'scheduled'])],
+            'is_instant_delivery' => ['required_without:delivery_choice', 'boolean'],
+            'scheduled_delivery_at' => ['nullable', 'date'],
 
             'items' => ['required', 'array', 'min:1'],
             'items.*.shop_product_variant_id' => [

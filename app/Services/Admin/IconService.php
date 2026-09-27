@@ -43,6 +43,12 @@ class IconService extends BaseService
 
         $result = parent::update($id, $data);
 
+        if (is_string($stored)) {
+            // parent::update can drop a path that is not an UploadedFile anymore.
+            // Write the new path again so a successful response cannot keep the old file.
+            Icon::query()->whereKey($id)->update(['image' => $stored]);
+        }
+
         if (
             is_string($stored)
             && is_string($previous)
@@ -51,6 +57,12 @@ class IconService extends BaseService
             && Storage::disk('public')->exists($previous)
         ) {
             Storage::disk('public')->delete($previous);
+        }
+
+        if (is_string($stored)) {
+            $resource = $this->resource;
+
+            return new $resource(Icon::query()->findOrFail($id));
         }
 
         return $result;

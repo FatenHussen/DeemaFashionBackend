@@ -28,6 +28,9 @@ class SellerRegistration extends Model
         'logo',
         'is_service_provider',
         'is_restaurant',
+        'min_order_amount',
+        'delivery_min_hours',
+        'delivery_max_hours',
         'service_type_ids',
         'status',
         'is_active',
@@ -43,6 +46,9 @@ class SellerRegistration extends Model
         'is_active'                => 'boolean',
         'is_service_provider'      => 'boolean',
         'is_restaurant'            => 'boolean',
+        'min_order_amount'         => 'float',
+        'delivery_min_hours'       => 'integer',
+        'delivery_max_hours'       => 'integer',
         'service_type_ids'         => 'array',
     ];
     public function governorate()

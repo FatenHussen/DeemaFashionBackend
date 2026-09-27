@@ -75,7 +75,7 @@ class CategoryDeleteImpactService
                 'id' => $product->id,
                 'name' => $product->getTranslations('name'),
                 'product_number' => $product->product_number,
-                'image' => $product->media->first()?->url ?? $product->thumbnail,
+                'image' => $product->image_url,
                 'category' => $product->category ? [
                     'id' => $product->category->id,
                     'name' => $product->category->getTranslations('name'),

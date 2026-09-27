@@ -17,6 +17,12 @@ return [
 
     'account_already_exists' => 'الحساب موجود بالفعل.',
     'cart_quantity_unavailable' => 'الكمية المطلوبة غير متوفرة.',
+    'checkout' => [
+        'asap' => 'أقرب وقت ممكن',
+        'min_order_remaining' => 'أقل طلب :min. باقي :remaining.',
+        'delivery_time_required' => 'حدد يوم ووقت التوصيل.',
+        'delivery_too_soon' => 'أقرب موعد مسموح :earliest.',
+    ],
 
 
     'errors' => [
@@ -137,6 +143,13 @@ return [
         'ratings_count' => 'عدد التقييمات',
         'is_active' => 'نشط',
         'is_free_delivery' => 'توصيل مجاني',
+        'min_order_amount' => 'أقل قيمة للطلب',
+        'min_order_amount_help' => 'الأدمن يقدر يغيّر هالرقم بأي وقت. السلة تعرض آخر قيمة محفوظة.',
+        'platform_uses_settings' => 'تيك مارت ياخد أقل قيمة ومدة التوصيل من إعدادات التوصيل، مو من حقول المتجر.',
+        'delivery_max_before_min' => 'أقصى مدة التوصيل لازم تكون أكبر أو تساوي أقل مدة.',
+        'delivery_min_hours' => 'أقل مدة توصيل (ساعة)',
+        'delivery_max_hours' => 'أقصى مدة توصيل (ساعة)',
+        'delivery_window_help' => 'نافذة أقرب وقت ممكن. الزبون ما يقدر يختار موعد أبكر من أقل مدة.',
         'working_hours' => 'أوقات العمل',
         'day' => 'اليوم',
         'open' => 'وقت الفتح',

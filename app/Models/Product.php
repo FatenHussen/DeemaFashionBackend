@@ -485,7 +485,26 @@ class Product extends Model implements Sectionable
 
     public function mainMedia()
     {
-        return $this->media()->where('collection', 'main')->first();
+        return $this->morphMany(ProductMedia::class, 'mediable')
+            ->where('collection', 'main')
+            ->orderBy('order')
+            ->first();
+    }
+
+    /**
+     * Gallery URLs, or the thumbnail when the gallery is empty.
+     */
+    public function listedImageUrls()
+    {
+        $media = $this->relationLoaded('media') ? $this->media : $this->media()->get();
+
+        $urls = $media->map(fn ($item) => $item->url)->filter()->values();
+
+        if ($urls->isEmpty() && $this->thumbnail_url) {
+            $urls->push($this->thumbnail_url);
+        }
+
+        return $urls;
     }
 
     public function badges()

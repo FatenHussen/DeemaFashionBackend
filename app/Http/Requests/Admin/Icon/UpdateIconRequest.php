@@ -3,7 +3,9 @@
 namespace App\Http\Requests\Admin\Icon;
 
 use App\Rules\IconImage;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\UploadedFile;
 
 class UpdateIconRequest extends FormRequest
 {
@@ -21,7 +23,7 @@ class UpdateIconRequest extends FormRequest
             })->call($this);
         }
 
-        if ($this->hasFile('image')) {
+        if ($this->hasFile('image') || $this->rejectedUpload() instanceof UploadedFile) {
             return;
         }
 
@@ -30,13 +32,23 @@ class UpdateIconRequest extends FormRequest
         $this->request->remove('icon');
     }
 
+    public function withValidator(Validator $validator): void
+    {
+        $validator->after(function (Validator $validator) {
+            $upload = $this->rejectedUpload();
+            if ($upload instanceof UploadedFile) {
+                $validator->errors()->add('image', $this->uploadErrorMessage($upload));
+            }
+        });
+    }
+
     public function rules(): array
     {
         return [
             'name' => 'sometimes|array',
             'name.ar' => 'required_with:name|string|max:255',
             'name.en' => 'required_with:name|string|max:255',
-            'image' => ['nullable', 'file', 'max:2048', new IconImage],
+            'image' => ['nullable', 'file', 'max:8192', new IconImage],
             'description' => 'nullable|array',
             'description.ar' => 'nullable|string|max:1000',
             'description.en' => 'nullable|string|max:1000',
@@ -56,7 +68,7 @@ class UpdateIconRequest extends FormRequest
             'name.en.max' => 'اسم الأيقونة بالإنجليزي يجب ألا يتجاوز 255 حرف',
             'image.image' => 'الملف يجب أن يكون صورة',
             'image.mimes' => 'صيغة الصورة يجب أن تكون: jpeg, png, jpg, gif, svg, webp',
-            'image.max' => 'حجم الصورة يجب ألا يتجاوز 2MB',
+            'image.max' => 'حجم الصورة يجب ألا يتجاوز 8MB',
             'description.array' => 'الوصف يجب أن يكون مصفوفة تحتوي على اللغات',
             'description.ar.string' => 'الوصف بالعربي يجب أن يكون نص',
             'description.ar.max' => 'الوصف بالعربي يجب ألا يتجاوز 1000 حرف',
@@ -64,5 +76,33 @@ class UpdateIconRequest extends FormRequest
             'description.en.max' => 'الوصف بالإنجليزي يجب ألا يتجاوز 1000 حرف',
             'is_active.boolean' => 'حالة الأيقونة يجب أن تكون صحيح أو خطأ',
         ];
+    }
+
+    /**
+     * A chosen file that PHP rejected (too large, partial, unwritable).
+     * An empty file input is not a rejection — the current image stays.
+     */
+    private function rejectedUpload(): mixed
+    {
+        $upload = $this->files->get('image') ?? $this->files->get('icon');
+        if (! $upload instanceof UploadedFile || $upload->isValid()) {
+            return null;
+        }
+
+        if ($upload->getError() === UPLOAD_ERR_NO_FILE) {
+            return null;
+        }
+
+        return $upload;
+    }
+
+    private function uploadErrorMessage(UploadedFile $upload): string
+    {
+        return match ($upload->getError()) {
+            UPLOAD_ERR_INI_SIZE, UPLOAD_ERR_FORM_SIZE => 'حجم الصورة يجب ألا يتجاوز 8MB',
+            UPLOAD_ERR_PARTIAL => 'رفع الصورة لم يكتمل. أعد اختيار الملف ثم احفظ.',
+            UPLOAD_ERR_NO_TMP_DIR, UPLOAD_ERR_CANT_WRITE, UPLOAD_ERR_EXTENSION => 'تعذر حفظ الصورة على السيرفر.',
+            default => 'الملف يجب أن يكون صورة',
+        };
     }
 }

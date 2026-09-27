@@ -63,6 +63,7 @@ class OneResource extends JsonResource
             'is_instant_delivery' => $this->is_instant_delivery,
 
             'thumbnail' => $this->thumbnail_url,
+            'image' => $this->image_url,
 
             'category' => [
                 'id' => $this->category?->id,
@@ -186,13 +187,8 @@ class OneResource extends JsonResource
                 ];
             })->values(),
 
-            // Product Images
-            'images' => ($this->media ?? collect())->map(function ($img) {
-                return [
-                    'id' => $img->id,
-                    'url' => $img->url,
-                ];
-            })->values(),
+            // Product Images — thumbnail fills the gallery when no media was uploaded
+            'images' => $this->adminImageItems(),
 
             // SEO Fields
             'seo_title' => $this->getTranslations('seo_title'),
@@ -227,5 +223,24 @@ class OneResource extends JsonResource
             'created_at' => $this->created_at?->toISOString(),
             'updated_at' => $this->updated_at?->toISOString(),
         ];
+    }
+
+    private function adminImageItems()
+    {
+        $images = ($this->media ?? collect())->map(function ($img) {
+            return [
+                'id' => $img->id,
+                'url' => $img->url,
+            ];
+        })->values();
+
+        if ($images->isEmpty() && $this->thumbnail_url) {
+            return collect([[
+                'id' => null,
+                'url' => $this->thumbnail_url,
+            ]]);
+        }
+
+        return $images;
     }
 }

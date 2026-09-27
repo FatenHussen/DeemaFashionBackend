@@ -202,6 +202,34 @@ class ShopForm
                                         Forms\Components\Toggle::make('is_free_delivery')
                                             ->label(__('custom.shops.is_free_delivery'))
                                             ->default(false),
+
+                                        Forms\Components\TextInput::make('min_order_amount')
+                                            ->label(__('custom.shops.min_order_amount'))
+                                            ->numeric()
+                                            ->minValue(0)
+                                            ->visible(fn ($record) => ! $record?->is_default)
+                                            ->helperText(__('custom.shops.min_order_amount_help')),
+
+                                        Forms\Components\TextInput::make('delivery_min_hours')
+                                            ->label(__('custom.shops.delivery_min_hours'))
+                                            ->numeric()
+                                            ->integer()
+                                            ->minValue(0)
+                                            ->visible(fn ($record) => ! $record?->is_default)
+                                            ->helperText(__('custom.shops.delivery_window_help')),
+
+                                        Forms\Components\TextInput::make('delivery_max_hours')
+                                            ->label(__('custom.shops.delivery_max_hours'))
+                                            ->numeric()
+                                            ->integer()
+                                            ->minValue(0)
+                                            ->visible(fn ($record) => ! $record?->is_default),
+
+                                        Forms\Components\Placeholder::make('platform_checkout')
+                                            ->label(__('custom.shops.min_order_amount'))
+                                            ->content(__('custom.shops.platform_uses_settings'))
+                                            ->visible(fn ($record) => (bool) $record?->is_default)
+                                            ->columnSpanFull(),
                                     ])
                                     ->columns(2),
                             ]),

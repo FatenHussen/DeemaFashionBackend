@@ -87,7 +87,7 @@ class ScheduledBasketItemResource extends JsonResource
                     'name' => $brand->name,
                     'image' => $brand->image_url ?? null,
                 ] : null,
-                'image_url' => optional($product->media->first())->url,
+                'image_url' => $product?->image_url,
                 'price' => (float) $variant->productVariant?->price,
                 'discount' => (float) $variant->productVariant?->discount,
                 'price_after_discount' => (float) $variant->productVariant?->price_after_discount,

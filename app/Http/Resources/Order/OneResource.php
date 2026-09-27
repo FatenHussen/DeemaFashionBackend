@@ -46,6 +46,7 @@ class OneResource extends JsonResource
             ),
             'is_instant_delivery' => $this->is_instant_delivery,
             'scheduled_delivery_at' => $this->scheduled_delivery_at?->format('Y-m-d H:i'),
+            ...$this->deliverySummary(),
             ...$this->withCurrency($this->delivery_price, 'delivery_price'),
             ...$this->withCurrency($this->subtotal, 'subtotal'),
             ...$this->withCurrency($this->total, 'total'),

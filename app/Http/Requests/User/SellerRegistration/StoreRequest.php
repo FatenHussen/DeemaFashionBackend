@@ -31,6 +31,9 @@ class StoreRequest extends FormRequest
             'logo' => 'nullable|image|mimes:jpg,jpeg,png,webp',
             'is_service_provider'  => 'nullable|boolean',
             'is_restaurant'        => 'nullable|boolean',
+            'min_order_amount'     => 'exclude_if:is_service_provider,true|required|numeric|min:0',
+            'delivery_min_hours'   => 'exclude_if:is_service_provider,true|required|integer|min:0',
+            'delivery_max_hours'   => 'exclude_if:is_service_provider,true|required|integer|min:0|gte:delivery_min_hours',
             'service_type_ids'     => 'required_if:is_service_provider,true|nullable|array',
             'service_type_ids.*'   => 'integer|exists:vendor_service_types,id',
         ];

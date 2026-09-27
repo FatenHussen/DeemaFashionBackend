@@ -89,9 +89,14 @@ class OrderController extends BaseIndexController
     {
         $data = $request->validate([
             'driver_id' => 'required|exists:drivers,id',
+            'scheduled_delivery_at' => ['nullable', 'date'],
         ]);
 
-        $this->service->assignDriver($orderId, $data['driver_id']);
+        $this->service->assignDriver(
+            $orderId,
+            (int) $data['driver_id'],
+            $data['scheduled_delivery_at'] ?? null
+        );
 
         return $this->sendResponse(
             message: __('custom.orders.assigned_to_driver_successfully')

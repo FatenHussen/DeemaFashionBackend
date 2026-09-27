@@ -43,7 +43,7 @@ class LowStockProducts extends BaseWidget
             ->columns([
                 Tables\Columns\ImageColumn::make('media')
                     ->label(__('custom.products.image'))
-                    ->getStateUsing(fn($record) => $record->media->first()?->url)
+                    ->getStateUsing(fn($record) => $record->image_url)
                     ->circular(),
 
                 Tables\Columns\TextColumn::make('name')
