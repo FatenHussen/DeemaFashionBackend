@@ -5,6 +5,8 @@
 > **آخر تحديث:** 27 أيلول 2026  
 > يجمع **كل** تعديلات الباك التي تحتاج تنفيذ في الداشبورد (مو بس المنتج).
 
+**اليوم:** قائمة البانرات على الشاشة الصغيرة تسكرول وتعرض كل البطاقات — [`DASHBOARD_BANNER_LIST_SCROLL.md`](./DASHBOARD_BANNER_LIST_SCROLL.md)
+
 **اليوم:** إخفاء الفئة (`is_active: false`) يخفي منتجاتها من الموقع والتطبيق، بدون تعطيل المنتجات في الداشبورد — [`DASHBOARD_HIDDEN_CATEGORY_PRODUCTS.md`](./DASHBOARD_HIDDEN_CATEGORY_PRODUCTS.md)
 
 **اليوم:** تغيير صورة الأيقونة ينحفظ، والمعاينة من `image` / `icon` بعد الرد — [`DASHBOARD_ICON_IMAGE.md`](./DASHBOARD_ICON_IMAGE.md)
@@ -197,7 +199,8 @@ Content-Type: application/json
 قسم البانرات **يدوي** ويختار من البانرات الموجودة (`GET /api/admin/banners`). الصورة **عرضية** (≈ 16:6). بانر واحد = إعلان ثابت، عدة بانرات = سلايدر.
 
 > **إنشاء/تعديل البنر:** كل الحقول **اختيارية** ما عدا `image` عند الإنشاء. بدون `expires_at` = دائم — [`DASHBOARD_BANNER_REQUIRED_FIELDS.md`](./DASHBOARD_BANNER_REQUIRED_FIELDS.md).  
-> **بطاقة البنر** في إضافة قسم وصفحة التفاصيل: صورة + اسم فقط، وبدون اسم تبقى الصورة — [`DASHBOARD_SECTION_BANNER_CARD.md`](./DASHBOARD_SECTION_BANNER_CARD.md).
+> **بطاقة البنر** في إضافة قسم وصفحة التفاصيل: صورة + اسم فقط، وبدون اسم تبقى الصورة — [`DASHBOARD_SECTION_BANNER_CARD.md`](./DASHBOARD_SECTION_BANNER_CARD.md).  
+> على الشاشة الصغيرة القائمة تسكرول وتعرض كل البانرات، مو بس اللي بينشاف بالصف الأول — [`DASHBOARD_BANNER_LIST_SCROLL.md`](./DASHBOARD_BANNER_LIST_SCROLL.md).
 
 ---
 
@@ -1290,7 +1293,7 @@ PATCH /api/admin/orders/{orderId}/change-status
 
 الرد بعد المسح `{ "ar": null, "en": null }` — مو `[]`. اعرضوا الفورم من الرد الجديد.
 
-بطاقة البنر في إضافة القسم وصفحة التفاصيل: **صورة + اسم فقط**. بدون اسم تبقى الصورة. لا رقم ولا رابط ولا وصف على البطاقة. جدول `/sections/banners` يبقى كاملاً.
+بطاقة البنر في إضافة القسم وصفحة التفاصيل: **صورة + اسم فقط**. بدون اسم تبقى الصورة. لا رقم ولا رابط ولا وصف على البطاقة. جدول `/sections/banners` يبقى كاملاً. على الشاشة الصغيرة قائمة البطاقات تسكرول وتعرض الكل — [`DASHBOARD_BANNER_LIST_SCROLL.md`](./DASHBOARD_BANNER_LIST_SCROLL.md).
 
 `delivery_time` على فورم المنتج يبقى نصاً («3–5 أيام») ويظهر على صفحة المنتج فقط — [`DASHBOARD_CART_NO_DELIVERY_TIME.md`](./DASHBOARD_CART_NO_DELIVERY_TIME.md).
 
