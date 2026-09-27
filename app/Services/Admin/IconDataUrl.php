@@ -13,20 +13,14 @@ class IconDataUrl
     /**
      * @return array{extension: string, bytes: string}|null
      */
-    public static function decode(string $value): ?array
+    public static function decode(string $value, ?string $filename = null): ?array
     {
-        if (! preg_match('#^data:image/([\w.+-]+)(?:;charset=[^;,]+)?;base64,#i', $value, $matches)) {
+        if (! preg_match('#^data:([^;,]+)?(?:;charset=[^;,]+)?;base64,#i', $value, $matches)) {
             return null;
         }
 
-        $extension = match (strtolower($matches[1])) {
-            'jpeg', 'jpg' => 'jpg',
-            'png' => 'png',
-            'gif' => 'gif',
-            'webp' => 'webp',
-            'svg+xml' => 'svg',
-            default => null,
-        };
+        $extension = self::extensionFromMime($matches[1] ?? '')
+            ?? self::extensionFromFilename($filename);
 
         if ($extension === null) {
             return null;
@@ -43,5 +37,26 @@ class IconDataUrl
         }
 
         return ['extension' => $extension, 'bytes' => $bytes];
+    }
+
+    private static function extensionFromMime(string $mime): ?string
+    {
+        return match (strtolower($mime)) {
+            'image/jpeg', 'image/jpg' => 'jpg',
+            'image/png' => 'png',
+            'image/gif' => 'gif',
+            'image/webp' => 'webp',
+            'image/svg+xml' => 'svg',
+            default => null,
+        };
+    }
+
+    private static function extensionFromFilename(?string $filename): ?string
+    {
+        $extension = strtolower(pathinfo((string) $filename, PATHINFO_EXTENSION));
+
+        return in_array($extension, ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'], true)
+            ? ($extension === 'jpeg' ? 'jpg' : $extension)
+            : null;
     }
 }

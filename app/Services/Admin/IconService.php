@@ -40,7 +40,7 @@ class IconService extends BaseService
             $stored = $this->uploadImage($data['image']);
             $data['image'] = $stored;
         } else {
-            $stored = $this->storeDataUrl($data['image_base64'] ?? null);
+            $stored = $this->storeDataUrl($data['image_base64'] ?? null, $data['image_filename'] ?? null);
             if (is_string($stored)) {
                 $data['image'] = $stored;
             } else {
@@ -48,7 +48,7 @@ class IconService extends BaseService
             }
         }
 
-        unset($data['image_base64']);
+        unset($data['image_base64'], $data['image_filename']);
 
         $result = parent::update($id, $data);
 
@@ -114,13 +114,13 @@ class IconService extends BaseService
         return $file->store('icons', 'public');
     }
 
-    protected function storeDataUrl(mixed $value): ?string
+    protected function storeDataUrl(mixed $value, mixed $filename = null): ?string
     {
         if (! is_string($value) || trim($value) === '') {
             return null;
         }
 
-        $decoded = IconDataUrl::decode($value);
+        $decoded = IconDataUrl::decode($value, is_string($filename) ? $filename : null);
         if ($decoded === null) {
             throw ValidationException::withMessages([
                 'image' => 'الملف يجب أن يكون صورة',
