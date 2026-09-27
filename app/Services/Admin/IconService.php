@@ -7,6 +7,8 @@ use App\Services\BaseService;
 use App\Http\Resources\Icon\IconResource;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 class IconService extends BaseService
 {
@@ -38,8 +40,15 @@ class IconService extends BaseService
             $stored = $this->uploadImage($data['image']);
             $data['image'] = $stored;
         } else {
-            unset($data['image']);
+            $stored = $this->storeDataUrl($data['image_base64'] ?? null);
+            if (is_string($stored)) {
+                $data['image'] = $stored;
+            } else {
+                unset($data['image']);
+            }
         }
+
+        unset($data['image_base64']);
 
         $result = parent::update($id, $data);
 
@@ -103,5 +112,24 @@ class IconService extends BaseService
     protected function uploadImage($file): string
     {
         return $file->store('icons', 'public');
+    }
+
+    protected function storeDataUrl(mixed $value): ?string
+    {
+        if (! is_string($value) || trim($value) === '') {
+            return null;
+        }
+
+        $decoded = IconDataUrl::decode($value);
+        if ($decoded === null) {
+            throw ValidationException::withMessages([
+                'image' => 'الملف يجب أن يكون صورة',
+            ]);
+        }
+
+        $path = 'icons/'.Str::uuid()->toString().'.'.$decoded['extension'];
+        Storage::disk('public')->put($path, $decoded['bytes']);
+
+        return $path;
     }
 }

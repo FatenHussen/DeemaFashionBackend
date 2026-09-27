@@ -49,6 +49,7 @@ class UpdateIconRequest extends FormRequest
             'name.ar' => 'required_with:name|string|max:255',
             'name.en' => 'required_with:name|string|max:255',
             'image' => ['nullable', 'file', 'max:8192', new IconImage],
+            'image_base64' => ['nullable', 'string'],
             'description' => 'nullable|array',
             'description.ar' => 'nullable|string|max:1000',
             'description.en' => 'nullable|string|max:1000',
