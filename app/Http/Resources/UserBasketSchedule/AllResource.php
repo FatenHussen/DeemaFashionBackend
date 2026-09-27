@@ -37,6 +37,8 @@ class AllResource extends JsonResource
             'discount_type' => $discountType,
             ...$this->withCurrency($discountAmount, 'discount_amount'),
             ...$this->withCurrency($totalPrice - $discountAmount, 'final_price'),
+            'start_date' => $this->start_date?->format('Y-m-d'),
+            'delivery_time' => $this->resource->formattedDeliveryTime(),
             'next_run_date' => $this->next_run_date?->format('Y-m-d'),
             'availability' => $this->availability_summary ? [
                 'status' => $this->availability_summary['status'],

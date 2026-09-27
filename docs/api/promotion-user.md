@@ -63,7 +63,9 @@
 
 ## أنواع العروض (مرجع)
 
-تُعرَّف في طلبات الأدمن والسيرفس؛ أمثلة: `simple_discount`, `spend_x_discount`, `spend_x_get_gift`, `spend_x_get_points`, `free_shipping`, `spend_x_get_free_shipping`.
+تُعرَّف في طلبات الأدمن والسيرفس؛ أمثلة: `simple_discount`, `spend_x_discount`, `spend_x_get_gift`, `spend_x_get_points`, `free_shipping`, `spend_x_get_free_shipping`, `first_order_discount`, `first_order_free_shipping`, `first_order_gift`, `signup_discount`, `signup_free_shipping`, `signup_gift`.
+
+عروض أول الطلب وإنشاء الحساب تُطبَّق تلقائياً على الطلب (خصم / توصيل مجاني / هدية) ولا تُمرَّر عبر `promotion_id`.
 
 ---
 

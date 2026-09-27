@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin\Icon;
 
+use App\Rules\IconImage;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateIconRequest extends FormRequest
@@ -11,13 +12,31 @@ class UpdateIconRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        if ($this->files->has('icon') && ! $this->files->has('image')) {
+            $this->files->set('image', $this->files->get('icon'));
+            (function () {
+                $this->convertedFiles = null;
+            })->call($this);
+        }
+
+        if ($this->hasFile('image')) {
+            return;
+        }
+
+        // The edit form sends the current URL back as text. That is not a new file.
+        $this->request->remove('image');
+        $this->request->remove('icon');
+    }
+
     public function rules(): array
     {
         return [
             'name' => 'sometimes|array',
             'name.ar' => 'required_with:name|string|max:255',
             'name.en' => 'required_with:name|string|max:255',
-            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg,webp',
+            'image' => ['nullable', 'file', 'max:2048', new IconImage],
             'description' => 'nullable|array',
             'description.ar' => 'nullable|string|max:1000',
             'description.en' => 'nullable|string|max:1000',

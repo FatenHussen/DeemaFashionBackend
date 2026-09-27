@@ -29,6 +29,7 @@ class Order extends Model
         'basket_id',
         'basket_schedule_id',
         'is_instant_delivery',
+        'scheduled_delivery_at',
         'status',
         'cart_type',
         'delivery_price',
@@ -64,6 +65,7 @@ class Order extends Model
     protected $casts = [
         'automatic_promotions_snapshot' => 'array',
         'is_instant_delivery' => 'boolean',
+        'scheduled_delivery_at' => 'datetime',
         'is_paid' => 'boolean',
         'has_external_items' => 'boolean',
         'start_todelivery' => 'boolean',

@@ -39,6 +39,7 @@ class OneResource extends JsonResource
             'name' => $this->name,
             'is_active' => $this->is_active,
             'start_date' => $this->start_date?->format('Y-m-d'),
+            'delivery_time' => $this->formattedDeliveryTime(),
             'next_run_date' => $this->next_run_date?->format('Y-m-d'),
             'num_varieties' => $this->items?->count() ?? 0,
             'original_price' => round($totalPrice, 2),

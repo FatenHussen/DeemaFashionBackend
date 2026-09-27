@@ -2,7 +2,9 @@
 
 namespace App\Services\User;
 
+use App\Models\Category;
 use App\Models\Favorite;
+use App\Models\Product;
 
 class FavoriteService
 {
@@ -76,9 +78,21 @@ class FavoriteService
             ]);
         }
 
+        $hiddenCategoryIds = Category::idsHiddenFromCatalog();
+
         return $query->get()
-            ->map(function ($fav) {
-                return $fav->favoriteable?->toSectionArray();
+            ->map(function ($fav) use ($hiddenCategoryIds) {
+                $item = $fav->favoriteable;
+
+                if (
+                    $item instanceof Product
+                    && $item->category_id
+                    && in_array((int) $item->category_id, $hiddenCategoryIds, true)
+                ) {
+                    return null;
+                }
+
+                return $item?->toSectionArray();
             })
             ->filter()
             ->values();

@@ -25,6 +25,8 @@ class UpdateRequest extends FormRequest
 
             'start_date' => ['nullable', 'date', 'after_or_equal:today'],
 
+            'delivery_time' => ['nullable', 'date_format:H:i'],
+
             'is_active' => ['sometimes', 'boolean'],
 
             'items' => ['nullable', 'array', 'min:1'],

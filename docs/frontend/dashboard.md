@@ -5,7 +5,13 @@
 > **آخر تحديث:** 25 أيلول 2026  
 > يجمع **كل** تعديلات الباك التي تحتاج تنفيذ في الداشبورد (مو بس المنتج).
 
-**اليوم:** حالة الطلب — `out_delivery` (مو `out_for_delivery`) + `status_label` — [`DASHBOARD_ORDER_STATUS.md`](./DASHBOARD_ORDER_STATUS.md)
+**اليوم:** العروض = شرط (أول طلب / شراء بقيمة / إنشاء حساب) + مكافأة (خصم / توصيل مجاني / هدية) — [`DASHBOARD_PROMOTION_TRIGGERS.md`](./DASHBOARD_PROMOTION_TRIGGERS.md)
+
+**اليوم:** جدولة سلة الزبون = تاريخ توصيل واحد + `delivery_time` (عرض فقط) — [`DASHBOARD_BASKET_SCHEDULE_DATE_TIME.md`](./DASHBOARD_BASKET_SCHEDULE_DATE_TIME.md)
+
+**اليوم:** يوم ووقت التوصيل خيار ثاني على الطلب (`scheduled_delivery_at`) — [`DASHBOARD_ORDER_DELIVERY_SCHEDULE.md`](./DASHBOARD_ORDER_DELIVERY_SCHEDULE.md)
+
+**اليوم (سابقاً):** حالة الطلب — `out_delivery` (مو `out_for_delivery`) + `status_label` — [`DASHBOARD_ORDER_STATUS.md`](./DASHBOARD_ORDER_STATUS.md)
 
 **اليوم (سابقاً):** إضافات المنتجات = اسم + سعر (مو عنوان/قيمة قطن) — [`DASHBOARD_PRODUCT_EXTRA_DETAILS.md`](./DASHBOARD_PRODUCT_EXTRA_DETAILS.md)
 

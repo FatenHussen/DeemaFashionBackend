@@ -116,6 +116,9 @@ class IconSeeder extends Seeder
             $existing = Icon::query()->where('name->en', $iconData['name']['en'])->first();
 
             if ($existing) {
+                if (is_string($existing->image) && $existing->image !== '' && $existing->image !== $relative) {
+                    unset($payload['image']);
+                }
                 $existing->update($payload);
             } else {
                 Icon::create($payload);

@@ -13,8 +13,8 @@ class ScheduleResource extends JsonResource
 
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'description' => $this->description,
+            'name' => $this->localizedText('name'),
+            'description' => $this->localizedText('description'),
             'image' => $this->image_url,
             'images' => $this->image_urls ?? [],
             'interval_days' => (int) $this->interval_days,
@@ -28,5 +28,18 @@ class ScheduleResource extends JsonResource
                 $badges->filter(fn ($badge) => ($badge->pivot->position ?? '') === 'bottom')->values()
             ),
         ];
+    }
+
+    /** Current locale, then Arabic, then English — empty locale must not drop the schedule. */
+    private function localizedText(string $field): ?string
+    {
+        foreach ([app()->getLocale(), 'ar', 'en'] as $locale) {
+            $value = $this->resource->getTranslation($field, $locale, false);
+            if (is_string($value) && trim($value) !== '') {
+                return $value;
+            }
+        }
+
+        return null;
     }
 }

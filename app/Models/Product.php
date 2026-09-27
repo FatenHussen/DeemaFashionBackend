@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Http\Resources\Product\AllResource;
 use App\Traits\LogsActivity;
+use App\Traits\MatchesRatingMorphTypes;
 use App\Traits\NormalizesBlankStringAttributes;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,7 +16,7 @@ use Spatie\Translatable\HasTranslations;
 
 class Product extends Model implements Sectionable
 {
-    use HasFactory, HasTranslations, SoftDeletes, LogsActivity, NormalizesBlankStringAttributes;
+    use HasFactory, HasTranslations, SoftDeletes, LogsActivity, MatchesRatingMorphTypes, NormalizesBlankStringAttributes;
 
     protected $fillable = [
         'product_number',
@@ -276,7 +277,11 @@ class Product extends Model implements Sectionable
             return collect([]);
         }
 
-        return Product::whereIn('id', $this->bought_with)->get();
+        return Product::query()
+            ->whereIn('id', $this->bought_with)
+            ->where('is_active', true)
+            ->inCatalogCategory()
+            ->get();
     }
 
     public function getImageUrlAttribute()
@@ -399,11 +404,6 @@ class Product extends Model implements Sectionable
     | Relationships
     |--------------------------------------------------------------------------
     */
-    public function ratings()
-    {
-        return $this->morphMany(Rating::class, 'rateable');
-    }
-
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -621,6 +621,26 @@ class Product extends Model implements Sectionable
     | Scopes
     |--------------------------------------------------------------------------
     */
+    /**
+     * Public catalog: keep products with no category, and products whose category
+     * is active and not sitting under an inactive or deleted ancestor.
+     */
+    public function scopeInCatalogCategory($query)
+    {
+        $hiddenCategoryIds = Category::idsHiddenFromCatalog();
+
+        if ($hiddenCategoryIds === []) {
+            return $query;
+        }
+
+        $column = $query->getModel()->getTable() . '.category_id';
+
+        return $query->where(function ($q) use ($hiddenCategoryIds, $column) {
+            $q->whereNull($column)
+                ->orWhereNotIn($column, $hiddenCategoryIds);
+        });
+    }
+
     public function scopeDeepSearch($query, $search)
     {
         $locale = app()->getLocale();

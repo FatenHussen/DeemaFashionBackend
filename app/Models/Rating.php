@@ -38,12 +38,12 @@ class Rating extends Model
     public function getTypeAttribute(): ?string
     {
         return match ($this->rateable_type) {
-            'App\Models\Product' => RateableType::PRODUCT->value,
+            'product', 'App\Models\Product' => RateableType::PRODUCT->value,
             'App\Models\Brand' => RateableType::BRAND->value,
-            'App\Models\Shop' => RateableType::SHOP->value,
-            'App\Models\Delivery' => RateableType::DELIVERY->value,
-            'App\Models\Recipe' => RateableType::RECIPE->value,
-            'App\Models\Basket' => RateableType::BASKET->value,
+            'shop', 'App\Models\Shop' => RateableType::SHOP->value,
+            'App\Models\Delivery', 'App\Models\Driver' => RateableType::DELIVERY->value,
+            'recipe', 'App\Models\Recipe' => RateableType::RECIPE->value,
+            'basket', 'App\Models\Basket' => RateableType::BASKET->value,
             'App\Models\BasketSchedule' => RateableType::SCHEDULED_BASKET->value,
             'App\Models\Order' => RateableType::ORDER->value,
             default => null,

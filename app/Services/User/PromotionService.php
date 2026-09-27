@@ -2,8 +2,11 @@
 
 namespace App\Services\User;
 
+use App\Enums\OrderStatus;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Promotion;
+use App\Models\User;
 use App\Services\PointService;
 use Illuminate\Support\Collection;
 
@@ -11,11 +14,45 @@ class PromotionService
 {
     public const USER_SELECTABLE_TYPES = ['simple_discount', 'spend_x_discount'];
 
+    public const FIRST_ORDER_TYPES = [
+        'first_order_discount',
+        'first_order_free_shipping',
+        'first_order_gift',
+    ];
+
+    public const SIGNUP_TYPES = [
+        'signup_discount',
+        'signup_free_shipping',
+        'signup_gift',
+    ];
+
+    public const AUTOMATIC_FREE_SHIPPING_TYPES = [
+        'free_shipping',
+        'spend_x_get_free_shipping',
+        'first_order_free_shipping',
+        'signup_free_shipping',
+    ];
+
     public const AUTOMATIC_TYPES = [
         'spend_x_get_gift',
         'spend_x_get_points',
         'free_shipping',
         'spend_x_get_free_shipping',
+        'first_order_discount',
+        'first_order_free_shipping',
+        'first_order_gift',
+        'signup_discount',
+        'signup_free_shipping',
+        'signup_gift',
+    ];
+
+    /** Order statuses that do not consume a first-order or signup reward. */
+    public const IGNORED_ORDER_STATUSES = [
+        OrderStatus::CANCELLED->value,
+        OrderStatus::CANCELLED_BY_ADMIN->value,
+        OrderStatus::REJECTEDBYDELIVERY->value,
+        OrderStatus::FAILDDELIVER->value,
+        OrderStatus::RETURNED_BY_USER->value,
     ];
 
     public function getAvailablePromotions(float $subtotal, Collection $items): Collection
@@ -153,29 +190,39 @@ class PromotionService
     public function resolveAutomaticFreeShippingDeliveryPrice(
         float $deliveryPrice,
         ?float $subtotal = null,
-        ?Collection $items = null
+        ?Collection $items = null,
+        ?User $user = null,
+        ?int $excludeOrderId = null
     ): float {
         if ($deliveryPrice <= 0) {
             return $deliveryPrice;
         }
 
-        if (! $this->hasActiveAutomaticFreeShipping($subtotal, $items)) {
+        if (! $this->hasActiveAutomaticFreeShipping($subtotal, $items, $user, $excludeOrderId)) {
             return $deliveryPrice;
         }
 
         return 0.0;
     }
 
-    public function hasActiveAutomaticFreeShipping(?float $subtotal = null, ?Collection $items = null): bool
-    {
-        return $this->activeAutomaticFreeShippingPromotions($subtotal, $items)->isNotEmpty();
+    public function hasActiveAutomaticFreeShipping(
+        ?float $subtotal = null,
+        ?Collection $items = null,
+        ?User $user = null,
+        ?int $excludeOrderId = null
+    ): bool {
+        return $this->activeAutomaticFreeShippingPromotions($subtotal, $items, $user, $excludeOrderId)->isNotEmpty();
     }
 
-    public function freeShippingPromotionsSnapshot(?float $subtotal = null, ?Collection $items = null): array
-    {
+    public function freeShippingPromotionsSnapshot(
+        ?float $subtotal = null,
+        ?Collection $items = null,
+        ?User $user = null,
+        ?int $excludeOrderId = null
+    ): array {
         $normalizedItems = $this->normalizeOrderItems($items ?? collect());
 
-        return $this->activeAutomaticFreeShippingPromotions($subtotal, $normalizedItems)
+        return $this->activeAutomaticFreeShippingPromotions($subtotal, $normalizedItems, $user, $excludeOrderId)
             ->map(function (Promotion $p) use ($subtotal, $normalizedItems) {
                 return [
                     'promotion_id' => $p->id,
@@ -195,17 +242,20 @@ class PromotionService
         float $deliveryAfterAutomaticFreeShipping,
         array $automaticOrderPromotionsResult,
         ?float $subtotal = null,
-        ?Collection $items = null
+        ?Collection $items = null,
+        ?User $user = null,
+        ?int $excludeOrderId = null,
+        array $automaticDiscounts = []
     ): ?array {
         $freeShipping = null;
         if (
             $deliveryBeforeAutomaticFreeShipping > 0
             && $deliveryAfterAutomaticFreeShipping <= 0
-            && $this->hasActiveAutomaticFreeShipping($subtotal, $items)
+            && $this->hasActiveAutomaticFreeShipping($subtotal, $items, $user, $excludeOrderId)
         ) {
             $freeShipping = [
                 'waived_delivery_amount' => round($deliveryBeforeAutomaticFreeShipping, 2),
-                'promotions' => $this->freeShippingPromotionsSnapshot($subtotal, $items),
+                'promotions' => $this->freeShippingPromotionsSnapshot($subtotal, $items, $user, $excludeOrderId),
             ];
         }
 
@@ -218,7 +268,9 @@ class PromotionService
             'awards' => $pointsAwards,
         ];
 
-        if ($freeShipping === null && $gifts === [] && $pointsAwarded === 0 && $pointsAwards === []) {
+        $discountPromotions = $automaticDiscounts['promotions'] ?? [];
+
+        if ($freeShipping === null && $gifts === [] && $pointsAwarded === 0 && $pointsAwards === [] && $discountPromotions === []) {
             return null;
         }
 
@@ -227,6 +279,65 @@ class PromotionService
             'free_shipping' => $freeShipping,
             'gifts' => $gifts,
             'points' => $pointsBlock,
+            'discounts' => $discountPromotions,
+        ];
+    }
+
+    /**
+     * Automatic discount for first order or account creation.
+     * Capped so the combined discount does not exceed the cart subtotal.
+     *
+     * @return array{discount: float, promotions: list<array<string, mixed>>}
+     */
+    public function evaluateAutomaticTriggerDiscounts(
+        ?User $user,
+        float $subtotal,
+        Collection $items,
+        ?int $excludeOrderId = null,
+        float $alreadyAppliedDiscount = 0
+    ): array {
+        $normalizedItems = $this->normalizeOrderItems($items);
+        $remaining = max(0, round($subtotal - $alreadyAppliedDiscount, 2));
+        $totalDiscount = 0.0;
+        $applied = [];
+
+        if ($remaining <= 0 || $user === null) {
+            return ['discount' => 0.0, 'promotions' => []];
+        }
+
+        $promotions = $this->activePromotions(Promotion::AUTO_DISCOUNT_TYPES);
+
+        foreach ($promotions as $promotion) {
+            if (! $this->qualifiesForTrigger($promotion, $user, $excludeOrderId)) {
+                continue;
+            }
+
+            $eligibleSubtotal = $this->resolveEligibleSubtotal($promotion, $subtotal, $normalizedItems);
+            if ($eligibleSubtotal <= 0) {
+                continue;
+            }
+
+            $amount = $this->calculateDiscountAmount($promotion, $eligibleSubtotal);
+            $amount = min($amount, max(0, $remaining - $totalDiscount));
+            if ($amount <= 0) {
+                continue;
+            }
+
+            $totalDiscount += $amount;
+            $applied[] = [
+                'promotion_id' => $promotion->id,
+                'type' => $promotion->type,
+                'discount' => round($amount, 2),
+                'discount_type' => $promotion->discount_type,
+                'discount_value' => $promotion->discount_value,
+                'eligible_subtotal' => round($eligibleSubtotal, 2),
+                'name' => $promotion->getTranslations('name'),
+            ];
+        }
+
+        return [
+            'discount' => round($totalDiscount, 2),
+            'promotions' => $applied,
         ];
     }
 
@@ -242,21 +353,15 @@ class PromotionService
         $pointsAwarded = 0;
         $pointsAwards = [];
         $normalizedItems = $this->normalizeOrderItems($items ?? collect());
+        $user = $userId ? User::query()->find($userId) : null;
+        $excludeOrderId = $orderOrNull?->id;
 
-        $promotions = Promotion::query()
-            ->whereIn('type', ['spend_x_get_gift', 'spend_x_get_points'])
-            ->where('is_active', true)
-            ->with(['products:id', 'categories:id', 'shops:id', 'vendors:id'])
-            ->where(function ($q) {
-                $q->whereNull('starts_at')
-                    ->orWhere('starts_at', '<=', now());
-            })
-            ->where(function ($q) {
-                $q->whereNull('ends_at')
-                    ->orWhere('ends_at', '>=', now());
-            })
-            ->orderBy('id')
-            ->get();
+        $promotions = $this->activePromotions([
+            'spend_x_get_gift',
+            'spend_x_get_points',
+            'first_order_gift',
+            'signup_gift',
+        ]);
 
         foreach ($promotions as $promotion) {
             if (! $promotion instanceof Promotion) {
@@ -273,13 +378,21 @@ class PromotionService
                 continue;
             }
 
-            if ($eligibleSubtotal < (float) ($promotion->min_spend ?? 0)) {
+            if (
+                in_array($promotion->type, ['spend_x_get_gift', 'spend_x_get_points'], true)
+                && $eligibleSubtotal < (float) ($promotion->min_spend ?? 0)
+            ) {
                 continue;
             }
 
-            if ($promotion->type === 'spend_x_get_gift') {
+            if (! $this->qualifiesForTrigger($promotion, $user, $excludeOrderId)) {
+                continue;
+            }
+
+            if (in_array($promotion->type, Promotion::GIFT_TYPES, true)) {
                 $gifts[] = [
                     'promotion_id' => $promotion->id,
+                    'type' => $promotion->type,
                     'promotion_title' => $promotion->name,
                     'promotion_name' => $promotion->getTranslations('name'),
                     'gift_description' => $promotion->getTranslations('gift_description'),
@@ -516,25 +629,14 @@ class PromotionService
      */
     protected function activeAutomaticFreeShippingPromotions(
         ?float $subtotal = null,
-        ?Collection $items = null
+        ?Collection $items = null,
+        ?User $user = null,
+        ?int $excludeOrderId = null
     ): Collection {
         $normalizedItems = $this->normalizeOrderItems($items ?? collect());
 
-        return Promotion::query()
-            ->whereIn('type', ['free_shipping', 'spend_x_get_free_shipping'])
-            ->where('is_active', true)
-            ->with(['products:id', 'categories:id', 'shops:id', 'vendors:id'])
-            ->where(function ($q) {
-                $q->whereNull('starts_at')
-                    ->orWhere('starts_at', '<=', now());
-            })
-            ->where(function ($q) {
-                $q->whereNull('ends_at')
-                    ->orWhere('ends_at', '>=', now());
-            })
-            ->orderBy('id')
-            ->get()
-            ->filter(function (Promotion $promotion) use ($subtotal, $normalizedItems) {
+        return $this->activePromotions(self::AUTOMATIC_FREE_SHIPPING_TYPES)
+            ->filter(function (Promotion $promotion) use ($subtotal, $normalizedItems, $user, $excludeOrderId) {
                 $eligibleSubtotal = $this->resolveEligibleSubtotal($promotion, $subtotal, $normalizedItems);
 
                 if ($eligibleSubtotal <= 0) {
@@ -546,8 +648,73 @@ class PromotionService
                     return false;
                 }
 
-                return in_array($promotion->type, ['free_shipping', 'spend_x_get_free_shipping'], true);
+                return $this->qualifiesForTrigger($promotion, $user, $excludeOrderId);
             })
             ->values();
+    }
+
+    /**
+     * @param  list<string>  $types
+     * @return Collection<int, Promotion>
+     */
+    protected function activePromotions(array $types): Collection
+    {
+        return Promotion::query()
+            ->whereIn('type', $types)
+            ->where('is_active', true)
+            ->with(['products:id', 'categories:id', 'shops:id', 'vendors:id'])
+            ->where(function ($q) {
+                $q->whereNull('starts_at')
+                    ->orWhere('starts_at', '<=', now());
+            })
+            ->where(function ($q) {
+                $q->whereNull('ends_at')
+                    ->orWhere('ends_at', '>=', now());
+            })
+            ->orderBy('id')
+            ->get();
+    }
+
+    protected function qualifiesForTrigger(Promotion $promotion, ?User $user, ?int $excludeOrderId = null): bool
+    {
+        if (in_array($promotion->type, self::FIRST_ORDER_TYPES, true)) {
+            return $user !== null && $this->isFirstOrder($user, $excludeOrderId);
+        }
+
+        if (in_array($promotion->type, self::SIGNUP_TYPES, true)) {
+            return $user !== null
+                && $this->registeredDuringPromotion($user, $promotion)
+                && $this->isFirstOrder($user, $excludeOrderId);
+        }
+
+        return true;
+    }
+
+    protected function isFirstOrder(User $user, ?int $excludeOrderId = null): bool
+    {
+        return ! Order::query()
+            ->where('user_id', $user->id)
+            ->when($excludeOrderId, fn ($query) => $query->where('id', '!=', $excludeOrderId))
+            ->whereNotIn('status', self::IGNORED_ORDER_STATUSES)
+            ->exists();
+    }
+
+    protected function registeredDuringPromotion(User $user, Promotion $promotion): bool
+    {
+        $registeredAt = $user->created_at;
+        if ($registeredAt === null) {
+            return false;
+        }
+
+        $startsAt = $promotion->starts_at ?? $promotion->created_at;
+        if ($startsAt && $registeredAt->lt($startsAt)) {
+            return false;
+        }
+
+        if ($promotion->ends_at && $registeredAt->gt($promotion->ends_at)) {
+            return false;
+        }
+
+        return true;
     }
 }

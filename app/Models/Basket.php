@@ -14,10 +14,11 @@ use Spatie\Translatable\HasTranslations;
 use App\Models\Favorite;
 use App\Support\ScheduleDiscount;
 use App\Traits\LogsActivity;
+use App\Traits\MatchesRatingMorphTypes;
 
 class Basket extends Model implements Sectionable
 {
-    use HasFactory, HasTranslations, LogsActivity;
+    use HasFactory, HasTranslations, LogsActivity, MatchesRatingMorphTypes;
 
     protected $fillable = [
         'category_id',
@@ -280,10 +281,6 @@ class Basket extends Model implements Sectionable
     }
 
 
-    public function ratings(): MorphMany
-    {
-        return $this->morphMany(Rating::class, 'rateable');
-    }
     public function getAverageRatingAttribute(): float
     {
         return round((float) $this->ratings()->avg('rating'), 1);

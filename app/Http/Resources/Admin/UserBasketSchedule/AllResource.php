@@ -61,6 +61,7 @@ class AllResource extends JsonResource
             // Status
             'is_active' => (bool) $this->is_active,
             'start_date' => $this->start_date?->format('Y-m-d'),
+            'delivery_time' => $this->formattedDeliveryTime(),
             'next_run_date' => $this->next_run_date?->format('Y-m-d'),
 
             // Timestamps

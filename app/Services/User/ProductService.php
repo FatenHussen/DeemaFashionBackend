@@ -285,7 +285,7 @@ class ProductService extends BaseService
         }
 
 
-        return $query->where('is_active', true);
+        return $query->where('is_active', true)->inCatalogCategory();
     }
 
 
@@ -293,7 +293,7 @@ class ProductService extends BaseService
     {
         $query = Product::query();
         $query =  $this->queryBuilder($query, $filters);
-        return $query->where('is_active', true);
+        return $query->where('is_active', true)->inCatalogCategory();
     }
 
     protected function applySortBy($query, string $sortBy): void

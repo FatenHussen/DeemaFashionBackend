@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin\Promotion;
 
+use App\Models\Promotion;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -21,14 +22,7 @@ class StoreRequest extends FormRequest
             'description' => ['required', 'array'],
             'description.en' => 'required|string',
             'description.ar' => 'required|string',
-            'type' => ['required', Rule::in([
-                'simple_discount',
-                'spend_x_discount',
-                'spend_x_get_gift',
-                'spend_x_get_points',
-                'free_shipping',
-                'spend_x_get_free_shipping',
-            ])],
+            'type' => ['required', Rule::in(Promotion::TYPES)],
             'is_active' => 'boolean',
             'position' => ['required', Rule::in(['top', 'bottom'])],
             'starts_at' => 'nullable|date',
@@ -37,20 +31,29 @@ class StoreRequest extends FormRequest
                 'nullable',
                 'numeric',
                 'min:0',
-                'required_if:type,spend_x_discount,spend_x_get_gift,spend_x_get_points,spend_x_get_free_shipping',
+                'required_if:type,'.implode(',', Promotion::MIN_SPEND_TYPES),
             ],
-            'discount_value' => 'nullable|numeric|min:0',
-            'discount_type' => 'nullable|in:percentage,fixed',
+            'discount_value' => [
+                'nullable',
+                'numeric',
+                'min:0',
+                Rule::requiredIf(fn () => in_array($this->input('type'), Promotion::AUTO_DISCOUNT_TYPES, true)),
+            ],
+            'discount_type' => [
+                'nullable',
+                'in:percentage,fixed',
+                Rule::requiredIf(fn () => in_array($this->input('type'), Promotion::AUTO_DISCOUNT_TYPES, true)),
+            ],
             'gift_description' => [
-                Rule::requiredIf(fn () => $this->input('type') === 'spend_x_get_gift'),
+                Rule::requiredIf(fn () => in_array($this->input('type'), Promotion::GIFT_TYPES, true)),
                 'array',
             ],
             'gift_description.en' => [
-                Rule::requiredIf(fn () => $this->input('type') === 'spend_x_get_gift'),
+                Rule::requiredIf(fn () => in_array($this->input('type'), Promotion::GIFT_TYPES, true)),
                 'string',
             ],
             'gift_description.ar' => [
-                Rule::requiredIf(fn () => $this->input('type') === 'spend_x_get_gift'),
+                Rule::requiredIf(fn () => in_array($this->input('type'), Promotion::GIFT_TYPES, true)),
                 'string',
             ],
             'reward_points' => [

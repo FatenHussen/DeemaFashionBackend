@@ -6,7 +6,9 @@ use App\Enums\SectionLayout;
 use App\Enums\VariantSection;
 use App\Http\Resources\SectionItem\OneResource as SectionItemOneResource;
 use App\Http\Resources\Section\SectionApiItemResource;
+use App\Models\Category;
 use App\Models\FlashSale;
+use App\Models\Product;
 use App\Models\SectionItem;
 use App\Support\DisplayTypeCatalog;
 use Illuminate\Http\Request;
@@ -99,11 +101,13 @@ class OneResource extends JsonResource
 
     private function visibleSectionItems()
     {
+        $hiddenCategoryIds = Category::idsHiddenFromCatalog();
+
         return collect($this->section->sectionItems ?? collect())
-            ->filter(fn(SectionItem $sectionItem) => $this->isSectionItemActive($sectionItem));
+            ->filter(fn(SectionItem $sectionItem) => $this->isSectionItemActive($sectionItem, $hiddenCategoryIds));
     }
 
-    private function isSectionItemActive(SectionItem $sectionItem): bool
+    private function isSectionItemActive(SectionItem $sectionItem, array $hiddenCategoryIds): bool
     {
         $item = $sectionItem->item;
 
@@ -120,6 +124,10 @@ class OneResource extends JsonResource
             if (!(bool) $item->is_active) {
                 return false;
             }
+        }
+
+        if ($item instanceof Product && $item->category_id) {
+            return !in_array((int) $item->category_id, $hiddenCategoryIds, true);
         }
 
         return true;

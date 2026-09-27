@@ -29,6 +29,7 @@ class OneResource extends JsonResource
             'is_paused' => $this->isPaused(),
             'paused_at' => $this->paused_at?->format('Y-m-d H:i:s'),
             'start_date' => $this->start_date?->format('Y-m-d'),
+            'delivery_time' => $this->resource->formattedDeliveryTime(),
             'next_run_date' => $this->next_run_date?->format('Y-m-d'),
             'availability' => $this->availability_summary ? [
                 'status' => $this->availability_summary['status'],

@@ -11,6 +11,39 @@ class Promotion extends Model
 {
     use HasFactory, HasTranslations;
 
+    public const TYPES = [
+        'simple_discount',
+        'spend_x_discount',
+        'spend_x_get_gift',
+        'spend_x_get_points',
+        'free_shipping',
+        'spend_x_get_free_shipping',
+        'first_order_discount',
+        'first_order_free_shipping',
+        'first_order_gift',
+        'signup_discount',
+        'signup_free_shipping',
+        'signup_gift',
+    ];
+
+    public const MIN_SPEND_TYPES = [
+        'spend_x_discount',
+        'spend_x_get_gift',
+        'spend_x_get_points',
+        'spend_x_get_free_shipping',
+    ];
+
+    public const GIFT_TYPES = [
+        'spend_x_get_gift',
+        'first_order_gift',
+        'signup_gift',
+    ];
+
+    public const AUTO_DISCOUNT_TYPES = [
+        'first_order_discount',
+        'signup_discount',
+    ];
+
     protected $fillable = [
         'name',
         'description',

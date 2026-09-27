@@ -131,7 +131,7 @@ class CategoryService extends BaseService
                 $query->selectRaw('categories.*, (
                     SELECT AVG(ratings.rating)
                     FROM products
-                    INNER JOIN ratings ON ratings.rateable_id = products.id AND ratings.rateable_type = "App\\\\Models\\\\Product"
+                    INNER JOIN ratings ON ratings.rateable_id = products.id AND ratings.rateable_type IN ("product", "App\\\\Models\\\\Product")
                     WHERE products.category_id = categories.id
                     AND products.deleted_at IS NULL
                 ) as avg_rating')

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Authorization\CityAccess;
 use App\Http\Resources\Shop\AllResource;
 use App\Traits\LogsActivity;
+use App\Traits\MatchesRatingMorphTypes;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
@@ -16,7 +17,7 @@ use Spatie\Translatable\HasTranslations;
 
 class Shop extends Model implements Sectionable
 {
-    use HasTranslations, LogsActivity, SoftDeletes;
+    use HasTranslations, LogsActivity, MatchesRatingMorphTypes, SoftDeletes;
 
     public array $translatable = ['name', 'description', 'address'];
 
@@ -274,10 +275,6 @@ class Shop extends Model implements Sectionable
     public function productVariants()
     {
         return $this->hasMany(ShopProductVariant::class);
-    }
-    public function ratings(): MorphMany
-    {
-        return $this->morphMany(Rating::class, 'rateable');
     }
     public function getAverageRatingAttribute(): float
     {

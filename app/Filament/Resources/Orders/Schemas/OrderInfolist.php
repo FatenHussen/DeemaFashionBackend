@@ -58,6 +58,11 @@ class OrderInfolist
                                             ->label(__('custom.orders.is_instant_delivery'))
                                             ->boolean(),
 
+                                        Infolists\Components\TextEntry::make('scheduled_delivery_at')
+                                            ->label(__('custom.orders.scheduled_delivery_at'))
+                                            ->dateTime('Y-m-d H:i')
+                                            ->placeholder('—'),
+
                                         Infolists\Components\TextEntry::make('created_at')
                                             ->label(__('custom.orders.order_date'))
                                             ->dateTime(),

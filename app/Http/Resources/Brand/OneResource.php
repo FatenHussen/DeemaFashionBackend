@@ -18,7 +18,7 @@ class OneResource extends JsonResource
             'id'             => $this->id,
             'name'           => $this->name,
             'image'          => $this->image_url,
-            'products_count' => $this->products()->count(),
+            'products_count' => $this->products()->where('is_active', true)->inCatalogCategory()->count(),
             'shops_count'    => \App\Models\Shop::whereIn(
                 'vendor_id',
                 $this->vendors()->pluck('vendors.id')

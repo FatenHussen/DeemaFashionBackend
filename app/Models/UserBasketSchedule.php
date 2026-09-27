@@ -21,6 +21,7 @@ class UserBasketSchedule extends Model implements Sectionable
         'is_active',
         'is_draft',
         'start_date',
+        'delivery_time',
         'next_run_date',
         'paused_at',
     ];
@@ -144,6 +145,16 @@ class UserBasketSchedule extends Model implements Sectionable
     }
 
     // ================= Helpers =================
+    public function formattedDeliveryTime(): ?string
+    {
+        $time = $this->getAttributes()['delivery_time'] ?? null;
+        if (!is_string($time) || trim($time) === '') {
+            return null;
+        }
+
+        return Carbon::parse($time)->format('H:i');
+    }
+
     public function isPaused(): bool
     {
         return $this->paused_at !== null;

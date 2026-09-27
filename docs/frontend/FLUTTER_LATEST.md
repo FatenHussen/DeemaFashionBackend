@@ -5,7 +5,13 @@
 > **آخر تحديث | Last Updated:** 2026-09-25  
 > الملف الشامل السابق يبقى: [`flutter.md`](./flutter.md)
 
-**اليوم (25 أيلول):** حالة الطلب — اعرضوا `out_delivery` / `status_label` (مو fallback `pending`) — [`FLUTTER_ORDER_STATUS.md`](./FLUTTER_ORDER_STATUS.md)
+**اليوم (27 أيلول):** عروض تلقائية — أول طلب أو إنشاء حساب أو شراء بقيمة، والمكافأة خصم أو توصيل مجاني أو هدية — [`FLUTTER_PROMOTION_TRIGGERS.md`](./FLUTTER_PROMOTION_TRIGGERS.md)
+
+**اليوم (25 أيلول):** جدولة السلة = تاريخ واحد + وقت داخل اليوم، وزر الحفظ يرسل الطلب — [`FLUTTER_BASKET_SCHEDULE_DATE_TIME.md`](./FLUTTER_BASKET_SCHEDULE_DATE_TIME.md)
+
+**اليوم (25 أيلول):** السلة / الدفع / المراجعة بدون تكرار، وكرت الطلب يعرض `scheduled_delivery_at` إذا الإدارة حددته — [`FLUTTER_CHECKOUT_LAYOUT.md`](./FLUTTER_CHECKOUT_LAYOUT.md)
+
+**اليوم (سابقاً):** حالة الطلب — اعرضوا `out_delivery` / `status_label` (مو fallback `pending`) — [`FLUTTER_ORDER_STATUS.md`](./FLUTTER_ORDER_STATUS.md)
 
 **اليوم (سابقاً):** طلب سريع — **زر الهيدر منفصل عن القسم** (`show_header` / `show_section`) — [`QUICK_ORDER_HEADER_VS_SECTION.md`](./QUICK_ORDER_HEADER_VS_SECTION.md)
 

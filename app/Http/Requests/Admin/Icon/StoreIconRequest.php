@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin\Icon;
 
+use App\Rules\IconImage;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreIconRequest extends FormRequest
@@ -17,7 +18,7 @@ class StoreIconRequest extends FormRequest
             'name' => 'required|array',
             'name.ar' => 'required|string|max:255',
             'name.en' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
+            'image' => ['required', 'file', 'max:2048', new IconImage],
             'description' => 'nullable|array',
             'description.ar' => 'nullable|string|max:1000',
             'description.en' => 'nullable|string|max:1000',

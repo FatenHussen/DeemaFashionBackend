@@ -62,6 +62,12 @@ class OrdersTable
                     ->label(__('custom.orders.is_instant_delivery'))
                     ->boolean(),
 
+                Tables\Columns\TextColumn::make('scheduled_delivery_at')
+                    ->label(__('custom.orders.scheduled_delivery_at'))
+                    ->dateTime('Y-m-d H:i')
+                    ->placeholder('—')
+                    ->sortable(),
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->label(__('custom.orders.order_date'))
                     ->dateTime()

@@ -232,7 +232,7 @@ class PopupCampaign extends Model
             'pages',
             'promotions' => fn($q) => $q->active()->with([
                 'pages',
-                'products' => fn($q) => $q->with([
+                'products' => fn($q) => $q->where('products.is_active', true)->inCatalogCategory()->with([
                     'category',
                     'vendor',
                     'media',
@@ -240,14 +240,14 @@ class PopupCampaign extends Model
                     'country',
                     'variants.shopVariants',
                 ]),
-                'categories',
+                'categories' => fn($q) => $q->visibleToUsers(),
                 'stores' => fn($q) => $q->with(['vendor', 'badges']),
                 'restaurants' => fn($q) => $q->with(['vendor', 'badges']),
                 'serviceProviders' => fn($q) => $q->with(['vendor', 'badges']),
                 'vendors' => fn($q) => $q->with(['badges']),
                 'shopVendorServices' => fn($q) => $q->with(['shop', 'vendorService.type']),
             ]),
-            'products' => fn($q) => $q->with([
+            'products' => fn($q) => $q->where('products.is_active', true)->inCatalogCategory()->with([
                 'category',
                 'vendor',
                 'media',

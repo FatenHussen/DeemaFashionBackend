@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 use App\Models\Favorite;
 use App\Traits\LogsActivity;
+use App\Traits\MatchesRatingMorphTypes;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use App\Models\Media;
 
 class Recipe extends Model implements Sectionable
 {
-    use HasTranslations, LogsActivity;
+    use HasTranslations, LogsActivity, MatchesRatingMorphTypes;
 
     public $translatable = ['name', 'description', 'video_title', 'video_desc'];
 
@@ -122,10 +123,6 @@ class Recipe extends Model implements Sectionable
     public function badges()
     {
         return $this->morphToMany(Badge::class, 'badgeable')->withPivot('position');
-    }
-    public function ratings()
-    {
-        return $this->morphMany(Rating::class, 'rateable');
     }
     public function getAverageRatingAttribute(): float
     {

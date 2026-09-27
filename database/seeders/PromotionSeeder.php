@@ -126,6 +126,108 @@ class PromotionSeeder extends Seeder
                 'gift_description' => null,
                 'reward_points' => null,
             ],
+            'first_order_discount' => [
+                ...$window,
+                'name' => [
+                    'en' => '10% Off Your First Order',
+                    'ar' => 'خصم 10% على أول طلب',
+                ],
+                'description' => [
+                    'en' => 'Place your first order and get 10% off.',
+                    'ar' => 'اعمل أول طلب واحصل على خصم 10%.',
+                ],
+                'min_spend' => null,
+                'discount_value' => 10,
+                'discount_type' => 'percentage',
+                'gift_description' => null,
+                'reward_points' => null,
+            ],
+            'first_order_free_shipping' => [
+                ...$window,
+                'name' => [
+                    'en' => 'Free Shipping on Your First Order',
+                    'ar' => 'توصيل مجاني على أول طلب',
+                ],
+                'description' => [
+                    'en' => 'Free delivery on your first order.',
+                    'ar' => 'توصيل مجاني على أول طلب.',
+                ],
+                'min_spend' => null,
+                'discount_value' => null,
+                'discount_type' => null,
+                'gift_description' => null,
+                'reward_points' => null,
+            ],
+            'first_order_gift' => [
+                ...$window,
+                'name' => [
+                    'en' => 'A Gift on Your First Order',
+                    'ar' => 'هدية مع أول طلب',
+                ],
+                'description' => [
+                    'en' => 'A welcome gift with your first order.',
+                    'ar' => 'هدية ترحيب مع أول طلب.',
+                ],
+                'min_spend' => null,
+                'discount_value' => null,
+                'discount_type' => null,
+                'gift_description' => [
+                    'en' => 'Welcome gift',
+                    'ar' => 'هدية ترحيب',
+                ],
+                'reward_points' => null,
+            ],
+            'signup_discount' => [
+                ...$window,
+                'name' => [
+                    'en' => '5 Off When You Create an Account',
+                    'ar' => 'خصم 5 عند إنشاء الحساب',
+                ],
+                'description' => [
+                    'en' => 'Create an account and get 5 off your first order.',
+                    'ar' => 'أنشئ حساباً واحصل على خصم 5 على أول طلب.',
+                ],
+                'min_spend' => null,
+                'discount_value' => 5,
+                'discount_type' => 'fixed',
+                'gift_description' => null,
+                'reward_points' => null,
+            ],
+            'signup_free_shipping' => [
+                ...$window,
+                'name' => [
+                    'en' => 'Free Shipping When You Create an Account',
+                    'ar' => 'توصيل مجاني عند إنشاء الحساب',
+                ],
+                'description' => [
+                    'en' => 'Create an account and get free delivery on your first order.',
+                    'ar' => 'أنشئ حساباً واحصل على توصيل مجاني على أول طلب.',
+                ],
+                'min_spend' => null,
+                'discount_value' => null,
+                'discount_type' => null,
+                'gift_description' => null,
+                'reward_points' => null,
+            ],
+            'signup_gift' => [
+                ...$window,
+                'name' => [
+                    'en' => 'A Gift When You Create an Account',
+                    'ar' => 'هدية عند إنشاء الحساب',
+                ],
+                'description' => [
+                    'en' => 'Create an account and receive a gift with your first order.',
+                    'ar' => 'أنشئ حساباً واحصل على هدية مع أول طلب.',
+                ],
+                'min_spend' => null,
+                'discount_value' => null,
+                'discount_type' => null,
+                'gift_description' => [
+                    'en' => 'Account gift',
+                    'ar' => 'هدية الحساب',
+                ],
+                'reward_points' => null,
+            ],
         ];
 
         $expectedTypes = array_values(array_unique(array_merge(

@@ -5,7 +5,13 @@
 > **آخر تحديث | Last Updated:** 2026-09-25  
 > الملف الشامل السابق يبقى: [`web.md`](./web.md)
 
-**اليوم (25 أيلول):** حالة الطلب — اعرضوا `out_delivery` / `status_label` (مو fallback `pending`) — [`WEB_ORDER_STATUS.md`](./WEB_ORDER_STATUS.md)
+**اليوم (27 أيلول):** عروض تلقائية — أول طلب أو إنشاء حساب أو شراء بقيمة، والمكافأة خصم أو توصيل مجاني أو هدية — [`WEB_PROMOTION_TRIGGERS.md`](./WEB_PROMOTION_TRIGGERS.md)
+
+**اليوم (25 أيلول):** جدولة السلة = تاريخ واحد + وقت داخل اليوم، وزر الحفظ يرسل الطلب — [`WEB_BASKET_SCHEDULE_DATE_TIME.md`](./WEB_BASKET_SCHEDULE_DATE_TIME.md)
+
+**اليوم (25 أيلول):** السلة / الدفع / المراجعة بدون تكرار، وكرت الطلب يعرض `scheduled_delivery_at` إذا الإدارة حددته — [`WEB_CHECKOUT_LAYOUT.md`](./WEB_CHECKOUT_LAYOUT.md)
+
+**اليوم (سابقاً):** حالة الطلب — اعرضوا `out_delivery` / `status_label` (مو fallback `pending`) — [`WEB_ORDER_STATUS.md`](./WEB_ORDER_STATUS.md)
 
 **اليوم (سابقاً):** طلب سريع — **زر الهيدر منفصل عن القسم** (`show_header` / `show_section`) — [`QUICK_ORDER_HEADER_VS_SECTION.md`](./QUICK_ORDER_HEADER_VS_SECTION.md)
 

@@ -14,6 +14,7 @@ class ActiveResource extends JsonResource
         $products = Product::query()
             ->where('flash_sale_id', $this->id)
             ->where('is_active', true)
+            ->inCatalogCategory()
             ->with([
                 'category',
                 'vendor',

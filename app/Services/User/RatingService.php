@@ -39,9 +39,9 @@ class RatingService extends BaseService
     {
         // handle rateable_type (enum → class)
         if (!empty($filters['rateable_type'])) {
-            $query->where(
+            $query->whereIn(
                 'rateable_type',
-                $this->resolveRateableType($filters['rateable_type'])
+                $this->rateableTypeValues($this->resolveRateableType($filters['rateable_type']))
             );
 
             unset($filters['rateable_type']);
@@ -67,7 +67,7 @@ class RatingService extends BaseService
 
         // Check if user already rated this item
         $existingRating = Rating::where('user_id', $userId)
-            ->where('rateable_type', $data['rateable_type'])
+            ->whereIn('rateable_type', $this->rateableTypeValues($data['rateable_type']))
             ->where('rateable_id', $data['rateable_id'])
             ->first();
 
@@ -138,6 +138,16 @@ class RatingService extends BaseService
         return parent::delete($id);
     }
 
+    private function rateableTypeValues(string $class): array
+    {
+        $model = new $class;
+
+        return array_values(array_unique(array_filter([
+            $model->getMorphClass(),
+            $class,
+        ])));
+    }
+
     private function resolveRateableType(string $type): string
     {
         return match ($type) {
@@ -158,7 +168,10 @@ class RatingService extends BaseService
             ->where('user_id', auth('user')->id());
 
         if (!empty($filters['type'])) {
-            $query->where('rateable_type', $this->resolveRateableType($filters['type']));
+            $query->whereIn(
+                'rateable_type',
+                $this->rateableTypeValues($this->resolveRateableType($filters['type']))
+            );
         }
 
         if (!empty($filters['rateable_id'])) {
@@ -207,7 +220,7 @@ class RatingService extends BaseService
 
         // Check if user already rated this product
         $alreadyRated = Rating::where('user_id', $userId)
-            ->where('rateable_type', \App\Models\Product::class)
+            ->whereIn('rateable_type', $this->rateableTypeValues(\App\Models\Product::class))
             ->where('rateable_id', $productId)
             ->exists();
 

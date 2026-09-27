@@ -413,6 +413,7 @@ Route::prefix('admin')->group(function () {
         });
         Route::middleware('admin.permission:order.update')->group(function () {
             Route::patch('{orderId}/change-status', [OrderController::class, 'changeStatus']);
+            Route::patch('{orderId}/scheduled-delivery', [OrderController::class, 'setScheduledDelivery']);
             Route::post('{orderId}/assign-driver', [OrderController::class, 'assignDriver']);
             Route::patch('items/{itemId}/change-status', [OrderController::class, 'changeItemStatus']);
         });

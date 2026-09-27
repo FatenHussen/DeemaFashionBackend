@@ -176,6 +176,29 @@ class Category extends Model implements Sectionable
     }
 
     /**
+     * Categories that must not appear in the public catalog, plus every descendant.
+     * Includes inactive and soft-deleted categories so hiding a parent hides its subtree.
+     *
+     * @return list<int>
+     */
+    public static function idsHiddenFromCatalog(): array
+    {
+        $hiddenIds = static::withTrashed()
+            ->where(function ($query) {
+                $query->where('is_active', false)
+                    ->orWhereNotNull('deleted_at');
+            })
+            ->pluck('id')
+            ->all();
+
+        if ($hiddenIds === []) {
+            return [];
+        }
+
+        return static::expandIdsToSubtrees($hiddenIds);
+    }
+
+    /**
      * Expand one or more category ids to include each id and all descendants.
      *
      * @param  array<int|string>  $categoryIds

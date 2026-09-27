@@ -26,7 +26,7 @@ class CategoryPageController extends Controller
     public function show(Request $request, int $categoryId)
     {
         $category = Category::query()
-            ->active()
+            ->visibleToUsers()
             ->with(['parent', 'activeChildren'])
             ->findOrFail($categoryId);
 

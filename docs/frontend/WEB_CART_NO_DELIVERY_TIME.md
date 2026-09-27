@@ -8,7 +8,8 @@
 > Flutter: [`FLUTTER_CART_NO_DELIVERY_TIME.md`](./FLUTTER_CART_NO_DELIVERY_TIME.md)
 
 تدفق السلة / الدفع **صفحتان (أو خطوتان)**.  
-**ما في أي ذكر لمدة التوصيل (`delivery_time`) داخل السلة.**
+**ما في أي ذكر لمدة التوصيل (`delivery_time`) داخل السلة.**  
+توزيع الدفع والمراجعة، وموعد اليوم والوقت على كرت الطلب: [`WEB_CHECKOUT_LAYOUT.md`](./WEB_CHECKOUT_LAYOUT.md).
 
 `delivery_time` يبقى على **صفحة المنتج** فقط (وبعد إنشاء الطلب على عناصر الطلب إن لزم).
 
@@ -89,7 +90,7 @@ GET /api/user/products/{id}
 }
 ```
 
-بعد الطلب: `delivery_time` قد يظهر على عناصر الطلب — مو على شاشات السلة قبل التأكيد.
+بعد الطلب: كرت الطلب يعرض `scheduled_delivery_at` فقط إذا الإدارة حددته — مو `delivery_time`، ومو على شاشات السلة قبل التأكيد.
 
 ---
 

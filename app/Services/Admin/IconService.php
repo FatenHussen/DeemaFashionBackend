@@ -5,6 +5,7 @@ namespace App\Services\Admin;
 use App\Models\Icon;
 use App\Services\BaseService;
 use App\Http\Resources\Icon\IconResource;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
 class IconService extends BaseService
@@ -17,7 +18,9 @@ class IconService extends BaseService
 
     public function create($data)
     {
-        if (isset($data['image']) && $data['image'] instanceof \Illuminate\Http\UploadedFile) {
+        $data = $this->mergeUploadedImage($data);
+
+        if (($data['image'] ?? null) instanceof UploadedFile) {
             $data['image'] = $this->uploadImage($data['image']);
         }
 
@@ -26,18 +29,51 @@ class IconService extends BaseService
 
     public function update($id, array $data)
     {
+        $data = $this->mergeUploadedImage($data);
         $icon = Icon::findOrFail($id);
+        $previous = $icon->image;
+        $stored = null;
 
-        if (isset($data['image']) && $data['image'] instanceof \Illuminate\Http\UploadedFile) {
-            // Delete old image
-            if ($icon->image && Storage::disk('public')->exists($icon->image)) {
-                Storage::disk('public')->delete($icon->image);
-            }
-
-            $data['image'] = $this->uploadImage($data['image']);
+        if (($data['image'] ?? null) instanceof UploadedFile) {
+            $stored = $this->uploadImage($data['image']);
+            $data['image'] = $stored;
+        } else {
+            unset($data['image']);
         }
 
-        return parent::update($id, $data);
+        $result = parent::update($id, $data);
+
+        if (
+            is_string($stored)
+            && is_string($previous)
+            && $previous !== $stored
+            && str_starts_with($previous, 'icons/')
+            && Storage::disk('public')->exists($previous)
+        ) {
+            Storage::disk('public')->delete($previous);
+        }
+
+        return $result;
+    }
+
+    /**
+     * validated() can omit the file, and the form may send it as `icon`.
+     *
+     * @param  array<string, mixed>  $data
+     * @return array<string, mixed>
+     */
+    protected function mergeUploadedImage(array $data): array
+    {
+        $request = request();
+        $file = $request?->file('image') ?? $request?->file('icon');
+
+        if ($file instanceof UploadedFile) {
+            $data['image'] = $file;
+        } elseif (array_key_exists('image', $data) && ! $data['image'] instanceof UploadedFile) {
+            unset($data['image']);
+        }
+
+        return $data;
     }
 
     public function delete($id): bool

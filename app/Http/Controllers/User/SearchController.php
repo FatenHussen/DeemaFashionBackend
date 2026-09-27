@@ -30,6 +30,8 @@ class SearchController extends Controller
             |--------------------------------------------------------------------------
             */
             'product' => Product::deepSearch($search)
+                ->where('is_active', true)
+                ->inCatalogCategory()
                 ->with(['media'])
                 ->withAvg('ratings', 'rating')
                 ->orderByDesc('ratings_avg_rating'),

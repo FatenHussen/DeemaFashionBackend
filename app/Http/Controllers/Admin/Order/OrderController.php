@@ -7,7 +7,9 @@ use App\Http\Controllers\BaseIndexController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Order\FilterRequest;
 use App\Http\Resources\Order\AllResource;
+use App\Http\Resources\Order\OneResource;
 use App\Services\Admin\OrderService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -46,6 +48,37 @@ class OrderController extends BaseIndexController
         return $this->sendResponse(
             data: new AllResource($order),
             message: __('custom.orders.status_updated_successfully')
+        );
+    }
+
+    /* =======================
+       📅 SET DELIVERY DAY AND TIME
+    ======================= */
+    public function setScheduledDelivery(Request $request, int $orderId)
+    {
+        $raw = $request->input('scheduled_delivery_at');
+        if (is_string($raw) && trim($raw) !== '') {
+            try {
+                $request->merge([
+                    'scheduled_delivery_at' => Carbon::parse($raw)->format('Y-m-d H:i'),
+                ]);
+            } catch (\Throwable) {
+                // Leave the raw value so validation rejects it.
+            }
+        }
+
+        $data = $request->validate([
+            'scheduled_delivery_at' => ['nullable', 'date_format:Y-m-d H:i'],
+        ]);
+
+        $order = $this->service->setScheduledDelivery(
+            $orderId,
+            $data['scheduled_delivery_at'] ?? null
+        );
+
+        return $this->sendResponse(
+            data: new OneResource($order),
+            message: __('custom.orders.scheduled_delivery_updated')
         );
     }
 

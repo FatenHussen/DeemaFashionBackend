@@ -38,6 +38,12 @@
 | `spend_x_get_points` | نقاط مكافأة عند بلوغ حد إنفاق | `min_spend`, `reward_points` |
 | `free_shipping` | شحن مجاني تلقائي (بدون حد إنفاق) | — |
 | `spend_x_get_free_shipping` | شحن مجاني عند بلوغ حد إنفاق | `min_spend` |
+| `first_order_discount` | خصم تلقائي على أول طلب | `discount_value`, `discount_type` |
+| `first_order_free_shipping` | توصيل مجاني على أول طلب | — |
+| `first_order_gift` | هدية مع أول طلب | `gift_description` (ar/en) |
+| `signup_discount` | خصم على أول طلب لحساب أُنشئ أثناء العرض | `discount_value`, `discount_type` |
+| `signup_free_shipping` | توصيل مجاني على أول طلب لحساب أُنشئ أثناء العرض | — |
+| `signup_gift` | هدية مع أول طلب لحساب أُنشئ أثناء العرض | `gift_description` (ar/en) |
 
 ---
 
@@ -54,9 +60,9 @@
 | `is_active` | اختياري `boolean` | افتراضي حسب الموديل |
 | `starts_at`, `ends_at` | اختياري `date` | `ends_at` ≥ `starts_at` |
 | `min_spend` | مطلوب لأنواع Spend X | `numeric`, `min:0` |
-| `discount_value` | اختياري | `numeric`, `min:0` |
-| `discount_type` | اختياري | `percentage` \| `fixed` |
-| `gift_description` | مطلوب لـ `spend_x_get_gift` | `gift_description.en`, `gift_description.ar` |
+| `discount_value` | مطلوب لـ `first_order_discount` و `signup_discount` | `numeric`, `min:0` |
+| `discount_type` | مطلوب مع الخصم التلقائي | `percentage` \| `fixed` |
+| `gift_description` | مطلوب لـ `spend_x_get_gift` و `first_order_gift` و `signup_gift` | `gift_description.en`, `gift_description.ar` |
 | `reward_points` | مطلوب لـ `spend_x_get_points` | `integer`, `min:1` |
 
 ### ربط الصفحات (`page_slugs`)
@@ -199,6 +205,8 @@
 | `simple_discount`, `spend_x_discount` | يختارها المستخدم (`promotion_id`)؛ الخصم من `eligible_subtotal` |
 | `spend_x_get_gift`, `spend_x_get_points` | تلقائي عند إنشاء الطلب إذا تحقق `min_spend` على المؤهل |
 | `free_shipping`, `spend_x_get_free_shipping` | تلقائي؛ يصفّر `delivery_price` عند التأهل |
+| `first_order_discount`, `first_order_free_shipping`, `first_order_gift` | تلقائي إذا لم يكن للزبون طلب سابق (الملغى لا يُحسب) |
+| `signup_discount`, `signup_free_shipping`, `signup_gift` | تلقائي على أول طلب إذا أُنشئ الحساب داخل فترة العرض |
 
 التنفيذ: `app/Services/User/PromotionService.php` + `app/Services/User/OrderService.php`.
 

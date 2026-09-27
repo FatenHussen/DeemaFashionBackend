@@ -46,6 +46,7 @@ class AllResource extends JsonResource
             'rejection_reason' => $this->rejection_reason,
             'cart_type' => $this->cart_type,
             'is_instant_delivery' => $this->is_instant_delivery,
+            'scheduled_delivery_at' => $this->scheduled_delivery_at?->format('Y-m-d H:i'),
             ...$this->withCurrency($this->delivery_price, 'delivery_price'),
             ...$this->withCurrency($this->total, 'total'),
             ...$this->withCurrency($this->subtotal, 'subtotal'),

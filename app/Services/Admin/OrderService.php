@@ -15,6 +15,7 @@ use App\Services\Shared\DriverCoverageService;
 use Illuminate\Database\Eloquent\Builder;
 use App\Services\Base\NotificationService;
 use App\Services\BaseService;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 
@@ -214,6 +215,42 @@ class OrderService extends BaseService
 
             return $item->fresh();
         });
+    }
+
+    /* =======================
+       📅 SET DELIVERY DAY AND TIME
+    ======================= */
+    public function setScheduledDelivery(int $orderId, ?string $scheduledDeliveryAt)
+    {
+        $order = Order::findOrFail($orderId);
+
+        $closed = [
+            OrderStatus::DELIVERED->value,
+            OrderStatus::CANCELLED->value,
+            OrderStatus::CANCELLED_BY_ADMIN->value,
+            OrderStatus::RETURNED_BY_USER->value,
+        ];
+
+        if (in_array($order->status, $closed, true)) {
+            throw new CustomExceptionWithMessage(
+                'custom.orders.cannot_set_scheduled_delivery'
+            );
+        }
+
+        $order->update([
+            'scheduled_delivery_at' => $scheduledDeliveryAt
+                ? Carbon::parse($scheduledDeliveryAt)->seconds(0)
+                : null,
+        ]);
+
+        return $order->fresh([
+            'items.shopProductVariant.shop',
+            'user',
+            'driver',
+            'address',
+            'paymentMethod',
+            'coupon',
+        ]);
     }
 
     /* =======================

@@ -25,11 +25,13 @@ class StoreRequest extends FormRequest
 
             'start_date' => ['required', 'date', 'after_or_equal:today'],
 
+            'delivery_time' => ['nullable', 'date_format:H:i'],
+
             'is_active' => ['sometimes', 'boolean'],
 
             'items' => ['required', 'array', 'min:1'],
 
-            'items.*.product_id' => ['required', 'exists:products,id'],
+            'items.*.product_id' => ['nullable', 'exists:products,id'],
             'items.*.shop_product_variant_id' => ['nullable', 'exists:shop_product_variants,id'],
             'items.*.quantity' => ['required', 'integer', 'min:1'],
         ];
@@ -41,5 +43,30 @@ class StoreRequest extends FormRequest
             'user_id'   => auth('user')->id(),
             'is_active' => $this->is_active ?? true,
         ]);
+    }
+
+    public function withValidator($validator): void
+    {
+        $validator->after(function ($validator) {
+            foreach ($this->input('items', []) as $index => $item) {
+                if (empty($item['product_id']) && empty($item['shop_product_variant_id'])) {
+                    $validator->errors()->add(
+                        "items.$index.shop_product_variant_id",
+                        'معرّف المنتج أو متغيّر المتجر مطلوب',
+                    );
+                }
+            }
+
+            $date = $this->input('start_date');
+            $time = $this->input('delivery_time');
+            if (!$date || !$time || $validator->errors()->isNotEmpty()) {
+                return;
+            }
+
+            $at = \Carbon\Carbon::parse($date.' '.$time);
+            if ($at->lt(now())) {
+                $validator->errors()->add('delivery_time', 'وقت التوصيل لازم يكون من الآن فصاعداً');
+            }
+        });
     }
 }

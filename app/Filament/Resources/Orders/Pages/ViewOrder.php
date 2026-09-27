@@ -6,6 +6,7 @@ use App\Filament\Resources\Orders\OrderResource;
 use App\Models\OrderItem;
 use App\Enums\OrderStatus;
 use Filament\Actions\Action;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
@@ -18,6 +19,36 @@ class ViewOrder extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
+            Action::make('set_scheduled_delivery')
+                ->label(__('custom.orders.actions.set_scheduled_delivery'))
+                ->icon('heroicon-o-calendar-days')
+                ->color('gray')
+                ->visible(fn () => ! in_array($this->record->status, [
+                    OrderStatus::DELIVERED->value,
+                    OrderStatus::CANCELLED->value,
+                    OrderStatus::CANCELLED_BY_ADMIN->value,
+                    OrderStatus::RETURNED_BY_USER->value,
+                ], true))
+                ->fillForm(fn () => [
+                    'scheduled_delivery_at' => $this->record->scheduled_delivery_at,
+                ])
+                ->form([
+                    DateTimePicker::make('scheduled_delivery_at')
+                        ->label(__('custom.orders.scheduled_delivery_at'))
+                        ->seconds(false)
+                        ->native(false),
+                ])
+                ->action(function (array $data) {
+                    $this->record->update([
+                        'scheduled_delivery_at' => $data['scheduled_delivery_at'] ?: null,
+                    ]);
+
+                    Notification::make()
+                        ->title(__('custom.orders.scheduled_delivery_updated'))
+                        ->success()
+                        ->send();
+                }),
+
             Action::make('start_preparing')
                 ->label(__('custom.orders.actions.start_preparing'))
                 ->icon('heroicon-o-clock')

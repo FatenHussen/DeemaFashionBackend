@@ -44,6 +44,9 @@ class Icon extends Model
             $path = substr($path, strlen('storage/'));
         }
 
-        return asset('storage/' . $path);
+        $url = asset('storage/' . $path);
+        $version = $this->updated_at?->getTimestamp();
+
+        return $version ? $url.'?v='.$version : $url;
     }
 }

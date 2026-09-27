@@ -19,7 +19,9 @@ class SuggestedProductsService
         ];
 
         $baseQuery = Product::query()
-            ->where('approval_status', ProductApprovalStatus::APPROVED->value);
+            ->where('approval_status', ProductApprovalStatus::APPROVED->value)
+            ->where('is_active', true)
+            ->inCatalogCategory();
 
         if ($userId) {
             $userTotals = OrderItem::query()
