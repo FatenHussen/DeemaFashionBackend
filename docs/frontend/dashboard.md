@@ -2,8 +2,12 @@
 
 > **أرسلوا هذا الملف لفريق الداشبورد فقط.**  
 > Base: `/api/admin` + Admin token.  
-> **آخر تحديث:** 25 أيلول 2026  
+> **آخر تحديث:** 27 أيلول 2026  
 > يجمع **كل** تعديلات الباك التي تحتاج تنفيذ في الداشبورد (مو بس المنتج).
+
+**اليوم:** إخفاء الفئة (`is_active: false`) يخفي منتجاتها من الموقع والتطبيق، بدون تعطيل المنتجات في الداشبورد — [`DASHBOARD_HIDDEN_CATEGORY_PRODUCTS.md`](./DASHBOARD_HIDDEN_CATEGORY_PRODUCTS.md)
+
+**اليوم:** تغيير صورة الأيقونة ينحفظ، والمعاينة من `image` / `icon` بعد الرد — [`DASHBOARD_ICON_IMAGE.md`](./DASHBOARD_ICON_IMAGE.md)
 
 **اليوم:** العروض = شرط (أول طلب / شراء بقيمة / إنشاء حساب) + مكافأة (خصم / توصيل مجاني / هدية) — [`DASHBOARD_PROMOTION_TRIGGERS.md`](./DASHBOARD_PROMOTION_TRIGGERS.md)
 
@@ -12,6 +16,12 @@
 **اليوم:** يوم ووقت التوصيل خيار ثاني على الطلب (`scheduled_delivery_at`) — [`DASHBOARD_ORDER_DELIVERY_SCHEDULE.md`](./DASHBOARD_ORDER_DELIVERY_SCHEDULE.md)
 
 **اليوم (سابقاً):** حالة الطلب — `out_delivery` (مو `out_for_delivery`) + `status_label` — [`DASHBOARD_ORDER_STATUS.md`](./DASHBOARD_ORDER_STATUS.md)
+
+**اليوم (سابقاً):** حقول البنر اختيارية ما عدا الصورة عند الإنشاء، ومسحها ينحفظ `null` — [`DASHBOARD_BANNER_REQUIRED_FIELDS.md`](./DASHBOARD_BANNER_REQUIRED_FIELDS.md) · [`DASHBOARD_BANNER_CLEAR_FIELDS.md`](./DASHBOARD_BANNER_CLEAR_FIELDS.md)
+
+**اليوم (سابقاً):** بطاقة البنر في الصفحة: صورة + اسم فقط — [`DASHBOARD_SECTION_BANNER_CARD.md`](./DASHBOARD_SECTION_BANNER_CARD.md)
+
+**اليوم (سابقاً):** `delivery_time` على فورم المنتج فقط — مو داخل سلة الزبون — [`DASHBOARD_CART_NO_DELIVERY_TIME.md`](./DASHBOARD_CART_NO_DELIVERY_TIME.md)
 
 **اليوم (سابقاً):** إضافات المنتجات = اسم + سعر (مو عنوان/قيمة قطن) — [`DASHBOARD_PRODUCT_EXTRA_DETAILS.md`](./DASHBOARD_PRODUCT_EXTRA_DETAILS.md)
 
@@ -59,6 +69,13 @@
 24. [كل المتغيّرات تُحفظ وتُربط بالمتجر](#24-كل-المتغيّرات-تحفظ-وتربط-بالمتجر)
 25. [إلغاء فروع المتاجر](#25-إلغاء-فروع-المتاجر)
 26. [إضافات المنتجات — اسم + سعر](#26-إضافات-المنتجات--اسم--سعر)
+27. [إخفاء الفئة يخفي منتجاتها](#27-إخفاء-الفئة-يخفي-منتجاتها)
+28. [تغيير صورة الأيقونة](#28-تغيير-صورة-الأيقونة)
+29. [عروض: شرط + مكافأة](#29-عروض-شرط--مكافأة)
+30. [تاريخ ووقت جدولة سلة الزبون](#30-تاريخ-ووقت-جدولة-سلة-الزبون)
+31. [يوم ووقت التوصيل على الطلب](#31-يوم-ووقت-التوصيل-على-الطلب)
+32. [حالة الطلب](#32-حالة-الطلب)
+33. [البنر: حقول اختيارية ومسحها](#33-البنر-حقول-اختيارية-ومسحها)
 
 ---
 
@@ -847,6 +864,15 @@ file: <products.xlsx>
 - [ ] sale_channel فقط (موقع/متجر) — احذف مستودعاتي/خارجي
 - [ ] استيراد Excel: تنزيل قالب + رفع + ملخص created/updated/failed
 
+### اليوم (25–27 أيلول)
+- [ ] إيقاف الفئة `is_active: false` فقط — لا تعطّلوا منتجاتها — [§27](#27-إخفاء-الفئة-يخفي-منتجاتها)
+- [ ] تغيير صورة الأيقونة في `image`، والمعاينة من الرد مع `?v=` — [§28](#28-تغيير-صورة-الأيقونة)
+- [ ] العروض: شرط + مكافأة (خصم / توصيل مجاني / هدية) — [§29](#29-عروض-شرط--مكافأة)
+- [ ] جداول سلال الزبائن: `start_date` + `delivery_time` للعرض فقط — [§30](#30-تاريخ-ووقت-جدولة-سلة-الزبون)
+- [ ] الطلب: `PATCH .../scheduled-delivery` بصيغة `Y-m-d H:i` — [§31](#31-يوم-ووقت-التوصيل-على-الطلب)
+- [ ] الحالة `out_delivery` مو `out_for_delivery` — [§32](#32-حالة-الطلب)
+- [ ] مسح حقول البنر يرسل فاضي وينحفظ `null` — [§33](#33-البنر-حقول-اختيارية-ومسحها)
+
 ### طلب سريع
 - [ ] إعدادات: سويتش `quick_order_header_enabled` + سويتش `quick_order_enabled` + multi-select `quick_order_page_ids` + خلفية + كروت + نصوص
 - [ ] قائمة الصفحات من `GET /api/admin/pages`
@@ -1121,4 +1147,150 @@ values[0][name][en]=XS
 
 فورم `/categories/extra-details` صار: **اسم الإضافة** (`detail_key`) + **سعر** (`price`).  
 `detail_value` وصف اختياري فقط — مو بديل عن السعر. لا تستخدموا placeholder «قطن».
+
+---
+
+## 27) إخفاء الفئة يخفي منتجاتها
+
+> **27 أيلول 2026** — [`DASHBOARD_HIDDEN_CATEGORY_PRODUCTS.md`](./DASHBOARD_HIDDEN_CATEGORY_PRODUCTS.md)
+
+مفتاح `is_active` الموجود يكفي. لا زر إخفاء على كل منتج، ولا تعطّلوا المنتجات لما تنطفئ الفئة.
+
+| `is_active` | الموقع والتطبيق |
+|-------------|-----------------|
+| `true` | الفئة ظاهرة ومنتجاتها ترجع |
+| `false` | الفئة تختفي مع منتجات الشجرة تحتها |
+
+إخفاء الرئيسية يخفي منتجات الفروع حتى لو الفرعية بقيت مفعّلة. إعادة `true` تنشر نفس المنتجات. قائمة منتجات الداشبورد تبقى تعرض منتجات الفئة المخفية.
+
+---
+
+## 28) تغيير صورة الأيقونة
+
+> **27 أيلول 2026** — [`DASHBOARD_ICON_IMAGE.md`](./DASHBOARD_ICON_IMAGE.md)
+
+`POST /api/admin/icons` و `POST /api/admin/icons/{id}` مع `_method=PUT`. `multipart/form-data`. اسم الملف **`image`**. بدون ملف جديد لا ترسلوا `image` ولا رابط قديم كنص.
+
+| الحقل | القاعدة |
+|--------|---------|
+| `image` | اختياري عند التعديل · فاضي = الصورة القديمة |
+| الصيغ | `jpg` `jpeg` `png` `gif` `svg` `webp` · 2MB |
+| `name[ar]` / `name[en]` | مطلوبان إذا انرسل `name` |
+
+بعد 200: المعاينة من `data.image` أو `data.icon` ومعه `?v=`. ربط المنتج ما تغيّر: `icon_ids`.
+
+---
+
+## 29) عروض: شرط + مكافأة
+
+> **27 أيلول 2026** — [`DASHBOARD_PROMOTION_TRIGGERS.md`](./DASHBOARD_PROMOTION_TRIGGERS.md)
+
+العرض = شرط + مكافأة. الحقول حسب النوع: `GET /api/admin/promotions/fields-for-type/{type}`.
+
+| الشرط | المكافأة | `type` | حقول إضافية |
+|--------|----------|--------|-------------|
+| أول طلب | خصم | `first_order_discount` | `discount_value` + `discount_type` |
+| أول طلب | توصيل مجاني | `first_order_free_shipping` | — |
+| أول طلب | هدية | `first_order_gift` | `gift_description.ar` + `.en` |
+| شراء بقيمة | خصم | `spend_x_discount` | `min_spend` + الخصم |
+| شراء بقيمة | توصيل مجاني | `spend_x_get_free_shipping` | `min_spend` |
+| شراء بقيمة | هدية | `spend_x_get_gift` | `min_spend` + `gift_description` |
+| أنشأ حساب | خصم | `signup_discount` | `discount_value` + `discount_type` |
+| أنشأ حساب | توصيل مجاني | `signup_free_shipping` | — |
+| أنشأ حساب | هدية | `signup_gift` | `gift_description` |
+
+`discount_type`: `percentage` أو `fixed`. النقاط تبقى خياراً منفصلاً: `spend_x_get_points` + `reward_points`.
+
+أول طلب تلقائي إذا ما عنده طلب سابق (الملغى ما يُحسب). شراء بقيمة عند بلوغ `min_spend`. إنشاء حساب على أول طلب إذا الحساب ضمن `starts_at` / `ends_at`. التطبيق والموقع يطبّقونه وحدهم.
+
+---
+
+## 30) تاريخ ووقت جدولة سلة الزبون
+
+> **25 أيلول 2026** — [`DASHBOARD_BASKET_SCHEDULE_DATE_TIME.md`](./DASHBOARD_BASKET_SCHEDULE_DATE_TIME.md)
+
+عرض فقط. الزبون يختار اليوم والساعة. الأدمن ما يعدّل الساعة من هذه الشاشة.
+
+```http
+GET /api/admin/user-basket-schedules
+GET /api/admin/user-basket-schedules/{id}
+```
+
+| الحقل | العرض |
+|--------|--------|
+| `start_date` | تاريخ التوصيل · لا تسموه Start Date |
+| `delivery_time` | `HH:mm` · `null` = «—» مو `00:00` |
+| `next_run_date` | التوصيل التالي + نفس الساعة إن وُجدت |
+| `schedule.name` | التكرار |
+
+تفعيل / إيقاف كما هو (`enable` / `disable`). لا خلط مع `delivery_time` نص المنتج ولا مع `scheduled_delivery_at` على الطلب. صلاحية العرض: `userbasketschedule.view`.
+
+---
+
+## 31) يوم ووقت التوصيل على الطلب
+
+> **25 أيلول 2026** — [`DASHBOARD_ORDER_DELIVERY_SCHEDULE.md`](./DASHBOARD_ORDER_DELIVERY_SCHEDULE.md)
+
+بجانب توصيل فوري (`is_instant_delivery`): خيار **تحديد يوم ووقت**.
+
+```http
+PATCH /api/admin/orders/{orderId}/scheduled-delivery
+```
+
+```json
+{ "scheduled_delivery_at": "2026-09-28 16:30" }
+```
+
+مسح الموعد: `"scheduled_delivery_at": null`. الصيغة `Y-m-d H:i` بدون ثواني. نفس الحقل من `GET /api/admin/orders` و `GET /api/admin/orders/{id}/get_one`.
+
+الطلب `delivered` · `cancelled` · `cancelled_by_admin` · `returned_by_user` ما ينحفظ له موعد. `null` مو باگ.
+
+---
+
+## 32) حالة الطلب
+
+> [`DASHBOARD_ORDER_STATUS.md`](./DASHBOARD_ORDER_STATUS.md)
+
+`value` في الـ Select = المفتاح الإنجليزي. **مو** `out_for_delivery`.
+
+```http
+PATCH /api/admin/orders/{orderId}/change-status
+{ "status": "out_delivery" }
+```
+
+إلغاء من الإدارة يحتاج `rejection_reason` مع `cancelled_by_admin`.
+
+| من | إلى |
+|----|-----|
+| `pending` / `waiting_approval` | `preparing` · `cancelled` · `cancelled_by_admin` |
+| `preparing` | `out_delivery` · `cancelled` · `cancelled_by_admin` |
+| `out_delivery` | `delivered` · `cancelled` · `cancelled_by_admin` |
+| `delivered` | لا تغيير |
+
+`preparing` → `pending` مرفوض. عنصر واحد: `PATCH /api/admin/orders/items/{itemId}/change-status` بقيم `pending` · `preparing` · `out_delivery` · `delivered`.
+
+القيم: `pending` · `waiting_approval` · `preparing` · `out_delivery` · `delivered` · `cancelled` · `cancelled_by_admin` · `rejected_by_delivery` · `faild_deliver` · `returned_by_user`.
+
+---
+
+## 33) البنر: حقول اختيارية ومسحها
+
+> [`DASHBOARD_BANNER_REQUIRED_FIELDS.md`](./DASHBOARD_BANNER_REQUIRED_FIELDS.md) · المسح: [`DASHBOARD_BANNER_CLEAR_FIELDS.md`](./DASHBOARD_BANNER_CLEAR_FIELDS.md) · البطاقة: [`DASHBOARD_SECTION_BANNER_CARD.md`](./DASHBOARD_SECTION_BANNER_CARD.md)
+
+كل الحقول اختيارية ما عدا `image` عند **الإنشاء**. بدون `expires_at` = بنر دائم.
+
+عند التعديل، إرسال الحقل فاضي يمسحه:
+
+| الحقل | فاضي |
+|--------|------|
+| `title` / `description` / `button_text` | اللغة المرسلة تُمسح · `null` على الكائن يمسح الكل |
+| `link` | `null` |
+| `expires_at` | `null` = دائم |
+| `image` | إذا ما انرسل، الصورة القديمة تبقى |
+
+الرد بعد المسح `{ "ar": null, "en": null }` — مو `[]`. اعرضوا الفورم من الرد الجديد.
+
+بطاقة البنر في إضافة القسم وصفحة التفاصيل: **صورة + اسم فقط**. بدون اسم تبقى الصورة. لا رقم ولا رابط ولا وصف على البطاقة. جدول `/sections/banners` يبقى كاملاً.
+
+`delivery_time` على فورم المنتج يبقى نصاً («3–5 أيام») ويظهر على صفحة المنتج فقط — [`DASHBOARD_CART_NO_DELIVERY_TIME.md`](./DASHBOARD_CART_NO_DELIVERY_TIME.md).
 

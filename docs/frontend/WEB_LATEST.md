@@ -2,8 +2,14 @@
 
 > **أرسلوا هذا الملف لفريق الويب.**  
 > Base: `/api/user` + `Accept-Language: ar|en`  
-> **آخر تحديث | Last Updated:** 2026-09-25  
+> **آخر تحديث | Last Updated:** 2026-09-27  
 > الملف الشامل السابق يبقى: [`web.md`](./web.md)
+
+**اليوم (27 أيلول):** إخفاء الفئة يخفي منتجاتها من القوائم والبحث والأقسام وصفحة المنتج (`404`) — [`WEB_HIDDEN_CATEGORY_PRODUCTS.md`](./WEB_HIDDEN_CATEGORY_PRODUCTS.md)
+
+**اليوم (27 أيلول):** صورة الأيقونة على صفحة المنتج من `icons[].icon` أو `icons[].image` مع `?v=` — [`WEB_ICON_IMAGE.md`](./WEB_ICON_IMAGE.md)
+
+**اليوم (27 أيلول):** نافذة التقييم تتسكرول لحد زر الإرسال، ومتوسط المنتج في `rating` يتحدث بعد الحفظ — [`WEB_PRODUCT_RATING.md`](./WEB_PRODUCT_RATING.md)
 
 **اليوم (27 أيلول):** عروض تلقائية — أول طلب أو إنشاء حساب أو شراء بقيمة، والمكافأة خصم أو توصيل مجاني أو هدية — [`WEB_PROMOTION_TRIGGERS.md`](./WEB_PROMOTION_TRIGGERS.md)
 
@@ -18,6 +24,12 @@
 **اليوم (سابقاً):** على `/home` — **الهيدر الإعلاني (بنر) فوق** كرت تتبع الطلب — [`WEB_HOME_BANNER_BEFORE_TRACK.md`](./WEB_HOME_BANNER_BEFORE_TRACK.md)
 
 **اليوم (سابقاً):** بنر — اعرضوا `title` · `desc` · `button_text` · `link` (مو صورة فقط) — [`WEB_BANNER_REQUIRED_FIELDS.md`](./WEB_BANNER_REQUIRED_FIELDS.md)
+
+**اليوم (سابقاً):** مسح حقول البنر يوصل `null` — لا تعرضوا النص القديم من الكاش — [`WEB_BANNER_CLEAR_FIELDS.md`](./WEB_BANNER_CLEAR_FIELDS.md)
+
+**اليوم (سابقاً):** السلة بدون مدة التوصيل — `delivery_time` على صفحة المنتج فقط — [`WEB_CART_NO_DELIVERY_TIME.md`](./WEB_CART_NO_DELIVERY_TIME.md)
+
+**اليوم (سابقاً):** لوحة المسوق فقط بعد الموافقة (`is_affiliate` + `approved`) — [`WEB_MARKETER_DASHBOARD_GATE.md`](./WEB_MARKETER_DASHBOARD_GATE.md)
 
 **اليوم (سابقاً):** جدولة التسليم **مطوية** — سطر + زر «عرض تفاصيل الجدولة» (مو بلوك مفتوح) — [`WEB_SCHEDULE_UI_COLLAPSED.md`](./WEB_SCHEDULE_UI_COLLAPSED.md)
 
@@ -43,7 +55,7 @@
 
 **اليوم (صباحاً):** سعر $ · ل.س · نوع الخصم (لا يوجد خصم) · قيمة الخصم · السعر بعد الخصم · الكمية المتوفرة · الباركود · SKU — [`WEB_PRODUCT_PRICING_FIELDS.md`](./WEB_PRODUCT_PRICING_FIELDS.md)
 
-يجمع **كل** ما يحتاجه الموقع حتى اليوم: Nav · أقسام · فئات · فلاتر · تسجيل · طلب سريع · أسعار · متغيّرات · **ضمان** · **كمية** · **سلل مجدولة** · **سلة مخصصة**.
+يجمع **كل** ما يحتاجه الموقع حتى اليوم: Nav · أقسام · فئات · فلاتر · تسجيل · طلب سريع · أسعار · متغيّرات · **ضمان** · **كمية** · **سلل مجدولة** · **سلة مخصصة** · إخفاء الفئة · أيقونات · تقييم · عروض تلقائية · جدولة بتاريخ ووقت · دفع ومراجعة · حالة الطلب · بنر.
 
 ---
 
@@ -64,6 +76,16 @@
 11. [الأسعار](#11-الأسعار)
 12. [Checklist](#12-checklist)
 13. [السلل المجدولة + السلة المخصصة](#13-السلل-المجدولة--السلة-المخصصة)
+14. [إخفاء الفئة يخفي منتجاتها](#14-إخفاء-الفئة-يخفي-منتجاتها)
+15. [صورة الأيقونة](#15-صورة-الأيقونة)
+16. [تقييم المنتج](#16-تقييم-المنتج)
+17. [العروض التلقائية](#17-العروض-التلقائية)
+18. [جدولة السلة: تاريخ + وقت](#18-جدولة-السلة-تاريخ--وقت)
+19. [السلة والدفع والمراجعة](#19-السلة-والدفع-والمراجعة)
+20. [حالة الطلب](#20-حالة-الطلب)
+21. [البنر](#21-البنر)
+22. [صفحة المنتج — تعديلات العرض](#22-صفحة-المنتج--تعديلات-العرض)
+23. [لوحة المسوق](#23-لوحة-المسوق)
 
 ---
 
@@ -408,6 +430,15 @@ GET /api/user/settings
 - [ ] سلل مجدولة: تبويبات `/schedules` + `schedule_id` + تخصيص بنفس الـ id
 - [ ] كروت الجدولة من `image` + `images` + `top_badges` / `bottom_badges` (بدون aliases)
 - [ ] **سعر/خصم/كمية/باركود/SKU:** الكارد من المنتج · التفاصيل من المتغيّر المختار — [`WEB_PRODUCT_PRICING_FIELDS.md`](./WEB_PRODUCT_PRICING_FIELDS.md)
+- [ ] فئة مخفية: منتجاتها تختفي من القوائم والبحث، وصفحة المنتج `404` — [§14](#14-إخفاء-الفئة-يخفي-منتجاتها)
+- [ ] أيقونة المنتج من `icons[].icon` أو `image` مع `?v=` — [§15](#15-صورة-الأيقونة)
+- [ ] نافذة التقييم تتسكرول، وبعد الحفظ `rating` من آخر `GET` — [§16](#16-تقييم-المنتج)
+- [ ] عروض تلقائية من `automatic_promotions` — لا `promotion_id` — [§17](#17-العروض-التلقائية)
+- [ ] جدولة السلة: يوم واحد + `delivery_time` `HH:mm`، وزر الحفظ يرسل — [§18](#18-جدولة-السلة-تاريخ--وقت)
+- [ ] الدفع والمراجعة بدون تكرار، و`scheduled_delivery_at` على كرت الطلب فقط — [§19](#19-السلة-والدفع-والمراجعة)
+- [ ] حالة الطلب: `out_delivery` + `status_label` — [§20](#20-حالة-الطلب)
+- [ ] بنر: عنوان ووصف وزر ورابط، و`null` بعد المسح — [§21](#21-البنر)
+- [ ] لوحة المسوق فقط إذا `is_affiliate` و `approved` — [§23](#23-لوحة-المسوق)
 
 ---
 
@@ -446,5 +477,190 @@ Accept-Language: ar
 **واجهة التأكيد مطوية:** سطر «هل ترغب بجدولة…» + زر «عرض تفاصيل الجدولة» — التفاصيل بعد الضغط فقط. [`WEB_SCHEDULE_UI_COLLAPSED.md`](./WEB_SCHEDULE_UI_COLLAPSED.md)
 
 التفاصيل والعقد الكامل: [`WEB_CUSTOM_BASKET.md`](./WEB_CUSTOM_BASKET.md)
+
+---
+
+## 14) إخفاء الفئة يخفي منتجاتها
+
+> **27 أيلول 2026** — [`WEB_HIDDEN_CATEGORY_PRODUCTS.md`](./WEB_HIDDEN_CATEGORY_PRODUCTS.md)
+
+ما في حقل جديد. الإخفاء من الداشبورد (`is_active: false`) والباك ما يرجّع الفئة ولا منتجاتها.
+
+| المكان | السلوك |
+|--------|--------|
+| `GET /api/user/categories` | الفئة المخفية ما ترجع، ولا الفئات تحت أب مخفي |
+| `GET /api/user/categories/{id}/page` | `404` إذا الفئة أو أبوها مخفي |
+| `GET /api/user/products` و `?category_id=` | منتجات الشجرة ما ترجع |
+| `GET /api/user/products/{id}` | `404` |
+| البحث والأقسام والمفضلة و`bought_with` | الكرت ما يجي |
+
+إخفاء الفئة الرئيسية يخفي منتجات الفروع حتى لو الفرعية مفعّلة. إعادة التفعيل ترجّع المنتجات في الطلب التالي. أعيدوا جلب الصفحة ولا تعرضوا كاش قديم. `404` = صفحة «غير موجود».
+
+---
+
+## 15) صورة الأيقونة
+
+> **27 أيلول 2026** — [`WEB_ICON_IMAGE.md`](./WEB_ICON_IMAGE.md) · الربط: [`PRODUCT_ICONS_WEB_DASHBOARD.md`](./PRODUCT_ICONS_WEB_DASHBOARD.md)
+
+من `GET /api/user/products/{id}` → `icons[]`. الصورة = `icon` أو `image` (نفس الرابط) ومعه `?v=`. لا تحذفوا `?v=` ولا تثبّتوا SVG في الكود. `icons` فاضي → أخفوا الصف.
+
+```tsx
+{(product.icons ?? []).map((item) => (
+  <img key={item.id} src={item.icon || item.image} alt={item.name} />
+))}
+```
+
+---
+
+## 16) تقييم المنتج
+
+> **27 أيلول 2026** — [`WEB_PRODUCT_RATING.md`](./WEB_PRODUCT_RATING.md)
+
+النافذة أطول من الشاشة: ارتفاع أقصى حوالي `90vh`، التمرير **داخل** النافذة، وزر الإرسال و«لاحقاً» `sticky`.
+
+```http
+POST /api/user/ratings
+```
+
+| الحقل | القيمة |
+|--------|--------|
+| `type` | `product` |
+| `rateable_id` | `id` المنتج — مو `shop_product_variant_id` |
+| `rating` | 1…5 |
+| `comment` / `order_id` / `image` | اختياري · الصورة حدّها 2MB |
+
+بعد النجاح أعيدوا `GET /products/{id}` واعرضوا `rating` و `rating_breakdown`. `rating: 0` يعني ما في تقييمات. تقييم واحد بخمس نجوم يخلّي `rating` = `5`.
+
+---
+
+## 17) العروض التلقائية
+
+> **27 أيلول 2026** — [`WEB_PROMOTION_TRIGGERS.md`](./WEB_PROMOTION_TRIGGERS.md)
+
+تنطبق وحدها على المعاينة والطلب. لا ترسلوا `promotion_id` لها. `promotion_id` يبقى لخصم يختاره الزبون: `simple_discount` أو `spend_x_discount`.
+
+| المكافأة | من وين |
+|----------|--------|
+| خصم | `discounts.promotion_discount` و `automatic_promotions.discounts[]` |
+| توصيل مجاني | `automatic_promotions.free_shipping_applies` = `true` و `delivery_price` = 0 |
+| هدية | `automatic_promotions.gifts[]` |
+
+الأنواع التلقائية: `first_order_*` · `signup_*` · `spend_x_get_free_shipping` · `spend_x_get_gift` · `free_shipping`.  
+المجموع الجاهز في `total`. لا تعيدوا حساب الخصم. إذا الشرط ما تحقق، المصفوفات فاضية و `free_shipping_applies` = `false`.
+
+| الشرط | الزبون |
+|--------|--------|
+| أول طلب | ما عنده طلب سابق. الملغى ما يُحسب |
+| إنشاء حساب | الحساب اتنشأ خلال فترة العرض، وهالطلب أول طلب |
+| شراء بقيمة | مجموع الأصناف المؤهلة ≥ `min_spend` |
+
+---
+
+## 18) جدولة السلة: تاريخ + وقت
+
+> **25 أيلول 2026** — [`WEB_BASKET_SCHEDULE_DATE_TIME.md`](./WEB_BASKET_SCHEDULE_DATE_TIME.md)
+
+يوم توصيل واحد + ساعة داخل اليوم. ما في عنوان Start Date. زر **حفظ الجدولة** يرسل `POST /api/user/scheduled-baskets`.
+
+```json
+{
+  "name": "أسبوعي",
+  "schedule_id": 2,
+  "is_active": true,
+  "start_date": "2026-10-21",
+  "delivery_time": "16:30",
+  "items": [{ "shop_product_variant_id": 25, "quantity": 2 }]
+}
+```
+
+| الحقل | القاعدة |
+|--------|---------|
+| `start_date` | `Y-m-d` · ≥ اليوم · يوم التوصيل مو بداية مدى |
+| `delivery_time` | `H:i` · الواجهة ترسله دائماً · إذا اليوم: من الآن فصاعداً |
+| `category_id` | لا ترسلوه |
+
+`delivery_time` على **المنتج** نص مثل «3–5 أيام». `scheduled_delivery_at` على **الطلب** موعد من الإدارة. ساعة الجدولة حقل ثالث.  
+تأكيد السلة المخصصة يبقى `{ confirm_schedule, start_date }` بدون `delivery_time`. جدولة قديمة بلا ساعة ترجع `delivery_time: null`.
+
+---
+
+## 19) السلة والدفع والمراجعة
+
+> **25 أيلول 2026** — [`WEB_CHECKOUT_LAYOUT.md`](./WEB_CHECKOUT_LAYOUT.md) · بلا مدة داخل السلة: [`WEB_CART_NO_DELIVERY_TIME.md`](./WEB_CART_NO_DELIVERY_TIME.md)
+
+| المعلومة | السلة | الدفع | المراجعة | كرت الطلب |
+|----------|-------|-------|----------|-----------|
+| تعديل الكمية / الحذف | ✅ | ❌ | ❌ | ❌ |
+| صورة + اسم + كمية + سعر | القائمة | ملخص قصير | مرة واحدة | حسب الكرت |
+| `scheduled_delivery_at` | ❌ | ❌ | ❌ | ✅ إذا مو `null` |
+| طريقة الدفع | ❌ | الاختيار | للتأكيد | إن وُجدت |
+| الإجمالي | ✅ | ❌ | مرة واحدة | ✅ |
+
+`product.delivery_time` على صفحة المنتج فقط. الدفع: عنوان + طريقة دفع + ملخص قصير، بلا جدول وبلا سطر توصيل. المراجعة: طريقة الدفع + القائمة مرة واحدة + الإجمالي، بلا عنوان «مراجعة طلبك» وبلا «عدد العناصر».
+
+```json
+{ "scheduled_delivery_at": "2026-09-28 16:30" }
+```
+
+`null` = لا سطر موعد. الزبون ما يختار الموعد في الدفع.
+
+---
+
+## 20) حالة الطلب
+
+> **25 أيلول 2026** — [`WEB_ORDER_STATUS.md`](./WEB_ORDER_STATUS.md)
+
+اعرضوا `status_label`. إذا بنيتم map محلي، المفتاح `out_delivery` (خرج للتوصيل) — مو `out_for_delivery`. مفتاح ناقص كان يطلع fallback `pending`.
+
+القيم: `pending` · `waiting_approval` · `preparing` · `out_delivery` · `delivered` · `cancelled` · `cancelled_by_admin` · `rejected_by_delivery` · `faild_deliver` · `returned_by_user`.
+
+من `GET /api/user/orders` و `/{id}` و `/active`.
+
+---
+
+## 21) البنر
+
+> [`WEB_BANNER_REQUIRED_FIELDS.md`](./WEB_BANNER_REQUIRED_FIELDS.md) · المسح: [`WEB_BANNER_CLEAR_FIELDS.md`](./WEB_BANNER_CLEAR_FIELDS.md) · الترتيب: [`WEB_HOME_BANNER_BEFORE_TRACK.md`](./WEB_HOME_BANNER_BEFORE_TRACK.md)
+
+على `/home` الترتيب: Nav → قسم البنر → كرت تتبع الطلب (إن وُجد طلب نشط) → باقي الأقسام. ما في تغيير API للترتيب.
+
+| الحقل | العرض |
+|--------|--------|
+| `item.image` | الصورة · ≈ 16:6 · تبقى حتى بعد مسح النصوص |
+| `item.title` / `item.desc` / `item.button_text` | اعرضوها إن وُجدت |
+| `items[].link` | الضغط يفتح الرابط |
+
+بعد المسح من الداشبورد القيمة `null` أو `""`: لا عنوان، لا وصف، لا زر، والكارد مو قابل للضغط. لا تحتفظوا بالنص السابق من الكاش. النص String حسب اللغة، مو `{ar,en}`.
+
+---
+
+## 22) صفحة المنتج — تعديلات العرض
+
+| الموضوع | المطلوب |
+|---------|---------|
+| تكبير الصورة | lightbox / zoom — [`WEB_PRODUCT_IMAGE_ZOOM.md`](./WEB_PRODUCT_IMAGE_ZOOM.md) |
+| جدول التفاصيل | بلا ترويسة «الاسم/القيمة» + فاصل عمودي — [`WEB_PRODUCT_CATEGORY_DETAILS_TABLE.md`](./WEB_PRODUCT_CATEGORY_DETAILS_TABLE.md) |
+| الإضافات | `extra_details[]`: الاسم `key` + السعر `price_currencies` — [`WEB_PRODUCT_EXTRA_DETAILS.md`](./WEB_PRODUCT_EXTRA_DETAILS.md) |
+| خصم ثابت | `discount_type=fixed` و `discount_value` number، كسور وأكبر من 100 — لا `parseInt` — [`WEB_FIXED_DISCOUNT.md`](./WEB_FIXED_DISCOUNT.md) |
+| بلا فروع | لا Branch ولا اسم متجر على الصفحة — [`WEB_NO_SHOP_BRANCHES.md`](./WEB_NO_SHOP_BRANCHES.md) |
+| صفات بالـ ID | الفلتر والـ picker من `id`، والاسم من آخر GET — [`WEB_CATEGORY_ATTRIBUTE_VALUE_IDS.md`](./WEB_CATEGORY_ATTRIBUTE_VALUE_IDS.md) |
+| كل المتغيّرات | اختاروا الصف من `shop_variants` مو `[0]` دائماً — [`WEB_PRODUCT_ALL_VARIANTS.md`](./WEB_PRODUCT_ALL_VARIANTS.md) |
+| صور المتغيّر | المعرض من `shop_variants[].images[].path` عند تبديل اللون — [`PRODUCT_VARIANT_IMAGES_WEB_DASHBOARD.md`](./PRODUCT_VARIANT_IMAGES_WEB_DASHBOARD.md) |
+
+مصفوفة `extra_details` فاضية → أخفوا قسم الإضافات. السعر بعد الخصم من `price_after_discount_currencies` — لا تحسبوه.
+
+---
+
+## 23) لوحة المسوق
+
+> [`WEB_MARKETER_DASHBOARD_GATE.md`](./WEB_MARKETER_DASHBOARD_GATE.md)
+
+```js
+const isApprovedMarketer =
+  user.affiliate?.is_affiliate === true &&
+  user.affiliate?.approved === true;
+```
+
+قبل الموافقة: زر «كن مسوقاً» فقط. بعد الموافقة: لوحة المسوق بدون زر الترقية. الحالة من `user.affiliate` بعد login / profile.
 
 ---

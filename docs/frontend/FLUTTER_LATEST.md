@@ -2,8 +2,12 @@
 
 > **أرسلوا هذا الملف لفريق Flutter.**  
 > Base: `/api/user` + `Accept-Language: ar|en`  
-> **آخر تحديث | Last Updated:** 2026-09-25  
+> **آخر تحديث | Last Updated:** 2026-09-27  
 > الملف الشامل السابق يبقى: [`flutter.md`](./flutter.md)
+
+**اليوم (27 أيلول):** إخفاء الفئة يخفي منتجاتها من القوائم والبحث والأقسام وصفحة المنتج (`404`) — [`FLUTTER_HIDDEN_CATEGORY_PRODUCTS.md`](./FLUTTER_HIDDEN_CATEGORY_PRODUCTS.md)
+
+**اليوم (27 أيلول):** صورة الأيقونة على صفحة المنتج من `icons[].icon` أو `icons[].image` مع `?v=` — [`FLUTTER_ICON_IMAGE.md`](./FLUTTER_ICON_IMAGE.md)
 
 **اليوم (27 أيلول):** عروض تلقائية — أول طلب أو إنشاء حساب أو شراء بقيمة، والمكافأة خصم أو توصيل مجاني أو هدية — [`FLUTTER_PROMOTION_TRIGGERS.md`](./FLUTTER_PROMOTION_TRIGGERS.md)
 
@@ -16,6 +20,8 @@
 **اليوم (سابقاً):** طلب سريع — **زر الهيدر منفصل عن القسم** (`show_header` / `show_section`) — [`QUICK_ORDER_HEADER_VS_SECTION.md`](./QUICK_ORDER_HEADER_VS_SECTION.md)
 
 **اليوم (سابقاً):** بنر — اعرضوا `title` · `desc` · `button_text` · `link` (مو صورة فقط) — [`FLUTTER_BANNER_REQUIRED_FIELDS.md`](./FLUTTER_BANNER_REQUIRED_FIELDS.md)
+
+**اليوم (سابقاً):** مسح حقول البنر يوصل `null` — لا تعرضوا النص القديم — [`FLUTTER_BANNER_CLEAR_FIELDS.md`](./FLUTTER_BANNER_CLEAR_FIELDS.md)
 
 **اليوم (سابقاً):** جدولة التسليم **مطوية** — سطر + زر «عرض تفاصيل الجدولة» — [`FLUTTER_SCHEDULE_UI_COLLAPSED.md`](./FLUTTER_SCHEDULE_UI_COLLAPSED.md)
 
@@ -33,7 +39,7 @@
 
 **اليوم (سابقاً):** خصم ثابت (`fixed`) كسور وأكبر من 100 — [`FLUTTER_FIXED_DISCOUNT.md`](./FLUTTER_FIXED_DISCOUNT.md) · لا Branch — [`FLUTTER_NO_SHOP_BRANCHES.md`](./FLUTTER_NO_SHOP_BRANCHES.md) · صفات بالـ ID — [`FLUTTER_CATEGORY_ATTRIBUTE_VALUE_IDS.md`](./FLUTTER_CATEGORY_ATTRIBUTE_VALUE_IDS.md) · كل المتغيّرات — [`FLUTTER_PRODUCT_ALL_VARIANTS.md`](./FLUTTER_PRODUCT_ALL_VARIANTS.md) · أسعار — [`FLUTTER_PRODUCT_PRICING_FIELDS.md`](./FLUTTER_PRODUCT_PRICING_FIELDS.md)
 
-يجمع **كل** ما يحتاجه التطبيق حتى اليوم: Nav · أقسام · فئات · فلاتر · تسجيل · طلب سريع · أسعار · متغيّرات · لون hex · جدول تفاصيل · تكبير صور · سلة بلا delivery_time · بوابة مسوّق · ضمان · كمية · سلة مخصصة.
+يجمع **كل** ما يحتاجه التطبيق حتى اليوم: Nav · أقسام · فئات · فلاتر · تسجيل · طلب سريع · أسعار · متغيّرات · لون hex · جدول تفاصيل · تكبير صور · سلة بلا delivery_time · بوابة مسوّق · ضمان · كمية · سلة مخصصة · إخفاء الفئة · أيقونات · عروض تلقائية · جدولة بتاريخ ووقت · دفع ومراجعة · حالة الطلب · بنر.
 
 ---
 
@@ -57,6 +63,14 @@
 13. [Checklist](#13-checklist)
 14. [السلة المخصصة](#14-السلة-المخصصة)
 15. [لوحة المسوق](#15-لوحة-المسوق)
+16. [إخفاء الفئة يخفي منتجاتها](#16-إخفاء-الفئة-يخفي-منتجاتها)
+17. [صورة الأيقونة](#17-صورة-الأيقونة)
+18. [العروض التلقائية](#18-العروض-التلقائية)
+19. [جدولة السلة: تاريخ + وقت](#19-جدولة-السلة-تاريخ--وقت)
+20. [السلة والدفع والمراجعة](#20-السلة-والدفع-والمراجعة)
+21. [حالة الطلب](#21-حالة-الطلب)
+22. [البنر](#22-البنر)
+23. [صفحة المنتج — تعديلات العرض](#23-صفحة-المنتج--تعديلات-العرض)
 
 ---
 
@@ -420,6 +434,13 @@ int? asInt(dynamic v) {
 - [ ] أسعار من API
 - [ ] طلب سريع من `settings.quick_order`
 - [ ] لوحة المسوق فقط بعد الموافقة — [`FLUTTER_MARKETER_DASHBOARD_GATE.md`](./FLUTTER_MARKETER_DASHBOARD_GATE.md)
+- [ ] فئة مخفية: امسحوا الكاش، و`404` يفتح «غير موجود» — [§16](#16-إخفاء-الفئة-يخفي-منتجاتها)
+- [ ] أيقونة من `icon` أو `image` مع `?v=` ومفتاح الكاش = الرابط كامل — [§17](#17-صورة-الأيقونة)
+- [ ] عروض تلقائية من `automatic_promotions` — لا `promotion_id` — [§18](#18-العروض-التلقائية)
+- [ ] جدولة السلة: يوم واحد + `delivery_time` `HH:mm` — [§19](#19-جدولة-السلة-تاريخ--وقت)
+- [ ] الدفع والمراجعة بدون تكرار، و`scheduled_delivery_at` على كرت الطلب — [§20](#20-السلة-والدفع-والمراجعة)
+- [ ] حالة الطلب: `out_delivery` + `status_label` — [§21](#21-حالة-الطلب)
+- [ ] بنر: عنوان ووصف وزر ورابط، و`null` بعد المسح — [§22](#22-البنر)
 
 ---
 
@@ -457,4 +478,131 @@ int? asInt(dynamic v) {
 
 لوحة المسوق (رصيد · طلبات · أرباح · إنشاء طلب) تظهر **فقط** بعد ترقية الحساب وموافقة الأدمن.  
 قبلها: زر/شاشة «كن مسوقاً» فقط — لا تعرضوا لوحة المسوق لليوزر العادي.
+
+```dart
+final isApprovedMarketer =
+    user.affiliate?.isAffiliate == true && user.affiliate?.approved == true;
+```
+
+---
+
+## 16) إخفاء الفئة يخفي منتجاتها
+
+> **27 أيلول 2026** — [`FLUTTER_HIDDEN_CATEGORY_PRODUCTS.md`](./FLUTTER_HIDDEN_CATEGORY_PRODUCTS.md)
+
+ما في حقل جديد ولا فلتر محلي. بعد إخفاء الفئة امسحوا كاش المنتجات والفئات وأعيدوا الجلب.
+
+| المكان | السلوك |
+|--------|--------|
+| `GET /api/user/categories` | الفئة المخفية ما ترجع، ولا الفئات تحت أب مخفي |
+| `GET /api/user/categories/{id}/page` | `404` |
+| `GET /api/user/products` و `?category_id=` | منتجات الشجرة ما ترجع |
+| `GET /api/user/products/{id}` | `404` → شاشة «غير موجود» |
+| البحث والأقسام والمفضلة و`bought_with` | الكرت ما يجي |
+
+إخفاء الفئة الرئيسية يخفي منتجات الفروع. إعادة التفعيل ترجّعها في الطلب التالي. `products_count` على العلامة بدون منتجات الفئات المخفية.
+
+---
+
+## 17) صورة الأيقونة
+
+> **27 أيلول 2026** — [`FLUTTER_ICON_IMAGE.md`](./FLUTTER_ICON_IMAGE.md)
+
+`icons[]` من `GET /products/{id}`. الصورة = `icon` أو `image` كما رجع، مع `?v=`. لا تقصّوا الاستعلام قبل `Image.network` / `CachedNetworkImage`. مفتاح الكاش = الرابط كامل، مو `id` لحاله. `icons` فاضي → أخفوا الصف. لا أصول SVG محلية بديلة.
+
+---
+
+## 18) العروض التلقائية
+
+> **27 أيلول 2026** — [`FLUTTER_PROMOTION_TRIGGERS.md`](./FLUTTER_PROMOTION_TRIGGERS.md)
+
+تنطبق وحدها على المعاينة والطلب. لا ترسلوا `promotion_id`. يبقى لخصم يختاره الزبون: `simple_discount` أو `spend_x_discount`.
+
+| المكافأة | من وين |
+|----------|--------|
+| خصم | `discounts.promotion_discount` و `automatic_promotions.discounts[]` |
+| توصيل مجاني | `free_shipping_applies` = `true` و `delivery_price` = 0 |
+| هدية | `automatic_promotions.gifts[]` |
+
+الأنواع: `first_order_*` · `signup_*` · `spend_x_get_free_shipping` · `spend_x_get_gift` · `free_shipping`. المجموع في `total`. لا تعيدوا الحساب على الجهاز.
+
+| الشرط | الزبون |
+|--------|--------|
+| أول طلب | ما عنده طلب سابق. الملغى ما يُحسب |
+| إنشاء حساب | الحساب خلال فترة العرض، وهالطلب أول طلب |
+| شراء بقيمة | مجموع الأصناف المؤهلة ≥ `min_spend` |
+
+---
+
+## 19) جدولة السلة: تاريخ + وقت
+
+> **25 أيلول 2026** — [`FLUTTER_BASKET_SCHEDULE_DATE_TIME.md`](./FLUTTER_BASKET_SCHEDULE_DATE_TIME.md)
+
+يوم واحد ≥ اليوم + `showTimePicker`. بلا Start Date. لا تعكسوا أعمدة التقويم في RTL. زر الحفظ `onPressed` شغال ويستدعي `POST /api/user/scheduled-baskets`.
+
+```json
+{
+  "name": "أسبوعي",
+  "schedule_id": 2,
+  "start_date": "2026-10-21",
+  "delivery_time": "16:30",
+  "items": [{ "shop_product_variant_id": 25, "quantity": 2 }]
+}
+```
+
+`delivery_time` = `HH:mm`. اليوم: ارفضوا وقتاً قبل `TimeOfDay.now()`. لا `category_id`.  
+`confirm` المخصصة يبقى `start_date` فقط. العرض: `21 Oct 2026 · 16:30`، وإذا `deliveryTime == null` التاريخ فقط.  
+لا تخلطوا مع `product.deliveryTime` («3–5 أيام») ولا مع `scheduled_delivery_at` على الطلب.
+
+---
+
+## 20) السلة والدفع والمراجعة
+
+> **25 أيلول 2026** — [`FLUTTER_CHECKOUT_LAYOUT.md`](./FLUTTER_CHECKOUT_LAYOUT.md)
+
+| المعلومة | السلة | الدفع | المراجعة | كرت الطلب |
+|----------|-------|-------|----------|-----------|
+| تعديل الكمية / الحذف | ✅ | ❌ | ❌ | ❌ |
+| صورة + اسم + كمية + سعر | القائمة | ملخص قصير | مرة واحدة | حسب الكرت |
+| `scheduled_delivery_at` | ❌ | ❌ | ❌ | ✅ إذا مو `null` |
+| الإجمالي | ✅ | ❌ | مرة واحدة | ✅ |
+
+`product.deliveryTime` على صفحة المنتج فقط. الدفع بلا جدول وبلا سطر توصيل. المراجعة بلا عنوان «مراجعة طلبك» وبلا «عدد العناصر»: طريقة الدفع + القائمة مرة + الإجمالي.
+
+`scheduled_delivery_at`: `"2026-09-28 16:30"` أو `null`. الزبون ما يختاره في الدفع.
+
+---
+
+## 21) حالة الطلب
+
+> [`FLUTTER_ORDER_STATUS.md`](./FLUTTER_ORDER_STATUS.md)
+
+اعرضوا `status_label`. المفتاح `out_delivery` — مو `out_for_delivery`. مفتاح ناقص في الـ enum كان يطلع `pending`.
+
+القيم: `pending` · `waiting_approval` · `preparing` · `out_delivery` · `delivered` · `cancelled` · `cancelled_by_admin` · `rejected_by_delivery` · `faild_deliver` · `returned_by_user`.
+
+---
+
+## 22) البنر
+
+> [`FLUTTER_BANNER_REQUIRED_FIELDS.md`](./FLUTTER_BANNER_REQUIRED_FIELDS.md) · المسح: [`FLUTTER_BANNER_CLEAR_FIELDS.md`](./FLUTTER_BANNER_CLEAR_FIELDS.md)
+
+اعرضوا `title` · `desc` · `button_text` · `link` إن وُجدت، مو الصورة وحدها. بعد المسح: `null` أو `""` — لا عنوان، لا وصف، لا زر، والكارد مو قابل للضغط. لا تبقوا النص القديم في الموديل. الصورة تبقى.
+
+---
+
+## 23) صفحة المنتج — تعديلات العرض
+
+| الموضوع | المطلوب |
+|---------|---------|
+| تكبير الصورة | pinch + pan — [`FLUTTER_PRODUCT_IMAGE_ZOOM.md`](./FLUTTER_PRODUCT_IMAGE_ZOOM.md) |
+| لون | دوائر من `hex` — [`FLUTTER_PRODUCT_COLOR_HEX.md`](./FLUTTER_PRODUCT_COLOR_HEX.md) |
+| جدول التفاصيل | بلا ترويسة + فاصل عمودي — [`FLUTTER_PRODUCT_CATEGORY_DETAILS_TABLE.md`](./FLUTTER_PRODUCT_CATEGORY_DETAILS_TABLE.md) |
+| خصم ثابت | `discount_value` number، كسور وأكبر من 100 — لا `toInt` — [`FLUTTER_FIXED_DISCOUNT.md`](./FLUTTER_FIXED_DISCOUNT.md) |
+| بلا فروع | لا Branch ولا اسم متجر — [`FLUTTER_NO_SHOP_BRANCHES.md`](./FLUTTER_NO_SHOP_BRANCHES.md) |
+| صفات بالـ ID | الفلتر والـ picker من `id` — [`FLUTTER_CATEGORY_ATTRIBUTE_VALUE_IDS.md`](./FLUTTER_CATEGORY_ATTRIBUTE_VALUE_IDS.md) |
+| كل المتغيّرات | اختاروا الصف من `shop_variants` مو `[0]` دائماً — [`FLUTTER_PRODUCT_ALL_VARIANTS.md`](./FLUTTER_PRODUCT_ALL_VARIANTS.md) |
+| السلة | بلا `delivery_time` — [`FLUTTER_CART_NO_DELIVERY_TIME.md`](./FLUTTER_CART_NO_DELIVERY_TIME.md) |
+
+السعر بعد الخصم من الحقول الجاهزة في الـ API. لا تحسبوه على الجهاز.
 
