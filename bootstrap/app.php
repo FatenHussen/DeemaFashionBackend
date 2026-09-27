@@ -3,6 +3,7 @@
 use App\Exceptions\Handler;
 use App\Http\Middleware\NormalizeBooleanQueryParams;
 use App\Http\Middleware\ParseMultipartPutPatch;
+use App\Http\Middleware\RejectDiscardedPhpUpload;
 use App\Http\Middleware\SetLocale;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -21,6 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->prepend(ParseMultipartPutPatch::class);
+        $middleware->prepend(RejectDiscardedPhpUpload::class);
 
         $middleware->api(prepend: [
             NormalizeBooleanQueryParams::class,
