@@ -23,17 +23,17 @@ class DriverContactMethodSeeder extends Seeder
             [
                 'key' => 'support_driver_telegram',
                 'type' => 'url',
-                'value' => 'https://t.me/tikmool_driver_support',
+                'value' => 'https://t.me/deemafashion_driver_support',
             ],
             [
                 'key' => 'support_driver_email',
                 'type' => 'email',
-                'value' => 'driver.support@tikmool.com',
+                'value' => 'driver.support@deemafashion.com',
             ],
             [
                 'key' => 'share_driver_app',
                 'type' => 'url',
-                'value' => 'https://tikmool.app/driver',
+                'value' => 'https://deemafashion.com/driver',
             ],
         ];
 

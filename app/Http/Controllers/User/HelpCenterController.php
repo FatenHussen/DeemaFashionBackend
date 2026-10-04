@@ -3,10 +3,17 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Contactus\StoreRequest;
+use App\Http\Resources\Branch\AllResource as BranchAllResource;
 use App\Http\Resources\Faq\AllResource;
+use App\Http\Resources\ServiceCenter\AllResource as ServiceCenterAllResource;
+use App\Models\Branch;
+use App\Models\Contact;
 use App\Models\Faq;
 use App\Models\Page;
+use App\Models\ServiceCenter;
 use App\Models\Setting;
+use App\Models\Tire;
 use Illuminate\Http\Request;
 
 class HelpCenterController extends Controller
@@ -90,24 +97,24 @@ class HelpCenterController extends Controller
             'color' => [
                 'main_color' => isset($settings['main_color'])
                     ? $settings['main_color']->value
-                    : '#E4F0FB',
+                    : '#c720a4',
                 'text_color' => isset($settings['text_color'])
                     ? $settings['text_color']->value
-                    : '#2A2A2A',
+                    : '#1F2937',
                 'second_color' => isset($settings['second_color'])
                     ? $settings['second_color']->value
-                    : '#e27676',
+                    : '#ff1493',
             ],
             'dark_color' => [
                 'main_color' => isset($settings['dark_main_color'])
                     ? $settings['dark_main_color']->value
-                    : '#0D1117',
+                    : '#1a0a16',
                 'text_color' => isset($settings['dark_text_color'])
                     ? $settings['dark_text_color']->value
-                    : '#FFFFFF',
+                    : '#fce7f3',
                 'second_color' => isset($settings['dark_second_color'])
                     ? $settings['dark_second_color']->value
-                    : '#9CA3AF',
+                    : '#a020f0',
             ],
         ]);
     }
@@ -182,7 +189,7 @@ class HelpCenterController extends Controller
     /**
      * Normalize stored page IDs and resolve slugs for clients.
      * Missing setting → home only (backward compatible).
-     * Explicit empty array → no pages (section hidden; header still follows show_header).
+     * Explicit empty array → no pages (section hidden; header still follows is_enabled).
      *
      * @return array{0: list<int>, 1: list<string>}
      */

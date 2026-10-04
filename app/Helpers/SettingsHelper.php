@@ -84,7 +84,7 @@ class SettingsHelper
     public static function getAppSettings(): array
     {
         return [
-            'name'             => self::get('app_name', 'Tikmool'),
+            'name'             => self::get('app_name', 'Deema Fashion'),
             'version'          => self::get('app_version', '1.0.0'),
             'maintenance_mode' => self::get('maintenance_mode', false),
         ];

@@ -18,8 +18,8 @@ class VendorUserSeeder extends Seeder
         }
 
         VendorUser::create([
-            'name' => 'Tikmool Admin',
-            'email' => 'admin@tikmool.com',
+            'name' => 'Deema Fashion Admin',
+            'email' => 'admin@deemafashion.com',
             'password' => Hash::make('password'),
             'is_active' => true,
             'vendor_id' => $vendor->id,

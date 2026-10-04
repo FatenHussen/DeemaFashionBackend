@@ -46,8 +46,8 @@ class RestaurantAndServiceProviderSeeder extends Seeder
 
         $restaurantShops = [
             [
-                'email' => 'restaurant1@tikmool.com',
-                'name' => ['ar' => 'مطعم تيكمول - الشام', 'en' => 'Tikmool Restaurant Damascus'],
+                'email' => 'restaurant1@deemafashion.com',
+                'name' => ['ar' => 'مطعم ديما فاشن - الشام', 'en' => 'Deema Fashion Restaurant Damascus'],
                 'description' => ['ar' => 'مطعم يقدم وجبات سريعة يومية', 'en' => 'Restaurant serving daily fast meals'],
                 'address' => ['ar' => 'دمشق - المزة', 'en' => 'Damascus - Mezzeh'],
                 'phone' => '0112100001',
@@ -56,8 +56,8 @@ class RestaurantAndServiceProviderSeeder extends Seeder
                 'lng' => 36.2765,
             ],
             [
-                'email' => 'restaurant2@tikmool.com',
-                'name' => ['ar' => 'مطعم تيكمول - حلب', 'en' => 'Tikmool Restaurant Aleppo'],
+                'email' => 'restaurant2@deemafashion.com',
+                'name' => ['ar' => 'مطعم ديما فاشن - حلب', 'en' => 'Deema Fashion Restaurant Aleppo'],
                 'description' => ['ar' => 'مطعم يقدم مشويات وسندويش', 'en' => 'Restaurant for grills and sandwiches'],
                 'address' => ['ar' => 'حلب - الفرقان', 'en' => 'Aleppo - Al Furqan'],
                 'phone' => '0212200002',
@@ -69,8 +69,8 @@ class RestaurantAndServiceProviderSeeder extends Seeder
 
         $providerShops = [
             [
-                'email' => 'provider1@tikmool.com',
-                'name' => ['ar' => 'خدمات تيكمول المنزلية', 'en' => 'Tikmool Home Services'],
+                'email' => 'provider1@deemafashion.com',
+                'name' => ['ar' => 'خدمات ديما فاشن المنزلية', 'en' => 'Deema Fashion Home Services'],
                 'description' => ['ar' => 'مزود خدمات صيانة وتنظيف', 'en' => 'Service provider for maintenance and cleaning'],
                 'address' => ['ar' => 'دمشق - أبو رمانة', 'en' => 'Damascus - Abu Rummaneh'],
                 'phone' => '0112300001',
@@ -79,8 +79,8 @@ class RestaurantAndServiceProviderSeeder extends Seeder
                 'lng' => 36.2900,
             ],
             [
-                'email' => 'provider2@tikmool.com',
-                'name' => ['ar' => 'خدمات تيكمول التقنية', 'en' => 'Tikmool Technical Services'],
+                'email' => 'provider2@deemafashion.com',
+                'name' => ['ar' => 'خدمات ديما فاشن التقنية', 'en' => 'Deema Fashion Technical Services'],
                 'description' => ['ar' => 'مزود خدمات تركيب وصيانة', 'en' => 'Service provider for installation and support'],
                 'address' => ['ar' => 'حمص - الوعر', 'en' => 'Homs - Al Waer'],
                 'phone' => '0312400002',

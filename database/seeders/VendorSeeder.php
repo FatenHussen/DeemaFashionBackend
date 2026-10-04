@@ -11,14 +11,14 @@ class VendorSeeder extends Seeder
     {
         $vendor =   Vendor::create([
             'name' => [
-                'ar' => 'تيكمول',
-                'en' => 'Tikmool',
+                'ar' => 'ديما فاشن',
+                'en' => 'Deema Fashion',
             ],
-            'owner_name' => 'Tikmool Admin',
+            'owner_name' => 'Deema Fashion Admin',
             'owner_phone' => '0990000000',
-            'commercial_register' => 'CR-TIKMOOL-001',
+            'commercial_register' => 'CR-DEEMAFASHION-001',
             'contract_date' => now()->subYear(),
-            'contract_number' => 'TIK-CNT-001',
+            'contract_number' => 'DEEMA-CNT-001',
             'contract_duration_months' => 36,
             'commission_rate' => 10.00,
             'is_active' => true,

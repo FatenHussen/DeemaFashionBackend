@@ -18,19 +18,22 @@ class ShopSeeder extends Seeder
             return;
         }
 
-        if (Shop::query()->where('vendor_id', $vendor->id)->exists()) {
-            return;
-        }
+        $shops = [
+            'Deema Fashion Damascus',
+            'Deema Fashion Aleppo',
+            'Deema Fashion Homs',
+        ];
 
-        $shop = Shop::create([
+        foreach ($shops as $index => $shopName) {
+            $shop =  Shop::create([
                 'name' => [
-                    'ar' => 'تيكمول',
-                    'en' => 'Tikmool',
+                    'ar' => 'ديما فاشن - فرع ' . ($index + 1),
+                    'en' => $shopName,
                 ],
 
                 'description' => [
-                    'ar' => 'المتجر الرسمي لمنصة تيكمول',
-                    'en' => 'Official Tikmool store',
+                    'ar' => 'المتجر الرسمي لمنصة ديما فاشن',
+                    'en' => 'Official Deema Fashion store',
                 ],
 
                 'address' => [
@@ -38,9 +41,9 @@ class ShopSeeder extends Seeder
                     'en' => 'Syria - Damascus',
                 ],
 
-                'phone' => '0110000001',
-                'mobile' => '0990000001',
-                'email' => 'shop@tikmool.com',
+                'phone' => '011000000' . $index,
+                'mobile' => '099000000' . $index,
+                'email' => 'shop' . ($index + 1) . '@deemafashion.com',
 
                 'lat' => 33.5138,
                 'lng' => 36.2765,
@@ -73,6 +76,7 @@ class ShopSeeder extends Seeder
             ]);
 
 
-        $shop->badges()->sync([1, 2, 3]);
+            $shop->badges()->sync([1, 2, 3]);
+        }
     }
 }

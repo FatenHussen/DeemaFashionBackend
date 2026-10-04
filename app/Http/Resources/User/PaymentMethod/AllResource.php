@@ -12,8 +12,10 @@ class AllResource extends JsonResource
         return [
             'id'   => $this->id,
             'name' => $this->name,
+            'code' => $this->code,
             'icon' => $this->image_url,
             'is_default' => $this->isDefault(),
+            'requires_online_payment' => $this->requiresOnlineConfirmation(),
         ];
     }
 }

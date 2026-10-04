@@ -104,8 +104,26 @@ class PaymentMethod extends Model
         return $this->code === 'cash';
     }
 
+    public function isStripe(): bool
+    {
+        return $this->code === 'stripe';
+    }
+
+    /**
+     * Methods that collect money outside the app and must not be marked paid
+     * until a gateway (Stripe webhook / confirmation) says so.
+     */
+    public function requiresOnlineConfirmation(): bool
+    {
+        return $this->isStripe();
+    }
+
     public function isPaidOnPlacement(): bool
     {
-        return !$this->isCash();
+        if ($this->requiresOnlineConfirmation()) {
+            return false;
+        }
+
+        return ! $this->isCash();
     }
 }

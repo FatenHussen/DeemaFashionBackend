@@ -54,7 +54,7 @@ class SystemSettingSeeder extends Seeder
             // General App Settings
             [
                 'key' => 'app_name',
-                'value' => 'Tikmool',
+                'value' => 'Deema Fashion',
                 'type' => 'string',
                 'group' => 'general',
                 'title' => 'Application Name',
@@ -104,8 +104,8 @@ class SystemSettingSeeder extends Seeder
                 'value' => '0',
                 'type' => 'number',
                 'group' => 'delivery',
-                'title' => 'TikMart minimum order',
-                'description' => 'Minimum cart amount for TikMart orders. Set from the dashboard.',
+                'title' => 'Platform minimum order',
+                'description' => 'Minimum cart amount for platform orders. Set from the dashboard.',
                 'is_active' => true,
             ],
             [
@@ -113,8 +113,8 @@ class SystemSettingSeeder extends Seeder
                 'value' => '24',
                 'type' => 'number',
                 'group' => 'delivery',
-                'title' => 'TikMart earliest delivery (hours)',
-                'description' => 'Soonest delivery window for TikMart, for example 24 hours.',
+                'title' => 'Platform earliest delivery (hours)',
+                'description' => 'Soonest delivery window for platform orders, for example 24 hours.',
                 'is_active' => true,
             ],
             [
@@ -122,8 +122,8 @@ class SystemSettingSeeder extends Seeder
                 'value' => '48',
                 'type' => 'number',
                 'group' => 'delivery',
-                'title' => 'TikMart latest delivery (hours)',
-                'description' => 'Latest delivery window for TikMart, for example 48 hours.',
+                'title' => 'Platform latest delivery (hours)',
+                'description' => 'Latest delivery window for platform orders, for example 48 hours.',
                 'is_active' => true,
             ],
         ];

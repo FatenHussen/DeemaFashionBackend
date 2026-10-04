@@ -1,11 +1,13 @@
-# آخر التعديلات والتحديثات — Tikmool Backend
+# آخر التعديلات والتحديثات — Deema Fashion Backend
 
 > **أرسلوا هذا الملف** — آخر نسخة شاملة (كل الفرق)  
-> **تاريخ:** 25 أيلول 2026  
+> **تاريخ:** 5 تشرين الأول 2026  
 > **النطاق:** من منتصف آب حتى اليوم — باك + داشبورد + ويب + Flutter  
 > **الحالة:** الباك جاهز بعد `git pull` + `php artisan config:clear`
 
-**آخر ما نزل اليوم (25 أيلول):** واجهة جدولة التسليم **مطوية** (سطر + زر) — ويب [`WEB_SCHEDULE_UI_COLLAPSED.md`](./frontend/WEB_SCHEDULE_UI_COLLAPSED.md) · Flutter [`FLUTTER_SCHEDULE_UI_COLLAPSED.md`](./frontend/FLUTTER_SCHEDULE_UI_COLLAPSED.md) — لا تغيير باك
+**آخر ما نزل اليوم (5 تشرين الأول):** دفع إلكتروني Stripe للطلبات — باك + دليل كامل [`api/STRIPE_PAYMENTS.md`](./api/STRIPE_PAYMENTS.md) (PaymentIntent · webhook · ويب/Flutter)
+
+**آخر ما نزل (25 أيلول):** واجهة جدولة التسليم **مطوية** (سطر + زر) — ويب [`WEB_SCHEDULE_UI_COLLAPSED.md`](./frontend/WEB_SCHEDULE_UI_COLLAPSED.md) · Flutter [`FLUTTER_SCHEDULE_UI_COLLAPSED.md`](./frontend/FLUTTER_SCHEDULE_UI_COLLAPSED.md) — لا تغيير باك
 
 **آخر ما نزل (20 أيلول):** فروع المتاجر واسم المتجر ملغيان — داش [`DASHBOARD_NO_SHOP_BRANCHES.md`](./frontend/DASHBOARD_NO_SHOP_BRANCHES.md) · ويب [`WEB_NO_SHOP_BRANCHES.md`](./frontend/WEB_NO_SHOP_BRANCHES.md) · Flutter [`FLUTTER_NO_SHOP_BRANCHES.md`](./frontend/FLUTTER_NO_SHOP_BRANCHES.md)
 

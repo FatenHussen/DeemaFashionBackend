@@ -137,9 +137,17 @@ class CustomOrderRequestService extends BaseService
             $oldStatus = $order->status;
             $paymentMethod = $request->paymentMethod ?? $order->paymentMethod;
 
+            $paidOnPlacement = $paymentMethod?->isPaidOnPlacement() ?? false;
+
             $order->update([
                 'status' => OrderStatus::PREPARING->value,
-                'is_paid' => $paymentMethod?->isPaidOnPlacement() ?? false,
+                'is_paid' => $paidOnPlacement,
+                'payment_status' => $paymentMethod?->requiresOnlineConfirmation()
+                    ? ($order->payment_status ?? \App\Enums\PaymentStatus::PENDING->value)
+                    : ($paidOnPlacement
+                        ? \App\Enums\PaymentStatus::SUCCEEDED->value
+                        : $order->payment_status),
+                'paid_at' => $paidOnPlacement ? ($order->paid_at ?? now()) : $order->paid_at,
             ]);
 
             $order->items()->update([

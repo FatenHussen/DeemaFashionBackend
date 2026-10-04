@@ -4,7 +4,7 @@
 </div>
 
 **Contact Us**
-- 📧 Email: [tickmart@tickmart.com](mailto:tickmart@tickmart.com)
+- 📧 Email: [info@deemafashion.com](mailto:info@deemafashion.com)
 - 📞 Phone: +963 999 999 999
 
 🌐 Follow us on:

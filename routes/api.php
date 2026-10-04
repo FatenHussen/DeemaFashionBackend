@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\User\PopupCampaignController;
+use App\Http\Controllers\Webhook\StripeWebhookController;
+
+// Stripe webhooks (no auth — verified via Stripe-Signature)
+Route::post('/webhooks/stripe', StripeWebhookController::class);
 
 Route::middleware('auth:user,admin,driver')->group(function () {
 

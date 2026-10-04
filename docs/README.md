@@ -1,8 +1,6 @@
-# Tikmool Docs
+# Deema Fashion Docs
 
 هيكل نظيف — أرسل لكل فريق **ملف واحد** فيه **كل** التعديلات.
-
-**آخر التعديلات والتحديثات (8 أيلول 2026 — كل شيء):** [`LATEST_UPDATES.md`](./LATEST_UPDATES.md)
 
 **نظرة شاملة من أول استنساخ حتى الوضع الحالي (بدون تواريخ):** [`FULL_PROJECT_OVERVIEW.md`](./FULL_PROJECT_OVERVIEW.md)
 
@@ -12,29 +10,9 @@
 
 | الفريق | الملف | يشمل |
 |--------|--------|------|
-| داشبورد | [`frontend/dashboard.md`](./frontend/dashboard.md) | Page Builder · أقسام · Nav · منتج · **حقول السعر/كمية/خصم** · **طلب سريع** · استيراد Excel · **الضمان** · **سلة مخصصة** · … |
-| ويب | [`frontend/WEB_LATEST.md`](./frontend/WEB_LATEST.md) | **آخر نسخة 5 أيلول مساءً** — Nav · أقسام · منتج · ضمان · كمية · متغيّرات · فلاتر · طلب سريع · **سلة مخصصة** (`image` / `images` / بادجز) |
-| Flutter | [`frontend/FLUTTER_LATEST.md`](./frontend/FLUTTER_LATEST.md) | **آخر نسخة 5 أيلول مساءً** — نفس المحاور للتطبيق · **سلة مخصصة** |
-
-## سلة مخصصة (أرسلوا ملف الفريق)
-
-| الفريق | الملف |
-|--------|--------|
-| داشبورد | [`frontend/DASHBOARD_CUSTOM_BASKET.md`](./frontend/DASHBOARD_CUSTOM_BASKET.md) |
-| ويب | [`frontend/WEB_CUSTOM_BASKET.md`](./frontend/WEB_CUSTOM_BASKET.md) |
-| Flutter | [`frontend/FLUTTER_CUSTOM_BASKET.md`](./frontend/FLUTTER_CUSTOM_BASKET.md) |
-| ملخص العقد | [`frontend/CUSTOM_BASKET_FLOW.md`](./frontend/CUSTOM_BASKET_FLOW.md) |
-
-الملفات التفصيلية الأطول (نفس المحتوى + أمثلة قديمة): [`web.md`](./frontend/web.md) · [`flutter.md`](./frontend/flutter.md)
-
-## إنشاء منتج — UX
-
-| الموضوع | الملف |
-|---------|--------|
-| صفات جزئية + حذف صور | [`frontend/DASHBOARD_PRODUCT_CREATE_UX.md`](./frontend/DASHBOARD_PRODUCT_CREATE_UX.md) |
-| سعر · خصم · كمية · باركود · SKU (Flutter Web) | [`frontend/DASHBOARD_PRODUCT_PRICING_FIELDS.md`](./frontend/DASHBOARD_PRODUCT_PRICING_FIELDS.md) |
-| باگ كمية المنتج (توست «موجبة») | [`frontend/DASHBOARD_PRODUCT_QUANTITY_VALIDATION.md`](./frontend/DASHBOARD_PRODUCT_QUANTITY_VALIDATION.md) |
-| ضمان المنتج (دروب داون + قسم مستقل) | [`frontend/DASHBOARD_PRODUCT_WARRANTY.md`](./frontend/DASHBOARD_PRODUCT_WARRANTY.md) |
+| داشبورد | [`frontend/dashboard.md`](./frontend/dashboard.md) | Page Builder · أقسام · Nav · منتج · **طلب سريع (إعدادات + صفحات الظهور)** · استيراد Excel · … |
+| ويب | [`frontend/web.md`](./frontend/web.md) | Nav · أقسام · فئات · منتج · تسجيل · فلاتر · **طلب سريع حسب الصفحة** · نص تحميل · أسعار · **آخر تحديث 2026-08-26** |
+| Flutter | [`frontend/flutter.md`](./frontend/flutter.md) | Nav · أقسام layout/variant · فئات دائرية · فلاتر · منتج/سلة · تسجيل · أسعار · **طلب سريع حسب الصفحة** · **آخر تحديث 2026-08-26** |
 
 ## إظهار / إخفاء أقسام الصفحة (Eye toggle)
 
@@ -59,6 +37,12 @@
 - مفتاح جديد: `quick_order_page_ids` — الأدمن يختار صفحات الظهور.
 - العميل يقرأ `data.quick_order.page_ids` + `page_slugs` من `GET /api/user/settings`.
 - الافتراضي = صفحة `home` فقط.
+
+## دفع Stripe (بطاقة)
+
+| الملف | لمن |
+|--------|-----|
+| [`api/STRIPE_PAYMENTS.md`](./api/STRIPE_PAYMENTS.md) | باك + ويب + Flutter — إعداد المفاتيح، Webhook، تدفق الدفع، أمثلة كود |
 
 ## مرجع API
 

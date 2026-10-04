@@ -38,6 +38,14 @@ class PaymentMethodSeeder extends Seeder
                 'sort_order' => 3,
                 'config'     => null,
             ],
+            [
+                'name'       => 'Card (Stripe)',
+                'code'       => 'stripe',
+                'icon'       => null,
+                'is_active'  => true,
+                'sort_order' => 4,
+                'config'     => null,
+            ],
         ];
 
         // assign icons from the files list by index if available

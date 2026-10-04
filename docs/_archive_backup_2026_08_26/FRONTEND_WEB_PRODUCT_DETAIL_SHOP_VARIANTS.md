@@ -2,7 +2,7 @@
 
 ## المشكلة اللي صارت
 
-صفحة `https://tickmartsy.com/product/23` كانت تطلع **بيضاء** وفيها نص `error element` فقط.
+صفحة `https://deemafashion.com/product/23` كانت تطلع **بيضاء** وفيها نص `error element` فقط.
 
 الـ API ما كان راجع خطأ — `GET /api/user/products/23` رجع **200**، بس الاستجابة كانت:
 
@@ -262,14 +262,14 @@ function ProductPage() {
 ### 8.1 المتغيّر ميّت وقيمته غلط
 
 ```
-VITE_SERVER_URL=https://tickmartsy.com/api/user
+VITE_SERVER_URL=https://deemafashion.com/api/user
 ```
 
-ما في سطر واحد بالكود يقرا `VITE_SERVER_URL`. والقيمة نفسها غلط: `tickmartsy.com` هو مضيف الواجهة (SPA) مو الـ API.
+ما في سطر واحد بالكود يقرا `VITE_SERVER_URL`. والقيمة نفسها غلط: `deemafashion.com` هو مضيف الواجهة (SPA) مو الـ API.
 
 ### 8.2 المضيف الحقيقي مثبَّت بالكود بمكانين
 
-- `interceptor.ts:26` — `https://tickdash.tickmartsy.com/api/` للإنتاج
+- `interceptor.ts:26` — `https://api.deemafashion.com/api/` للإنتاج
 - `vite.config.ts:27` — نفس المضيف كهدف للـ proxy بالتطوير
 
 ### 8.3 `.env` مو ضمن `.gitignore`
@@ -279,9 +279,9 @@ VITE_SERVER_URL=https://tickmartsy.com/api/user
 | الملف | التغيير |
 |---|---|
 | `.gitignore` | ضيف `.env` و `.env.*` مع استثناء `!.env.example` |
-| `.env.example` | ملف جديد متتبَّع فيه `VITE_API_HOST=https://tickdash.tickmartsy.com` كتوثيق |
-| `.env` | استبدل السطر الميّت بـ `VITE_API_HOST=https://tickdash.tickmartsy.com` |
-| `interceptor.ts` | `DEV ? "/api" : \`${import.meta.env.VITE_API_HOST ?? "https://tickdash.tickmartsy.com"}/api\`` |
+| `.env.example` | ملف جديد متتبَّع فيه `VITE_API_HOST=https://api.deemafashion.com` كتوثيق |
+| `.env` | استبدل السطر الميّت بـ `VITE_API_HOST=https://api.deemafashion.com` |
+| `interceptor.ts` | `DEV ? "/api" : \`${import.meta.env.VITE_API_HOST ?? "https://api.deemafashion.com"}/api\`` |
 | `vite.config.ts` | خُد هدف الـ proxy من `loadEnv` بنفس القيمة الافتراضية |
 
 **⚠️ يحتاج موافقة قبل التنفيذ** — التعديل بيلمس إعداد البناء والنشر.

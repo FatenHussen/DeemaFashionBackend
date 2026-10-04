@@ -29,7 +29,7 @@ class VendorPanelProvider extends PanelProvider
             ->path('vendor')
             ->login()
             ->colors([
-                'primary' => Color::hex("#00aed1"),
+                'primary' => Color::hex('#c720a4'),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')

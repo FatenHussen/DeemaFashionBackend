@@ -4,6 +4,7 @@ namespace App\Services\User;
 
 use App\Enums\CartType;
 use App\Enums\OrderStatus;
+use App\Enums\PaymentStatus;
 use App\Events\OrderCreated;
 use App\Events\OrderStatusChanged;
 use App\Exceptions\CustomExceptionWithMessage;
@@ -23,6 +24,7 @@ use App\Models\Vendor;
 use App\Models\VendorSubscription;
 use App\Services\BaseService;
 use App\Services\PointExchangeService;
+use App\Services\Stripe\StripePaymentService;
 use App\Services\User\CalculateDeliveryPriceService;
 use App\Services\User\PromotionService;
 use Illuminate\Support\Facades\DB;
@@ -111,7 +113,7 @@ class OrderService extends BaseService
      */
     public function create($data)
     {
-        return DB::transaction(function () use ($data) {
+        $order = DB::transaction(function () use ($data) {
 
             $user = $this->resolveUser();
             $address = $this->resolveAddress($user, $data['address_id']);
@@ -224,11 +226,15 @@ class OrderService extends BaseService
 
             $this->maybeIncrementRecipeOrdersCount($order, $data);
 
-
             $this->dispatchOrderCreatedEvent($order);
 
-            return new OneResource($order->fresh('items'));
+            return $order->fresh(['items', 'paymentMethod', 'user', 'address', 'driver']);
         });
+
+        // Outside the DB transaction: Stripe API must not hold locks.
+        $this->attachStripePaymentForCheckout($order);
+
+        return new OneResource($order);
     }
 
     /**
@@ -406,6 +412,7 @@ class OrderService extends BaseService
     private function createOrder(User $user, $address, array $data, string $choice): Order
     {
         $paymentMethod = $this->resolvePaymentMethod($data);
+        $paidOnPlacement = $paymentMethod->isPaidOnPlacement();
 
         return Order::create([
             'user_id' => $user->id,
@@ -417,8 +424,46 @@ class OrderService extends BaseService
                 : null,
             'status' => OrderStatus::PENDING->value,
             'payment_method_id' => $paymentMethod->id,
-            'is_paid' => $paymentMethod->isPaidOnPlacement(),
+            'is_paid' => $paidOnPlacement,
+            'payment_status' => $paymentMethod->requiresOnlineConfirmation()
+                ? PaymentStatus::PENDING->value
+                : ($paidOnPlacement ? PaymentStatus::SUCCEEDED->value : null),
+            'paid_at' => $paidOnPlacement ? now() : null,
         ]);
+    }
+
+    /**
+     * After totals are final, create a Stripe PaymentIntent for card checkout.
+     */
+    private function attachStripePaymentForCheckout(Order $order): void
+    {
+        if (! $order->paymentMethod?->isStripe() || $order->is_paid) {
+            return;
+        }
+
+        try {
+            $payment = app(StripePaymentService::class)->createOrReusePaymentIntent($order);
+            $order->setAttribute('stripe_client_payment', $payment);
+            $order->refresh();
+            $order->setAttribute('stripe_client_payment', $payment);
+        } catch (\Throwable $e) {
+            Log::error('Stripe PaymentIntent on order create failed', [
+                'order_id' => $order->id,
+                'message' => $e->getMessage(),
+            ]);
+
+            // Order stays unpaid; client can retry via POST /orders/{id}/pay
+            $order->setAttribute('stripe_client_payment', [
+                'client_secret' => null,
+                'payment_intent_id' => $order->stripe_payment_intent_id,
+                'publishable_key' => app(StripePaymentService::class)->publishableKey(),
+                'payment_status' => $order->payment_status ?? PaymentStatus::PENDING->value,
+                'amount' => (float) $order->total,
+                'currency' => strtoupper((string) config('stripe.currency', 'usd')),
+                'is_paid' => false,
+                'error' => true,
+            ]);
+        }
     }
 
     private function resolvePaymentMethod(array $data): PaymentMethod
@@ -1129,6 +1174,12 @@ class OrderService extends BaseService
         }
         $oldStatus = $order->status;
 
+        $order->loadMissing('paymentMethod');
+
+        if ($order->paymentMethod?->isStripe()) {
+            app(StripePaymentService::class)->cancelPaymentIntent($order);
+        }
+
         $order->update([
             'status' => OrderStatus::CANCELLED->value
         ]);
@@ -1193,11 +1244,17 @@ class OrderService extends BaseService
 
         return DB::transaction(function () use ($originalOrder, $user) {
             // Create new order with same data, but reset some fields
+            $paidOnPlacement = $originalOrder->paymentMethod?->isPaidOnPlacement() ?? false;
+
             $newOrder = Order::create([
                 'user_id' => $user->id,
                 'user_address_id' => $originalOrder->user_address_id,
                 'payment_method_id' => $originalOrder->payment_method_id,
-                'is_paid' => $originalOrder->paymentMethod?->isPaidOnPlacement() ?? false,
+                'is_paid' => $paidOnPlacement,
+                'payment_status' => $originalOrder->paymentMethod?->requiresOnlineConfirmation()
+                    ? PaymentStatus::PENDING->value
+                    : ($paidOnPlacement ? PaymentStatus::SUCCEEDED->value : null),
+                'paid_at' => $paidOnPlacement ? now() : null,
                 'basket_id' => $originalOrder->basket_id,
                 'basket_schedule_id' => $originalOrder->basket_schedule_id,
                 'is_instant_delivery' => $originalOrder->is_instant_delivery,

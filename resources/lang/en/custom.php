@@ -23,6 +23,16 @@ return [
         'delivery_time_required' => 'Choose a delivery day and time.',
         'delivery_too_soon' => 'The earliest allowed time is :earliest.',
     ],
+    'stripe' => [
+        'not_configured' => 'Card payments are not configured yet.',
+        'webhook_not_configured' => 'Stripe webhook secret is not configured.',
+        'invalid_payload' => 'Invalid Stripe webhook payload.',
+        'invalid_signature' => 'Invalid Stripe webhook signature.',
+        'not_stripe_order' => 'This order is not a Stripe card payment.',
+        'already_paid' => 'This order is already paid.',
+        'order_not_payable' => 'This order cannot be paid in its current status.',
+        'intent_failed' => 'Could not start card payment. Please try again.',
+    ],
     // HTTP Status Codes
     'errors' => [
         400 => 'Bad request.',

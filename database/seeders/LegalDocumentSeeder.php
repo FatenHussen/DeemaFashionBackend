@@ -13,12 +13,12 @@ class LegalDocumentSeeder extends Seeder
         $englishText = <<<'TEXT'
         Privacy Policy
 
-        The privacy policy adopted by Online Tikmool outlines how we process personal data, payment data, and other information collected from users, suppliers, third parties, or provided directly through www.tikmool.com and the tikmool mobile application. We understand the importance of this data and commit to protecting, respecting, and preserving your privacy. Please read the following carefully. By using our services, you agree that your data may be handled in accordance with this policy.
+        The privacy policy adopted by Deema Fashion outlines how we process personal data, payment data, and other information collected from users, suppliers, third parties, or provided directly through www.deemafashion.com and the deemafashion mobile application. We understand the importance of this data and commit to protecting, respecting, and preserving your privacy. Please read the following carefully. By using our services, you agree that your data may be handled in accordance with this policy.
 
         Data we collect:
 
         - Information provided when filling out forms during account registration, social logins, subscriptions, content publication, or additional service requests.
-        - Device-specific data when you install or use the tikmool app, such as location details and your device ID.
+        - Device-specific data when you install or use the deemafashion app, such as location details and your device ID.
         - Technical information about your computer or device (IP address, operating system, browser type).
         - Inputs submitted via surveys, votes, reviews, testimonials, or feedback messages.
         - Details provided when reporting issues encountered on the site or app.
@@ -45,7 +45,7 @@ class LegalDocumentSeeder extends Seeder
 
         - Third-party service and logistic partners: We cooperate with entities (e.g., logistics providers, marketing agencies) to fulfil orders. They receive only the data required to deliver the order and process cash-on-delivery collections.
 
-        Note on payment: Tikmool sells physical goods delivered to homes, and payment is cash-on-delivery only. We do not collect, store, or process credit card or electronic payment details within the app.
+        Note on payment: Deema Fashion sells physical goods delivered to homes, and payment is cash-on-delivery only. We do not collect, store, or process credit card or electronic payment details within the app.
 
         - Marketing and promotional initiatives: We may use your data to improve your experience and send information about relevant goods/services, service notices, new features, special offers, and events through channels such as email, web push, in-app messages, WhatsApp, phone calls, or social media.
         - Third-party advertising: We may provide data to advertisers to help them reach target audiences while honouring our commitments.
@@ -90,23 +90,23 @@ class LegalDocumentSeeder extends Seeder
 
         Account deletion:
 
-        You may request deletion of your account and all related data by emailing tikmool.cs@gmail.com (subject: "Account Deletion Request") or contacting support via the app's listed numbers. Requests are processed within 14 business days.
+        You may request deletion of your account and all related data by emailing support@deemafashion.com (subject: "Account Deletion Request") or contacting support via the app's listed numbers. Requests are processed within 14 business days.
 
         Contact us:
 
-        Reach us through site/app contact details or email tikmool.cs@gmail.com for inquiries, complaints, feedback, or data requests.
+        Reach us through site/app contact details or email support@deemafashion.com for inquiries, complaints, feedback, or data requests.
         TEXT;
 
         $arabicText = <<<'TEXT'
         سياسة الخصوصية
 
-        ان سياسة الخصوصية التي نعتمدها شركة اونلاين تيك مول هي القواعد التي سنقوم بموجبها بالتعامل مع أي بيانات شخصية، بيانات الدفع، وغيرها من البيانات الأخرى التي نجمعها من المستخدمين أو الموردين أو من مصادر آخرى أو تلك التي تقدمها إلينا وذلك عند استخدامك لموقع www.tikmool.com و/او تطبيق tikmool للجوال، ونحن ندرك أهمية هذه البيانات، ونلتزم بحماية خصوصيتك واحترامها والحفاظ عليها. يُرجى قراءة ما يلي جيداً لفهم سياستنا فيما يتعلق بالبيانات. باستخدامك لخدماتنا فإنك توافق على التعامل مع البيانات بما يتفق مع سياسة الخصوصية هذه.
+        ان سياسة الخصوصية التي نعتمدها شركة اونلاين ديما فاشن هي القواعد التي سنقوم بموجبها بالتعامل مع أي بيانات شخصية، بيانات الدفع، وغيرها من البيانات الأخرى التي نجمعها من المستخدمين أو الموردين أو من مصادر آخرى أو تلك التي تقدمها إلينا وذلك عند استخدامك لموقع www.deemafashion.com و/او تطبيق deemafashion للجوال، ونحن ندرك أهمية هذه البيانات، ونلتزم بحماية خصوصيتك واحترامها والحفاظ عليها. يُرجى قراءة ما يلي جيداً لفهم سياستنا فيما يتعلق بالبيانات. باستخدامك لخدماتنا فإنك توافق على التعامل مع البيانات بما يتفق مع سياسة الخصوصية هذه.
 
         البيانات التي نقوم بجمعها:
 
         · البيانات التي تزودنا بها عند تعبئة النماذج والحقول في الموقع (تسجيل الحساب)، بما في ذلك البيانات التي زودتنا بها عند التسجيل لاستخدام الموقع والتسجيلات الأخرى (مثل دخول مواقع التواصل الاجتماعي المختلفة) أو الاشتراك في الخدمات التي نقدمها أو نشر المواد أو طلب خدمات أخرى.
 
-        · في حال تحميل أو استخدام تطبيق tikmool على هاتفك الجوال، فقد نتمكن من الوصول إلى تفاصيل تتعلق بموقعك وموقع جوالك، بما في ذلك ID الخاص بجهازك.
+        · في حال تحميل أو استخدام تطبيق deemafashion على هاتفك الجوال، فقد نتمكن من الوصول إلى تفاصيل تتعلق بموقعك وموقع جوالك، بما في ذلك ID الخاص بجهازك.
 
         · تفاصيل حول جهاز الكمبيوتر الذي تستخدمه، كعنوان بروتوكول الإنترنت IP الخاص بك ونظام التشغيل ونوع المتصفح.
 
@@ -148,7 +148,7 @@ class LegalDocumentSeeder extends Seeder
 
         · الطرف الثالث (الوسيط الخدمي واللوجستي): من أجل العمل على توفير خدماتنا، نتمكن من التعاون مع شركات أخرى تابعة لنا أو غير تابعين لنا (على سبيل المثال: الشركات اللوجستية لتوصيل المنتجات إليك، وكالات وشركات التسويق). يتم تزويد هؤلاء الشركاء بالبيانات الضرورية فقط لإتمام عملية التوصيل وتحصيل قيمة الطلبات نقداً عند الاستلام (Cash on Delivery).
 
-        ملاحظة هامة حول الدفع: تطبيق Tikmool مخصص لبيع المنتجات المادية وتوصيلها للمنازل، وعملية الدفع تتم حصراً بشكل نقدي عند الاستلام. نحن لا نقوم بجمع، تخزين، أو معالجة أي بيانات تتعلق ببطاقات الائتمان أو وسائل الدفع الإلكتروني داخل التطبيق.
+        ملاحظة هامة حول الدفع: تطبيق Deema Fashion مخصص لبيع المنتجات المادية وتوصيلها للمنازل، وعملية الدفع تتم حصراً بشكل نقدي عند الاستلام. نحن لا نقوم بجمع، تخزين، أو معالجة أي بيانات تتعلق ببطاقات الائتمان أو وسائل الدفع الإلكتروني داخل التطبيق.
 
         · عمليات التسويق والعروض الترويجية: قد نعمل على استخدام البيانات لتعزيز وتطوير تجربتك في استخدام الموقع والتطبيق ولتزويدك بمعلومات عن السلع والخدمات التي قد تكون مهتماً بها، ورسائل الخدمة، والمزايا الجديدة والتحسينات والعروض الخاصة والفعاليات ذات الأهمية. ومن الممكن التواصل معك عبر وسائل مختلفة، بما في ذلك على سبيل المثال لا الحصر البريد الإلكتروني وإشعارات الويب والمنشورات والهاتف ورسائل التطبيق ورسائل الواتساب ومواقع التواصل الاجتماعي.
 
@@ -202,57 +202,57 @@ class LegalDocumentSeeder extends Seeder
 
         نحترم خصوصيتك، ويمكنك طلب حذف حسابك وجميع البيانات المرتبطة به عن طريق:
 
-        - إرسال طلب إلى البريد الإلكتروني: tikmool.cs@gmail.com (يرجى كتابة "طلب حذف حساب" في الموضوع).
+        - إرسال طلب إلى البريد الإلكتروني: support@deemafashion.com (يرجى كتابة "طلب حذف حساب" في الموضوع).
         - التواصل مع الدعم الفني عبر الأرقام الواردة في التطبيق. سنعالج الطلب خلال 14 يوم عمل على الأكثر.
 
         تواصل معنا:
 
-        يمكن للعملاء التواصل معنا عبر أرقام الموقع، التطبيق، أو البريد الإلكتروني tikmool.cs@gmail.com لأي استفسارات، شكاوى، ملاحظات، أو طلبات بيانات.
+        يمكن للعملاء التواصل معنا عبر أرقام الموقع، التطبيق، أو البريد الإلكتروني support@deemafashion.com لأي استفسارات، شكاوى، ملاحظات، أو طلبات بيانات.
         TEXT;
 
         $marketerTermsEn = <<<'TEXT'
         Marketer Terms & Conditions
 
-        This document explains the rules and commitments that apply to any individual or entity that promotes products or services on behalf of Tikmool. By participating in our marketer programs you agree to:
+        This document explains the rules and commitments that apply to any individual or entity that promotes products or services on behalf of Deema Fashion. By participating in our marketer programs you agree to:
 
         - Register with valid commercial information, including proof of authorization if you act on behalf of a company.
         - Provide accurate contact and tax details, and update them whenever they change.
-        - Only promote products, campaigns, or services that Tikmool has explicitly approved.
+        - Only promote products, campaigns, or services that Deema Fashion has explicitly approved.
         - Respect trademark, copyright, and advertising guidelines, and avoid misleading or prohibited content.
-        - Follow Tikmool instructions about pricing, offers, messaging, and promotional mechanics.
+        - Follow Deema Fashion instructions about pricing, offers, messaging, and promotional mechanics.
         - Use only official channels or links we provide for campaigns and avoid redirecting users outside the platform without prior consent.
         - Protect any confidential information or marketing collateral shared with you.
-        - Notify Tikmool immediately if you suspect any fraudulent activity or breach related to your marketing account.
+        - Notify Deema Fashion immediately if you suspect any fraudulent activity or breach related to your marketing account.
         - Comply with all applicable laws regarding marketing, data privacy, electronic messaging, and contest administration.
         - Cease marketing activities if your status is suspended, your account is cancelled, or you no longer meet the eligibility requirements.
 
-        Tikmool reserves the right to suspend, terminate, or update marketer eligibility, commissions, or access at any time. Compensation is subject to proper tracking and verification. Failure to comply may result in removal from the marketer program and withholding of rewards.
+        Deema Fashion reserves the right to suspend, terminate, or update marketer eligibility, commissions, or access at any time. Compensation is subject to proper tracking and verification. Failure to comply may result in removal from the marketer program and withholding of rewards.
         TEXT;
 
         $marketerTermsAr = <<<'TEXT'
         شروط وأحكام المسوقين
 
-        تشرح هذه الوثيقة القواعد والالتزامات التي تنطبق على كل فرد أو جهة تروّج لمنتجات أو خدمات تيك مول. من خلال مشاركتك في برامج المسوقين، فإنك توافق على ما يلي:
+        تشرح هذه الوثيقة القواعد والالتزامات التي تنطبق على كل فرد أو جهة تروّج لمنتجات أو خدمات ديما فاشن. من خلال مشاركتك في برامج المسوقين، فإنك توافق على ما يلي:
 
         · التسجيل بمعلومات تجارية صحيحة، بما في ذلك دليل التفويض في حال كنت تمثل شركة.
         · تزويدنا ببيانات اتصال وضرائب دقيقة وتحديثها عند أي تغيير.
-        · الترويج فقط للمنتجات أو الحملات أو الخدمات التي وافقت عليها تيك مول صراحةً.
+        · الترويج فقط للمنتجات أو الحملات أو الخدمات التي وافقت عليها ديما فاشن صراحةً.
         · الالتزام بحقوق العلامات التجارية والملكية وتفادي المحتوى المضلل أو المحظور.
-        · اتباع تعليمات تيك مول الخاصة بالتسعير، والعروض، والرسائل، وآليات الترويج.
+        · اتباع تعليمات ديما فاشن الخاصة بالتسعير، والعروض، والرسائل، وآليات الترويج.
         · استخدام القنوات الرسمية أو الروابط التي نُقدمها فقط ولا تقم بتحويل العملاء خارج المنصة بدون موافقة مسبقة.
         · حماية أي معلومات أو مواد تسويقية سرية تم مشاركتها معك.
-        · إبلاغ تيك مول فوراً في حال لاحظت أي نشاط احتيالي أو خرق متعلق بحسابك التسويقي.
+        · إبلاغ ديما فاشن فوراً في حال لاحظت أي نشاط احتيالي أو خرق متعلق بحسابك التسويقي.
         · الالتزام بجميع القوانين المعمول بها في مجال التسويق، وخصوصية البيانات، والرسائل الإلكترونية، وإدارة المسابقات.
         · التوقف عن أي نشاط تسويقي إذا تم تعليق حسابك، أو إلغاؤه، أو إذا لم تعد تستوفي شروط الأهلية.
 
-        تيك مول تحتفظ بالحق في تعليق أو إنهاء أو تعديل أهلية المسوقين أو شروط العمولات أو الوصول في أي وقت. تُصرف التعويضات بعد التحقق من الأداء الصحيح. الإخلال قد يؤدي إلى الإزالة من البرنامج وحجز المكافآت.
+        ديما فاشن تحتفظ بالحق في تعليق أو إنهاء أو تعديل أهلية المسوقين أو شروط العمولات أو الوصول في أي وقت. تُصرف التعويضات بعد التحقق من الأداء الصحيح. الإخلال قد يؤدي إلى الإزالة من البرنامج وحجز المكافآت.
         TEXT;
 
         $termsOfUseEn = <<<'TEXT'
         Terms of Use
         Last updated: 13/06/2025
 
-        Welcome to our website www.tikmool.com and our mobile application tikmool.app. We are pleased to introduce the terms of use for each. These terms include all policies, procedures, and protocols governing your use of our services via the website and mobile application.
+        Welcome to our website www.deemafashion.com and our mobile application deemafashion.com. We are pleased to introduce the terms of use for each. These terms include all policies, procedures, and protocols governing your use of our services via the website and mobile application.
 
         Your use or registration in our services constitutes your agreement to comply with the terms of use stated in this document. These terms may be amended and updated by us at any time. Your use of our website and application after publishing such amendments or updates constitutes implicit acceptance of the modified or updated terms of use.
 
@@ -367,7 +367,7 @@ class LegalDocumentSeeder extends Seeder
 
         v Suspension and Ban
 
-        We at Tikmool have the right to suspend, ban, or restrict your use of the services, cancel your product orders, or delete and hide your content at our sole discretion and judgment, without prejudice to any rights or compensation and without any liability to you. Any amounts paid and received by us related to a canceled product order will be refunded.
+        We at Deema Fashion have the right to suspend, ban, or restrict your use of the services, cancel your product orders, or delete and hide your content at our sole discretion and judgment, without prejudice to any rights or compensation and without any liability to you. Any amounts paid and received by us related to a canceled product order will be refunded.
 
         v Reporting Violations of Terms of Use
 
@@ -405,7 +405,7 @@ class LegalDocumentSeeder extends Seeder
 
         التحديث الاخير 13/06/2025
 
-        نرحب بكم في موقعنا الالكتروني www.tikmool.com وتطبيقنا الالكتروني tikmool.app ويسعدنا تعريفكم بشروط استخدامكم لكل منها. وتضم هذا الشروط جميع السياسات والاجراءات والبروتوكولات الخاصة باستخدامكن لخدماتنا عبر الموقع الالكتروني وتطبيق الجوال.
+        نرحب بكم في موقعنا الالكتروني www.deemafashion.com وتطبيقنا الالكتروني deemafashion.com ويسعدنا تعريفكم بشروط استخدامكم لكل منها. وتضم هذا الشروط جميع السياسات والاجراءات والبروتوكولات الخاصة باستخدامكن لخدماتنا عبر الموقع الالكتروني وتطبيق الجوال.
 
         ان استخدامك او تسجيلك في خدماتنا يعتبر موافقة من قبلك على الالتزام بشروط الاستخدام المذكورة في هذه الوثيقة. وهذه الشروط قابلة للتعديل والتحديث من قبلنا في أي وقت واستخدامك لموقعنا وتطبيقنا بعد نشر هذه التعديلات او التحديثات هو موافقة ضمنية من قبلك على شروط الاستخدام التي تم تعديلها او تحديثها.
 
@@ -607,24 +607,24 @@ class LegalDocumentSeeder extends Seeder
 
         Scope of Application of this Policy:
 
-        This return policy applies to customers who purchase products from a brand or seller listed on the Tikmool website www.tikmool.com or the Tikmool mobile application.
+        This return policy applies to customers who purchase products from a brand or seller listed on the Deema Fashion website www.deemafashion.com or the Deema Fashion mobile application.
 
         Returnable Products:
 
         The following conditions must be met for products to be considered returnable:
 
-        - Tikmool reserves the right to reject any return request from the customer if the product does not meet the return requirements (rejected product).
+        - Deema Fashion reserves the right to reject any return request from the customer if the product does not meet the return requirements (rejected product).
         - If the return request is rejected, the customer is not entitled to a refund.
-        - If the product is deemed rejected at any stage after the return, Tikmool will make one attempt to return the rejected product to the customer. If the customer does not receive the product, Tikmool will retain the product for two business days at the delivery warehouse.
+        - If the product is deemed rejected at any stage after the return, Deema Fashion will make one attempt to return the rejected product to the customer. If the customer does not receive the product, Deema Fashion will retain the product for two business days at the delivery warehouse.
         - The customer has the right to submit a request to return the rejected product through the customer service center within 5 business days of the last notification of the failed delivery.
         - If the customer does not receive the returned products after the last delivery attempt, we will send two reminder emails and make two phone calls to inform them of the return request.
-        - If the customer responds to our contact and return attempts and requests a return within 5 business days from the date of the first call, we will deliver the product to them. If they do not respond, the product will be disposed of, and Tikmool will not be responsible for the product price or return.
+        - If the customer responds to our contact and return attempts and requests a return within 5 business days from the date of the first call, we will deliver the product to them. If they do not respond, the product will be disposed of, and Deema Fashion will not be responsible for the product price or return.
 
         General Conditions for the Return Process:
 
-        - If the returned product does not meet the company's return conditions, Tikmool reserves the right to return the product to the customer.
+        - If the returned product does not meet the company's return conditions, Deema Fashion reserves the right to return the product to the customer.
         - If the product does not meet the return conditions, the customer is not entitled to a refund.
-        - If a return request is rejected at any stage, Tikmool will make one attempt to return the product to the customer. In the event of a failed delivery attempt, the product will be retained for two business days after notifying the customer of the last failed delivery attempt. The customer may submit a return request to the customer service center within two days of the last notification.
+        - If a return request is rejected at any stage, Deema Fashion will make one attempt to return the product to the customer. In the event of a failed delivery attempt, the product will be retained for two business days after notifying the customer of the last failed delivery attempt. The customer may submit a return request to the customer service center within two days of the last notification.
         - If a return request is not received from the customer, the product will be disposed of, and the customer will not be able to receive a refund or submit a new return request.
 
         Returnable Products and Return Conditions:
@@ -638,7 +638,7 @@ class LegalDocumentSeeder extends Seeder
         - If the box has been opened, the tags have been removed, the device has been used, or there is damage, the return request will be rejected. This excludes cases where a manufacturing defect is proven in the product.
         - In case of a manufacturing defect, the product must be returned with the box, manuals, labels, and all accessories in good condition.
         - The original box, with all labels intact and unopened, is a prerequisite for a return.
-        - After receiving the product, Tikmool will determine whether to repair the product, refund the customer, or return the product.
+        - After receiving the product, Deema Fashion will determine whether to repair the product, refund the customer, or return the product.
 
         3- Beauty and Health:
         - If opened or used, products (skin care, perfumes, cosmetics, etc.) cannot be returned.
@@ -691,24 +691,24 @@ class LegalDocumentSeeder extends Seeder
 
         نطاق تطبيق هذه السياسة:
 
-        تطبق سياسة الإرجاع هذه على العملاء الذين يشترون منتجات من علامة تجارية أو بائع مدرج على موقع تيك مول www.tikmool.com أو تطبيق تيك مول للجوال.
+        تطبق سياسة الإرجاع هذه على العملاء الذين يشترون منتجات من علامة تجارية أو بائع مدرج على موقع ديما فاشن www.deemafashion.com أو تطبيق ديما فاشن للجوال.
 
         المنتجات القابلة للإرجاع:
 
         يجب استيفاء الشروط التالية حتى تعتبر المنتجات قابلة للإرجاع:
 
-        - تحتفظ تيك مول بالحق في رفض أي طلب إرجاع من العميل إذا كان المنتج لا يفي بشروط الإرجاع (منتج مرفوض).
+        - تحتفظ ديما فاشن بالحق في رفض أي طلب إرجاع من العميل إذا كان المنتج لا يفي بشروط الإرجاع (منتج مرفوض).
         - إذا تم رفض طلب الإرجاع، فلن يكون العميل مستحقا لأي استرداد.
-        - إذا اعتبر المنتج مرفوضا في أي مرحلة بعد الإرجاع، ستقوم تيك مول بمحاولة واحدة لإعادة المنتج المرفوض إلى العميل. وإذا لم يستلم العميل المنتج، فسيتم الاحتفاظ به لمدة يومي عمل في مستودع التوصيل.
+        - إذا اعتبر المنتج مرفوضا في أي مرحلة بعد الإرجاع، ستقوم ديما فاشن بمحاولة واحدة لإعادة المنتج المرفوض إلى العميل. وإذا لم يستلم العميل المنتج، فسيتم الاحتفاظ به لمدة يومي عمل في مستودع التوصيل.
         - يحق للعميل تقديم طلب لاستلام المنتج المرفوض من خلال مركز خدمة العملاء خلال 5 أيام عمل من آخر إشعار بمحاولة التسليم الفاشلة.
         - إذا لم يستلم العميل المنتجات المعادة بعد آخر محاولة تسليم، فسنرسل رسالتي تذكير عبر البريد الإلكتروني وسنجري اتصالين هاتفيين لإبلاغه بطلب الإرجاع.
-        - إذا استجاب العميل لمحاولات التواصل وطلب الاستلام خلال 5 أيام عمل من تاريخ أول اتصال، سيتم تسليم المنتج له. وإذا لم يستجب، فسيتم التخلص من المنتج ولن تتحمل تيك مول مسؤولية سعر المنتج أو إرجاعه.
+        - إذا استجاب العميل لمحاولات التواصل وطلب الاستلام خلال 5 أيام عمل من تاريخ أول اتصال، سيتم تسليم المنتج له. وإذا لم يستجب، فسيتم التخلص من المنتج ولن تتحمل ديما فاشن مسؤولية سعر المنتج أو إرجاعه.
 
         الشروط العامة لعملية الإرجاع:
 
-        - إذا لم يستوف المنتج المرتجع شروط الإرجاع المعتمدة لدى الشركة، تحتفظ تيك مول بالحق في إعادة المنتج إلى العميل.
+        - إذا لم يستوف المنتج المرتجع شروط الإرجاع المعتمدة لدى الشركة، تحتفظ ديما فاشن بالحق في إعادة المنتج إلى العميل.
         - إذا لم يستوف المنتج شروط الإرجاع، فلا يحق للعميل استرداد المبلغ.
-        - إذا تم رفض طلب الإرجاع في أي مرحلة، ستقوم تيك مول بمحاولة واحدة لإعادة المنتج إلى العميل. وفي حال فشل التسليم، سيتم الاحتفاظ بالمنتج لمدة يومي عمل بعد إشعار العميل بآخر محاولة تسليم فاشلة. ويجوز للعميل تقديم طلب استلام عبر مركز خدمة العملاء خلال يومين من آخر إشعار.
+        - إذا تم رفض طلب الإرجاع في أي مرحلة، ستقوم ديما فاشن بمحاولة واحدة لإعادة المنتج إلى العميل. وفي حال فشل التسليم، سيتم الاحتفاظ بالمنتج لمدة يومي عمل بعد إشعار العميل بآخر محاولة تسليم فاشلة. ويجوز للعميل تقديم طلب استلام عبر مركز خدمة العملاء خلال يومين من آخر إشعار.
         - إذا لم يتم استلام طلب من العميل، سيتم التخلص من المنتج، ولن يتمكن العميل من استرداد المبلغ أو تقديم طلب إرجاع جديد.
 
         المنتجات القابلة للإرجاع وشروط الإرجاع:
@@ -722,7 +722,7 @@ class LegalDocumentSeeder extends Seeder
         - إذا تم فتح الصندوق أو إزالة الملصقات أو استخدام الجهاز أو وجود تلف، فسيتم رفض طلب الإرجاع. ويستثنى من ذلك حالات وجود عيب مصنعي مثبت.
         - في حال وجود عيب مصنعي، يجب إرجاع المنتج مع الصندوق والكتيبات والملصقات وجميع الملحقات بحالة جيدة.
         - يعتبر وجود الصندوق الأصلي بجميع ملصقاته سليمة وغير مفتوحة شرطا أساسيا للإرجاع.
-        - بعد استلام المنتج، تقرر تيك مول ما إذا كان سيتم إصلاح المنتج أو رد المبلغ للعميل أو إعادة المنتج إليه.
+        - بعد استلام المنتج، تقرر ديما فاشن ما إذا كان سيتم إصلاح المنتج أو رد المبلغ للعميل أو إعادة المنتج إليه.
 
         3- منتجات الجمال والصحة:
         - لا يمكن إرجاع المنتجات (العناية بالبشرة، العطور، مستحضرات التجميل وغيرها) إذا تم فتحها أو استخدامها.
@@ -774,82 +774,82 @@ class LegalDocumentSeeder extends Seeder
         Warranty Policy
 
         Product Warranty Policy:
-        - Tikmool's warranty policy protects you and your product from manufacturing defects after purchase.
+        - Deema Fashion's warranty policy protects you and your product from manufacturing defects after purchase.
         - All electrical and electronic devices are subject to the warranty of the manufacturer or supplier according to the period specified by them, with the exception of accessories that follow the manufacturer's or seller's policy.
         - The original invoice containing the serial number and warranty period must be kept to ensure validity. If devices are delivered with a warranty card, customers must visit the service centers and show the card to follow up on their request.
         - The service centers of the seller that issued the warranty card are obligated to carry out warranty repairs in cases where products are purchased through that seller, and the seller's warranty terms apply in this case.
-        - Companies, brands, and sellers other than Tikmool are obligated to the warranty services they provide, including the provision of spare parts and repair quality. In the event of a complaint, inquiry, or note, customers must contact the warranty service provider for their product.
-        - The customer can claim direct compensation from service providers in the event of delay in resolving the warranty claim in accordance with applicable laws in the country, and Tikmool bears no responsibility for such compensation.
+        - Companies, brands, and sellers other than Deema Fashion are obligated to the warranty services they provide, including the provision of spare parts and repair quality. In the event of a complaint, inquiry, or note, customers must contact the warranty service provider for their product.
+        - The customer can claim direct compensation from service providers in the event of delay in resolving the warranty claim in accordance with applicable laws in the country, and Deema Fashion bears no responsibility for such compensation.
 
         Repairing or replacing the device under warranty does not require extending or renewing the warranty period and remains subject to the manufacturer's warranty terms.
 
         Instructions for Receiving and Delivering Warranty Items:
-        - The customer must keep the original packaging of the product and repackage the product safely and properly. Tikmool is not responsible for damage during transport if packaging or wrapping is not intact.
+        - The customer must keep the original packaging of the product and repackage the product safely and properly. Deema Fashion is not responsible for damage during transport if packaging or wrapping is not intact.
         - The product and all its accessories must be delivered by the customer to the delivery representative.
         - If the customer receives a damaged product or one of its accessories is missing, this must be reported within 24 hours of receiving the product. We are not responsible for any claim after this period.
-        - The customer must remove all additional accessories (SIM cards, covers, protectors, electronic pens, accessories) when handing over the device, and remains responsible for them. Tikmool bears no responsibility for their loss or damage.
-        - The address used when submitting the order is approved for both pickup and delivery. If you wish to change it, please contact Tikmool customer service. Changes will be shared with the delivery company. Submitting the device or product to the service center also includes implicit customer consent to use contact information by us and the service provider to meet service requirements.
-        - Contact information may not be changed during the warranty claim, and Tikmool and service centers have the right to use it while processing the request.
+        - The customer must remove all additional accessories (SIM cards, covers, protectors, electronic pens, accessories) when handing over the device, and remains responsible for them. Deema Fashion bears no responsibility for their loss or damage.
+        - The address used when submitting the order is approved for both pickup and delivery. If you wish to change it, please contact Deema Fashion customer service. Changes will be shared with the delivery company. Submitting the device or product to the service center also includes implicit customer consent to use contact information by us and the service provider to meet service requirements.
+        - Contact information may not be changed during the warranty claim, and Deema Fashion and service centers have the right to use it while processing the request.
         - If the product cannot be repaired under warranty, the customer is entitled to request product replacement or a refund after deducting the value of use and missing parts. Customers must request this directly from brands, commercial companies, or the seller according to applicable laws.
         - The warranty does not cover damage resulting from misuse, accidents, or any external cause unrelated to manufacturing defects.
         - If the warranty card is rejected or the product is out of warranty, some service centers may charge inspection fees.
         - The inspection period does not include the time spent obtaining customer approval or product information.
         - Any data on the device (personal data, contacts, accounts, passwords, etc.) is the customer's responsibility. Customers are requested to back up their data, remove any lock or password, and disable Find My Device before handing the device to the service center.
         - We emphasize that customers must provide correct information when submitting warranty requests.
-        - If the customer refuses to receive the product after processing is complete, it will be kept for 15 days from the completion date. After that, the product will be disposed of without any responsibility or compensation on Tikmool, including the product price.
+        - If the customer refuses to receive the product after processing is complete, it will be kept for 15 days from the completion date. After that, the product will be disposed of without any responsibility or compensation on Deema Fashion, including the product price.
 
         Pick-up and Delivery Policy (If Available):
-        - If Tikmool provides pickup and delivery service for warranty requests in any area, this is considered an additional service and may include fees charged to customers as determined by Tikmool. Tikmool reserves the right to discontinue the service at any time.
+        - If Deema Fashion provides pickup and delivery service for warranty requests in any area, this is considered an additional service and may include fees charged to customers as determined by Deema Fashion. Deema Fashion reserves the right to discontinue the service at any time.
         - If this service is provided, the processing period is 30 business days as follows:
         - 7 business days: from receipt of the product from the customer until delivery to the seller or service center.
         - 16 business days: processing, inspection, and maintenance time at the seller or service center.
         - 7 business days: delivery of the product to the customer after inspection and maintenance by the seller or service center.
 
         Seller or Brand Warranty:
-        1. Tikmool is not responsible for warranty services provided by the seller or brand in terms of repair quality, parts availability, or repair duration, and customers must contact the warranty service provider directly for complaints or inquiries.
+        1. Deema Fashion is not responsible for warranty services provided by the seller or brand in terms of repair quality, parts availability, or repair duration, and customers must contact the warranty service provider directly for complaints or inquiries.
         2. The manufacturer or service provider offers a warranty for the device subject to manufacturer, producer, or seller policies. These policies may be found in the user manual or on the official website of the manufacturer or seller. To obtain warranty service, customers can contact manufacturers, sellers, or their authorized service centers according to approved policies.
-        3. Tikmool provides its own warranty for some devices to ensure service quality.
+        3. Deema Fashion provides its own warranty for some devices to ensure service quality.
         TEXT;
 
         $warrantyPolicyAr = <<<'TEXT'
         سياسة الضمان
 
         سياسة ضمان المنتجات:
-        - تحميك سياسة الضمان في تيك مول وتحمي منتجك من عيوب التصنيع بعد الشراء.
+        - تحميك سياسة الضمان في ديما فاشن وتحمي منتجك من عيوب التصنيع بعد الشراء.
         - تخضع جميع الأجهزة الكهربائية والإلكترونية لضمان الشركة المصنعة أو المورد حسب المدة المحددة من قبلهم، باستثناء الملحقات التي تتبع سياسة الشركة المصنعة أو البائع.
         - يجب الاحتفاظ بالفاتورة الأصلية التي تتضمن الرقم التسلسلي ومدة الضمان لضمان سريانه. وإذا تم تسليم الأجهزة مع بطاقة ضمان، يجب على العملاء زيارة مراكز الخدمة وإبراز البطاقة لمتابعة الطلب.
         - تلتزم مراكز خدمة البائع صاحب بطاقة الضمان بإجراء إصلاحات الضمان للحالات التي يتم فيها شراء المنتجات من خلال ذلك البائع، وتطبق شروط ضمان البائع في هذه الحالة.
-        - تلتزم الشركات والعلامات التجارية والبائعون غير تيك مول بخدمات الضمان التي يقدمونها، بما في ذلك توفير قطع الغيار وجودة الإصلاح. وفي حال وجود شكوى أو استفسار أو ملاحظة، يجب على العملاء التواصل مع مزود خدمة الضمان الخاص بمنتجهم.
-        - يحق للعميل المطالبة بتعويض مباشر من مزودي الخدمة في حال التأخر في معالجة مطالبة الضمان وفقا للقوانين النافذة في الدولة، ولا تتحمل تيك مول أي مسؤولية عن هذا التعويض.
+        - تلتزم الشركات والعلامات التجارية والبائعون غير ديما فاشن بخدمات الضمان التي يقدمونها، بما في ذلك توفير قطع الغيار وجودة الإصلاح. وفي حال وجود شكوى أو استفسار أو ملاحظة، يجب على العملاء التواصل مع مزود خدمة الضمان الخاص بمنتجهم.
+        - يحق للعميل المطالبة بتعويض مباشر من مزودي الخدمة في حال التأخر في معالجة مطالبة الضمان وفقا للقوانين النافذة في الدولة، ولا تتحمل ديما فاشن أي مسؤولية عن هذا التعويض.
 
         إن إصلاح الجهاز أو استبداله ضمن الضمان لا يستلزم تمديد فترة الضمان أو تجديدها، ويظل خاضعا لشروط الضمان وفق سياسة الشركة المصنعة للجهاز.
 
         تعليمات استلام وتسليم الضمان:
-        - يجب على العميل الاحتفاظ بالتغليف الأصلي للمنتج وإعادة تغليف المنتج بطريقة آمنة وسليمة. ولا تتحمل تيك مول مسؤولية أي ضرر أثناء نقل المنتج إذا لم يكن التغليف سليما.
+        - يجب على العميل الاحتفاظ بالتغليف الأصلي للمنتج وإعادة تغليف المنتج بطريقة آمنة وسليمة. ولا تتحمل ديما فاشن مسؤولية أي ضرر أثناء نقل المنتج إذا لم يكن التغليف سليما.
         - يجب على العميل تسليم المنتج وجميع ملحقاته إلى مندوب التوصيل.
         - إذا استلم العميل منتجا متضررا أو كان أحد ملحقاته مفقودا، فيجب الإبلاغ عن ذلك خلال 24 ساعة من استلام المنتج، ولا نتحمل أي مطالبة بعد هذه المدة.
-        - يجب على العميل إزالة جميع الملحقات الإضافية (شرائح الاتصال، الأغطية، الواقيات، الأقلام الإلكترونية، الإكسسوارات) عند تسليم الجهاز، ويكون مسؤولا عنها، ولا تتحمل تيك مول أي مسؤولية عن فقدانها أو تلفها.
-        - يعتمد العنوان المستخدم عند تقديم الطلب لعمليتي الاستلام والتسليم. وإذا رغبت بتعديله، يرجى التواصل مع خدمة عملاء تيك مول، وسيتم مشاركة التعديل مع شركة التوصيل. كما أن تسليم الجهاز أو المنتج إلى مركز الخدمة يتضمن موافقة ضمنية من العميل على استخدام معلومات التواصل من قبلنا ومن قبل مزود الخدمة لتلبية متطلبات الخدمة.
-        - لا يمكن تغيير معلومات التواصل أثناء مطالبة الضمان، ويحق لتيك مول ولمراكز الخدمة استخدامها أثناء معالجة الطلب.
+        - يجب على العميل إزالة جميع الملحقات الإضافية (شرائح الاتصال، الأغطية، الواقيات، الأقلام الإلكترونية، الإكسسوارات) عند تسليم الجهاز، ويكون مسؤولا عنها، ولا تتحمل ديما فاشن أي مسؤولية عن فقدانها أو تلفها.
+        - يعتمد العنوان المستخدم عند تقديم الطلب لعمليتي الاستلام والتسليم. وإذا رغبت بتعديله، يرجى التواصل مع خدمة عملاء ديما فاشن، وسيتم مشاركة التعديل مع شركة التوصيل. كما أن تسليم الجهاز أو المنتج إلى مركز الخدمة يتضمن موافقة ضمنية من العميل على استخدام معلومات التواصل من قبلنا ومن قبل مزود الخدمة لتلبية متطلبات الخدمة.
+        - لا يمكن تغيير معلومات التواصل أثناء مطالبة الضمان، ويحق لديما فاشن ولمراكز الخدمة استخدامها أثناء معالجة الطلب.
         - إذا تعذر إصلاح المنتج ضمن الضمان، يحق للعميل طلب استبدال المنتج أو استرداد المبلغ بعد خصم قيمة الاستخدام وقيمة الأجزاء المفقودة. ويجب على العملاء طلب ذلك مباشرة من العلامات التجارية أو الشركات التجارية أو البائع وفق القوانين النافذة.
         - لا يغطي الضمان الأضرار الناتجة عن سوء الاستخدام أو الحوادث أو أي سبب خارجي لا يتعلق بعيوب التصنيع.
         - في حال رفض بطاقة الضمان أو كان المنتج خارج الضمان، قد تفرض بعض مراكز الخدمة رسوما على الفحص.
         - لا تشمل مدة الفحص الوقت المستغرق للحصول على موافقة العميل أو معلومات المنتج.
         - أي بيانات موجودة على الجهاز (بيانات شخصية، جهات اتصال، حسابات، كلمات مرور، وغيرها) هي مسؤولية العميل. لذلك يرجى عمل نسخة احتياطية وإزالة أي قفل أو كلمة مرور وإيقاف خدمة Find My Device قبل تسليم الجهاز لمركز الخدمة.
         - نؤكد على العملاء عند طلب الضمان ضرورة تقديم معلومات صحيحة.
-        - في حال رفض العميل استلام المنتج بعد إتمام المعالجة، سيتم الاحتفاظ به لمدة 15 يوما من تاريخ اكتمال المعالجة، وبعد ذلك سيتم التخلص من المنتج دون أي مسؤولية أو تعويض على تيك مول، بما في ذلك قيمة المنتج.
+        - في حال رفض العميل استلام المنتج بعد إتمام المعالجة، سيتم الاحتفاظ به لمدة 15 يوما من تاريخ اكتمال المعالجة، وبعد ذلك سيتم التخلص من المنتج دون أي مسؤولية أو تعويض على ديما فاشن، بما في ذلك قيمة المنتج.
 
         سياسة الاستلام والتسليم (إن وجدت):
-        - إذا وفرت تيك مول خدمة الاستلام والتسليم لطلبات الضمان في أي منطقة ممكنة، فتعد هذه خدمة إضافية وقد يترتب عليها رسوم وتكاليف على العملاء تحددها تيك مول، وتحتفظ تيك مول بحق إيقاف الخدمة متى تشاء.
+        - إذا وفرت ديما فاشن خدمة الاستلام والتسليم لطلبات الضمان في أي منطقة ممكنة، فتعد هذه خدمة إضافية وقد يترتب عليها رسوم وتكاليف على العملاء تحددها ديما فاشن، وتحتفظ ديما فاشن بحق إيقاف الخدمة متى تشاء.
         - في حال توفير هذه الخدمة، تكون مدة معالجة الطلب 30 يوم عمل موزعة كما يلي:
         - 7 أيام عمل: من تاريخ استلام المنتج من العميل وحتى تسليمه إلى البائع أو مركز الخدمة.
         - 16 يوم عمل: مدة المعالجة والفحص والصيانة لدى البائع أو مركز الخدمة.
         - 7 أيام عمل: تسليم المنتج إلى العميل بعد الفحص والصيانة من قبل البائع أو مركز الخدمة.
 
         ضمان البائع أو العلامة التجارية:
-        1. تيك مول غير مسؤولة عن خدمة الضمان المقدمة من البائع أو العلامة التجارية من حيث جودة الإصلاح أو توفر القطع أو مدة الإصلاح، ويجب على العملاء التواصل مباشرة مع مزود خدمة الضمان في حال وجود شكوى أو استفسار.
+        1. ديما فاشن غير مسؤولة عن خدمة الضمان المقدمة من البائع أو العلامة التجارية من حيث جودة الإصلاح أو توفر القطع أو مدة الإصلاح، ويجب على العملاء التواصل مباشرة مع مزود خدمة الضمان في حال وجود شكوى أو استفسار.
         2. تقدم الشركة المصنعة أو مزود الخدمة ضمانا للجهاز وفقا لسياسات الشركة المصنعة أو المنتج أو البائع. وقد تتوفر هذه السياسات في دليل المستخدم الخاص بالجهاز أو على الموقع الرسمي للشركة المصنعة أو البائع. وللحصول على خدمة الضمان، يمكن للعملاء التواصل مع المصنعين أو البائعين أو مراكز الخدمة المعتمدة لديهم وفقا لسياساتهم المعتمدة.
-        3. توفر تيك مول ضمانها الخاص لبعض الأجهزة لضمان جودة الخدمة.
+        3. توفر ديما فاشن ضمانها الخاص لبعض الأجهزة لضمان جودة الخدمة.
         TEXT;
 
         $termsOfSaleEn = <<<'TEXT'
@@ -859,15 +859,15 @@ class LegalDocumentSeeder extends Seeder
 
         Introduction
 
-        The terms of sale in this document are the terms and conditions under which purchases are received and delivered to the customer as a buyer on the website www.tikmool.com or through our mobile application, owned and operated by Online Tech Mall Limited. Please read and understand these terms carefully before making any purchase through the website or application. If you make a purchase through the website, this constitutes your acknowledgment and agreement to these terms of sale and your commitment to all their provisions. You must also review, read, and understand the privacy policy adopted on our website and application, as your use and all transactions are subject to it.
+        The terms of sale in this document are the terms and conditions under which purchases are received and delivered to the customer as a buyer on the website www.deemafashion.com or through our mobile application, owned and operated by Online Tech Mall Limited. Please read and understand these terms carefully before making any purchase through the website or application. If you make a purchase through the website, this constitutes your acknowledgment and agreement to these terms of sale and your commitment to all their provisions. You must also review, read, and understand the privacy policy adopted on our website and application, as your use and all transactions are subject to it.
 
         Approved Definitions:
 
         1- Purchase Order: When you place a purchase order, we will notify you via email, SMS, or a notification on the application and website of our acceptance or rejection of the order. In this case, you will not be charged any amount or product value unless the order is confirmed.
 
-        2- Supplier: All products available on our website and mobile application are sold by Tikmool or by a local or international seller.
+        2- Supplier: All products available on our website and mobile application are sold by Deema Fashion or by a local or international seller.
 
-        3- Payment: Upon placing and confirming a purchase order, you authorize Tikmool or any third party specialized in electronic payments with whom we have contracts to deduct the purchase value from your card, or to collect payment in cash on delivery.
+        3- Payment: Upon placing and confirming a purchase order, you authorize Deema Fashion or any third party specialized in electronic payments with whom we have contracts to deduct the purchase value from your card, or to collect payment in cash on delivery.
 
         4- Payment by Credit Card (if available): We may require you to open an account with our contracted electronic payment companies, and this means accepting their terms and conditions. We also reserve the right to add or remove any approved payment method at any time without prior notice.
 
@@ -888,7 +888,7 @@ class LegalDocumentSeeder extends Seeder
 
         Warranty:
 
-        - Tikmool warranty is subject to our approved warranty policy. We provide warranty for certain products sold by us, and warranty availability may depend on suppliers and their approved terms and policies. Warranty applies only to manufacturing, material, or design defects. Product warranty is limited to repairing the defective product, replacing the defective part, replacing the product, or refunding the paid amount according to the paid price.
+        - Deema Fashion warranty is subject to our approved warranty policy. We provide warranty for certain products sold by us, and warranty availability may depend on suppliers and their approved terms and policies. Warranty applies only to manufacturing, material, or design defects. Product warranty is limited to repairing the defective product, replacing the defective part, replacing the product, or refunding the paid amount according to the paid price.
         - Warranty does not apply to all products and depends on supplier warranty availability and policy. Please always review the warranty policy on our website and app, along with supplier policies and warranty cards.
         - If products are purchased from another seller, that seller's warranty terms apply. For details, review the approved warranty policy on our website and app.
         - Repairing or replacing the product does not require extending or renewing the warranty period.
@@ -942,7 +942,7 @@ class LegalDocumentSeeder extends Seeder
         Refunds are made through the same payment method selected during checkout within a maximum of 15 days from receiving the returned product, or immediately when cancellation occurs during packaging stage.
 
         Customer Legal Obligations:
-        Once you register an account with Tikmool, you agree to:
+        Once you register an account with Deema Fashion, you agree to:
         1. Comply with all applicable laws and regulations in countries where we operate, including privacy laws.
         2. Confirm you have full legal capacity to agree and pay all due amounts.
         3. Accept services are provided on an "as-is" basis without special warranties.
@@ -979,15 +979,15 @@ class LegalDocumentSeeder extends Seeder
 
         المقدمة:
 
-        شروط البيع الواردة في هذه الوثيقة هي الأحكام والشروط التي يتم بموجبها استلام المشتريات وتسليمها للعميل بصفته مشتريا عبر موقع www.tikmool.com أو عبر تطبيقنا للجوال المملوك والمدار من قبل شركة Online Tech Mall Limited. لذلك يرجى قراءة هذه الشروط وفهمها جيدا قبل إجراء أي عملية شراء عبر الموقع أو التطبيق. إن قيامك بالشراء عبر الموقع يعد إقرارا منك وموافقة على شروط البيع والتزاما بجميع أحكامها. كما يجب عليك مراجعة وقراءة وفهم سياسة الخصوصية المعتمدة على موقعنا وتطبيقنا، حيث يخضع استخدامك وجميع معاملاتك لها.
+        شروط البيع الواردة في هذه الوثيقة هي الأحكام والشروط التي يتم بموجبها استلام المشتريات وتسليمها للعميل بصفته مشتريا عبر موقع www.deemafashion.com أو عبر تطبيقنا للجوال المملوك والمدار من قبل شركة Online Tech Mall Limited. لذلك يرجى قراءة هذه الشروط وفهمها جيدا قبل إجراء أي عملية شراء عبر الموقع أو التطبيق. إن قيامك بالشراء عبر الموقع يعد إقرارا منك وموافقة على شروط البيع والتزاما بجميع أحكامها. كما يجب عليك مراجعة وقراءة وفهم سياسة الخصوصية المعتمدة على موقعنا وتطبيقنا، حيث يخضع استخدامك وجميع معاملاتك لها.
 
         التعريفات المعتمدة:
 
         1- طلب الشراء: عند تقديم طلب شراء، سنقوم بإشعار العميل عبر البريد الإلكتروني أو رسالة هاتفية أو إشعار داخل التطبيق والموقع بقبول الطلب أو رفضه. وفي هذه الحالة لا يتم تحصيل أي مبلغ أو قيمة المنتج إلا بعد تأكيد الطلب.
 
-        2- المورد: جميع المنتجات المعروضة على موقعنا وتطبيقنا تباع من قبل تيك مول أو من قبل بائع محلي أو دولي.
+        2- المورد: جميع المنتجات المعروضة على موقعنا وتطبيقنا تباع من قبل ديما فاشن أو من قبل بائع محلي أو دولي.
 
-        3- الدفع: عند تقديم وتأكيد طلب الشراء، فإنك تفوض تيك مول أو أي طرف ثالث متخصص في الدفع الإلكتروني ومتعاقد معنا بخصم قيمة الشراء من بطاقتك أو تحصيلها نقدا عند الاستلام.
+        3- الدفع: عند تقديم وتأكيد طلب الشراء، فإنك تفوض ديما فاشن أو أي طرف ثالث متخصص في الدفع الإلكتروني ومتعاقد معنا بخصم قيمة الشراء من بطاقتك أو تحصيلها نقدا عند الاستلام.
 
         4- الدفع بالبطاقة (إن توفر): قد نطلب منك فتح حساب لدى شركات الدفع الإلكتروني المتعاقد معها، ويعني ذلك قبول شروطها وأحكامها. كما نحتفظ بحق إضافة أو حذف أي وسيلة دفع معتمدة في أي وقت ودون إشعار مسبق.
 
@@ -1008,7 +1008,7 @@ class LegalDocumentSeeder extends Seeder
 
         الضمان:
 
-        - يخضع ضمان تيك مول لسياسة الضمان المعتمدة لدينا، حيث نوفر ضمانا لبعض المنتجات المباعة من طرفنا. وقد يتوقف الضمان على الموردين أصحاب المنتجات المعروضة وفقا لسياساتهم وشروطهم المعتمدة. ولا يطبق الضمان إلا على عيوب التصنيع أو المواد أو التصميم. ويقتصر الضمان على إصلاح المنتج المعيب أو استبدال الجزء المعيب أو استبدال المنتج أو رد المبلغ المدفوع وفق السعر المدفوع.
+        - يخضع ضمان ديما فاشن لسياسة الضمان المعتمدة لدينا، حيث نوفر ضمانا لبعض المنتجات المباعة من طرفنا. وقد يتوقف الضمان على الموردين أصحاب المنتجات المعروضة وفقا لسياساتهم وشروطهم المعتمدة. ولا يطبق الضمان إلا على عيوب التصنيع أو المواد أو التصميم. ويقتصر الضمان على إصلاح المنتج المعيب أو استبدال الجزء المعيب أو استبدال المنتج أو رد المبلغ المدفوع وفق السعر المدفوع.
         - لا يشمل الضمان جميع المنتجات، إذ يعتمد على توفر الضمان من الموردين حسب سياساتهم. لذلك يرجى مراجعة سياسة الضمان على موقعنا وتطبيقنا، إضافة إلى سياسات الموردين وبطاقات الضمان الخاصة بهم.
         - في حال شراء المنتجات من بائع آخر، تطبق شروط ضمان ذلك البائع. ولمزيد من المعلومات يرجى الرجوع إلى سياسة الضمان المعتمدة على موقعنا وتطبيقنا.
         - إصلاح المنتج أو استبداله لا يترتب عليه تمديد أو تجديد مدة الضمان.
@@ -1062,7 +1062,7 @@ class LegalDocumentSeeder extends Seeder
         يتم رد المبلغ المدفوع عبر نفس وسيلة الدفع المستخدمة عند الطلب خلال مدة أقصاها 15 يوما من استلام المنتج المرتجع، أو فورا عند إلغاء الطلب خلال مرحلة التغليف.
 
         الالتزامات القانونية على العميل:
-        بمجرد تسجيل حساب لدى تيك مول، يوافق العميل على ما يلي:
+        بمجرد تسجيل حساب لدى ديما فاشن، يوافق العميل على ما يلي:
         1. الالتزام بجميع القوانين والأنظمة النافذة في الدول التي نعمل بها، بما في ذلك قوانين حماية الخصوصية.
         2. أن العميل يتمتع بالأهلية القانونية الكاملة للموافقة وسداد جميع المستحقات.
         3. أن خدماتنا تقدم كما هي دون أي ضمانات خاصة.
@@ -1095,13 +1095,13 @@ class LegalDocumentSeeder extends Seeder
         $driverPrivacyEn = <<<'TEXT'
         Driver Privacy Policy
 
-        This policy explains how Tikmool handles driver data needed to operate the delivery service, including location tracking during active orders, contact details, and performance metrics. Data is used to assign orders, provide support, improve service quality, and comply with legal requirements.
+        This policy explains how Deema Fashion handles driver data needed to operate the delivery service, including location tracking during active orders, contact details, and performance metrics. Data is used to assign orders, provide support, improve service quality, and comply with legal requirements.
         TEXT;
 
         $driverPrivacyAr = <<<'TEXT'
         سياسة خصوصية المندوب
 
-        توضح هذه السياسة كيفية تعامل تيك مول مع بيانات المندوب اللازمة لتشغيل خدمة التوصيل، بما في ذلك تتبع الموقع أثناء الطلبات النشطة، وبيانات التواصل، ومؤشرات الأداء. تُستخدم البيانات لتوزيع الطلبات، وتقديم الدعم، وتحسين جودة الخدمة، والامتثال للمتطلبات القانونية.
+        توضح هذه السياسة كيفية تعامل ديما فاشن مع بيانات المندوب اللازمة لتشغيل خدمة التوصيل، بما في ذلك تتبع الموقع أثناء الطلبات النشطة، وبيانات التواصل، ومؤشرات الأداء. تُستخدم البيانات لتوزيع الطلبات، وتقديم الدعم، وتحسين جودة الخدمة، والامتثال للمتطلبات القانونية.
         TEXT;
 
         $driverTermsEn = <<<'TEXT'

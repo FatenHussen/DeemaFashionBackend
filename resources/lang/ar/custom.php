@@ -23,7 +23,16 @@ return [
         'delivery_time_required' => 'حدد يوم ووقت التوصيل.',
         'delivery_too_soon' => 'أقرب موعد مسموح :earliest.',
     ],
-
+    'stripe' => [
+        'not_configured' => 'الدفع بالبطاقة غير مفعّل حالياً.',
+        'webhook_not_configured' => 'مفتاح webhook لسترايب غير مضبوط.',
+        'invalid_payload' => 'بيانات webhook غير صالحة.',
+        'invalid_signature' => 'توقيع webhook غير صالح.',
+        'not_stripe_order' => 'هذا الطلب ليس دفعاً بالبطاقة عبر سترايب.',
+        'already_paid' => 'تم دفع هذا الطلب مسبقاً.',
+        'order_not_payable' => 'لا يمكن دفع هذا الطلب في حالته الحالية.',
+        'intent_failed' => 'تعذّر بدء الدفع بالبطاقة. حاول مرة أخرى.',
+    ],
 
     'errors' => [
         400 => 'طلب غير صالح.',

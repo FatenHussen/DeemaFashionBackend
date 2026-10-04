@@ -21,6 +21,9 @@ class Order extends Model
         'user_address_id',
         'payment_method_id',
         'is_paid',
+        'stripe_payment_intent_id',
+        'payment_status',
+        'paid_at',
         'custom_order_request_id',
         'has_external_items',
         'price_variance_type',
@@ -67,6 +70,7 @@ class Order extends Model
         'is_instant_delivery' => 'boolean',
         'scheduled_delivery_at' => 'datetime',
         'is_paid' => 'boolean',
+        'paid_at' => 'datetime',
         'has_external_items' => 'boolean',
         'start_todelivery' => 'boolean',
         'subscription_free_delivery' => 'boolean',
@@ -263,6 +267,7 @@ class Order extends Model
 
                     if ($order->paymentMethod?->isCash()) {
                         $order->is_paid = true;
+                        $order->paid_at = $order->paid_at ?? now();
                     }
                 }
             }

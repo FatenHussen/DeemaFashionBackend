@@ -1,8 +1,9 @@
 # إظهار / إخفاء أقسام الصفحة — Dashboard
 
-> **آخر تحديث | Last Updated:** 2026-08-28  
+> **آخر تحديث | Last Updated:** 2026-08-29  
 > **الشاشة:** `/sections/pages/details/{pageId}`  
-> **Base:** `/api/admin` + Bearer admin token
+> **Base:** `/api/admin` + Bearer admin token  
+> **حالة الداشبورد:** مُنفَّذ — أيقونة العين في `PageDetails.tsx` (DeemaDashboard)
 
 ---
 
@@ -184,13 +185,13 @@ async function toggleSectionVisibility(section: PageSection) {
 
 ## Checklist التنفيذ
 
-- [ ] اقرأ `is_active` من `GET /api/admin/pages/{id}` → `data.sections[]`
-- [ ] أضف أيقونة عين لكل صف قسم
-- [ ] Toggle عبر `POST /api/admin/toggle-status` (`type: page_section`)
-- [ ] استخدم `page_section.id` — **ليس** `section_id`
-- [ ] أظهر القسم المخفي في القائمة مع تمييز بصري
-- [ ] Preview (`GET .../preview`) — لا تتوقع ظهور الأقسام المخفية
-- [ ] **لا تحذف** القسم لإخفائه — استخدم العين فقط
+- [x] اقرأ `is_active` من `GET /api/admin/pages/{id}` → `data.sections[]`
+- [x] أضف أيقونة عين لكل صف قسم
+- [x] Toggle عبر `POST /api/admin/toggle-status` (`type: page_section`)
+- [x] استخدم `page_section.id` — **ليس** `section_id`
+- [x] أظهر القسم المخفي في القائمة مع تمييز بصري
+- [x] Preview (`GET .../preview`) — لا تتوقع ظهور الأقسام المخفية
+- [x] **لا تحذف** القسم لإخفائه — استخدم العين فقط
 
 ---
 

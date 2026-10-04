@@ -33,6 +33,7 @@ use App\Http\Controllers\User\NavMenuController;
 use App\Http\Controllers\User\Order\OrderController;
 use App\Http\Controllers\User\Package\SubscriptionController;
 use App\Http\Controllers\User\PaymentMethodController;
+use App\Http\Controllers\User\StripePaymentController;
 use App\Http\Controllers\User\Rating\RatingController;
 use App\Http\Controllers\User\RecipeController;
 use App\Http\Controllers\User\Schedule\ScheduleController;
@@ -183,6 +184,13 @@ Route::prefix('user')->group(
                 Route::put('/{id}', [RatingController::class, 'update']);
                 Route::delete('/{id}', [RatingController::class, 'destroy']);
             });
+        });
+
+        // Stripe config (publishable key) — auth optional but kept behind user auth for consistency
+        Route::middleware(['auth:user'])->group(function () {
+            Route::get('/payments/stripe/config', [StripePaymentController::class, 'config']);
+            Route::post('/orders/{orderId}/pay', [StripePaymentController::class, 'pay']);
+            Route::get('/orders/{orderId}/payment-status', [StripePaymentController::class, 'status']);
         });
 
         // Order routes - لازم تكون قبل apiResource

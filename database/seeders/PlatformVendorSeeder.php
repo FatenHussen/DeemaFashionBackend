@@ -31,14 +31,14 @@ class PlatformVendorSeeder extends Seeder
             $vendor->id = $id;
             $vendor->fill([
                 'name' => [
-                    'ar' => 'تيكموول',
-                    'en' => 'Tikmool',
+                    'ar' => 'ديما فاشن',
+                    'en' => 'Deema Fashion',
                 ],
-                'owner_name' => 'Tikmool Admin',
+                'owner_name' => 'Deema Fashion Admin',
                 'owner_phone' => '0990000000',
-                'commercial_register' => 'CR-TIKMOOL-001',
+                'commercial_register' => 'CR-DEEMAFASHION-001',
                 'contract_date' => now()->subYear()->toDateString(),
-                'contract_number' => 'TIK-PLATFORM-001',
+                'contract_number' => 'DEEMA-PLATFORM-001',
                 'contract_duration_months' => 36,
                 'commission_rate' => 10.00,
                 'is_active' => true,
@@ -69,7 +69,7 @@ class PlatformVendorSeeder extends Seeder
                 'ar' => 'فرع المنصة',
                 'en' => 'Platform shop',
             ],
-            'email' => 'platform@tikmool.com',
+            'email' => 'platform@deemafashion.com',
             'vendor_id' => $vendor->id,
             'is_active' => true,
             'is_default' => true,

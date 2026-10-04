@@ -253,7 +253,7 @@ class Product extends Model implements Sectionable
 
     public function getEffectiveDeliveryTimeAttribute(): ?string
     {
-        // Tikmool vendor (id=1) always gets fixed delivery time
+        // Deema Fashion vendor (id=1) always gets fixed delivery time
         if ($this->vendor_id === 1) {
             return '12-48 ساعة';
         }
