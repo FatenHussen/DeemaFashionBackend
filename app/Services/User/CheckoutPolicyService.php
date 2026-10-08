@@ -12,8 +12,9 @@ use Illuminate\Support\Collection;
 class CheckoutPolicyService
 {
     /**
-     * One cart, one limit. TikMart reads dashboard settings. A shop uses its own fields.
-     * A restaurant-only cart is instant: restaurant drivers or TikMart couriers.
+     * One cart, one limit. Deema platform reads dashboard settings (API keys still tikmart_*).
+     * A shop uses its own fields.
+     * A restaurant-only cart is instant: restaurant drivers or Deema couriers.
      * A mixed cart still returns one limit, the strictest. Restaurant hours do not extend it.
      */
     public function forShops(Collection $shops): array

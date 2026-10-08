@@ -146,7 +146,7 @@ return [
         'is_free_delivery' => 'Free Delivery',
         'min_order_amount' => 'Minimum order amount',
         'min_order_amount_help' => 'Admin can change this any time. The cart shows the last saved value.',
-        'platform_uses_settings' => 'TikMart uses the delivery settings for the minimum amount and the delivery window, not these shop fields.',
+        'platform_uses_settings' => 'Deema Fashion uses the delivery settings for the minimum amount and the delivery window, not these shop fields.',
         'delivery_max_before_min' => 'The latest delivery must be greater than or equal to the earliest delivery.',
         'delivery_min_hours' => 'Earliest delivery (hours)',
         'delivery_max_hours' => 'Latest delivery (hours)',

@@ -1,6 +1,6 @@
-# الويب — متغيّرات المنتج (دليل شامل + مقارنة tikmool-website)
+# الويب — متغيّرات المنتج (دليل شامل + مقارنة موقع ديما)
 
-> **الجمهور:** فريق tikmool-website (React)  
+> **الجمهور:** فريق ويب ديما فاشن (React) — المشروع منفصل عن تيك مارت / tikmool-website  
 > **Base:** `/api/user` + `Accept-Language: ar|en`  
 > **مصدر الحقيقة:** كود الباك (`ShopVariantResource`, `OneResource`, `ProductVariant`)  
 > **آخر تحديث:** 31 آب 2026

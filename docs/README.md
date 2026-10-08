@@ -2,7 +2,11 @@
 
 هيكل نظيف — أرسل لكل فريق **ملف واحد** فيه **كل** التعديلات.
 
+**المشروع منفصل عن تيك مارت.** الهوية البصرية: [`frontend/DEEMA_BRAND_IDENTITY.md`](./frontend/DEEMA_BRAND_IDENTITY.md)
+
 **نظرة شاملة من أول استنساخ حتى الوضع الحالي (بدون تواريخ):** [`FULL_PROJECT_OVERVIEW.md`](./FULL_PROJECT_OVERVIEW.md)
+
+**آخر نسخة شاملة:** [`LATEST_UPDATES.md`](./LATEST_UPDATES.md)
 
 **تقرير شخصي للإدارة — شو اشتغلتِ (ويب + داشبورد، بدون تواريخ):** [`تقرير_عملي_ويب_وداشبورد.txt`](./تقرير_عملي_ويب_وداشبورد.txt)
 
@@ -10,9 +14,11 @@
 
 | الفريق | الملف | يشمل |
 |--------|--------|------|
-| داشبورد | [`frontend/dashboard.md`](./frontend/dashboard.md) | Page Builder · أقسام · Nav · منتج · **طلب سريع (إعدادات + صفحات الظهور)** · استيراد Excel · … |
-| ويب | [`frontend/web.md`](./frontend/web.md) | Nav · أقسام · فئات · منتج · تسجيل · فلاتر · **طلب سريع حسب الصفحة** · نص تحميل · أسعار · **آخر تحديث 2026-08-26** |
-| Flutter | [`frontend/flutter.md`](./frontend/flutter.md) | Nav · أقسام layout/variant · فئات دائرية · فلاتر · منتج/سلة · تسجيل · أسعار · **طلب سريع حسب الصفحة** · **آخر تحديث 2026-08-26** |
+| هوية ديما | [`frontend/DEEMA_BRAND_IDENTITY.md`](./frontend/DEEMA_BRAND_IDENTITY.md) | ألوان · اسم · فصل عن تيك مارت — **8 تشرين الأول 2026** |
+| صلاحيات داشبورد | [`frontend/DASHBOARD_PERMISSIONS.md`](./frontend/DASHBOARD_PERMISSIONS.md) | إخفاء السايدبار حسب `permissions` — **8 تشرين الأول 2026** |
+| داشبورد | [`frontend/dashboard.md`](./frontend/dashboard.md) · [`DASHBOARD_BRAND_IDENTITY.md`](./frontend/DASHBOARD_BRAND_IDENTITY.md) | Page Builder · أقسام · Nav · منتج · هوية · … |
+| ويب | [`frontend/WEB_LATEST.md`](./frontend/WEB_LATEST.md) · [`WEB_BRAND_IDENTITY.md`](./frontend/WEB_BRAND_IDENTITY.md) | آخر نسخة الموقع + هوية ديما |
+| Flutter | [`frontend/FLUTTER_LATEST.md`](./frontend/FLUTTER_LATEST.md) · [`FLUTTER_BRAND_IDENTITY.md`](./frontend/FLUTTER_BRAND_IDENTITY.md) | آخر نسخة التطبيق + هوية ديما |
 
 ## إظهار / إخفاء أقسام الصفحة (Eye toggle)
 

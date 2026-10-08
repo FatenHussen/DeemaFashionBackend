@@ -1,11 +1,16 @@
-# Flutter — آخر نسخة (كل التعديلات)
+# Flutter — آخر نسخة (كل التعديلات) — ديما فاشن
 
 > **أرسلوا هذا الملف لفريق Flutter.**  
 > Base: `/api/user` + `Accept-Language: ar|en`  
-> **آخر تحديث | Last Updated:** 2026-09-27  
-> الملف الشامل السابق يبقى: [`flutter.md`](./flutter.md)
+> **آخر تحديث | Last Updated:** 2026-10-08  
+> الملف الشامل السابق يبقى: [`flutter.md`](./flutter.md)  
+> **المشروع منفصل عن تيك مارت** — الهوية البصرية: [`FLUTTER_BRAND_IDENTITY.md`](./FLUTTER_BRAND_IDENTITY.md)
 
-**اليوم (27 أيلول):** السلة: أقل طلب + أقرب توصيل + سعر التوصيل. المطعم لحاله فوري (سائق المطعم أو تيك مارت) — [`FLUTTER_CART_CHECKOUT_DELIVERY.md`](./FLUTTER_CART_CHECKOUT_DELIVERY.md)
+**اليوم (8 تشرين الأول):** هوية ديما فاشن البصرية — ألوان ماجنتا/وردي من `GET /settings` · لا تيك مارت في الواجهة — [`FLUTTER_BRAND_IDENTITY.md`](./FLUTTER_BRAND_IDENTITY.md) · المرجع [`DEEMA_BRAND_IDENTITY.md`](./DEEMA_BRAND_IDENTITY.md)
+
+**اليوم (سابقاً — 5 تشرين الأول):** دفع Stripe للطلبات — [`../api/STRIPE_PAYMENTS.md`](../api/STRIPE_PAYMENTS.md) (`PaymentSheet` · `merchantDisplayName: 'Deema'`)
+
+**اليوم (سابقاً — 27 أيلول):** السلة: أقل طلب + أقرب توصيل + سعر التوصيل. المطعم لحاله فوري (سائق المطعم أو عامل ديما) — [`FLUTTER_CART_CHECKOUT_DELIVERY.md`](./FLUTTER_CART_CHECKOUT_DELIVERY.md)
 
 **اليوم (27 أيلول):** إخفاء الفئة يخفي منتجاتها من القوائم والبحث والأقسام وصفحة المنتج (`404`) — [`FLUTTER_HIDDEN_CATEGORY_PRODUCTS.md`](./FLUTTER_HIDDEN_CATEGORY_PRODUCTS.md)
 
@@ -41,12 +46,13 @@
 
 **اليوم (سابقاً):** خصم ثابت (`fixed`) كسور وأكبر من 100 — [`FLUTTER_FIXED_DISCOUNT.md`](./FLUTTER_FIXED_DISCOUNT.md) · لا Branch — [`FLUTTER_NO_SHOP_BRANCHES.md`](./FLUTTER_NO_SHOP_BRANCHES.md) · صفات بالـ ID — [`FLUTTER_CATEGORY_ATTRIBUTE_VALUE_IDS.md`](./FLUTTER_CATEGORY_ATTRIBUTE_VALUE_IDS.md) · كل المتغيّرات — [`FLUTTER_PRODUCT_ALL_VARIANTS.md`](./FLUTTER_PRODUCT_ALL_VARIANTS.md) · أسعار — [`FLUTTER_PRODUCT_PRICING_FIELDS.md`](./FLUTTER_PRODUCT_PRICING_FIELDS.md)
 
-يجمع **كل** ما يحتاجه التطبيق حتى اليوم: Nav · أقسام · فئات · فلاتر · تسجيل · طلب سريع · أسعار · متغيّرات · لون hex · جدول تفاصيل · تكبير صور · سلة بلا delivery_time · بوابة مسوّق · ضمان · كمية · سلة مخصصة · إخفاء الفئة · أيقونات · عروض تلقائية · جدولة بتاريخ ووقت · دفع ومراجعة · حالة الطلب · بنر.
+يجمع **كل** ما يحتاجه التطبيق حتى اليوم: **هوية ديما** · Nav · أقسام · فئات · فلاتر · تسجيل · طلب سريع · أسعار · متغيّرات · لون hex · جدول تفاصيل · تكبير صور · سلة بلا delivery_time · بوابة مسوّق · ضمان · كمية · سلة مخصصة · إخفاء الفئة · أيقونات · عروض تلقائية · جدولة بتاريخ ووقت · دفع ومراجعة · حالة الطلب · بنر · Stripe.
 
 ---
 
 ## الفهرس
 
+0d. [هوية ديما فاشن (8 تشرين الأول 2026)](#0d-هوية-ديما-فاشن-8-تشرين-الأول-2026)
 0c. [ماذا تغيّر في 21 أيلول 2026](#0c-ماذا-تغيّر-في-21-أيلول-2026)
 0. [ماذا تغيّر في 8 أيلول 2026](#0-ماذا-تغيّر-في-8-أيلول-2026)
 0b. [ماذا تغيّر في 5 أيلول 2026](#0b-ماذا-تغيّر-في-5-أيلول-2026)
@@ -73,6 +79,22 @@
 21. [حالة الطلب](#21-حالة-الطلب)
 22. [البنر](#22-البنر)
 23. [صفحة المنتج — تعديلات العرض](#23-صفحة-المنتج--تعديلات-العرض)
+24. [هوية ديما البصرية](#24-هوية-ديما-البصرية)
+
+---
+
+## 0d) هوية ديما فاشن (8 تشرين الأول 2026)
+
+| البند | المطلوب |
+|-------|---------|
+| الاسم | **ديما فاشن** / **Deema Fashion** — مو تيك مارت / Tikmool |
+| الألوان | من `GET /api/user/settings` → `color` / `dark_color` |
+| أساسي / ثانوي | `#c720a4` / `#ff1493` |
+| ممنوع | `#00aed1` · `#FFA000` · شعار تيك مارت · كلمة «تيك مارت» في UI |
+| API قديم | `source: "tikmart"` = منصة ديما — اعرضوا «المنصة» / «ديما فاشن» |
+| Stripe | `merchantDisplayName: 'Deema'` |
+
+الدليل الكامل: [`FLUTTER_BRAND_IDENTITY.md`](./FLUTTER_BRAND_IDENTITY.md).
 
 ---
 
@@ -443,6 +465,8 @@ int? asInt(dynamic v) {
 - [ ] الدفع والمراجعة بدون تكرار، و`scheduled_delivery_at` على كرت الطلب — [§20](#20-السلة-والدفع-والمراجعة)
 - [ ] حالة الطلب: `out_delivery` + `status_label` — [§21](#21-حالة-الطلب)
 - [ ] بنر: عنوان ووصف وزر ورابط، و`null` بعد المسح — [§22](#22-البنر)
+- [ ] **هوية ديما:** ثيم من `settings.color` · لا تيك مارت — [§24](#24-هوية-ديما-البصرية) · [`FLUTTER_BRAND_IDENTITY.md`](./FLUTTER_BRAND_IDENTITY.md)
+- [ ] Stripe PaymentSheet باسم `Deema` — [`../api/STRIPE_PAYMENTS.md`](../api/STRIPE_PAYMENTS.md)
 
 ---
 
@@ -607,4 +631,27 @@ final isApprovedMarketer =
 | السلة | بلا `delivery_time` — [`FLUTTER_CART_NO_DELIVERY_TIME.md`](./FLUTTER_CART_NO_DELIVERY_TIME.md) |
 
 السعر بعد الخصم من الحقول الجاهزة في الـ API. لا تحسبوه على الجهاز.
+
+---
+
+## 24) هوية ديما البصرية
+
+> **8 تشرين الأول 2026** — [`FLUTTER_BRAND_IDENTITY.md`](./FLUTTER_BRAND_IDENTITY.md)
+
+المشروع **ديما فاشن** منفصل عن تيك مارت. ابنوا الثيم من:
+
+```http
+GET /api/user/settings
+```
+
+| حقل | استخدام | افتراضي |
+|-----|---------|---------|
+| `color.main_color` | أزرار · AppBar | `#c720a4` |
+| `color.second_color` | CTA ثانوي | `#ff1493` |
+| `color.text_color` | نص | `#1F2937` |
+| `dark_color.*` | الوضع الداكن | `#1a0a16` / `#a020f0` / `#fce7f3` |
+| `login.image` / `welcome.image` | شعار / ترحيب | من السيرفر |
+| `contact.*` | تواصل | `info@deemafashion.com` |
+
+نصوص السلة: `source == "tikmart"` → اعرضوا «ديما فاشن» / «المنصة». لا تكتبوا «تيك مارت».
 

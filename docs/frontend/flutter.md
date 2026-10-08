@@ -3,12 +3,13 @@
 > **أرسلوا هذا الملف لفريق Flutter فقط.**  
 > Base: `/api/user` + `Accept-Language: ar|en`.  
 > يجمع **كل** التعديلات: Nav · أقسام · فئات · منتج · فلاتر · أسعار · طلب سريع · متغيّرات · **ضمان** · **كمية**.  
-> **آخر نسخة موحّدة (موصى بها للإرسال — 21 أيلول 2026):** [`FLUTTER_LATEST.md`](./FLUTTER_LATEST.md)  
+> **آخر نسخة موحّدة (موصى بها للإرسال — 8 تشرين الأول 2026):** [`FLUTTER_LATEST.md`](./FLUTTER_LATEST.md)  
+> **هوية ديما فاشن (منفصل عن تيك مارت):** [`FLUTTER_BRAND_IDENTITY.md`](./FLUTTER_BRAND_IDENTITY.md)  
 > **سعر · خصم · كمية · باركود · SKU:** [`FLUTTER_PRODUCT_PRICING_FIELDS.md`](./FLUTTER_PRODUCT_PRICING_FIELDS.md)  
 > **تسجيل:** [`REGISTER_FLOW.md`](./REGISTER_FLOW.md) · [`FLUTTER_REGISTER_FLOW.md`](./FLUTTER_REGISTER_FLOW.md)  
-> **آخر تحديث | Last Updated:** 2026-09-21
+> **آخر تحديث | Last Updated:** 2026-10-08
 
-**اليوم (أحدث دفعة — أرسلوا FLUTTER_LATEST أولاً):** تكبير صورة · لون hex · جدول تفاصيل · سلة بلا delivery_time · بوابة مسوّق — كلها في [`FLUTTER_LATEST.md` §0c](./FLUTTER_LATEST.md#0c-ماذا-تغيّر-في-21-أيلول-2026)
+**اليوم (أحدث دفعة — أرسلوا FLUTTER_LATEST أولاً):** هوية ديما البصرية — [`FLUTTER_BRAND_IDENTITY.md`](./FLUTTER_BRAND_IDENTITY.md) · [`FLUTTER_LATEST.md` §0d](./FLUTTER_LATEST.md#0d-هوية-ديما-فاشن-8-تشرين-الأول-2026)
 
 **اليوم (سابقاً):** خصم ثابت (`fixed`) كسور وأكبر من 100 — `discountValue` نوع `num?` مو `int` — [`FLUTTER_FIXED_DISCOUNT.md`](./FLUTTER_FIXED_DISCOUNT.md)
 

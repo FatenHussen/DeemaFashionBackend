@@ -104,8 +104,8 @@ class SystemSettingSeeder extends Seeder
                 'value' => '0',
                 'type' => 'number',
                 'group' => 'delivery',
-                'title' => 'Platform minimum order',
-                'description' => 'Minimum cart amount for platform orders. Set from the dashboard.',
+                'title' => 'Deema Fashion minimum order',
+                'description' => 'Minimum cart amount for Deema platform orders. Set from the dashboard.',
                 'is_active' => true,
             ],
             [
@@ -113,8 +113,8 @@ class SystemSettingSeeder extends Seeder
                 'value' => '24',
                 'type' => 'number',
                 'group' => 'delivery',
-                'title' => 'Platform earliest delivery (hours)',
-                'description' => 'Soonest delivery window for platform orders, for example 24 hours.',
+                'title' => 'Deema Fashion earliest delivery (hours)',
+                'description' => 'Soonest delivery window for Deema platform orders, for example 24 hours.',
                 'is_active' => true,
             ],
             [
@@ -122,8 +122,8 @@ class SystemSettingSeeder extends Seeder
                 'value' => '48',
                 'type' => 'number',
                 'group' => 'delivery',
-                'title' => 'Platform latest delivery (hours)',
-                'description' => 'Latest delivery window for platform orders, for example 48 hours.',
+                'title' => 'Deema Fashion latest delivery (hours)',
+                'description' => 'Latest delivery window for Deema platform orders, for example 48 hours.',
                 'is_active' => true,
             ],
         ];

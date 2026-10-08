@@ -1,11 +1,16 @@
 # آخر التعديلات والتحديثات — Deema Fashion Backend
 
 > **أرسلوا هذا الملف** — آخر نسخة شاملة (كل الفرق)  
-> **تاريخ:** 5 تشرين الأول 2026  
+> **تاريخ:** 8 تشرين الأول 2026  
 > **النطاق:** من منتصف آب حتى اليوم — باك + داشبورد + ويب + Flutter  
-> **الحالة:** الباك جاهز بعد `git pull` + `php artisan config:clear`
+> **الحالة:** الباك جاهز بعد `git pull` + `php artisan config:clear`  
+> **مهم:** المشروع **ديما فاشن** منفصل عن تيك مارت — الهوية البصرية [`frontend/DEEMA_BRAND_IDENTITY.md`](./frontend/DEEMA_BRAND_IDENTITY.md)
 
-**آخر ما نزل اليوم (5 تشرين الأول):** دفع إلكتروني Stripe للطلبات — باك + دليل كامل [`api/STRIPE_PAYMENTS.md`](./api/STRIPE_PAYMENTS.md) (PaymentIntent · webhook · ويب/Flutter)
+**آخر ما نزل اليوم (8 تشرين الأول):** صلاحيات الداشبورد — إخفاء السايدبار حسب `permissions` (مثال: بس شريط التنقّل) — [`frontend/DASHBOARD_PERMISSIONS.md`](./frontend/DASHBOARD_PERMISSIONS.md) · **ويب/Flutter الزبون: لا حاجة**
+
+**آخر ما نزل (8 تشرين الأول):** هوية ديما فاشن البصرية (منفصل عن تيك مارت) — ألوان `#c720a4` / `#ff1493` من `GET /api/user/settings` · داش [`DASHBOARD_BRAND_IDENTITY.md`](./frontend/DASHBOARD_BRAND_IDENTITY.md) · ويب [`WEB_BRAND_IDENTITY.md`](./frontend/WEB_BRAND_IDENTITY.md) · Flutter [`FLUTTER_BRAND_IDENTITY.md`](./frontend/FLUTTER_BRAND_IDENTITY.md)
+
+**آخر ما نزل (5 تشرين الأول):** دفع إلكتروني Stripe للطلبات — باك + دليل كامل [`api/STRIPE_PAYMENTS.md`](./api/STRIPE_PAYMENTS.md) (PaymentIntent · webhook · ويب/Flutter)
 
 **آخر ما نزل (25 أيلول):** واجهة جدولة التسليم **مطوية** (سطر + زر) — ويب [`WEB_SCHEDULE_UI_COLLAPSED.md`](./frontend/WEB_SCHEDULE_UI_COLLAPSED.md) · Flutter [`FLUTTER_SCHEDULE_UI_COLLAPSED.md`](./frontend/FLUTTER_SCHEDULE_UI_COLLAPSED.md) — لا تغيير باك
 
@@ -34,9 +39,11 @@
 | الفريق | أرسلوا هذا | ملاحظة |
 |--------|------------|--------|
 | **الكل (هذا الملف)** | [`LATEST_UPDATES.md`](./LATEST_UPDATES.md) | آخر نسخة لكل شيء |
-| **داشبورد** | [`frontend/dashboard.md`](./frontend/dashboard.md) | كل تعديلات الأدمن |
-| **ويب** | [`frontend/WEB_LATEST.md`](./frontend/WEB_LATEST.md) | آخر نسخة الموقع |
-| **Flutter** | [`frontend/FLUTTER_LATEST.md`](./frontend/FLUTTER_LATEST.md) | آخر نسخة التطبيق |
+| **هوية ديما (الكل)** | [`frontend/DEEMA_BRAND_IDENTITY.md`](./frontend/DEEMA_BRAND_IDENTITY.md) | **8 تشرين الأول — منفصل عن تيك مارت** |
+| **داشبورد — صلاحيات السايدبار** | [`frontend/DASHBOARD_PERMISSIONS.md`](./frontend/DASHBOARD_PERMISSIONS.md) | **8 تشرين الأول — أخفوا القوائم حسب permissions** |
+| **داشبورد** | [`frontend/dashboard.md`](./frontend/dashboard.md) · [`DASHBOARD_BRAND_IDENTITY.md`](./frontend/DASHBOARD_BRAND_IDENTITY.md) | كل تعديلات الأدمن + هوية |
+| **ويب** | [`frontend/WEB_LATEST.md`](./frontend/WEB_LATEST.md) · [`WEB_BRAND_IDENTITY.md`](./frontend/WEB_BRAND_IDENTITY.md) | آخر نسخة الموقع + هوية |
+| **Flutter** | [`frontend/FLUTTER_LATEST.md`](./frontend/FLUTTER_LATEST.md) · [`FLUTTER_BRAND_IDENTITY.md`](./frontend/FLUTTER_BRAND_IDENTITY.md) | آخر نسخة التطبيق + هوية |
 | **سلة مخصصة — داش** | [`frontend/DASHBOARD_CUSTOM_BASKET.md`](./frontend/DASHBOARD_CUSTOM_BASKET.md) | فئات + سلل جاهزة |
 | **سلة مخصصة — ويب** | [`frontend/WEB_CUSTOM_BASKET.md`](./frontend/WEB_CUSTOM_BASKET.md) | كروت + تخصيص + تأكيد |
 | **سلة مخصصة — Flutter** | [`frontend/FLUTTER_CUSTOM_BASKET.md`](./frontend/FLUTTER_CUSTOM_BASKET.md) | نفس العقد للشاشات |
@@ -51,7 +58,10 @@
 | **ضمان المنتج — دروب داون + قسم مستقل** | [`frontend/DASHBOARD_PRODUCT_WARRANTY.md`](./frontend/DASHBOARD_PRODUCT_WARRANTY.md) | **5 أيلول** |
 | **تسجيل المستخدم — تدفق كامل** | [`frontend/REGISTER_FLOW.md`](./frontend/REGISTER_FLOW.md) | **8 أيلول — ويب + Flutter** |
 | **متغيّرات — ويب (تفصيل)** | [`frontend/product-variants-web.md`](./frontend/product-variants-web.md) | |
-| **متغيّرات — ويب (دليل شامل + مقارنة tikmool-website)** | [`frontend/WEB_VARIANTS_COMPLETE.md`](./frontend/WEB_VARIANTS_COMPLETE.md) | **31 آب** — API حقيقي · types · gaps · سلة |
+| **متغيّرات — ويب (دليل شامل)** | [`frontend/WEB_VARIANTS_COMPLETE.md`](./frontend/WEB_VARIANTS_COMPLETE.md) | **31 آب** — API حقيقي · types · gaps · سلة |
+| **هوية ديما — Flutter** | [`frontend/FLUTTER_BRAND_IDENTITY.md`](./frontend/FLUTTER_BRAND_IDENTITY.md) | **8 تشرين الأول** |
+| **هوية ديما — ويب** | [`frontend/WEB_BRAND_IDENTITY.md`](./frontend/WEB_BRAND_IDENTITY.md) | **8 تشرين الأول** |
+| **هوية ديما — داشبورد** | [`frontend/DASHBOARD_BRAND_IDENTITY.md`](./frontend/DASHBOARD_BRAND_IDENTITY.md) | **8 تشرين الأول** |
 | **متغيّرات — Flutter (تفصيل)** | [`frontend/product-variants-flutter.md`](./frontend/product-variants-flutter.md) | |
 | **طلب سريع** | [`custom-orders/`](./custom-orders/) | dashboard · web · flutter |
 | **إظهار/إخفاء أقسام** | [`page-sections/`](./page-sections/) | Eye toggle |
