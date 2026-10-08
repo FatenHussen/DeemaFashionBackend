@@ -122,9 +122,9 @@ class RolePermissionSeeder extends Seeder
 
         //create Admins
         $Em1 = Admin::firstOrCreate(
-            ['email' => 'superadmin@admin.com'],
+            ['email' => 'admin@deemafashion.com'],
             [
-                'name' => 'Super Admin',
+                'name' => 'Deema Admin',
                 'password' => bcrypt('password'),
             ]
         );
