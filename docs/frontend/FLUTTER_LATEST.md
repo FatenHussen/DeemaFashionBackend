@@ -2,14 +2,16 @@
 
 > **أرسلوا هذا الملف لفريق Flutter.**  
 > Base: `/api/user` + `Accept-Language: ar|en`  
-> **آخر تحديث | Last Updated:** 2026-09-27  
+> **آخر تحديث | Last Updated:** 2026-10-05  
 > الملف الشامل السابق يبقى: [`flutter.md`](./flutter.md)
+
+**اليوم (5 تشرين الأول / تصحيح 28 أيلول):** صورة الأيقونة — بعض الأيقونات رجعت `icon`/`image` = `null` بسبب صلاحيات مجلد `icons` على السيرفر (مو باگ Flutter). أخفوا العنصر إذا الرابط فاضي. بعد إصلاح السيرفر وإعادة الرفع المسار يتغيّر وفيه `?v=` — الكاش على الرابط كامل مو على `id` — [`FLUTTER_ICON_IMAGE.md`](./FLUTTER_ICON_IMAGE.md)
 
 **اليوم (27 أيلول):** السلة: أقل طلب + أقرب توصيل + سعر التوصيل. المطعم لحاله فوري (سائق المطعم أو تيك مارت) — [`FLUTTER_CART_CHECKOUT_DELIVERY.md`](./FLUTTER_CART_CHECKOUT_DELIVERY.md)
 
-**اليوم (27 أيلول):** إخفاء الفئة يخفي منتجاتها من القوائم والبحث والأقسام وصفحة المنتج (`404`) — [`FLUTTER_HIDDEN_CATEGORY_PRODUCTS.md`](./FLUTTER_HIDDEN_CATEGORY_PRODUCTS.md)
+**اليوم (27 أيلول):** مصغّرة المنتج داخل `image` / `images[].path` — منتج بلا معرض ما عاد يبين فاضي — [`FLUTTER_PRODUCT_THUMBNAIL.md`](./FLUTTER_PRODUCT_THUMBNAIL.md)
 
-**اليوم (27 أيلول):** صورة الأيقونة — بعد استبدالها مسار الملف يتغيّر، والكاش على الرابط كامل مع `?v=` مو على `id` — [`FLUTTER_ICON_IMAGE.md`](./FLUTTER_ICON_IMAGE.md)
+**اليوم (27 أيلول):** إخفاء الفئة يخفي منتجاتها من القوائم والبحث والأقسام وصفحة المنتج (`404`) — [`FLUTTER_HIDDEN_CATEGORY_PRODUCTS.md`](./FLUTTER_HIDDEN_CATEGORY_PRODUCTS.md)
 
 **اليوم (27 أيلول):** عروض تلقائية — أول طلب أو إنشاء حساب أو شراء بقيمة، والمكافأة خصم أو توصيل مجاني أو هدية — [`FLUTTER_PROMOTION_TRIGGERS.md`](./FLUTTER_PROMOTION_TRIGGERS.md)
 
@@ -41,12 +43,13 @@
 
 **اليوم (سابقاً):** خصم ثابت (`fixed`) كسور وأكبر من 100 — [`FLUTTER_FIXED_DISCOUNT.md`](./FLUTTER_FIXED_DISCOUNT.md) · لا Branch — [`FLUTTER_NO_SHOP_BRANCHES.md`](./FLUTTER_NO_SHOP_BRANCHES.md) · صفات بالـ ID — [`FLUTTER_CATEGORY_ATTRIBUTE_VALUE_IDS.md`](./FLUTTER_CATEGORY_ATTRIBUTE_VALUE_IDS.md) · كل المتغيّرات — [`FLUTTER_PRODUCT_ALL_VARIANTS.md`](./FLUTTER_PRODUCT_ALL_VARIANTS.md) · أسعار — [`FLUTTER_PRODUCT_PRICING_FIELDS.md`](./FLUTTER_PRODUCT_PRICING_FIELDS.md)
 
-يجمع **كل** ما يحتاجه التطبيق حتى اليوم: Nav · أقسام · فئات · فلاتر · تسجيل · طلب سريع · أسعار · متغيّرات · لون hex · جدول تفاصيل · تكبير صور · سلة بلا delivery_time · بوابة مسوّق · ضمان · كمية · سلة مخصصة · إخفاء الفئة · أيقونات · عروض تلقائية · جدولة بتاريخ ووقت · دفع ومراجعة · حالة الطلب · بنر.
+يجمع **كل** ما يحتاجه التطبيق حتى اليوم: Nav · أقسام · فئات · فلاتر · تسجيل · طلب سريع · أسعار · متغيّرات · لون hex · جدول تفاصيل · تكبير صور · مصغّرة · سلة بلا delivery_time · أقل طلب + توصيل · بوابة مسوّق · ضمان · كمية · سلة مخصصة · إخفاء الفئة · أيقونات · عروض تلقائية · جدولة بتاريخ ووقت · دفع ومراجعة · حالة الطلب · بنر.
 
 ---
 
 ## الفهرس
 
+0d. [ماذا تغيّر في 28 أيلول – 5 تشرين الأول 2026](#0d-ماذا-تغيّر-في-28-أيلول--5-تشرين-الأول-2026)
 0c. [ماذا تغيّر في 21 أيلول 2026](#0c-ماذا-تغيّر-في-21-أيلول-2026)
 0. [ماذا تغيّر في 8 أيلول 2026](#0-ماذا-تغيّر-في-8-أيلول-2026)
 0b. [ماذا تغيّر في 5 أيلول 2026](#0b-ماذا-تغيّر-في-5-أيلول-2026)
@@ -73,6 +76,18 @@
 21. [حالة الطلب](#21-حالة-الطلب)
 22. [البنر](#22-البنر)
 23. [صفحة المنتج — تعديلات العرض](#23-صفحة-المنتج--تعديلات-العرض)
+24. [السلة: أقل طلب + طريقة التوصيل](#24-السلة-أقل-طلب--طريقة-التوصيل)
+25. [مصغّرة المنتج](#25-مصغّرة-المنتج)
+
+---
+
+## 0d) ماذا تغيّر في 28 أيلول – 5 تشرين الأول 2026
+
+| البند | المطلوب في التطبيق |
+|-------|---------------------|
+| **أيقونات `null`** | بعض الأيقونات (2، 9، 12، 13) صورتها `null` بعد حفظ فاشل على السيرفر — أخفوا الويدجت إذا `icon` و`image` فاضيين. لا SVG محلي بديل. بعد إصلاح السيرفر وإعادة الرفع: رابط جديد + `?v=` — [`FLUTTER_ICON_IMAGE.md`](./FLUTTER_ICON_IMAGE.md) |
+| **أقل طلب + توصيل** | تحت السلة: أقرب توصيل · أقل طلب · سعر التوصيل من `checkout` · مطعم لحاله فوري — [`FLUTTER_CART_CHECKOUT_DELIVERY.md`](./FLUTTER_CART_CHECKOUT_DELIVERY.md) |
+| **مصغّرة** | الكرت يقرأ `image`؛ المعرض `images[].path` — حتى لو ما في معرض — [`FLUTTER_PRODUCT_THUMBNAIL.md`](./FLUTTER_PRODUCT_THUMBNAIL.md) |
 
 ---
 
@@ -437,12 +452,14 @@ int? asInt(dynamic v) {
 - [ ] طلب سريع من `settings.quick_order`
 - [ ] لوحة المسوق فقط بعد الموافقة — [`FLUTTER_MARKETER_DASHBOARD_GATE.md`](./FLUTTER_MARKETER_DASHBOARD_GATE.md)
 - [ ] فئة مخفية: امسحوا الكاش، و`404` يفتح «غير موجود» — [§16](#16-إخفاء-الفئة-يخفي-منتجاتها)
-- [ ] أيقونة من `icon` أو `image` مع `?v=` ومفتاح الكاش = الرابط كامل — [§17](#17-صورة-الأيقونة)
+- [ ] أيقونة من `icon` أو `image` مع `?v=` ومفتاح الكاش = الرابط كامل — إذا الرابط `null` أخفوا العنصر (مشكلة سيرفر مؤقتة على بعض الأيقونات) — [§17](#17-صورة-الأيقونة)
 - [ ] عروض تلقائية من `automatic_promotions` — لا `promotion_id` — [§18](#18-العروض-التلقائية)
 - [ ] جدولة السلة: يوم واحد + `delivery_time` `HH:mm` — [§19](#19-جدولة-السلة-تاريخ--وقت)
 - [ ] الدفع والمراجعة بدون تكرار، و`scheduled_delivery_at` على كرت الطلب — [§20](#20-السلة-والدفع-والمراجعة)
 - [ ] حالة الطلب: `out_delivery` + `status_label` — [§21](#21-حالة-الطلب)
 - [ ] بنر: عنوان ووصف وزر ورابط، و`null` بعد المسح — [§22](#22-البنر)
+- [ ] السلة: أقرب توصيل + أقل طلب + سعر التوصيل + `delivery_choice` — [§24](#24-السلة-أقل-طلب--طريقة-التوصيل)
+- [ ] مصغّرة: `image` على الكرت و`images[].path` بالمعرض — [§25](#25-مصغّرة-المنتج)
 
 ---
 
@@ -508,9 +525,13 @@ final isApprovedMarketer =
 
 ## 17) صورة الأيقونة
 
-> **27 أيلول 2026** — [`FLUTTER_ICON_IMAGE.md`](./FLUTTER_ICON_IMAGE.md)
+> **27 أيلول 2026 · تصحيح 28 أيلول / 5 تشرين الأول** — [`FLUTTER_ICON_IMAGE.md`](./FLUTTER_ICON_IMAGE.md)
 
-`icons[]` من `GET /products/{id}`. الصورة = `icon` أو `image` كما رجع. بعد الاستبدال من الداشبورد اسم الملف يتغيّر وفيه `?v=`. لا تقصّوا الاستعلام. `cacheKey` = الرابط كامل، مو `id`. `icons` فاضي → أخفوا الصف. لا أصول SVG محلية بديلة.
+`icons[]` من `GET /products/{id}`. الصورة = `icon` أو `image` كما رجع.
+
+**تصحيح:** على السيرفر مجلد `storage/app/public/icons` كان غير قابل للكتابة، فبعض الأيقونات (مثل 2 و 9 و 12 و 13) رجعت `icon`/`image` = `null`. هذا **مو باگ Flutter**. إذا الرابط فاضي → `SizedBox.shrink()` لهذا العنصر. لا أصول SVG محلية بديلة.
+
+بعد إصلاح الصلاحيات وإعادة الرفع من الداشبورد: اسم الملف يتغيّر وفيه `?v=`. لا تقصّوا الاستعلام. `cacheKey` = الرابط كامل، مو `id`. `icons` فاضي بالكامل → أخفوا الصف.
 
 ---
 
@@ -607,4 +628,53 @@ final isApprovedMarketer =
 | السلة | بلا `delivery_time` — [`FLUTTER_CART_NO_DELIVERY_TIME.md`](./FLUTTER_CART_NO_DELIVERY_TIME.md) |
 
 السعر بعد الخصم من الحقول الجاهزة في الـ API. لا تحسبوه على الجهاز.
+
+---
+
+## 24) السلة: أقل طلب + طريقة التوصيل
+
+> **27 أيلول 2026** — [`FLUTTER_CART_CHECKOUT_DELIVERY.md`](./FLUTTER_CART_CHECKOUT_DELIVERY.md)
+
+`GET /api/user/cart` → `checkout`:
+
+| السطر | المصدر |
+|--------|--------|
+| أقرب توصيل | `delivery_min_hours`–`delivery_max_hours` (مثل «24–48 ساعة») |
+| أقل قيمة للطلب | `min_order_amount.formatted` |
+| سعر التوصيل | `delivery_price.formatted` · `amount == 0` = مجاني · `null` = أخفوا السطر |
+
+- `can_checkout == false` → عطّلوا زر الإتمام واعرضوا `message`.
+- مطعم لحاله: `instant_only: true` → توصيل فوري فقط، أرسلوا `delivery_choice: "asap"` بدون منتقي يوم/وقت.
+- غير ذلك: `asap` أو `scheduled` + `scheduled_delivery_at` (`yyyy-MM-dd HH:mm`) بعد `earliest_delivery_at`.
+- الملخص وكرت الطلب: `delivery_choice_label`.
+- `product.deliveryTime` («3–5 أيام») على صفحة المنتج فقط — مو هنا ولا في جدولة السلة.
+
+```dart
+// أقرب وقت
+{ "delivery_choice": "asap", "address_id": 1, "items": [] }
+
+// يوم ووقت
+{
+  "delivery_choice": "scheduled",
+  "scheduled_delivery_at": "2026-09-29 16:30",
+  "address_id": 1,
+  "items": []
+}
+```
+
+---
+
+## 25) مصغّرة المنتج
+
+> **27 أيلول 2026** — [`FLUTTER_PRODUCT_THUMBNAIL.md`](./FLUTTER_PRODUCT_THUMBNAIL.md)
+
+منتج بمصغّرة وبدون معرض كان يبين بلا صورة. الباك يرجّع المصغّرة داخل الحقول المعتادة.
+
+| الشاشة | الحقل |
+|--------|--------|
+| كرت القائمة / الأقسام / البحث / bought_with | `image` |
+| صفحة المنتج — المعرض | `images[].path` |
+| متغيّر بلا صور خاصة | `shop_variants[].images[].path` |
+
+الرابط كامل (`https://.../storage/...`). لا تلصقوا `storage/` مرة ثانية. الحقل `path` مو `url`. `thumbnail` موجود لحاله — الكرت يقرأ `image` مباشرة.
 

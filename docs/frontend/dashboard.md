@@ -11,7 +11,7 @@
 
 **اليوم:** إخفاء الفئة (`is_active: false`) يخفي منتجاتها من الموقع والتطبيق، بدون تعطيل المنتجات في الداشبورد — [`DASHBOARD_HIDDEN_CATEGORY_PRODUCTS.md`](./DASHBOARD_HIDDEN_CATEGORY_PRODUCTS.md)
 
-**اليوم:** تغيير صورة الأيقونة — مع الملف ابعتوا `image_filename` و`image_base64` (حتى لو المتصفح سمّى webp‏ `octet-stream`). النجاح فقط إذا `data.image` رابط ومساره تغيّر. `null` خطأ — [`DASHBOARD_ICON_IMAGE.md`](./DASHBOARD_ICON_IMAGE.md)
+**اليوم:** تغيير صورة الأيقونة — السبب على السيرفر: مجلد `storage/app/public/icons` غير قابل للكتابة، فالحفظ يرجع 200 و`data.image` يساوي `null`. لا تعديل مطلوب في الداشبورد بعد إصلاح الصلاحيات. `null` أو نفس المسار = خطأ — [`DASHBOARD_ICON_IMAGE.md`](./DASHBOARD_ICON_IMAGE.md)
 
 **اليوم:** العروض = شرط (أول طلب / شراء بقيمة / إنشاء حساب) + مكافأة (خصم / توصيل مجاني / هدية) — [`DASHBOARD_PROMOTION_TRIGGERS.md`](./DASHBOARD_PROMOTION_TRIGGERS.md)
 
@@ -871,7 +871,7 @@ file: <products.xlsx>
 
 ### اليوم (25–27 أيلول)
 - [ ] إيقاف الفئة `is_active: false` فقط — لا تعطّلوا منتجاتها — [§27](#27-إخفاء-الفئة-يخفي-منتجاتها)
-- [ ] تغيير صورة الأيقونة: `image` + `image_filename` + `image_base64`. النجاح فقط إذا `data.image` رابط ومساره تغيّر. `null` و422 مو «تم الحفظ» — [§28](#28-تغيير-صورة-الأيقونة)
+- [ ] تغيير صورة الأيقونة: الملف في `image`. `null` أو نفس المسار أو 422 مو «تم الحفظ». المشكلة الحالية صلاحيات مجلد `icons` على السيرفر — [§28](#28-تغيير-صورة-الأيقونة)
 - [ ] العروض: شرط + مكافأة (خصم / توصيل مجاني / هدية) — [§29](#29-عروض-شرط--مكافأة)
 - [ ] جداول سلال الزبائن: `start_date` + `delivery_time` للعرض فقط — [§30](#30-تاريخ-ووقت-جدولة-سلة-الزبون)
 - [ ] الطلب: `PATCH .../scheduled-delivery` بصيغة `Y-m-d H:i` — [§31](#31-يوم-ووقت-التوصيل-على-الطلب)
@@ -1174,13 +1174,14 @@ values[0][name][en]=XS
 
 > **28 أيلول 2026** — [`DASHBOARD_ICON_IMAGE.md`](./DASHBOARD_ICON_IMAGE.md)
 
-`POST /api/admin/icons/{id}` مع `_method=PUT`. `multipart/form-data`. لا تضبطوا `Content-Type` يدوياً. الملف من `input.files[0]` لحظة التحديث.
+**تصحيح 28 أيلول:** المشكلة على السيرفر. مجلد `storage/app/public/icons` غير قابل للكتابة لمستخدم الويب، فكل حفظ مع ملف يرجع 200 و`data.image` يساوي `null` وتنمسح الصورة القديمة. الأيقونات 2 و 9 و 12 و 13 صورها `null` الآن. الإصلاح `chown` للمجلد ثم إعادة الرفع. الداشبورد ما يحتاج تعديل.
 
-مع ملف جديد ابعتوا ثلاثة حقول: `image` و`image_filename` و`image_base64` (ناتج `readAsDataURL`). ملف `webp` على ويندوز غالباً `data:application/octet-stream;base64,...` — ابعتوه، والامتداد من اسم الملف. بدون ملف لا ترسلوا هل الحقول ولا رابط قديم جوا `image`.
+`POST /api/admin/icons/{id}` مع `_method=PUT`. `multipart/form-data`. لا تضبطوا `Content-Type` يدوياً. الملف من `input.files[0]` لحظة التحديث في `image`. `image_filename` و`image_base64` اختياريان (الباك يستخدمهما فقط إذا ما وصل ملف). بدون ملف لا ترسلوا هالحقول ولا رابط قديم جوا `image`.
 
 | الحقل | القاعدة |
 |--------|---------|
-| `image` + `image_filename` + `image_base64` | مع بعض عند تغيير الصورة. فاضي = الصورة القديمة |
+| `image` | الملف. فاضي = الصورة القديمة |
+| `image_filename` + `image_base64` | اختياريان. احتياط فقط |
 | الصيغ | `jpg` `jpeg` `png` `gif` `svg` `webp` · 8MB |
 | `name[ar]` / `name[en]` | مطلوبان إذا انرسل `name` |
 

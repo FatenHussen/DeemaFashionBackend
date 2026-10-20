@@ -32,7 +32,7 @@ class CurrencyHelper
 
         $currency = Currency::find($currencyId);
 
-        if (!$currency || $currency->is_default) {
+        if (!$currency || strtoupper((string) $currency->code) === 'USD') {
             return $price;
         }
 
@@ -68,7 +68,7 @@ class CurrencyHelper
             $currency = Currency::default()->first();
         }
 
-        if (!$currency || $currency->is_default) {
+        if (!$currency || strtoupper((string) $currency->code) === 'USD') {
             return [
                 'amount'    => round($priceInBase, 2),
                 'currency'  => $currency?->code ?? 'USD',

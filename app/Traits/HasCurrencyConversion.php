@@ -37,7 +37,7 @@ trait HasCurrencyConversion
             $currency = Currency::default()->first();
         }
 
-        if (!$currency || $currency->is_default) {
+        if (!$currency || strtoupper((string) $currency->code) === 'USD') {
             return [
                 'amount'    => round($priceInBase, 2),
                 'currency'  => $currency?->code ?? 'USD',
@@ -133,7 +133,7 @@ trait HasCurrencyConversion
             ];
         }
 
-        $amount = $currency->is_default
+        $amount = strtoupper((string) $currency->code) === 'USD'
             ? round($priceInBase, 2)
             : $currency->convertFromBase($priceInBase);
 
