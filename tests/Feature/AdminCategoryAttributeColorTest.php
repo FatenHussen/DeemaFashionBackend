@@ -4,7 +4,9 @@ namespace Tests\Feature;
 
 use App\Http\Requests\Admin\Category\CategoryAttribute\StoreRequest;
 use App\Http\Resources\Admin\Category\CategoryAttribute\AllResource;
+use App\Models\AttributeValue;
 use App\Models\Category;
+use App\Models\CategoryAttribute;
 use App\Models\Color;
 use App\Models\Language;
 use App\Services\Admin\CategoryAttributeService;
@@ -177,6 +179,76 @@ class AdminCategoryAttributeColorTest extends TestCase
         $request->validateResolved();
 
         $this->assertArrayNotHasKey('color_id', $request->validated()['values'][0]);
+    }
+
+    public function test_saving_a_color_shade_without_color_id_does_not_persist(): void
+    {
+        $category = $this->createCategory();
+
+        try {
+            app(CategoryAttributeService::class)->create([
+                'category_id' => $category->id,
+                'name' => ['en' => 'Color', 'ar' => 'اللون'],
+                'type' => 'color',
+                'is_active' => true,
+                'values' => [[
+                    'name' => ['en' => '2', 'ar' => '2'],
+                ]],
+            ]);
+            $this->fail('Free-text color values must not be stored.');
+        } catch (ValidationException $exception) {
+            $this->assertArrayHasKey('values.0.color_id', $exception->errors());
+        }
+
+        $this->assertSame(0, CategoryAttribute::query()->count());
+        $this->assertSame(0, AttributeValue::query()->count());
+    }
+
+    public function test_an_existing_text_shade_stays_unlinked_until_color_id_is_sent(): void
+    {
+        $category = $this->createCategory();
+        $rose = $this->createColor('Rose 2', 'وردي 2', '#BC7B79');
+        $attribute = CategoryAttribute::create([
+            'category_id' => $category->id,
+            'name' => ['en' => 'Color', 'ar' => 'اللون'],
+            'type' => 'color',
+            'is_active' => true,
+        ]);
+        $value = AttributeValue::create([
+            'category_attribute_id' => $attribute->id,
+            'name' => ['en' => '2', 'ar' => '2'],
+        ]);
+
+        try {
+            app(CategoryAttributeService::class)->update($attribute->id, [
+                'type' => 'color',
+                'name' => ['en' => 'Color', 'ar' => 'اللون'],
+                'values' => [[
+                    'id' => $value->id,
+                    'name' => ['en' => '2', 'ar' => '2'],
+                ]],
+            ]);
+            $this->fail('Saving a color value again without color_id must fail.');
+        } catch (ValidationException $exception) {
+            $this->assertArrayHasKey('values.0.color_id', $exception->errors());
+        }
+
+        $this->assertNull($value->fresh()->color_id);
+        $this->assertSame($value->id, $value->fresh()->id);
+
+        app(CategoryAttributeService::class)->update($attribute->id, [
+            'type' => 'color',
+            'name' => ['en' => 'Color', 'ar' => 'اللون'],
+            'values' => [[
+                'id' => $value->id,
+                'name' => ['en' => '2', 'ar' => '2'],
+                'color_id' => $rose->id,
+            ]],
+        ]);
+
+        $fresh = $value->fresh();
+        $this->assertSame($value->id, $fresh->id);
+        $this->assertSame($rose->id, (int) $fresh->color_id);
     }
 
     private function storeRequest(array $payload): StoreRequest
