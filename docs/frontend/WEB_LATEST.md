@@ -5,6 +5,8 @@
 > **آخر تحديث | Last Updated:** 2026-09-27  
 > الملف الشامل السابق يبقى: [`web.md`](./web.md)
 
+**اليوم (28 تشرين الأول):** دوائر اللون من `hex` فقط. الموقع ما يرسل `color_id` ولا يخمن اللون من الاسم. الاختيار بـ `options[].id` والسلة بـ `shop_variants[].id` — [`WEB_PRODUCT_COLOR_HEX.md`](./WEB_PRODUCT_COLOR_HEX.md)
+
 **اليوم (27 أيلول):** السلة: أقل طلب + أقرب توصيل + سعر التوصيل. المطعم لحاله فوري (سائق المطعم أو تيك مارت) — [`WEB_CART_CHECKOUT_DELIVERY.md`](./WEB_CART_CHECKOUT_DELIVERY.md)
 
 **اليوم (27 أيلول):** إخفاء الفئة يخفي منتجاتها من القوائم والبحث والأقسام وصفحة المنتج (`404`) — [`WEB_HIDDEN_CATEGORY_PRODUCTS.md`](./WEB_HIDDEN_CATEGORY_PRODUCTS.md)

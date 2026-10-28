@@ -4,8 +4,8 @@
 > **آخر تحديث:** 28 تشرين الأول 2026  
 > Base: `/api/user` + `Accept-Language: ar|en`  
 > **الباك جاهز بعد `git pull`**  
-> مرجع مشترك: [`PRODUCT_COLOR_SWATCHES.md`](./PRODUCT_COLOR_SWATCHES.md)  
 > الداشبورد: [`DASHBOARD_PRODUCT_COLOR_HEX.md`](./DASHBOARD_PRODUCT_COLOR_HEX.md)  
+> الويب: [`WEB_PRODUCT_COLOR_HEX.md`](./WEB_PRODUCT_COLOR_HEX.md)  
 > متغيّرات: [`FLUTTER_PRODUCT_ALL_VARIANTS.md`](./FLUTTER_PRODUCT_ALL_VARIANTS.md)
 
 الداشبورد يحفظ الدرجة على قيمة صفة الفئة بـ `color_id` من جدول `colors`، والسجل فيه `hex`.  

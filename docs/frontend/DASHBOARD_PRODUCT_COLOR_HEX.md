@@ -4,7 +4,8 @@
 > **آخر تحديث:** 28 تشرين الأول 2026  
 > Base: `/api/admin` + Admin token  
 > **الباك يرفض النص الحر على صفة اللون بعد `git pull`**  
-> المستخدم (ويب / Flutter): [`PRODUCT_COLOR_SWATCHES.md`](./PRODUCT_COLOR_SWATCHES.md) · [`FLUTTER_PRODUCT_COLOR_HEX.md`](./FLUTTER_PRODUCT_COLOR_HEX.md)
+> الويب: [`WEB_PRODUCT_COLOR_HEX.md`](./WEB_PRODUCT_COLOR_HEX.md)  
+> Flutter: [`FLUTTER_PRODUCT_COLOR_HEX.md`](./FLUTTER_PRODUCT_COLOR_HEX.md)
 
 حفظ اللون يكون على **قيمة صفة الفئة**، من جدول `colors`.  
 جدول `colors` هو التدرج: الاسم للعرض، و`hex` للون الدائرة. ما في خطوة ثانية بعد هذا السجل.
