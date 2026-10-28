@@ -14,6 +14,7 @@ use App\Models\Shop;
 use App\Models\Vendor;
 use App\Services\Admin\ProductService;
 use App\Support\AttributeColorHex;
+use App\Support\CatalogShadeColors;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -161,6 +162,85 @@ class UserProductShowTest extends TestCase
                 ->assertJsonPath('data.shop_variants.0.attributes.0.type', 'square')
                 ->assertJsonPath('data.shop_variants.1.attributes.0.hex', '#F6F1E7')
                 ->assertJsonPath('data.shop_variants.2.attributes.0.hex', null);
+        }
+    }
+
+    public function test_catalog_shades_link_color_records_and_product_hex_matches_on_variants(): void
+    {
+        foreach (['en' => 'English', 'ar' => 'العربية'] as $code => $name) {
+            Language::create([
+                'code' => $code,
+                'native_name' => $name,
+                'direction' => $code === 'ar' ? 'rtl' : 'ltr',
+                'is_active' => true,
+                'is_default' => $code === 'ar',
+            ]);
+        }
+
+        $product = $this->createProduct();
+        $colorAttribute = CategoryAttribute::create([
+            'category_id' => $product->category_id,
+            'name' => ['en' => 'Color', 'ar' => 'اللون'],
+            'type' => 'color',
+            'is_active' => true,
+        ]);
+        $sizeAttribute = CategoryAttribute::create([
+            'category_id' => $product->category_id,
+            'name' => ['en' => 'Size', 'ar' => 'القياس'],
+            'type' => 'square',
+            'is_active' => true,
+        ]);
+
+        $glitter = $colorAttribute->values()->create([
+            'name' => ['en' => 'Black with Silver Glitter (1)', 'ar' => 'اسود مع لمعة فضية (1)'],
+        ]);
+        $mauve = $colorAttribute->values()->create([
+            'name' => ['en' => 'Mauve Brown (26)', 'ar' => 'بني موف (26)'],
+        ]);
+        $size = $sizeAttribute->values()->create([
+            'name' => ['en' => 'Black (5)', 'ar' => 'اسود (5)'],
+        ]);
+        $kept = Color::create([
+            'name' => ['en' => 'Milky White (9)', 'ar' => 'ابيض حليبي (9)'],
+            'hex' => '#111111',
+            'is_active' => true,
+        ]);
+        $milky = $colorAttribute->values()->create([
+            'name' => ['en' => 'Milky White (9)', 'ar' => 'ابيض حليبي (9)'],
+            'color_id' => $kept->id,
+        ]);
+
+        foreach ([$glitter, $mauve, $milky, $size] as $value) {
+            $product->variants()->create([
+                'price' => 20,
+                'quantity' => 1,
+                'is_active' => true,
+                'attributes_values_ids' => [$value->id],
+            ]);
+        }
+
+        $this->assertGreaterThan(0, CatalogShadeColors::link());
+
+        $this->assertSame($kept->id, (int) $milky->fresh()->color_id);
+        $this->assertNotNull($glitter->fresh()->color_id);
+        $this->assertNull($size->fresh()->color_id);
+
+        foreach (['en', 'ar'] as $locale) {
+            $response = $this->withHeaders(['Accept-Language' => $locale])
+                ->getJson("/api/user/products/{$product->id}");
+
+            $response->assertOk()
+                ->assertJsonPath('data.attributes_map.0.type', 'color')
+                ->assertJsonPath('data.attributes_map.0.options.0.id', $glitter->id)
+                ->assertJsonPath('data.attributes_map.0.options.0.hex', '#3E434A')
+                ->assertJsonPath('data.attributes_map.0.options.1.hex', '#9E5E5F')
+                ->assertJsonPath('data.attributes_map.0.options.2.hex', '#111111')
+                ->assertJsonPath('data.attributes_map.1.options.0.hex', null)
+                ->assertJsonPath('data.shop_variants.0.attributes.0.id', $glitter->id)
+                ->assertJsonPath('data.shop_variants.0.attributes.0.hex', '#3E434A')
+                ->assertJsonPath('data.shop_variants.1.attributes.0.hex', '#9E5E5F')
+                ->assertJsonPath('data.shop_variants.2.attributes.0.hex', '#111111')
+                ->assertJsonPath('data.shop_variants.3.attributes.0.hex', null);
         }
     }
 
