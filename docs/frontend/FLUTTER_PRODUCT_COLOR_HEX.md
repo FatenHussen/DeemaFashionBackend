@@ -63,8 +63,9 @@ GET /api/user/products/{id}
 }
 ```
 
-دوائر اللون من `attributes_map` حيث `type == 'color'` → **`options[].hex`**.  
-أو من `shop_variants[].attributes` حيث `type == 'color'` → **`hex`**.
+دوائر اللون من `attributes_map` حيث `type == 'color'` **أو** اسم الصفة `Color` / `اللون` → **`options[].hex`**.  
+أو من `shop_variants[].attributes` بنفس الشرط → **`hex`**.  
+صفة اللون المحفوظة `type: "square"` تبقى `square` في الاستجابة، و`hex` يجي من سجل اللون إذا القيمة مربوطة أو اسمها يطابق لوناً مسجّلاً.
 
 ### فلتر الفئة (chips)
 

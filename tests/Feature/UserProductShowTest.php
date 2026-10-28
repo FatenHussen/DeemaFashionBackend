@@ -87,6 +87,83 @@ class UserProductShowTest extends TestCase
         }
     }
 
+    public function test_square_attribute_named_color_returns_catalog_hex_without_changing_type(): void
+    {
+        foreach (['en' => 'English', 'ar' => 'العربية'] as $code => $name) {
+            Language::create([
+                'code' => $code,
+                'native_name' => $name,
+                'direction' => $code === 'ar' ? 'rtl' : 'ltr',
+                'is_active' => true,
+                'is_default' => $code === 'ar',
+            ]);
+        }
+
+        $product = $this->createProduct();
+        $colorAttribute = CategoryAttribute::create([
+            'category_id' => $product->category_id,
+            'name' => ['en' => 'Color', 'ar' => 'اللون'],
+            'type' => 'square',
+            'is_active' => true,
+        ]);
+        $sizeAttribute = CategoryAttribute::create([
+            'category_id' => $product->category_id,
+            'name' => ['en' => 'Size', 'ar' => 'القياس'],
+            'type' => 'square',
+            'is_active' => true,
+        ]);
+
+        $mauve = Color::create([
+            'name' => ['en' => 'Mauve Brown (26)', 'ar' => 'بني مووف'],
+            'hex' => '#b5838d',
+        ]);
+        Color::create([
+            'name' => ['en' => 'Milky White (9)', 'ar' => 'أبيض حليبي'],
+            'hex' => '#f6f1e7',
+        ]);
+        Color::create([
+            'name' => ['en' => 'Black', 'ar' => 'أسود'],
+            'hex' => '#000000',
+        ]);
+
+        $mauveValue = $colorAttribute->values()->create([
+            'name' => ['en' => 'Custom mauve label', 'ar' => 'درجة مووف'],
+            'color_id' => $mauve->id,
+        ]);
+        $milkyValue = $colorAttribute->values()->create([
+            'name' => ['en' => 'Milky White (9)', 'ar' => 'درجة حليبية'],
+        ]);
+        $sizeValue = $sizeAttribute->values()->create([
+            'name' => ['en' => 'Black', 'ar' => 'أسود'],
+        ]);
+
+        foreach ([$mauveValue, $milkyValue, $sizeValue] as $value) {
+            $product->variants()->create([
+                'price' => 20,
+                'quantity' => 1,
+                'is_active' => true,
+                'attributes_values_ids' => [$value->id],
+            ]);
+        }
+
+        foreach (['en', 'ar'] as $locale) {
+            $response = $this->withHeaders(['Accept-Language' => $locale])
+                ->getJson("/api/user/products/{$product->id}");
+
+            $response->assertOk()
+                ->assertJsonPath('data.attributes_map.0.type', 'square')
+                ->assertJsonPath('data.attributes_map.0.attribute', $locale === 'ar' ? 'اللون' : 'Color')
+                ->assertJsonPath('data.attributes_map.0.options.0.hex', '#B5838D')
+                ->assertJsonPath('data.attributes_map.0.options.1.hex', '#F6F1E7')
+                ->assertJsonPath('data.attributes_map.1.type', 'square')
+                ->assertJsonPath('data.attributes_map.1.options.0.hex', null)
+                ->assertJsonPath('data.shop_variants.0.attributes.0.hex', '#B5838D')
+                ->assertJsonPath('data.shop_variants.0.attributes.0.type', 'square')
+                ->assertJsonPath('data.shop_variants.1.attributes.0.hex', '#F6F1E7')
+                ->assertJsonPath('data.shop_variants.2.attributes.0.hex', null);
+        }
+    }
+
     public function test_invalid_linked_hex_can_fall_back_to_a_valid_legacy_translation(): void
     {
         $linkedColor = Color::create([

@@ -8,6 +8,51 @@ use App\Models\Color;
 class AttributeColorHex
 {
     /**
+     * Labels that still mean a color picker when the row was saved as square/circle.
+     * Live catalog rows named Color arrive as type "square" with no swatch otherwise.
+     */
+    private const COLOR_LABELS = [
+        'color',
+        'colour',
+        'اللون',
+        'لون',
+        'الالوان',
+        'الألوان',
+        'الوان',
+        'ألوان',
+    ];
+
+    /**
+     * Color swatches are type "color", or an attribute whose name is Color / اللون.
+     * The stored type is left unchanged; only hex resolution uses this.
+     */
+    public static function isColorAttribute(?string $type, mixed $names = null): bool
+    {
+        if ($type === 'color') {
+            return true;
+        }
+
+        $candidates = match (true) {
+            is_string($names) => [$names],
+            is_array($names) => $names,
+            default => [],
+        };
+
+        foreach ($candidates as $name) {
+            if (!is_string($name)) {
+                continue;
+            }
+
+            $normalized = mb_strtolower(trim($name));
+            if ($normalized !== '' && in_array($normalized, self::COLOR_LABELS, true)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Resolve a display hex for a color-type attribute value.
      * Prefers colors.hex via color_id; legacy values use stored translations
      * so the swatch does not depend on the request language.

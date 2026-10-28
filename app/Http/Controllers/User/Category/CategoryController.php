@@ -32,7 +32,10 @@ class CategoryController extends BaseIndexController
                 'name'             => $attr->name,
                 'type'             => $attr->type,
                 'values'           => $attr->values->map(function ($val) use ($attr) {
-                    $isColor = ($attr->type ?? null) === 'color';
+                    $isColor = AttributeColorHex::isColorAttribute(
+                        $attr->type ?? null,
+                        $attr->getTranslations('name')
+                    );
 
                     return [
                         'id'   => $val->id,

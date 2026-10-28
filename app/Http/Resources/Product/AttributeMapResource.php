@@ -54,7 +54,10 @@ class AttributeMapResource extends JsonResource
                     continue;
                 }
 
-                $isColorType = ($attribute->type ?? null) === 'color';
+                $isColorType = AttributeColorHex::isColorAttribute(
+                    $attribute->type ?? null,
+                    $attribute->getTranslations('name')
+                );
                 $valueName = $isColorType
                     ? ($attr->color?->name ?? $attr->name)
                     : $attr->name;
