@@ -5,7 +5,7 @@
 > **آخر تحديث | Last Updated:** 2026-10-05  
 > الملف الشامل السابق يبقى: [`flutter.md`](./flutter.md)
 
-**اليوم (28 تشرين الأول):** دوائر اللون — صفة اسمها `Color` / `اللون` ترجع `hex` حتى لو `type` محفوظ `square`. اقرؤوا `options[].hex`. إذا `hex` فاضي الدائرة تبقى رمادية لأن الدرجة مو مربوطة بسجل لون — [`FLUTTER_PRODUCT_COLOR_HEX.md`](./FLUTTER_PRODUCT_COLOR_HEX.md)
+**اليوم (28 تشرين الأول):** دوائر اللون من `hex` فقط. الداشبورد يربط الدرجة بـ `color_id`، والتطبيق ما يرسله ولا يخمن اللون من الاسم. الاختيار بـ `options[].id` والسلة بـ `shop_variants[].id` — [`FLUTTER_PRODUCT_COLOR_HEX.md`](./FLUTTER_PRODUCT_COLOR_HEX.md)
 
 **اليوم (5 تشرين الأول / تصحيح 28 أيلول):** صورة الأيقونة — بعض الأيقونات رجعت `icon`/`image` = `null` بسبب صلاحيات مجلد `icons` على السيرفر (مو باگ Flutter). أخفوا العنصر إذا الرابط فاضي. بعد إصلاح السيرفر وإعادة الرفع المسار يتغيّر وفيه `?v=` — الكاش على الرابط كامل مو على `id` — [`FLUTTER_ICON_IMAGE.md`](./FLUTTER_ICON_IMAGE.md)
 
@@ -218,7 +218,7 @@ products.where((p) => p.categoryId == selectedId); // خطأ
 - لا `name` ولا `country_id` على `/products`
 - أي فلتر → `page = 1`
 - empty state من `pagination.total == 0`
-- chips اللون من `/categories/{id}/attributes` → `values[].hex` عند `type=color`
+- chips اللون من `/categories/{id}/attributes` → `values[].hex` عندما `type=color` أو اسم الصفة `Color` / `اللون`
 - لا ترسلوا مفاتيح فاضي/`null`؛ booleans: احذفوا المفتاح أو `1`/`0` (الباك يقبل `true`/`false` بعد التحديث)
 - `attribute_values=31,40` — **IDs** مو أسماء
 
