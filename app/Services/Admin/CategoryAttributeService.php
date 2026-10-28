@@ -42,18 +42,20 @@ class CategoryAttributeService extends BaseService
 
     /**
      * Create a new category attribute
-     * If type is 'color', automatically create attribute values from colors table
+     * If type is 'color' and no values are supplied, use the colors table.
      */
     public function create($data)
     {
+        $hasSuppliedValues = !empty($data['values']);
+
         // Create the category attribute using parent method
         $object = $this->model::create($data);
         $this->handleSingleImages($object, $data);
         $this->handleRelations($object, $data);
         $this->handleMedia($object, $data);
 
-        // If type is 'color', automatically create attribute values from colors table
-        if (isset($data['type']) && $data['type'] === 'color') {
+        // Keep explicit color selections instead of appending the full palette.
+        if (($data['type'] ?? null) === 'color' && !$hasSuppliedValues) {
             $this->createColorAttributeValues($object);
         }
 

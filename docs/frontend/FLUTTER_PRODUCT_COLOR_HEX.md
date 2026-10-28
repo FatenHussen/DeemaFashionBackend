@@ -1,5 +1,7 @@
 # Flutter — دوائر اللون من `hex`
 
+مرجع مشترك للويب والتطبيق، مع حفظ ربط اللون وتشخيص الدوائر الرمادية: [`PRODUCT_COLOR_SWATCHES.md`](./PRODUCT_COLOR_SWATCHES.md).
+
 > **أرسلوا هذا الملف لفريق Flutter فقط.**  
 > **آخر تحديث:** 21 أيلول 2026  
 > Base: `/api/user` + `Accept-Language: ar|en`  

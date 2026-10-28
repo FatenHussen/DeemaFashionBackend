@@ -39,9 +39,15 @@ class StoreRequest extends FormRequest
                         $valueName[$locale] = $value['name'][$locale];
                     }
                 }
-                $values[] = [
+                $entry = [
                     'name' => $valueName,
                 ];
+
+                if (is_array($value) && array_key_exists('color_id', $value)) {
+                    $entry['color_id'] = $value['color_id'];
+                }
+
+                $values[] = $entry;
             }
         }
 
@@ -58,6 +64,7 @@ class StoreRequest extends FormRequest
             'type' => 'required|in:square,circle,color',
             'values'      => 'nullable|array',
             'values.*.name' => 'required|array',
+            'values.*.color_id' => 'nullable|integer|exists:colors,id',
         ];
 
         foreach ($this->locales as $locale) {
