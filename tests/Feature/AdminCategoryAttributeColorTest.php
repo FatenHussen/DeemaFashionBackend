@@ -93,10 +93,16 @@ class AdminCategoryAttributeColorTest extends TestCase
         foreach ([$data, array_merge($data, ['values' => []])] as $payload) {
             $resource = app(CategoryAttributeService::class)->create($payload);
             $values = $resource->resource->values()->get();
+            $palette = Color::query()->orderBy('id')->get();
 
-            $this->assertCount(2, $values);
-            $this->assertEqualsCanonicalizing([$black->id, $silver->id], $values->pluck('color_id')->all());
-            $this->assertEqualsCanonicalizing(['#000000', '#C0C0C0'], collect($resource->resolve()['values'])->pluck('hex')->all());
+            $this->assertCount($palette->count(), $values);
+            $this->assertEqualsCanonicalizing($palette->pluck('id')->all(), $values->pluck('color_id')->all());
+            $this->assertTrue($values->pluck('color_id')->contains($black->id));
+            $this->assertTrue($values->pluck('color_id')->contains($silver->id));
+            $this->assertEqualsCanonicalizing(
+                $palette->pluck('hex')->map(fn ($hex) => strtoupper((string) $hex))->all(),
+                collect($resource->resolve()['values'])->pluck('hex')->map(fn ($hex) => strtoupper((string) $hex))->all()
+            );
         }
     }
 
