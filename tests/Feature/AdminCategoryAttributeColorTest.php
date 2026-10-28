@@ -131,6 +131,54 @@ class AdminCategoryAttributeColorTest extends TestCase
         }
     }
 
+    public function test_color_values_without_a_color_link_are_rejected(): void
+    {
+        $this->seedLanguages();
+        $category = $this->createCategory();
+
+        foreach ([
+            ['type' => 'color', 'name' => ['en' => 'Finish', 'ar' => 'اللمسة']],
+            ['type' => 'square', 'name' => ['en' => 'Color', 'ar' => 'اللون']],
+        ] as $attribute) {
+            $request = $this->storeRequest([
+                'category_id' => $category->id,
+                'name' => $attribute['name'],
+                'type' => $attribute['type'],
+                'values' => [[
+                    'name' => ['en' => '2', 'ar' => '2'],
+                ]],
+            ]);
+
+            try {
+                $request->validateResolved();
+            } catch (ValidationException $exception) {
+                $this->assertArrayHasKey('values.0.color_id', $exception->errors());
+
+                continue;
+            }
+
+            $this->fail('A color value without color_id must fail validation.');
+        }
+    }
+
+    public function test_non_color_values_can_stay_plain_text(): void
+    {
+        $this->seedLanguages();
+        $category = $this->createCategory();
+        $request = $this->storeRequest([
+            'category_id' => $category->id,
+            'name' => ['en' => 'Size', 'ar' => 'القياس'],
+            'type' => 'square',
+            'values' => [[
+                'name' => ['en' => 'M', 'ar' => 'وسط'],
+            ]],
+        ]);
+
+        $request->validateResolved();
+
+        $this->assertArrayNotHasKey('color_id', $request->validated()['values'][0]);
+    }
+
     private function storeRequest(array $payload): StoreRequest
     {
         $request = StoreRequest::create('/api/admin/category-attributes', 'POST', $payload);

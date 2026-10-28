@@ -3,12 +3,14 @@
 > **أرسلوا هذا الملف لفريق Flutter فقط.**  
 > **آخر تحديث:** 28 تشرين الأول 2026  
 > Base: `/api/user` + `Accept-Language: ar|en`  
-> **الباك جاهز بعد `git pull` ثم `php artisan migrate` على سيرفر التطبيق**  
+> **الباك جاهز بعد `git pull`**  
 > مرجع مشترك: [`PRODUCT_COLOR_SWATCHES.md`](./PRODUCT_COLOR_SWATCHES.md)  
+> الداشبورد: [`DASHBOARD_PRODUCT_COLOR_HEX.md`](./DASHBOARD_PRODUCT_COLOR_HEX.md)  
 > متغيّرات: [`FLUTTER_PRODUCT_ALL_VARIANTS.md`](./FLUTTER_PRODUCT_ALL_VARIANTS.md)
 
-الداشبورد يربط كل درجة بسجل في جدول `colors` عبر `color_id`، والسجل فيه `hex`.  
-التطبيق **ما يرسل `color_id`**. يقرأ `hex` فقط ويملأ الدائرة منه.
+الداشبورد يحفظ الدرجة على قيمة صفة الفئة بـ `color_id` من جدول `colors`، والسجل فيه `hex`.  
+التطبيق **ما يرسل `color_id`**. يقرأ `hex` فقط ويملأ الدائرة منه.  
+إذا القيمة نص بلا ربط، مثل `2` أو `7`، الرد يبقى `hex: null` حتى يختار الداشبورد سجل اللون. إعادة حفظ المنتج بلا تغيير القيمة لا تكفي.
 
 الدائرة تبقى رمادية إذا `hex` فاضي. لا تخمّنوا الدرجة من الاسم.
 

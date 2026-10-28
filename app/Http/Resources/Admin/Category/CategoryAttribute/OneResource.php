@@ -22,14 +22,18 @@ class OneResource extends JsonResource
             'name'     => $this->getTranslations('name'),
             'category' => $this->category?->name,
             'type'     =>$this->type,
-            'values'   => $this->values->map(fn($value) => [
-                'id'   => $value->id,
-                'name' => $this->type === 'color'
-                    ? ($value->color?->getTranslations('name') ?? $value->getTranslations('name'))
-                    : $value->getTranslations('name'),
-                'color_id' => $this->type === 'color' ? $value->color_id : null,
-                'hex' => $this->type === 'color' ? AttributeColorHex::forValue($value) : null,
-            ]),
+            'values'   => $this->values->map(function ($value) {
+                $isColor = AttributeColorHex::isColorAttribute($this->type, $this->getTranslations('name'));
+
+                return [
+                    'id'   => $value->id,
+                    'name' => $isColor
+                        ? ($value->color?->getTranslations('name') ?? $value->getTranslations('name'))
+                        : $value->getTranslations('name'),
+                    'color_id' => $isColor ? $value->color_id : null,
+                    'hex' => $isColor ? AttributeColorHex::forValue($value) : null,
+                ];
+            }),
             'is_active' => $this->is_active,
 
         ];
