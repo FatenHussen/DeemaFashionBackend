@@ -2,7 +2,7 @@
 
 > **أرسلوا هذا الملف لفريق الويب.**  
 > Base: `/api/user` + `Accept-Language: ar|en`  
-> **آخر تحديث | Last Updated:** 2026-10-28  
+> **آخر تحديث | Last Updated:** 2026-10-29  
 > الملف الشامل السابق يبقى: [`web.md`](./web.md)  
 > **المشروع منفصل عن تيك مارت** — الهوية البصرية: [`WEB_BRAND_IDENTITY.md`](./WEB_BRAND_IDENTITY.md)
 

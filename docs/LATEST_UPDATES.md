@@ -1,10 +1,12 @@
 # آخر التعديلات والتحديثات — Deema Fashion Backend
 
 > **أرسلوا هذا الملف** — آخر نسخة شاملة (كل الفرق)  
-> **تاريخ:** 28 تشرين الأول 2026  
+> **تاريخ:** 29 تشرين الأول 2026  
 > **النطاق:** من منتصف آب حتى اليوم — باك + داشبورد + ويب + Flutter  
 > **الحالة:** الباك جاهز بعد `git pull` + `php artisan config:clear`  
 > **مهم:** المشروع **ديما فاشن** منفصل عن تيك مارت — الهوية البصرية [`frontend/DEEMA_BRAND_IDENTITY.md`](./frontend/DEEMA_BRAND_IDENTITY.md)
+
+**آخر ما نزل (29 تشرين الأول):** درجة اللون على متغير الفئة اختيارية. الاسم يُحفظ وحده و`hex` يبقى `null` حتى يُرسل `color_id`. الهوية البصرية لديما فاشن ما تغيّرت (`#c720a4` / `#ff1493` · اسم المتجر · الشعارات). داش [`frontend/DASHBOARD_PRODUCT_COLOR_HEX.md`](./frontend/DASHBOARD_PRODUCT_COLOR_HEX.md) · ويب [`frontend/WEB_PRODUCT_COLOR_HEX.md`](./frontend/WEB_PRODUCT_COLOR_HEX.md) · Flutter [`frontend/FLUTTER_PRODUCT_COLOR_HEX.md`](./frontend/FLUTTER_PRODUCT_COLOR_HEX.md)
 
 **آخر ما نزل (28 تشرين الأول):** لون المنتج من جدول `colors` (`color_id` + `hex`) وتحويل العملة — الهوية البصرية لديما فاشن بقيت كما هي (`#c720a4` / `#ff1493` · اسم المتجر · الشعارات). داش [`frontend/DASHBOARD_PRODUCT_COLOR_HEX.md`](./frontend/DASHBOARD_PRODUCT_COLOR_HEX.md) · ويب [`frontend/WEB_PRODUCT_COLOR_HEX.md`](./frontend/WEB_PRODUCT_COLOR_HEX.md) · Flutter [`frontend/FLUTTER_PRODUCT_COLOR_HEX.md`](./frontend/FLUTTER_PRODUCT_COLOR_HEX.md)
 

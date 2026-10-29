@@ -2,7 +2,7 @@
 
 > **أرسلوا هذا الملف لفريق Flutter.**  
 > Base: `/api/user` + `Accept-Language: ar|en`  
-> **آخر تحديث | Last Updated:** 2026-10-28  
+> **آخر تحديث | Last Updated:** 2026-10-29  
 > الملف الشامل السابق يبقى: [`flutter.md`](./flutter.md)  
 > **المشروع منفصل عن تيك مارت** — الهوية البصرية: [`FLUTTER_BRAND_IDENTITY.md`](./FLUTTER_BRAND_IDENTITY.md)
 
