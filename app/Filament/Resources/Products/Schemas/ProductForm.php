@@ -1018,8 +1018,12 @@ class ProductForm
             return false;
         }
 
-        return \App\Models\CategoryAttribute::where('id', $attributeId)
-            ->value('type') === 'color';
+        $attribute = \App\Models\CategoryAttribute::query()->find($attributeId);
+
+        return \App\Support\AttributeColorHex::isColorAttribute(
+            $attribute?->type,
+            $attribute?->getTranslations('name') ?? []
+        );
     }
 
     private static function getAttributeValueHexById(int $valueId): ?string
@@ -1061,7 +1065,7 @@ class ProductForm
     private static function getColorOptionLabel(AttributeValue $value): ?string
     {
         $color = $value->color;
-        $hex = $color?->hex;
+        $hex = \App\Support\AttributeColorHex::normalize($color?->hex);
 
         if (!$hex) {
             return null;

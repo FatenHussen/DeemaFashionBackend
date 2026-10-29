@@ -45,7 +45,7 @@ class Currency extends Model
         }
 
         // إذا العملة هي الدولار (الأساسية)، نرجع كما هو
-        if ($this->is_default) {
+        if (strtoupper((string) $this->code) === 'USD') {
             return round($amountInBase, 2);
         }
 
@@ -59,7 +59,7 @@ class Currency extends Model
             return null;
         }
 
-        if ($this->is_default) {
+        if (strtoupper((string) $this->code) === 'USD') {
             return round($amount, 2);
         }
 

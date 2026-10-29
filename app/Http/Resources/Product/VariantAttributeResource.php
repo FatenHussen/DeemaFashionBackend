@@ -9,7 +9,11 @@ class VariantAttributeResource extends JsonResource
 {
     public function toArray($request)
     {
-        $isColorType = ($this->categoryAttribute?->type ?? null) === 'color';
+        $attribute = $this->categoryAttribute;
+        $isColorType = AttributeColorHex::isColorAttribute(
+            $attribute?->type,
+            $attribute?->getTranslations('name') ?? []
+        );
 
         return [
             'id'        => $this->id,

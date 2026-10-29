@@ -1,12 +1,14 @@
 # آخر التعديلات والتحديثات — Deema Fashion Backend
 
 > **أرسلوا هذا الملف** — آخر نسخة شاملة (كل الفرق)  
-> **تاريخ:** 8 تشرين الأول 2026  
+> **تاريخ:** 28 تشرين الأول 2026  
 > **النطاق:** من منتصف آب حتى اليوم — باك + داشبورد + ويب + Flutter  
 > **الحالة:** الباك جاهز بعد `git pull` + `php artisan config:clear`  
 > **مهم:** المشروع **ديما فاشن** منفصل عن تيك مارت — الهوية البصرية [`frontend/DEEMA_BRAND_IDENTITY.md`](./frontend/DEEMA_BRAND_IDENTITY.md)
 
-**آخر ما نزل اليوم (8 تشرين الأول):** صلاحيات الداشبورد — إخفاء السايدبار حسب `permissions` (مثال: بس شريط التنقّل) — [`frontend/DASHBOARD_PERMISSIONS.md`](./frontend/DASHBOARD_PERMISSIONS.md) · **ويب/Flutter الزبون: لا حاجة**
+**آخر ما نزل (28 تشرين الأول):** لون المنتج من جدول `colors` (`color_id` + `hex`) وتحويل العملة — الهوية البصرية لديما فاشن بقيت كما هي (`#c720a4` / `#ff1493` · اسم المتجر · الشعارات). داش [`frontend/DASHBOARD_PRODUCT_COLOR_HEX.md`](./frontend/DASHBOARD_PRODUCT_COLOR_HEX.md) · ويب [`frontend/WEB_PRODUCT_COLOR_HEX.md`](./frontend/WEB_PRODUCT_COLOR_HEX.md) · Flutter [`frontend/FLUTTER_PRODUCT_COLOR_HEX.md`](./frontend/FLUTTER_PRODUCT_COLOR_HEX.md)
+
+**آخر ما نزل (8 تشرين الأول):** صلاحيات الداشبورد — إخفاء السايدبار حسب `permissions` (مثال: بس شريط التنقّل) — [`frontend/DASHBOARD_PERMISSIONS.md`](./frontend/DASHBOARD_PERMISSIONS.md) · **ويب/Flutter الزبون: لا حاجة**
 
 **آخر ما نزل (8 تشرين الأول):** هوية ديما فاشن البصرية (منفصل عن تيك مارت) — ألوان `#c720a4` / `#ff1493` من `GET /api/user/settings` · داش [`DASHBOARD_BRAND_IDENTITY.md`](./frontend/DASHBOARD_BRAND_IDENTITY.md) · ويب [`WEB_BRAND_IDENTITY.md`](./frontend/WEB_BRAND_IDENTITY.md) · Flutter [`FLUTTER_BRAND_IDENTITY.md`](./frontend/FLUTTER_BRAND_IDENTITY.md)
 

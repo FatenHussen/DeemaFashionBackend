@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Http\Resources\Product\VariantAttributeResource;
+use App\Support\AttributeColorHex;
 use App\Traits\NormalizesBlankStringAttributes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -124,7 +125,10 @@ class ProductVariant extends Model
                 return null;
             }
 
-            $isColorType = ($attribute->type ?? null) === 'color';
+            $isColorType = AttributeColorHex::isColorAttribute(
+                $attribute->type ?? null,
+                $attribute->getTranslations('name')
+            );
             $attributeName = $attribute->name ?? null;
 
             if ($isColorType) {
@@ -132,7 +136,7 @@ class ProductVariant extends Model
                     ?: $attributeValue->color?->getTranslation('name', 'en', false)
                     ?: $attributeValue->color?->getTranslation('name', 'ar', false)
                     ?: $attributeValue->name;
-                $hex = $attributeValue->color?->hex;
+                $hex = AttributeColorHex::forValue($attributeValue);
 
                 return [
                     'id' => $attributeValue->id,

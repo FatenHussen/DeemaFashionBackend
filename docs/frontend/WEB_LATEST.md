@@ -2,9 +2,11 @@
 
 > **أرسلوا هذا الملف لفريق الويب.**  
 > Base: `/api/user` + `Accept-Language: ar|en`  
-> **آخر تحديث | Last Updated:** 2026-10-08  
+> **آخر تحديث | Last Updated:** 2026-10-28  
 > الملف الشامل السابق يبقى: [`web.md`](./web.md)  
 > **المشروع منفصل عن تيك مارت** — الهوية البصرية: [`WEB_BRAND_IDENTITY.md`](./WEB_BRAND_IDENTITY.md)
+
+**اليوم (28 تشرين الأول):** دوائر اللون من `hex` فقط. الموقع ما يرسل `color_id` ولا يخمن اللون من الاسم. الاختيار بـ `options[].id` والسلة بـ `shop_variants[].id` — [`WEB_PRODUCT_COLOR_HEX.md`](./WEB_PRODUCT_COLOR_HEX.md)
 
 **اليوم (8 تشرين الأول):** هوية ديما فاشن البصرية — ألوان ماجنتا/وردي من `GET /settings` · لا تيك مارت — [`WEB_BRAND_IDENTITY.md`](./WEB_BRAND_IDENTITY.md)
 

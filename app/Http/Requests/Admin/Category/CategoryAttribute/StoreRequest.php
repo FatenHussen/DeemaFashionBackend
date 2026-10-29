@@ -4,7 +4,9 @@ namespace App\Http\Requests\Admin\Category\CategoryAttribute;
 
 use App\Models\Language;
 use App\Rules\RootCategory;
+use App\Support\AttributeColorHex;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreRequest extends FormRequest
 {
@@ -39,9 +41,15 @@ class StoreRequest extends FormRequest
                         $valueName[$locale] = $value['name'][$locale];
                     }
                 }
-                $values[] = [
+                $entry = [
                     'name' => $valueName,
                 ];
+
+                if (is_array($value) && array_key_exists('color_id', $value)) {
+                    $entry['color_id'] = $value['color_id'];
+                }
+
+                $values[] = $entry;
             }
         }
 
@@ -58,6 +66,12 @@ class StoreRequest extends FormRequest
             'type' => 'required|in:square,circle,color',
             'values'      => 'nullable|array',
             'values.*.name' => 'required|array',
+            'values.*.color_id' => [
+                Rule::requiredIf(fn () => $this->requiresColorLink()),
+                'nullable',
+                'integer',
+                'exists:colors,id',
+            ],
         ];
 
         foreach ($this->locales as $locale) {
@@ -66,5 +80,18 @@ class StoreRequest extends FormRequest
         }
 
         return $rules;
+    }
+
+    /**
+     * A color shade is a colors-table row. Free text is rejected once values are sent.
+     * Omitting values, or sending an empty list, still attaches the full palette.
+     */
+    private function requiresColorLink(): bool
+    {
+        $values = $this->input('values');
+
+        return is_array($values)
+            && $values !== []
+            && AttributeColorHex::isColorAttribute($this->input('type'), $this->input('name'));
     }
 }

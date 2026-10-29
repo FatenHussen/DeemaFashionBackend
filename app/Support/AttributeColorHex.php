@@ -8,8 +8,54 @@ use App\Models\Color;
 class AttributeColorHex
 {
     /**
+     * Labels that still mean a color picker when the row was saved as square/circle.
+     * Live catalog rows named Color arrive as type "square" with no swatch otherwise.
+     */
+    private const COLOR_LABELS = [
+        'color',
+        'colour',
+        'اللون',
+        'لون',
+        'الالوان',
+        'الألوان',
+        'الوان',
+        'ألوان',
+    ];
+
+    /**
+     * Color swatches are type "color", or an attribute whose name is Color / اللون.
+     * The stored type is left unchanged; only hex resolution uses this.
+     */
+    public static function isColorAttribute(?string $type, mixed $names = null): bool
+    {
+        if ($type === 'color') {
+            return true;
+        }
+
+        $candidates = match (true) {
+            is_string($names) => [$names],
+            is_array($names) => $names,
+            default => [],
+        };
+
+        foreach ($candidates as $name) {
+            if (!is_string($name)) {
+                continue;
+            }
+
+            $normalized = mb_strtolower(trim($name));
+            if ($normalized !== '' && in_array($normalized, self::COLOR_LABELS, true)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Resolve a display hex for a color-type attribute value.
-     * Prefers colors.hex via color_id; falls back to matching colors by name.
+     * Prefers colors.hex via color_id; legacy values use stored translations
+     * so the swatch does not depend on the request language.
      */
     public static function forValue(?AttributeValue $value): ?string
     {
@@ -17,19 +63,35 @@ class AttributeColorHex
             return null;
         }
 
-        $hex = $value->color?->hex;
-        if (is_string($hex) && $hex !== '') {
-            return self::normalize($hex);
+        $color = $value->color;
+        $hex = self::normalize($color?->hex);
+        if ($hex !== null) {
+            return $hex;
         }
 
-        $name = $value->color?->name ?? $value->name;
-        if (!is_string($name) || $name === '') {
+        $colorNames = $color?->getTranslations('name') ?? [];
+        $valueNames = $value->getTranslations('name');
+        $names = collect(array_merge(array_values($colorNames), array_values($valueNames)))
+            ->filter(fn ($name) => is_string($name))
+            ->map(fn ($name) => trim($name))
+            ->filter(fn ($name) => $name !== '')
+            ->unique()
+            ->values()
+            ->all();
+
+        foreach ($names as $name) {
+            if (($hex = self::normalize($name)) !== null) {
+                return $hex;
+            }
+        }
+
+        if ($names === []) {
             return null;
         }
 
-        $matched = self::findColorByName($name);
+        $locales = array_unique(array_merge(['ar', 'en'], array_keys($colorNames), array_keys($valueNames)));
 
-        return $matched?->hex ? self::normalize($matched->hex) : self::normalize($name);
+        return self::findHexByNames($names, $locales);
     }
 
     public static function normalize(mixed $hex): ?string
@@ -57,24 +119,42 @@ class AttributeColorHex
         return null;
     }
 
-    private static function findColorByName(string $name): ?Color
+    private static function findHexByNames(array $names, array $locales): ?string
     {
-        static $cache = [];
+        $names = array_values(array_unique(array_map(fn ($name) => mb_strtolower($name), $names)));
+        $request = request();
+        $cache = $request->attributes->get(self::class, []);
+        $key = json_encode([$names, array_values($locales)]);
 
-        $key = mb_strtolower(trim($name));
+        // Repeated variants share lookups within this response, never across requests.
         if (array_key_exists($key, $cache)) {
             return $cache[$key];
         }
 
-        $color = Color::query()
-            ->where(function ($q) use ($name) {
-                $q->whereRaw("LOWER(JSON_UNQUOTE(JSON_EXTRACT(name, '$.ar'))) = ?", [mb_strtolower($name)])
-                    ->orWhereRaw("LOWER(JSON_UNQUOTE(JSON_EXTRACT(name, '$.en'))) = ?", [mb_strtolower($name)])
-                    ->orWhereRaw('LOWER(hex) = ?', [mb_strtolower($name)])
-                    ->orWhereRaw("LOWER(hex) = ?", ['#' . ltrim(mb_strtolower($name), '#')]);
-            })
-            ->first();
+        $placeholders = implode(', ', array_fill(0, count($names), '?'));
 
-        return $cache[$key] = $color;
+        $colors = Color::query()
+            ->where(function ($query) use ($names, $locales, $placeholders) {
+                foreach ($locales as $locale) {
+                    $query->orWhereRaw(
+                        "LOWER(TRIM(JSON_UNQUOTE(JSON_EXTRACT(name, ?)))) IN ({$placeholders})",
+                        array_merge(['$.' . json_encode((string) $locale)], $names)
+                    );
+                }
+            })
+            ->orderBy('id')
+            ->get(['hex']);
+
+        $hex = null;
+        foreach ($colors as $color) {
+            if (($hex = self::normalize($color->hex)) !== null) {
+                break;
+            }
+        }
+
+        $cache[$key] = $hex;
+        $request->attributes->set(self::class, $cache);
+
+        return $hex;
     }
 }

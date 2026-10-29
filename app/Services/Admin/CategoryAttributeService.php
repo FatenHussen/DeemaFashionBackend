@@ -10,7 +10,9 @@ use App\Http\Resources\Admin\Category\CategoryAttribute\AllResource;
 use App\Services\Base\CategoryAttributeDeleteImpactService;
 use App\Services\BaseService;
 use App\Exceptions\DeleteConfirmationRequiredException;
+use App\Support\AttributeColorHex;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class CategoryAttributeService extends BaseService
 {
@@ -42,18 +44,28 @@ class CategoryAttributeService extends BaseService
 
     /**
      * Create a new category attribute
-     * If type is 'color', automatically create attribute values from colors table
+     * If type is 'color' and no values are supplied, use the colors table.
      */
     public function create($data)
     {
+        $hasSuppliedValues = !empty($data['values']);
+
+        if ($hasSuppliedValues) {
+            $this->assertColorValuesAreLinked(
+                $data['type'] ?? null,
+                $data['name'] ?? null,
+                $data['values']
+            );
+        }
+
         // Create the category attribute using parent method
         $object = $this->model::create($data);
         $this->handleSingleImages($object, $data);
         $this->handleRelations($object, $data);
         $this->handleMedia($object, $data);
 
-        // If type is 'color', automatically create attribute values from colors table
-        if (isset($data['type']) && $data['type'] === 'color') {
+        // Keep explicit color selections instead of appending the full palette.
+        if (($data['type'] ?? null) === 'color' && !$hasSuppliedValues) {
             $this->createColorAttributeValues($object);
         }
 
@@ -61,6 +73,20 @@ class CategoryAttributeService extends BaseService
         $object->refresh();
 
         return new $this->resource($object) ?? true;
+    }
+
+    public function update($id, array $data)
+    {
+        if (array_key_exists('values', $data)) {
+            $attribute = CategoryAttribute::query()->findOrFail($id);
+            $this->assertColorValuesAreLinked(
+                array_key_exists('type', $data) ? $data['type'] : $attribute->type,
+                array_key_exists('name', $data) ? $data['name'] : $attribute->getTranslations('name'),
+                $data['values'] ?? []
+            );
+        }
+
+        return parent::update($id, $data);
     }
 
     public function queryBuilder($query, $filters = [], $config = [])
@@ -190,6 +216,41 @@ class CategoryAttributeService extends BaseService
         }
 
         parent::handleRelations($object, $data);
+    }
+
+    /**
+     * A color shade is a colors row. Free text on a color attribute is not stored.
+     * An empty value list is left alone so creating a color attribute can still
+     * attach the palette, and omitting values on update does not reach this method.
+     */
+    private function assertColorValuesAreLinked(?string $type, mixed $names, array $items): void
+    {
+        if (!AttributeColorHex::isColorAttribute($type, $names)) {
+            return;
+        }
+
+        $messages = [];
+
+        foreach (array_values($items) as $index => $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+
+            $colorId = $item['color_id'] ?? null;
+
+            if ($colorId === null || $colorId === '') {
+                $messages["values.$index.color_id"] = __('validation.required', ['attribute' => 'color id']);
+                continue;
+            }
+
+            if (!is_numeric($colorId) || !Color::query()->whereKey((int) $colorId)->exists()) {
+                $messages["values.$index.color_id"] = __('validation.exists', ['attribute' => 'color id']);
+            }
+        }
+
+        if ($messages !== []) {
+            throw ValidationException::withMessages($messages);
+        }
     }
 
     protected function syncAttributeValues(CategoryAttribute $attribute, array $items): void
