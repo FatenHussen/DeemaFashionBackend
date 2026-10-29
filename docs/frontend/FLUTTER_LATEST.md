@@ -5,7 +5,7 @@
 > **آخر تحديث | Last Updated:** 2026-10-05  
 > الملف الشامل السابق يبقى: [`flutter.md`](./flutter.md)
 
-**اليوم (28 تشرين الأول):** دوائر اللون من `hex` فقط. الداشبورد يربط الدرجة بـ `color_id`، والتطبيق ما يرسله ولا يخمن اللون من الاسم. الاختيار بـ `options[].id` والسلة بـ `shop_variants[].id` — [`FLUTTER_PRODUCT_COLOR_HEX.md`](./FLUTTER_PRODUCT_COLOR_HEX.md)
+**اليوم (29 تشرين الأول):** دوائر اللون من `hex` فقط. درجة الداشبورد اختيارية، فـ `hex: null` دائرة رمادية `Color(0xFFA1A1AA)` بلا تخمين من الاسم. التطبيق ما يرسل `color_id`. الاختيار بـ `options[].id` والسلة بـ `shop_variants[].id` — [`FLUTTER_PRODUCT_COLOR_HEX.md`](./FLUTTER_PRODUCT_COLOR_HEX.md)
 
 **اليوم (5 تشرين الأول / تصحيح 28 أيلول):** صورة الأيقونة — بعض الأيقونات رجعت `icon`/`image` = `null` بسبب صلاحيات مجلد `icons` على السيرفر (مو باگ Flutter). أخفوا العنصر إذا الرابط فاضي. بعد إصلاح السيرفر وإعادة الرفع المسار يتغيّر وفيه `?v=` — الكاش على الرابط كامل مو على `id` — [`FLUTTER_ICON_IMAGE.md`](./FLUTTER_ICON_IMAGE.md)
 

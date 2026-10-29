@@ -1,20 +1,16 @@
 # Flutter — دوائر اللون من `hex`
 
 > **أرسلوا هذا الملف لفريق Flutter فقط.**  
-> **آخر تحديث:** 28 تشرين الأول 2026  
+> **آخر تحديث:** 29 تشرين الأول 2026  
 > Base: `/api/user` + `Accept-Language: ar|en`  
-> **الباك جاهز بعد `git pull`**  
 > الداشبورد: [`DASHBOARD_PRODUCT_COLOR_HEX.md`](./DASHBOARD_PRODUCT_COLOR_HEX.md)  
 > الويب: [`WEB_PRODUCT_COLOR_HEX.md`](./WEB_PRODUCT_COLOR_HEX.md)  
 > متغيّرات: [`FLUTTER_PRODUCT_ALL_VARIANTS.md`](./FLUTTER_PRODUCT_ALL_VARIANTS.md)
 
-الداشبورد يحفظ الدرجة على قيمة صفة الفئة بـ `color_id` من جدول `colors`، والسجل فيه `hex`.  
-التطبيق **ما يرسل `color_id`**. يقرأ `hex` فقط ويملأ الدائرة منه.  
-إذا القيمة نص بلا ربط، مثل `2` أو `7`، الرد يبقى `hex: null` حتى يختار الداشبورد سجل اللون. إعادة حفظ المنتج بلا تغيير القيمة لا تكفي.
+الداشبورد يكتب اسم اللون، ودرجة اللون **اختيارية**. إذا اختار درجة تُحفظ في جدول `colors` ويرجع التطبيق `hex`.  
+التطبيق **ما يرسل `color_id`** وما يخزّن لوناً. يقرأ `hex` ويملأ الدائرة منه.
 
-الدائرة تبقى رمادية إذا `hex` فاضي. لا تخمّنوا الدرجة من الاسم.
-
-ثبت على السيرفر: منتج 68 خيارات `141` و`142` فيهن `hex` والدائرة تلونت. منتج 95 خيارات `160` و`161` (`2` و`7`) رجعن `hex: null` والدائرة `rgb(161, 161, 170)`. النقص من ربط `color_id` على الداشبورد، مو من التطبيق.
+إذا القيمة نص بلا درجة، مثل `2` أو `7`، الرد `hex: null` والدائرة رمادية `Color(0xFFA1A1AA)`. هذا متوقع إلى أن تُختار درجة على الداشبورد. إعادة حفظ المنتج لا تلوّنها. لا تخمّنوا الدرجة من الاسم.
 
 ---
 
@@ -33,20 +29,20 @@
 
 | المصدر | الاستخدام |
 |--------|-----------|
-| `options[].hex` أو `attributes[].hex` | لون الدائرة. مثال `#3E434A` |
+| `options[].hex` أو `attributes[].hex` | لون الدائرة. مثال `#FDD0DB` |
 | `options[].name` / `attributes[].value` | نص بجانب الدائرة فقط. **ما يلوّن** |
 | `options[].id` | اختيار الدرجة. يطابق `shop_variants[].attributes[].id` |
 | `shop_variants[].id` | إرسال المتغيّر للسلة |
-| `color_id` | رقم سجل اللون عند الداشبورد. **مو موجود** في رد المستخدم، ومو رقم الخيار |
+| `color_id` | رقم سجل اللون عند الداشبورد. **مو موجود** في رد المستخدم |
 
 صفة اللون هي:
 
 - `type == "color"`، أو
-- اسمها `Color` / `اللون` حتى لو `type` بقي `square`
+- اسمها `Color` / `colour` / `اللون` / `لون` / `الالوان` / `الألوان` / `الوان` / `ألوان` حتى لو `type` بقي `square`
 
 `type` في الرد يبقى كما حفظه الداشبورد. لا تحوّلوا `square` إلى `color` عندكم.
 
-بدون `hex` → دائرة رمادية واضحة، مو لون مستنتج من «أسود» أو «موف».
+بدون `hex` → `Color(0xFFA1A1AA)`. مو لون مستنتج من «أسود» أو «موف» أو من رقم مثل `2`.
 
 `attributes_map[].values` أسماء قديمة بلا `hex` وبلا id. ابنوا الدوائر من `options[]`.
 
@@ -66,29 +62,28 @@ GET /api/user/products/{id}
     "id": 6,
     "attribute": "Color",
     "type": "color",
-    "options": [{
-      "id": 147,
-      "name": "Black with Silver Glitter (1)",
-      "hex": "#3E434A"
-    }]
+    "options": [
+      { "id": 160, "name": "2", "hex": null },
+      { "id": 147, "name": "Light Nude Pink", "hex": "#FDD0DB" }
+    ]
   }],
   "shop_variants": [{
-    "id": 195,
+    "id": 208,
     "attributes": [{
-      "id": 147,
+      "id": 160,
       "attribute": "Color",
-      "value": "Black with Silver Glitter (1)",
+      "value": "2",
       "type": "color",
-      "hex": "#3E434A"
+      "hex": null
     }]
   }]
 }
 ```
 
 نفس `hex` في المكانين لنفس `id`.  
-`147` رقم قيمة الصفة. `195` رقم صف المتغيّر الذي يدخل السلة.
+`160` رقم قيمة الصفة. `208` رقم صف المتغيّر الذي يدخل السلة.
 
-مع `Accept-Language: ar` الاسم يصير «اسود مع لمعة فضية (1)» و`hex` ما يتغيّر.
+مع `Accept-Language: ar` الاسم يتغيّر و`hex` ما يتغيّر. `null` يبقى `null` في اللغتين.
 
 ### فلتر الفئة
 
@@ -101,13 +96,13 @@ GET /api/user/categories/{id}/attributes
   "name": "اللون",
   "type": "color",
   "values": [
-    { "id": 147, "name": "اسود مع لمعة فضية (1)", "hex": "#3E434A" }
+    { "id": 147, "name": "وردي نيود فاتح", "hex": "#FDD0DB" },
+    { "id": 160, "name": "2", "hex": null }
   ]
 }
 ```
 
-دوائر الفلتر من `values[].hex` عندما `type == "color"` أو اسم الصفة `Color` / `اللون`.  
-مفتاح الفلتر `attribute_values` = `values[].id`.
+دوائر الفلتر من `values[].hex`. مفتاح الفلتر `attribute_values` = `values[].id`. صف `hex: null` دائرة رمادية، والفلترة بالـ id تبقى شغّالة.
 
 ---
 
@@ -117,13 +112,31 @@ GET /api/user/categories/{id}/attributes
 2. طابقوا هذا الـ id مع `shop_variants[].attributes[].id`.
 3. أضيفوا للسلة `shop_variants[].id` للصف المطابق، مو `options[].id`.
 
-إذا `hex` فاضي والدائرة رمادية، الاختيار بالـ id يبقى شغّال. النقص من سجل اللون على السيرفر، مو من التطبيق.
+الدائرة الرمادية خيار صالح. النقص من درجة لم تُختر على الداشبورد، مو من التطبيق.
 
 ---
 
 ## 4) العرض
 
 ```dart
+const missingSwatch = Color(0xFFA1A1AA);
+
+const colorLabels = {
+  'color',
+  'colour',
+  'اللون',
+  'لون',
+  'الالوان',
+  'الألوان',
+  'الوان',
+  'ألوان',
+};
+
+bool isColorAttribute({String? type, String? name}) {
+  if ((type ?? '').trim().toLowerCase() == 'color') return true;
+  return colorLabels.contains((name ?? '').trim().toLowerCase());
+}
+
 Color? parseHex(String? hex) {
   if (hex == null || hex.isEmpty) return null;
   var raw = hex.trim();
@@ -137,20 +150,13 @@ Color? parseHex(String? hex) {
   return Color(value + 0xFF000000);
 }
 
-bool isColorAttribute({String? type, String? name}) {
-  if ((type ?? '').toLowerCase() == 'color') return true;
-  const names = {'color', 'colour', 'اللون', 'لون'};
-  return names.contains((name ?? '').trim().toLowerCase());
-}
-
-// options من attributes_map
 CircleAvatar(
-  backgroundColor: parseHex(option.hex) ?? const Color(0xFFA1A1AA),
+  backgroundColor: parseHex(option.hex) ?? missingSwatch,
   child: selected ? const Icon(Icons.check, size: 14) : null,
 );
 ```
 
-العنوان: `Color · ${option.name}` — النص من `name`، التعبئة من `hex`.
+العنوان من `option.name`. التعبئة من `parseHex(option.hex)`.
 
 ---
 
@@ -159,8 +165,7 @@ CircleAvatar(
 **غلط**
 
 ```dart
-// لون من الاسم، أو بناء الدوائر من values بدون hex
-CircleAvatar(backgroundColor: Colors.grey);
+CircleAvatar(backgroundColor: Colors.grey); // لكل الخيارات
 colorFromName(option.name);
 ```
 
@@ -169,7 +174,7 @@ colorFromName(option.name);
 ```dart
 for (final opt in colorGroup.options)
   CircleAvatar(
-    backgroundColor: parseHex(opt.hex) ?? const Color(0xFFA1A1AA),
+    backgroundColor: parseHex(opt.hex) ?? missingSwatch,
   );
 ```
 
@@ -178,9 +183,10 @@ for (final opt in colorGroup.options)
 ## 6) Checklist
 
 - [ ] دوائر المنتج من `options[].hex`، ونفس القيمة من `shop_variants[].attributes[].hex`
-- [ ] صفة `color` أو اسمها `Color` / `اللون` حتى لو `type` هو `square`
+- [ ] صفة `color` أو اسمها لون حتى لو `type` هو `square`
 - [ ] `#RGB` و`#RRGGBB`، والتعبئة معتمة
-- [ ] `hex: null` → رمادي، بلا تخمين من الاسم
+- [ ] `hex: null` → `Color(0xFFA1A1AA)`، بلا تخمين من الاسم
+- [ ] الخيار الرمادي يبقى قابلاً للاختيار
 - [ ] الاختيار بـ `options[].id`
 - [ ] السلة بـ `shop_variants[].id`
 - [ ] فلتر الفئة من `values[].hex` و`values[].id`

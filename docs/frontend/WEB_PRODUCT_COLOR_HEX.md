@@ -3,17 +3,13 @@
 > **أرسلوا هذا الملف لفريق الويب فقط.**  
 > **آخر تحديث:** 29 تشرين الأول 2026  
 > Base: `/api/user` + `Accept-Language: ar|en`  
-> **الباك جاهز بعد `git pull`**  
 > الداشبورد: [`DASHBOARD_PRODUCT_COLOR_HEX.md`](./DASHBOARD_PRODUCT_COLOR_HEX.md)  
 > Flutter: [`FLUTTER_PRODUCT_COLOR_HEX.md`](./FLUTTER_PRODUCT_COLOR_HEX.md)
 
-الداشبورد يحفظ الدرجة على قيمة صفة الفئة بـ `color_id` من جدول `colors`، والسجل فيه `hex`.  
-الموقع **ما يرسل `color_id`**. يقرأ `hex` فقط ويملأ الدائرة منه.  
-إذا القيمة نص بلا ربط، مثل `2` أو `7`، الرد يبقى `hex: null` حتى يختار الداشبورد درجة فينحفظ اللون في جدول `colors` ويرجع `color_id` مع تحديث المتغير. إعادة حفظ المنتج بلا `color_id` لا تكفي.
+الداشبورد يكتب اسم اللون، ودرجة اللون **اختيارية**. إذا اختار درجة تُحفظ في جدول `colors` ويرجع الموقع `hex`.  
+الموقع **ما يرسل `color_id`** وما يخزّن لوناً. يقرأ `hex` ويملأ الدائرة منه.
 
-الدائرة تبقى رمادية إذا `hex` فاضي. لا تخمّنوا الدرجة من الاسم.
-
-ثبت على السيرفر: منتج 68 خيارات `141` و`142` فيهن `hex` والدائرة تلونت. منتج 95 خيارات `160` و`161` (`2` و`7`) رجعن `hex: null` والدائرة `rgb(161, 161, 170)`. النقص من ربط `color_id` على الداشبورد، مو من الموقع.
+إذا القيمة نص بلا درجة، مثل `2` أو `7`، الرد `hex: null` والدائرة رمادية `rgb(161, 161, 170)`. هذا متوقع إلى أن تُختار درجة على الداشبورد. إعادة حفظ المنتج لا تلوّنها. لا تخمّنوا الدرجة من الاسم.
 
 ---
 
@@ -32,20 +28,20 @@
 
 | المصدر | الاستخدام |
 |--------|-----------|
-| `options[].hex` أو `attributes[].hex` | لون الدائرة. مثال `#3E434A` |
+| `options[].hex` أو `attributes[].hex` | لون الدائرة. مثال `#FDD0DB` |
 | `options[].name` / `attributes[].value` | نص بجانب الدائرة فقط. **ما يلوّن** |
 | `options[].id` | اختيار الدرجة. يطابق `shop_variants[].attributes[].id` |
 | `shop_variants[].id` | إرسال المتغيّر للسلة |
-| `color_id` | رقم سجل اللون عند الداشبورد. **مو موجود** في رد المستخدم، ومو رقم الخيار |
+| `color_id` | رقم سجل اللون عند الداشبورد. **مو موجود** في رد المستخدم |
 
 صفة اللون هي:
 
 - `type == "color"`، أو
-- اسمها `Color` / `اللون` حتى لو `type` بقي `square`
+- اسمها `Color` / `colour` / `اللون` / `لون` / `الالوان` / `الألوان` / `الوان` / `ألوان` حتى لو `type` بقي `square`
 
-`type` في الرد يبقى كما حفظه الداشبورد. لا تحوّلوا `square` إلى `color` في البيانات المحفوظة. العرض فقط يرسم دائرة عندما الصفة لون.
+`type` في الرد يبقى كما حفظه الداشبورد. لا تحوّلوا `square` إلى `color` في البيانات. العرض فقط يرسم دائرة عندما الصفة لون.
 
-بدون `hex` → دائرة رمادية `rgb(161 161 170)`، مو لون مستنتج من «أسود» أو «موف».
+بدون `hex` → `rgb(161 161 170)`. مو لون مستنتج من «أسود» أو «موف» أو من رقم مثل `2`.
 
 `attributes_map[].values` أسماء قديمة بلا `hex` وبلا id. ابنوا الدوائر من `options[]`.
 
@@ -65,29 +61,28 @@ GET /api/user/products/{id}
     "id": 6,
     "attribute": "Color",
     "type": "color",
-    "options": [{
-      "id": 147,
-      "name": "Black with Silver Glitter (1)",
-      "hex": "#3E434A"
-    }]
+    "options": [
+      { "id": 160, "name": "2", "hex": null },
+      { "id": 147, "name": "Light Nude Pink", "hex": "#FDD0DB" }
+    ]
   }],
   "shop_variants": [{
-    "id": 195,
+    "id": 208,
     "attributes": [{
-      "id": 147,
+      "id": 160,
       "attribute": "Color",
-      "value": "Black with Silver Glitter (1)",
+      "value": "2",
       "type": "color",
-      "hex": "#3E434A"
+      "hex": null
     }]
   }]
 }
 ```
 
 نفس `hex` في المكانين لنفس `id`.  
-`147` رقم قيمة الصفة. `195` رقم صف المتغيّر الذي يدخل السلة.
+`160` رقم قيمة الصفة. `208` رقم صف المتغيّر الذي يدخل السلة.
 
-مع `Accept-Language: ar` الاسم يصير «اسود مع لمعة فضية (1)» و`hex` ما يتغيّر.
+مع `Accept-Language: ar` الاسم يتغيّر و`hex` ما يتغيّر. `null` يبقى `null` في اللغتين.
 
 ### فلتر الفئة
 
@@ -100,13 +95,13 @@ GET /api/user/categories/{id}/attributes
   "name": "اللون",
   "type": "color",
   "values": [
-    { "id": 147, "name": "اسود مع لمعة فضية (1)", "hex": "#3E434A" }
+    { "id": 147, "name": "وردي نيود فاتح", "hex": "#FDD0DB" },
+    { "id": 160, "name": "2", "hex": null }
   ]
 }
 ```
 
-دوائر الفلتر من `values[].hex` عندما `type == "color"` أو اسم الصفة `Color` / `اللون`.  
-مفتاح الفلتر `attribute_values` = `values[].id`.
+دوائر الفلتر من `values[].hex`. مفتاح الفلتر `attribute_values` = `values[].id`. صف `hex: null` دائرة رمادية، والفلترة بالـ id تبقى شغّالة.
 
 ---
 
@@ -116,7 +111,7 @@ GET /api/user/categories/{id}/attributes
 2. طابقوا هذا الـ id مع `shop_variants[].attributes[].id`.
 3. أضيفوا للسلة `shop_variants[].id` للصف المطابق، مو `options[].id`.
 
-إذا `hex` فاضي والدائرة رمادية، الاختيار بالـ id يبقى شغّال. النقص من سجل اللون على السيرفر، مو من الموقع.
+الدائرة الرمادية خيار صالح. النقص من درجة لم تُختر على الداشبورد، مو من الموقع.
 
 ---
 
@@ -129,7 +124,16 @@ const MISSING = "rgb(161 161 170)";
 
 function isColorAttribute(type?: string | null, name?: string | null) {
   if ((type ?? "").trim().toLowerCase() === "color") return true;
-  const names = new Set(["color", "colour", "اللون", "لون"]);
+  const names = new Set([
+    "color",
+    "colour",
+    "اللون",
+    "لون",
+    "الالوان",
+    "الألوان",
+    "الوان",
+    "ألوان",
+  ]);
   return names.has((name ?? "").trim().toLowerCase());
 }
 
@@ -163,9 +167,10 @@ style={{ backgroundColor: fill(option.hex) }}
 ## 6) Checklist
 
 - [ ] دوائر المنتج من `options[].hex`، ونفس القيمة من `shop_variants[].attributes[].hex`
-- [ ] صفة `color` أو اسمها `Color` / `اللون` حتى لو `type` هو `square`
+- [ ] صفة `color` أو اسمها لون حتى لو `type` هو `square`
 - [ ] `#RGB` و`#RRGGBB`، والتعبئة معتمة
 - [ ] `hex: null` → `rgb(161 161 170)`، بلا تخمين من الاسم
+- [ ] الخيار الرمادي يبقى قابلاً للاختيار
 - [ ] الاختيار بـ `options[].id`
 - [ ] السلة بـ `shop_variants[].id`
 - [ ] فلتر الفئة من `values[].hex` و`values[].id`

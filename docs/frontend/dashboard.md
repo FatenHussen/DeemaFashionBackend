@@ -5,7 +5,7 @@
 > **آخر تحديث:** 27 أيلول 2026  
 > يجمع **كل** تعديلات الباك التي تحتاج تنفيذ في الداشبورد (مو بس المنتج).
 
-**اليوم (28 تشرين الأول):** لون المنتج من جدول `colors`. قيمة الصفة تُحفظ بـ `color_id`، والنص الحر على صفة اللون يُرفض — [`DASHBOARD_PRODUCT_COLOR_HEX.md`](./DASHBOARD_PRODUCT_COLOR_HEX.md)
+**اليوم (29 تشرين الأول):** درجة اللون على متغير الفئة اختيارية. الاسم يُحفظ وحده والدائرة تبقى رمادية حتى تُختار درجة عبر `POST /api/admin/colors` ثم `color_id` — [`DASHBOARD_PRODUCT_COLOR_HEX.md`](./DASHBOARD_PRODUCT_COLOR_HEX.md)
 
 **اليوم:** طلب المطعم لحاله توصيل فوري، من سائق المطعم أو عامل تيك مارت. السعر من المسافة والساعات ما بتنضرب بالمعامل — [`DASHBOARD_CART_CHECKOUT_DELIVERY.md`](./DASHBOARD_CART_CHECKOUT_DELIVERY.md)
 
