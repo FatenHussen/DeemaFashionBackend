@@ -6,7 +6,7 @@
 > يجمع **كل** تعديلات الباك التي تحتاج تنفيذ في الداشبورد (مو بس المنتج).  
 > **المشروع منفصل عن تيك مارت** — الهوية: [`DASHBOARD_BRAND_IDENTITY.md`](./DASHBOARD_BRAND_IDENTITY.md)
 
-**اليوم (28 تشرين الأول):** لون المنتج من جدول `colors`. قيمة الصفة تُحفظ بـ `color_id`، والنص الحر على صفة اللون يُرفض — [`DASHBOARD_PRODUCT_COLOR_HEX.md`](./DASHBOARD_PRODUCT_COLOR_HEX.md)
+**اليوم (29 تشرين الأول):** درجة اللون على متغير الفئة اختيارية. الاسم يُحفظ وحده والدائرة تبقى رمادية حتى تُختار درجة عبر `POST /api/admin/colors` ثم `color_id` — [`DASHBOARD_PRODUCT_COLOR_HEX.md`](./DASHBOARD_PRODUCT_COLOR_HEX.md)
 
 **اليوم (8 تشرين الأول):** صلاحيات الأدمن — أخفوا السايدبار حسب `permissions` بعد Login (مو قائمة ثابتة). موظف `navmenuitem.*` فقط → يظهر شريط التنقّل فقط — [`DASHBOARD_PERMISSIONS.md`](./DASHBOARD_PERMISSIONS.md)
 

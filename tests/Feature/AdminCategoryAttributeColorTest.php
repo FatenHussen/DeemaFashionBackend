@@ -133,7 +133,7 @@ class AdminCategoryAttributeColorTest extends TestCase
         }
     }
 
-    public function test_color_values_without_a_color_link_are_rejected(): void
+    public function test_color_values_without_a_color_link_are_allowed(): void
     {
         $this->seedLanguages();
         $category = $this->createCategory();
@@ -151,15 +151,9 @@ class AdminCategoryAttributeColorTest extends TestCase
                 ]],
             ]);
 
-            try {
-                $request->validateResolved();
-            } catch (ValidationException $exception) {
-                $this->assertArrayHasKey('values.0.color_id', $exception->errors());
+            $request->validateResolved();
 
-                continue;
-            }
-
-            $this->fail('A color value without color_id must fail validation.');
+            $this->assertArrayNotHasKey('color_id', $request->validated()['values'][0]);
         }
     }
 
@@ -181,27 +175,23 @@ class AdminCategoryAttributeColorTest extends TestCase
         $this->assertArrayNotHasKey('color_id', $request->validated()['values'][0]);
     }
 
-    public function test_saving_a_color_shade_without_color_id_does_not_persist(): void
+    public function test_saving_a_color_shade_without_color_id_keeps_the_name(): void
     {
         $category = $this->createCategory();
 
-        try {
-            app(CategoryAttributeService::class)->create([
-                'category_id' => $category->id,
-                'name' => ['en' => 'Color', 'ar' => 'اللون'],
-                'type' => 'color',
-                'is_active' => true,
-                'values' => [[
-                    'name' => ['en' => '2', 'ar' => '2'],
-                ]],
-            ]);
-            $this->fail('Free-text color values must not be stored.');
-        } catch (ValidationException $exception) {
-            $this->assertArrayHasKey('values.0.color_id', $exception->errors());
-        }
+        $resource = app(CategoryAttributeService::class)->create([
+            'category_id' => $category->id,
+            'name' => ['en' => 'Color', 'ar' => 'اللون'],
+            'type' => 'color',
+            'is_active' => true,
+            'values' => [[
+                'name' => ['en' => '2', 'ar' => '2'],
+            ]],
+        ]);
 
-        $this->assertSame(0, CategoryAttribute::query()->count());
-        $this->assertSame(0, AttributeValue::query()->count());
+        $value = $resource->resource->fresh('values')->values->first();
+        $this->assertSame('2', $value->getTranslation('name', 'en'));
+        $this->assertNull($value->color_id);
     }
 
     public function test_an_existing_text_shade_stays_unlinked_until_color_id_is_sent(): void
@@ -219,19 +209,14 @@ class AdminCategoryAttributeColorTest extends TestCase
             'name' => ['en' => '2', 'ar' => '2'],
         ]);
 
-        try {
-            app(CategoryAttributeService::class)->update($attribute->id, [
-                'type' => 'color',
-                'name' => ['en' => 'Color', 'ar' => 'اللون'],
-                'values' => [[
-                    'id' => $value->id,
-                    'name' => ['en' => '2', 'ar' => '2'],
-                ]],
-            ]);
-            $this->fail('Saving a color value again without color_id must fail.');
-        } catch (ValidationException $exception) {
-            $this->assertArrayHasKey('values.0.color_id', $exception->errors());
-        }
+        app(CategoryAttributeService::class)->update($attribute->id, [
+            'type' => 'color',
+            'name' => ['en' => 'Color', 'ar' => 'اللون'],
+            'values' => [[
+                'id' => $value->id,
+                'name' => ['en' => '2', 'ar' => '2'],
+            ]],
+        ]);
 
         $this->assertNull($value->fresh()->color_id);
         $this->assertSame($value->id, $value->fresh()->id);

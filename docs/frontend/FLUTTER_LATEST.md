@@ -6,7 +6,7 @@
 > الملف الشامل السابق يبقى: [`flutter.md`](./flutter.md)  
 > **المشروع منفصل عن تيك مارت** — الهوية البصرية: [`FLUTTER_BRAND_IDENTITY.md`](./FLUTTER_BRAND_IDENTITY.md)
 
-**اليوم (28 تشرين الأول):** دوائر اللون من `hex` فقط. الداشبورد يربط الدرجة بـ `color_id`، والتطبيق ما يرسله ولا يخمن اللون من الاسم. الاختيار بـ `options[].id` والسلة بـ `shop_variants[].id` — [`FLUTTER_PRODUCT_COLOR_HEX.md`](./FLUTTER_PRODUCT_COLOR_HEX.md)
+**اليوم (29 تشرين الأول):** دوائر اللون من `hex` فقط. درجة الداشبورد اختيارية، فـ `hex: null` دائرة رمادية `Color(0xFFA1A1AA)` بلا تخمين من الاسم. التطبيق ما يرسل `color_id`. الاختيار بـ `options[].id` والسلة بـ `shop_variants[].id` — [`FLUTTER_PRODUCT_COLOR_HEX.md`](./FLUTTER_PRODUCT_COLOR_HEX.md)
 
 **اليوم (8 تشرين الأول):** هوية ديما فاشن البصرية — ألوان ماجنتا/وردي من `GET /settings` · لا تيك مارت في الواجهة — [`FLUTTER_BRAND_IDENTITY.md`](./FLUTTER_BRAND_IDENTITY.md) · المرجع [`DEEMA_BRAND_IDENTITY.md`](./DEEMA_BRAND_IDENTITY.md)
 

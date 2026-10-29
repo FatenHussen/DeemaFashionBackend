@@ -219,7 +219,7 @@ class CategoryAttributeService extends BaseService
     }
 
     /**
-     * A color shade is a colors row. Free text on a color attribute is not stored.
+     * The shade is optional. A sent color_id must be a colors row.
      * An empty value list is left alone so creating a color attribute can still
      * attach the palette, and omitting values on update does not reach this method.
      */
@@ -239,7 +239,6 @@ class CategoryAttributeService extends BaseService
             $colorId = $item['color_id'] ?? null;
 
             if ($colorId === null || $colorId === '') {
-                $messages["values.$index.color_id"] = __('validation.required', ['attribute' => 'color id']);
                 continue;
             }
 
