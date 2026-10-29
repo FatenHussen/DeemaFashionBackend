@@ -27,9 +27,7 @@ class AllResource extends JsonResource
 
                 return [
                     'id'   => $value->id,
-                    'name' => $isColor
-                        ? ($value->color?->name ?? $value->name)
-                        : $value->name,
+                    'name' => $value->name,
                     'color_id' => $isColor ? $value->color_id : null,
                     'hex' => $isColor ? AttributeColorHex::forValue($value) : null,
                 ];
