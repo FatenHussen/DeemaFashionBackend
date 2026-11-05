@@ -6,7 +6,9 @@
 > الملف الشامل السابق يبقى: [`flutter.md`](./flutter.md)  
 > **المشروع منفصل عن تيك مارت** — الهوية البصرية: [`FLUTTER_BRAND_IDENTITY.md`](./FLUTTER_BRAND_IDENTITY.md)
 
-**اليوم (29 تشرين الأول):** دوائر اللون من `hex` فقط. درجة الداشبورد اختيارية، فـ `hex: null` دائرة رمادية `Color(0xFFA1A1AA)` بلا تخمين من الاسم. التطبيق ما يرسل `color_id`. الاختيار بـ `options[].id` والسلة بـ `shop_variants[].id` — [`FLUTTER_PRODUCT_COLOR_HEX.md`](./FLUTTER_PRODUCT_COLOR_HEX.md)
+**اليوم (29 تشرين الأول):** مدة توصيل ديما فاشن تتبع اللغة — إنجليزي `12-48 hours`، عربي `12-48 ساعة`. اعرضوا `delivery_time` كما هو، بلا لاحقة — [`FLUTTER_DELIVERY_TIME_LOCALE.md`](./FLUTTER_DELIVERY_TIME_LOCALE.md)
+
+**اليوم (29 تشرين الأول):** دوائر اللون من `hex` فقط. ما في طلب جديد على التطبيق: الدرجة تُحفظ من الداشبورد (متغير الفئة أو باليت المنتج)، و`hex: null` دائرة رمادية `Color(0xFFA1A1AA)` بلا تخمين من الاسم. التطبيق ما يرسل `color_id`. الاختيار بـ `options[].id` والسلة بـ `shop_variants[].id` — [`FLUTTER_PRODUCT_COLOR_HEX.md`](./FLUTTER_PRODUCT_COLOR_HEX.md)
 
 **اليوم (8 تشرين الأول):** هوية ديما فاشن البصرية — ألوان ماجنتا/وردي من `GET /settings` · لا تيك مارت في الواجهة — [`FLUTTER_BRAND_IDENTITY.md`](./FLUTTER_BRAND_IDENTITY.md) · المرجع [`DEEMA_BRAND_IDENTITY.md`](./DEEMA_BRAND_IDENTITY.md)
 
@@ -248,7 +250,7 @@ Accept-Language: ar
 | `warranty` | `{ id, name, description }` أو `null` |
 | `warranty_period` | `int?` — قديم |
 | `quantity` | `int?` على المنتج — **ليس المخزون** |
-| `delivery_time` | `String?` على المنتج — **هنا فقط** (مو بالسلة) |
+| `delivery_time` | `String?` على المنتج — **هنا فقط** (مو بالسلة). ديما فاشن: `12-48 hours` / `12-48 ساعة` — [`FLUTTER_DELIVERY_TIME_LOCALE.md`](./FLUTTER_DELIVERY_TIME_LOCALE.md) |
 | `shop_variants` | دائماً عنصر واحد على الأقل |
 | `shop_variants[].id` / `shop_id` | `int?` |
 | `shop_variants[].quantity` | `int?` — المخزون |
@@ -641,6 +643,7 @@ final isApprovedMarketer =
 | صفات بالـ ID | الفلتر والـ picker من `id` — [`FLUTTER_CATEGORY_ATTRIBUTE_VALUE_IDS.md`](./FLUTTER_CATEGORY_ATTRIBUTE_VALUE_IDS.md) |
 | كل المتغيّرات | اختاروا الصف من `shop_variants` مو `[0]` دائماً — [`FLUTTER_PRODUCT_ALL_VARIANTS.md`](./FLUTTER_PRODUCT_ALL_VARIANTS.md) |
 | السلة | بلا `delivery_time` — [`FLUTTER_CART_NO_DELIVERY_TIME.md`](./FLUTTER_CART_NO_DELIVERY_TIME.md) |
+| مدة التوصيل | النص جاهز حسب اللغة — [`FLUTTER_DELIVERY_TIME_LOCALE.md`](./FLUTTER_DELIVERY_TIME_LOCALE.md) |
 
 السعر بعد الخصم من الحقول الجاهزة في الـ API. لا تحسبوه على الجهاز.
 

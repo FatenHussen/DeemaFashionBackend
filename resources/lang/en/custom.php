@@ -199,6 +199,7 @@ return [
 
     // Products
     'products' => [
+        'tikmool_delivery_time' => '12-48 hours',
         'cannot_delete_has_active_orders' => 'Cannot delete this variant because it is linked to active orders.',
         'delete_impact' => [
             'requires_confirmation' => 'Deleting this variant affects related data. Review the details and resend the request with confirm=true.',
@@ -340,6 +341,10 @@ return [
             'quantity_label' => 'Available Quantity',
             'instant_delivery' => 'Instant Delivery',
             'preparation_time' => 'Preparation Time',
+            'delivery_time' => 'Delivery Time',
+            'delivery_time_help' => 'Expected delivery window (example: 12-48 hours, 3-5 days)',
+            'delivery_time_placeholder' => 'Example: 12-48 hours',
+            'tikmool_delivery_time_note' => '12-48 hours (Deema Fashion)',
             'main_image_label' => 'Drag and drop or click to upload main image',
             'additional_images_label' => 'Drag and drop or click to upload additional images',
             'images_help' => 'Replace all old images with new ones only. Old images will be kept and new images will be added to them',

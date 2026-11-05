@@ -253,12 +253,30 @@ class Product extends Model implements Sectionable
 
     public function getEffectiveDeliveryTimeAttribute(): ?string
     {
-        // Deema Fashion vendor (id=1) always gets fixed delivery time
-        if ($this->vendor_id === 1) {
-            return '12-48 ساعة';
+        // Deema Fashion vendor (id=1) always gets a fixed delivery window.
+        if ((int) $this->vendor_id === 1) {
+            return $this->tikmoolDeliveryTime();
         }
 
         return $this->delivery_time;
+    }
+
+    /**
+     * Locale-specific label. Arabic keeps the hour range in LTR order so
+     * "12-48 ساعة" is not reshuffled by the bidirectional algorithm.
+     * Method name keeps the shared API key for TickMart compatibility.
+     */
+    private function tikmoolDeliveryTime(): string
+    {
+        $label = (string) __('custom.products.tikmool_delivery_time');
+
+        if (app()->getLocale() !== 'ar') {
+            return $label;
+        }
+
+        $isolated = preg_replace('/(\d+\s*-\s*\d+)/u', "\u{2066}$1\u{2069}", $label, 1);
+
+        return is_string($isolated) ? $isolated : $label;
     }
 
     public function getAverageRatingAttribute(): float

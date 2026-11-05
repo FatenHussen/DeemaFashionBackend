@@ -530,7 +530,7 @@ class ProductForm
 
                                     Forms\Components\TextInput::make('delivery_time')
                                         ->label(__('custom.products.form.delivery_time'))
-                                        ->placeholder('مثال: 12-48 ساعة')
+                                        ->placeholder(__('custom.products.form.delivery_time_placeholder'))
                                         ->maxLength(100)
                                         ->helperText(__('custom.products.form.delivery_time_help'))
                                         ->hidden(fn (callable $get) => $get('vendor_id') == 1)
@@ -538,7 +538,7 @@ class ProductForm
 
                                     Forms\Components\Placeholder::make('delivery_time_tikmool')
                                         ->label(__('custom.products.form.delivery_time'))
-                                        ->content('12-48 ساعة (تيك مول)')
+                                        ->content(__('custom.products.form.tikmool_delivery_time_note'))
                                         ->visible(fn (callable $get) => $get('vendor_id') == 1)
                                         ->columnSpan(1),
                                 ])

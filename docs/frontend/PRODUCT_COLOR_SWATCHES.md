@@ -59,7 +59,7 @@
 }
 ```
 
-`color_id` اختياري، وإذا أُرسل يجب أن يكون سجل لون موجوداً. عند إغفال `values` أو إرسالها فارغة على الإنشاء، تُربط لوحة الألوان كاملة. ترك `values` خارج التعديل لا يعيد كتابة الصفوف، وإغفال `color_id` لا يمسح ربطاً قديماً. استجابات الإدارة تعرض `color_id` و`hex`. `color_id` معرّف سجل اللون، و`options[].id` معرّف قيمة الصفة. اختيار الدرجة من متغير الفئة يحفظ اللون بـ `POST /api/admin/colors` ثم يرسل `data.id` كـ `color_id`. الملفات: [`DASHBOARD_PRODUCT_COLOR_HEX.md`](./DASHBOARD_PRODUCT_COLOR_HEX.md) · [`WEB_PRODUCT_COLOR_HEX.md`](./WEB_PRODUCT_COLOR_HEX.md) · [`FLUTTER_PRODUCT_COLOR_HEX.md`](./FLUTTER_PRODUCT_COLOR_HEX.md).
+`color_id` اختياري، وإذا أُرسل يجب أن يكون سجل لون موجوداً. عند إغفال `values` أو إرسالها فارغة على الإنشاء، تُربط لوحة الألوان كاملة. ترك `values` خارج التعديل لا يعيد كتابة الصفوف، وإغفال `color_id` لا يمسح ربطاً قديماً. استجابات الإدارة تعرض `color_id` و`hex`. `color_id` معرّف سجل اللون، و`options[].id` معرّف قيمة الصفة. اختيار الدرجة من متغير الفئة، أو من باليت صف المتغير على صفحة المنتج، يحفظ اللون بـ `POST /api/admin/colors` ثم يربط `color_id`. المتغير يُرسل رقم قيمة الصفة. الملفات: [`DASHBOARD_PRODUCT_COLOR_HEX.md`](./DASHBOARD_PRODUCT_COLOR_HEX.md) · [`WEB_PRODUCT_COLOR_HEX.md`](./WEB_PRODUCT_COLOR_HEX.md) · [`FLUTTER_PRODUCT_COLOR_HEX.md`](./FLUTTER_PRODUCT_COLOR_HEX.md).
 
 إذا كانت كل الدوائر رمادية، افحصوا استجابة المنتج لنفس اللغة المستخدمة على الشاشة:
 

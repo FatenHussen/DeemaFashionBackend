@@ -6,7 +6,9 @@
 > الملف الشامل السابق يبقى: [`web.md`](./web.md)  
 > **المشروع منفصل عن تيك مارت** — الهوية البصرية: [`WEB_BRAND_IDENTITY.md`](./WEB_BRAND_IDENTITY.md)
 
-**اليوم (29 تشرين الأول):** دوائر اللون من `hex` فقط. درجة الداشبورد اختيارية، فـ `hex: null` دائرة رمادية `rgb(161 161 170)` بلا تخمين من الاسم. الاختيار بـ `options[].id` والسلة بـ `shop_variants[].id` — [`WEB_PRODUCT_COLOR_HEX.md`](./WEB_PRODUCT_COLOR_HEX.md)
+**اليوم (29 تشرين الأول):** مدة توصيل ديما فاشن تتبع اللغة — إنجليزي `12-48 hours`، عربي `12-48 ساعة`. اعرضوا `delivery_time` كما هو، بلا لاحقة — [`WEB_DELIVERY_TIME_LOCALE.md`](./WEB_DELIVERY_TIME_LOCALE.md)
+
+**اليوم (29 تشرين الأول):** دوائر اللون من `hex` فقط. ما في طلب جديد على الموقع: الدرجة تُحفظ من الداشبورد (متغير الفئة أو باليت المنتج)، و`hex: null` دائرة رمادية `rgb(161 161 170)` بلا تخمين من الاسم. الاختيار بـ `options[].id` والسلة بـ `shop_variants[].id` — [`WEB_PRODUCT_COLOR_HEX.md`](./WEB_PRODUCT_COLOR_HEX.md)
 
 **اليوم (8 تشرين الأول):** هوية ديما فاشن البصرية — ألوان ماجنتا/وردي من `GET /settings` · لا تيك مارت — [`WEB_BRAND_IDENTITY.md`](./WEB_BRAND_IDENTITY.md)
 
@@ -382,7 +384,7 @@ Authorization: Bearer {token}
 - لون: swatches. مقاس: أزرار للقيم المتاحة بعد اختيار اللون.
 - السعر من المتغيّر المختار: `price_currencies` / `price_after_discount_currencies`.
 - خصم المتغيّر أولاً ثم خصم المنتج / flash sale (محسوب في الباك).
-- `delivery_time` على **المنتج** مرة واحدة.
+- `delivery_time` على **المنتج** مرة واحدة. ديما فاشن يرجع `12-48 hours` أو `12-48 ساعة` حسب `Accept-Language` — [`WEB_DELIVERY_TIME_LOCALE.md`](./WEB_DELIVERY_TIME_LOCALE.md)
 - `attributes_map` فاضي → منتج بلا صفات — استخدموا `shop_variants[0]` مباشرة.
 
 ---
