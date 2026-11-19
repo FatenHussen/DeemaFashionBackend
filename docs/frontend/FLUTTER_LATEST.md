@@ -2,9 +2,11 @@
 
 > **أرسلوا هذا الملف لفريق Flutter.**  
 > Base: `/api/user` + `Accept-Language: ar|en`  
-> **آخر تحديث | Last Updated:** 2026-10-29  
+> **آخر تحديث | Last Updated:** 2026-11-05  
 > الملف الشامل السابق يبقى: [`flutter.md`](./flutter.md)  
 > **المشروع منفصل عن تيك مارت** — الهوية البصرية: [`FLUTTER_BRAND_IDENTITY.md`](./FLUTTER_BRAND_IDENTITY.md)
+
+**اليوم (5 تشرين الثاني):** منتج بمتغيّرات — **لا** اختيار افتراضي لـ `shopVariants.first`. أول فتح = صور المنتج؛ السلة بدون اختيار كامل → «يجب اختيار المتغيرات»؛ بعد الاختيار تتبدل الصور — [`FLUTTER_NO_DEFAULT_VARIANT_SELECTION.md`](./FLUTTER_NO_DEFAULT_VARIANT_SELECTION.md)
 
 **اليوم (29 تشرين الأول):** مدة توصيل ديما فاشن تتبع اللغة — إنجليزي `12-48 hours`، عربي `12-48 ساعة`. اعرضوا `delivery_time` كما هو، بلا لاحقة — [`FLUTTER_DELIVERY_TIME_LOCALE.md`](./FLUTTER_DELIVERY_TIME_LOCALE.md)
 

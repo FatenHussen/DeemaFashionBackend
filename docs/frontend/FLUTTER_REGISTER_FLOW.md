@@ -17,8 +17,8 @@ Do **not** call `/auth/send-otp` on this screen (that endpoint is password reset
 
 | Field | Required |
 |--------|----------|
-| `name` · `phone` · `password` · `city_id` · `governorate_id` | yes |
-| `email` | no — never send `""` |
+| `name` · `phone` · `password` | yes |
+| `email` · `city_id` · `governorate_id` | no — never send `""`; omit key or send `null` |
 
 `phone`: digits only (`replaceAll(RegExp(r'\D'), '')`).  
 Password: ≥ 8 + lower + upper + digit + symbol (`Passw0rd!`).

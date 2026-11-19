@@ -91,8 +91,8 @@ class UserService
             'email'          => $data['email'] ?? null,
             'password'       => $data['password'],
             'name'           => $data['name'],
-            'city_id'        => $data['city_id'],
-            'governorate_id' => $data['governorate_id'],
+            'city_id'        => $data['city_id'] ?? null,
+            'governorate_id' => $data['governorate_id'] ?? null,
             'is_active'      => true,
         ]);
 

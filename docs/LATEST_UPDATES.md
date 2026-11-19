@@ -1,10 +1,12 @@
 # آخر التعديلات والتحديثات — Deema Fashion Backend
 
 > **أرسلوا هذا الملف** — آخر نسخة شاملة (كل الفرق)  
-> **تاريخ:** 29 تشرين الأول 2026  
+> **تاريخ:** 5 تشرين الثاني 2026  
 > **النطاق:** من منتصف آب حتى اليوم — باك + داشبورد + ويب + Flutter  
 > **الحالة:** الباك جاهز بعد `git pull` + `php artisan config:clear`  
 > **مهم:** المشروع **ديما فاشن** منفصل عن تيك مارت — الهوية البصرية [`frontend/DEEMA_BRAND_IDENTITY.md`](./frontend/DEEMA_BRAND_IDENTITY.md)
+
+**آخر ما نزل (5 تشرين الثاني):** صفحة المنتج بمتغيّرات — **لا** اختيار افتراضي لأول متغيّر (ويب/Flutter). أول فتح = صور المنتج؛ السلة بدون اختيار → رسالة؛ بعد الاختيار تتبدل الصور. داشبورد: لا شغل — توضيح فقط. ويب [`frontend/WEB_NO_DEFAULT_VARIANT_SELECTION.md`](./frontend/WEB_NO_DEFAULT_VARIANT_SELECTION.md) · Flutter [`frontend/FLUTTER_NO_DEFAULT_VARIANT_SELECTION.md`](./frontend/FLUTTER_NO_DEFAULT_VARIANT_SELECTION.md) · داش [`frontend/DASHBOARD_NO_DEFAULT_VARIANT_SELECTION.md`](./frontend/DASHBOARD_NO_DEFAULT_VARIANT_SELECTION.md)
 
 **آخر ما نزل (29 تشرين الأول):** مدة توصيل منصة ديما تتبع `Accept-Language` (`12-48 hours` / `12-48 ساعة`) — ويب [`frontend/WEB_DELIVERY_TIME_LOCALE.md`](./frontend/WEB_DELIVERY_TIME_LOCALE.md) · Flutter [`frontend/FLUTTER_DELIVERY_TIME_LOCALE.md`](./frontend/FLUTTER_DELIVERY_TIME_LOCALE.md). درجة اللون على متغير الفئة اختيارية. الهوية البصرية لديما فاشن ما تغيّرت (`#c720a4` / `#ff1493` · اسم المتجر · الشعارات).
 

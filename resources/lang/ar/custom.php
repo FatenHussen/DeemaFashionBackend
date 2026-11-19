@@ -205,7 +205,7 @@ return [
 
     // Products
     'products' => [
-        'tikmool_delivery_time' => '12-48 ساعة',
+        'Deema_delivery_time' => '12-48 ساعة',
         'cannot_delete_has_active_orders' => 'لا يمكن حذف هذا المتغير لأنه مرتبط بطلبات نشطة',
         'delete_impact' => [
             'requires_confirmation' => 'حذف هذا المتغير سيؤثر على بيانات مرتبطة. راجع التفاصيل ثم أعد إرسال الطلب مع confirm=true للتأكيد.',
@@ -370,7 +370,7 @@ return [
             'delivery_time' => 'وقت التوصيل',
             'delivery_time_help' => 'وقت التوصيل المتوقع (مثال: 12-48 ساعة، 3-5 أيام)',
             'delivery_time_placeholder' => 'مثال: 12-48 ساعة',
-            'tikmool_delivery_time_note' => '12-48 ساعة (ديما فاشن)',
+            'Deema_delivery_time_note' => '12-48 ساعة (ديما فاشن)',
             'variant_name' => 'اسم المتغير',
             'variant_name_placeholder' => 'مثال: أحمر - كبير',
             'variant_name_ar' => 'اسم المتغير (عربي)',

@@ -17,8 +17,8 @@
 
 | الحقل | مطلوب |
 |--------|--------|
-| `name` · `phone` · `password` · `city_id` · `governorate_id` | نعم |
-| `email` | لا — لا ترسلوا `""` |
+| `name` · `phone` · `password` | نعم |
+| `email` · `city_id` · `governorate_id` | لا — لا ترسلوا `""`؛ احذفوا المفتاح أو `null` |
 
 `phone`: أرقام فقط. كلمة المرور: ≥ 8 + صغير + كبير + رقم + رمز.
 

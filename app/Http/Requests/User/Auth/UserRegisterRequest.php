@@ -25,8 +25,8 @@ class UserRegisterRequest extends BaseRequest
                 'regex:/[^a-zA-Z0-9]/',
             ],
 
-            'city_id' => 'required|exists:cities,id',
-            'governorate_id' => 'required|exists:governorates,id',
+            'city_id' => 'nullable|exists:cities,id',
+            'governorate_id' => 'nullable|exists:governorates,id',
 
         ];
     }

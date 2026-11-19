@@ -2,9 +2,11 @@
 
 > **أرسلوا هذا الملف لفريق الويب.**  
 > Base: `/api/user` + `Accept-Language: ar|en`  
-> **آخر تحديث | Last Updated:** 2026-10-29  
+> **آخر تحديث | Last Updated:** 2026-11-05  
 > الملف الشامل السابق يبقى: [`web.md`](./web.md)  
 > **المشروع منفصل عن تيك مارت** — الهوية البصرية: [`WEB_BRAND_IDENTITY.md`](./WEB_BRAND_IDENTITY.md)
+
+**اليوم (5 تشرين الثاني):** منتج بمتغيّرات — **لا** اختيار افتراضي لـ `shop_variants[0]`. أول فتح = صور المنتج؛ السلة بدون اختيار كامل → «يجب اختيار المتغيرات»؛ بعد الاختيار تتبدل الصور — [`WEB_NO_DEFAULT_VARIANT_SELECTION.md`](./WEB_NO_DEFAULT_VARIANT_SELECTION.md)
 
 **اليوم (29 تشرين الأول):** مدة توصيل ديما فاشن تتبع اللغة — إنجليزي `12-48 hours`، عربي `12-48 ساعة`. اعرضوا `delivery_time` كما هو، بلا لاحقة — [`WEB_DELIVERY_TIME_LOCALE.md`](./WEB_DELIVERY_TIME_LOCALE.md)
 
@@ -404,7 +406,7 @@ POST /api/user/auth/register
 - `phone` **مطلوب دائماً** (أرقام فقط).
 - `email` اختياري — **لا ترسلوا** `email: ""`.
 - `password`: ≥ 8 + صغير + كبير + رقم + رمز.
-- `city_id` + `governorate_id` مطلوبان — المدن: `GET /cities?governorate_id=`.
+- `city_id` + `governorate_id` اختياريان — إن أُرسلا يجب أن يكونا موجودين؛ المدن: `GET /cities?governorate_id=`.
 - OTP: `POST /api/user/auth/verify-otp` `{ phone, code }`. **مؤقت (16 أيلول):** الكود **`00000`** — ما في SMS.
 - إعادة الإرسال: `POST /auth/login` (403 متوقع) — **ليس** `/send-otp`.
 
