@@ -11,9 +11,6 @@ class BasketItemResource extends JsonResource
 
     public function toArray($request)
     {
-        $user = auth('user')->user();
-        $currencyId = $user?->currency_id;
-
         return [
             'id' => $this->id,
             'quantity' => (int) $this->quantity,
@@ -56,17 +53,14 @@ class BasketItemResource extends JsonResource
             ])
             ->get();
 
-        $user = auth('user')->user();
-        $currencyId = $user?->currency_id;
-
-        return $variants->map(function ($variant) use ($currencyId) {
+        return $variants->map(function ($variant) {
 
             $product = optional($variant->productVariant)->product;
             $brand   = optional($product)->brand;
 
             $productVariant = $variant->productVariant;
 
-            $priceData = $this->convertPrice($productVariant?->price, $currencyId);
+            $priceData = $this->convertPrice($productVariant?->price);
 
             return [
                 'product_id' => $product->id ?? null,

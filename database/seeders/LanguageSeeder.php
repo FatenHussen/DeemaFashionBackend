@@ -18,22 +18,22 @@ class LanguageSeeder extends Seeder
 
         $languages = [
             [
-                'code' => 'ar',
-                'native_name' => 'العربية',
-                'direction' => 'rtl',
-                'is_active' => true,
-                'is_default' => true,
-                'order' => 1,
-                'flag_icon' => '🇸🇦',
-            ],
-            [
                 'code' => 'en',
                 'native_name' => 'English',
                 'direction' => 'ltr',
                 'is_active' => true,
+                'is_default' => true,
+                'order' => 1,
+                'flag_icon' => '🇺🇸',
+            ],
+            [
+                'code' => 'ar',
+                'native_name' => 'العربية',
+                'direction' => 'rtl',
+                'is_active' => true,
                 'is_default' => false,
                 'order' => 2,
-                'flag_icon' => '🇺🇸',
+                'flag_icon' => '🇸🇦',
             ],
             // [
             //     'code' => 'fr',

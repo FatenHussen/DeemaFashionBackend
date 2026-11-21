@@ -90,4 +90,18 @@ class LanguageService extends BaseService
             throw $e;
         }
     }
+
+    public function update($id, array $data)
+    {
+        if (!empty($data['is_default']) && $data['is_default']) {
+            $this->model->where('id', '!=', $id)
+                ->where('is_default', true)
+                ->update(['is_default' => false]);
+        }
+
+        $result = parent::update($id, $data);
+        Language::forgetLocaleCache();
+
+        return $result;
+    }
 }

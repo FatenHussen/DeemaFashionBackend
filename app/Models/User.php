@@ -15,16 +15,6 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasApiTokens, SoftDeletes;
 
-    protected static function booted(): void
-    {
-        static::creating(function (self $user): void {
-            if (!$user->currency_id) {
-                $user->currency_id = Currency::default()->value('id')
-                    ?? Currency::where('code', 'USD')->value('id');
-            }
-        });
-    }
-
     /**
      * The attributes that are mass assignable.
      *

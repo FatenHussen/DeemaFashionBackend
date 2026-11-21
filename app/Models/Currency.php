@@ -19,6 +19,7 @@ class Currency extends Model
         'is_active',
     ];
     public $translatable = ['name'];
+    protected $hidden = ['active_default_guard'];
     protected $casts = [
         'name' => 'array',
         'exchange_rate' => 'decimal:6',
@@ -29,6 +30,11 @@ class Currency extends Model
     public function users(): HasMany
     {
         return $this->hasMany(User::class);
+    }
+
+    public function setCodeAttribute(string $value): void
+    {
+        $this->attributes['code'] = strtoupper(trim($value));
     }
 
     public function getLocalizedNameAttribute(): string

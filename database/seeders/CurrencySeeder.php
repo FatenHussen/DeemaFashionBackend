@@ -4,12 +4,14 @@ namespace Database\Seeders;
 
 use App\Models\Currency;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CurrencySeeder extends Seeder
 {
     /**
      * exchange_rate = كم وحدة من هذه العملة تساوي 1 دولار أمريكي.
-     * الدولار الأمريكي هو العملة الأساسية (is_default = true, exchange_rate = 1).
+     * الدولار الأمريكي هو عملة التخزين الأساسية (exchange_rate = 1).
+     * عملة العرض الافتراضية يحددها الداشبورد وقد تكون عملة أخرى.
      *
      * مثال التحويل:
      *   سعر بالدولار × exchange_rate = سعر بالعملة الأخرى
@@ -68,14 +70,20 @@ class CurrencySeeder extends Seeder
             ],
         ];
 
-        // Reset all defaults first
-        Currency::where('is_default', true)->update(['is_default' => false]);
+        DB::transaction(function () use ($currencies) {
+            Currency::orderBy('id')->lockForUpdate()->get();
+            foreach ($currencies as $currency) {
+                // Deployment seed reruns preserve dashboard defaults, rates and status.
+                Currency::firstOrCreate(
+                    ['code' => $currency['code']],
+                    [...$currency, 'is_default' => false]
+                );
+            }
 
-        foreach ($currencies as $currency) {
-            Currency::updateOrCreate(
-                ['code' => $currency['code']],
-                $currency
-            );
-        }
+            if (!Currency::active()->default()->exists()) {
+                Currency::where('is_default', true)->update(['is_default' => false]);
+                Currency::where('code', 'USD')->update(['is_default' => true, 'is_active' => true]);
+            }
+        }, 3);
     }
 }

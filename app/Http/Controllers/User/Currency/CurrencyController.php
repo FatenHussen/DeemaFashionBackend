@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\User\Currency;
 
 use App\Http\Controllers\BaseCRUDController;
-use App\Http\Controllers\Controller;
-use App\Http\Resources\Currency\AllResource;
 use App\Http\Resources\Currency\OneResource;
 use App\Http\Requests\User\Currency\UpdateUserCurrencyRequest;
 use App\Services\User\CurrencyService;
@@ -25,7 +23,9 @@ class CurrencyController extends BaseCRUDController
         $currency = $this->currencyService->getUserCurrency($user);
 
         return $this->sendResponse(
-            new OneResource($currency),
+            (new OneResource($currency))->withPreferenceSource(
+                $this->currencyService->getPreferenceSource($user, $currency)
+            ),
             __('custom.user_currency_retrieved_successfully')
         );
     }
@@ -36,8 +36,8 @@ class CurrencyController extends BaseCRUDController
         $currency = $this->currencyService->updateUserCurrency($user, $request->currency_id);
 
         return $this->sendResponse(
-            new OneResource($currency),
-            __( 'custom.user_currency_updated_successfully')
+            (new OneResource($currency))->withPreferenceSource('user'),
+            __('custom.user_currency_updated_successfully')
         );
     }
 }

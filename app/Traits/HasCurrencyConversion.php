@@ -13,7 +13,10 @@ trait HasCurrencyConversion
     public function convertPrice($priceInBase, $currencyId = null)
     {
         if ($priceInBase === null) {
-            $defaultCurrency = Currency::default()->first();
+            $defaultCurrency = $currencyId
+                ? Currency::active()->find($currencyId)
+                : CurrencyHelper::getUserCurrency();
+            $defaultCurrency ??= Currency::active()->default()->first();
             return [
                 'amount'    => null,
                 'currency'  => $defaultCurrency?->code ?? 'USD',
@@ -22,38 +25,7 @@ trait HasCurrencyConversion
             ];
         }
 
-        $priceInBase = (float) $priceInBase;
-
-        if (!$currencyId) {
-            $user = auth('user')->user();
-            $currencyId = $user?->currency_id;
-        }
-
-        $currency = $currencyId
-            ? Currency::find($currencyId)
-            : Currency::default()->first();
-
-        if (!$currency) {
-            $currency = Currency::default()->first();
-        }
-
-        if (!$currency || strtoupper((string) $currency->code) === 'USD') {
-            return [
-                'amount'    => round($priceInBase, 2),
-                'currency'  => $currency?->code ?? 'USD',
-                'symbol'    => $currency?->symbol ?? '$',
-                'formatted' => ($currency?->symbol ?? '$') . ' ' . CurrencyHelper::formatAmount($priceInBase),
-            ];
-        }
-
-        $convertedAmount = $currency->convertFromBase($priceInBase);
-
-        return [
-            'amount'    => $convertedAmount,
-            'currency'  => $currency->code,
-            'symbol'    => $currency->symbol,
-            'formatted' => $currency->symbol . ' ' . CurrencyHelper::formatAmount($convertedAmount),
-        ];
+        return CurrencyHelper::convertFromBase((float) $priceInBase, $currencyId);
     }
 
     public function convertFormattedPrice($priceInBase, $currencyId = null)
@@ -125,11 +97,13 @@ trait HasCurrencyConversion
         $currency = $this->getCurrencyByCode($code);
 
         if (!$currency) {
+            $amount = $code === 'USD' ? round($priceInBase, 2) : null;
+
             return [
-                'amount' => round($priceInBase, 2),
+                'amount' => $amount,
                 'currency' => $code,
                 'symbol' => $fallbackSymbol,
-                'formatted' => $fallbackSymbol . ' ' . CurrencyHelper::formatAmount($priceInBase),
+                'formatted' => $amount === null ? null : $fallbackSymbol . ' ' . CurrencyHelper::formatAmount($amount),
             ];
         }
 
@@ -147,12 +121,7 @@ trait HasCurrencyConversion
 
     protected function getCurrencyByCode(string $code): ?Currency
     {
-        static $cache = [];
-
-        if (!array_key_exists($code, $cache)) {
-            $cache[$code] = Currency::where('code', $code)->first();
-        }
-
-        return $cache[$code];
+        // Read current rates even under long-lived HTTP workers.
+        return Currency::where('code', $code)->first();
     }
 }

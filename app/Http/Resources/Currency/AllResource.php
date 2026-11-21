@@ -14,7 +14,7 @@ class AllResource extends JsonResource
             'code' => $this->code,
             'name' => $this->localized_name,
             'symbol' => $this->symbol,
-            'is_default' => $this->is_default,
+            'is_default' => (bool) $this->is_default,
         ];
     }
 }

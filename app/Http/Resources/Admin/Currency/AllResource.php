@@ -15,8 +15,8 @@ class AllResource extends JsonResource
             'name' => $this->name,
             'symbol' => $this->symbol,
             'exchange_rate' => $this->exchange_rate,
-            'is_default' => $this->is_default,
-            'is_active' => $this->is_active,
+            'is_default' => (bool) $this->is_default,
+            'is_active' => (bool) $this->is_active,
             'created_at' => $this->created_at?->format('Y-m-d H:i:s'),
         ];
     }

@@ -330,7 +330,7 @@ if (email.trim()) body.email = email.trim();
 
 ## 10) Checklist
 
-- [ ] محافظة ثم مدينة — `GET /cities?governorate_id=` إلزامي
+- [ ] محافظة/مدينة اختياريان — إن اختيرت محافظة: `GET /cities?governorate_id=` إلزامي
 - [ ] `phone` مطلوب، أرقام فقط
 - [ ] `email` اختياري — لا `""`
 - [ ] كلمة المرور: 8 + صغير + كبير + رقم + رمز

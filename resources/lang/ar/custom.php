@@ -87,6 +87,7 @@ return [
     'user_currency_retrieved_successfully' => 'تم جلب عملة المستخدم بنجاح.',
     'user_currency_updated_successfully' => 'تم تحديث عملة المستخدم بنجاح.',
     'cannot_deactivate_default_currency' => 'لا يمكن تعطيل العملة الافتراضية.',
+    'currency_default_required' => 'يرجى اختيار عملة افتراضية نشطة أخرى قبل تغيير هذه العملة أو حذفها.',
     'cannot_delete_package_with_active_subscriptions' => 'لا يمكن حذف الباقة لوجود اشتراكات نشطة.',
     'cannot_delete_category_attribute_in_use' => 'لا يمكن حذف خاصية الصنف لأنها مستخدمة في :count متغير من المنتجات.',
     'category_attribute_delete_impact' => [

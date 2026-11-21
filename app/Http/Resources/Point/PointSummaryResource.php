@@ -16,17 +16,8 @@ class PointSummaryResource extends JsonResource
         $pointsSettings = \App\Helpers\SettingsHelper::getPointsSettings();
         $balance = $this->resource['balance'];
 
-        // الحصول على عملة المستخدم
-        $user = auth('user')->user();
-        $currency = null;
-
-        if ($user && $user->currency_id) {
-            $currency = Currency::find($user->currency_id);
-        }
-
-        if (!$currency) {
-            $currency = Currency::default()->first();
-        }
+        $currency = CurrencyHelper::getUserCurrency()
+            ?? Currency::active()->default()->first();
 
         // تحويل قيمة النقطة للعملة المختارة (currency_rate مخزن بالدولار)
         $currencyRateBase = $pointsSettings['currency_rate']; // قيمة النقطة بالدولار

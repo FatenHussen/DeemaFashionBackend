@@ -21,16 +21,9 @@ class CurrencyHelper
      */
     public static function convertToBase(float $price, ?int $currencyId = null): float
     {
-        if (!$currencyId) {
-            $user = auth('user')->user();
-            $currencyId = $user?->currency_id;
-        }
-
-        if (!$currencyId) {
-            return $price;
-        }
-
-        $currency = Currency::find($currencyId);
+        $currency = $currencyId
+            ? Currency::active()->find($currencyId)
+            : self::getUserCurrency();
 
         if (!$currency || strtoupper((string) $currency->code) === 'USD') {
             return $price;
@@ -52,21 +45,10 @@ class CurrencyHelper
      */
     public static function convertFromBase(float $priceInBase, ?int $currencyId = null): array
     {
-        if (!$currencyId) {
-            $user = auth('user')->user();
-            $currencyId = $user?->currency_id;
-        }
-
-        if (!$currencyId) {
-            $currency = Currency::default()->first();
-        } else {
-            $currency = Currency::find($currencyId);
-        }
-
-        // fallback للعملة الافتراضية
-        if (!$currency) {
-            $currency = Currency::default()->first();
-        }
+        $currency = $currencyId
+            ? Currency::active()->find($currencyId)
+            : self::getUserCurrency();
+        $currency ??= Currency::active()->default()->first();
 
         if (!$currency || strtoupper((string) $currency->code) === 'USD') {
             return [
@@ -96,17 +78,20 @@ class CurrencyHelper
     }
 
     /**
-     * الحصول على عملة اليوزر
+     * عملة العرض: اختيار صريح من المستخدم، وإلا الافتراضي من الداشبورد.
      */
     public static function getUserCurrency(): ?Currency
     {
         $user = auth('user')->user();
 
-        if (!$user || !$user->currency_id) {
-            return Currency::default()->first();
+        if ($user?->currency_preference_source === 'user' && $user->currency_id) {
+            $currency = Currency::active()->find($user->currency_id);
+            if ($currency) {
+                return $currency;
+            }
         }
 
-        return Currency::find($user->currency_id);
+        return Currency::active()->default()->first();
     }
 
     /**

@@ -6,6 +6,8 @@ use App\Http\Resources\Currency\AllResource;
 use App\Http\Resources\Currency\OneResource;
 use App\Models\Currency;
 use App\Services\BaseService;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class CurrencyService extends BaseService
 {
@@ -22,24 +24,52 @@ class CurrencyService extends BaseService
         return $this->model->active()->get();
     }
 
+    public function queryBuilder($query, $filters = [], $config = [])
+    {
+        return parent::queryBuilder($query->active(), $filters, $config);
+    }
+
     public function getDefault()
     {
-        return $this->model->default()->first() ?? $this->model->where('code', 'USD')->first();
+        return $this->model->active()->default()->first();
     }
 
     public function getUserCurrency($user)
     {
-        if ($user && $user->currency_id) {
-            return $this->model->find($user->currency_id);
+        if ($user?->currency_preference_source === 'user' && $user->currency_id) {
+            $currency = $this->model->active()->find($user->currency_id);
+            if ($currency) {
+                return $currency;
+            }
         }
         return $this->getDefault();
     }
 
+    public function getPreferenceSource($user, ?Currency $currency): string
+    {
+        return $user?->currency_preference_source === 'user'
+            && $currency && $currency->id === (int) $user->currency_id
+            ? 'user'
+            : 'default';
+    }
+
     public function updateUserCurrency($user, $currencyId)
     {
-        $currency = $this->model->findOrFail($currencyId);
-        $user->update(['currency_id' => $currencyId]);
-        $user->save();
-        return $currency;
+        return DB::transaction(function () use ($user, $currencyId) {
+            // Serialize with dashboard changes so an inactive choice cannot be saved.
+            $currency = $this->model->lockForUpdate()->find($currencyId);
+            if (!$currency || !$currency->is_active) {
+                throw ValidationException::withMessages([
+                    'currency_id' => __('validation.exists', ['attribute' => 'currency_id']),
+                ]);
+            }
+
+            $user->forceFill([
+                'currency_id' => $currency->id,
+                'currency_preference_source' => 'user',
+            ])->save();
+
+            return $currency;
+        });
     }
 }

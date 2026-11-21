@@ -84,6 +84,12 @@ class ToggleStatusService
      */
     public function toggleStatus(string $type, int $id, bool $isActive): bool
     {
+        if ($type === 'currency') {
+            app(CurrencyService::class)->update($id, ['is_active' => $isActive]);
+
+            return true;
+        }
+
         // Get model class from map
         if (!isset($this->modelMap[$type])) {
             throw new CustomExceptionWithMessage(__('custom.invalid_model_type'));

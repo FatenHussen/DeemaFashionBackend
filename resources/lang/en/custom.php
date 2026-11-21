@@ -82,6 +82,7 @@ return [
     'user_currency_retrieved_successfully' => 'User currency retrieved successfully.',
     'user_currency_updated_successfully' => 'User currency updated successfully.',
     'cannot_deactivate_default_currency' => 'Cannot deactivate the default currency.',
+    'currency_default_required' => 'Choose another active default currency before changing or deleting this currency.',
     'cannot_delete_category_attribute_in_use' => 'Cannot delete category attribute because it is used in :count product variant(s).',
     'category_attribute_delete_impact' => [
         'requires_confirmation' => 'Deleting this attribute affects linked items. Review the details and resend the request with confirm=true.',
