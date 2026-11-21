@@ -226,6 +226,15 @@ class OrderService extends BaseService
 
             $this->maybeIncrementRecipeOrdersCount($order, $data);
 
+            // Empty the persisted cart so a refresh does not show the same items again.
+            $cartType = $data['cart_type'] ?? CartType::DEFAULT->value;
+            if ($cartType === CartType::DEFAULT->value) {
+                $this->cartService->clear(
+                    (int) $user->id,
+                    collect($data['items'] ?? [])->pluck('shop_product_variant_id')->all()
+                );
+            }
+
             $this->dispatchOrderCreatedEvent($order);
 
             return $order->fresh(['items', 'paymentMethod', 'user', 'address', 'driver']);

@@ -185,6 +185,9 @@ POST /api/user/orders/preview
 `items` من `cart.items` (`shop_product_variant_id` + `quantity` + `note` إن وُجد).  
 `422` → اعرضوا `message`، لا تعتبروا الطلب ناجحاً محلياً.
 
+بعد نجاح `POST /orders` الباك **يمسح** أسطر السلة التي طُلبت (`cart_items`).  
+امسحوا الكاش المحلي للسلة أيضاً، ثم `GET /api/user/cart` يرجع `items: []`.
+
 ---
 
 ## 4) غلط vs صح
@@ -219,5 +222,6 @@ POST /api/user/orders/preview
 - [ ] الشاشة 2: كود حسم + تطبيق عبر preview
 - [ ] الشاشة 2: تفاصيل الطلب السبعة من `order_details`
 - [ ] زر تأكيد → `POST /orders` بنفس الحقول
+- [ ] بعد النجاح: امسحوا كاش السلة محلياً (الباك يفرّغ `cart_items`)
 
 **الباك جاهز — التطبيق يتبع هذا الملف.**

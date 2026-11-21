@@ -180,6 +180,25 @@ class CartService
         return true;
     }
 
+    /**
+     * Clear the user's cart after a successful checkout.
+     * When $variantIds is provided, only those lines are removed (partial order).
+     */
+    public function clear(int $userId, ?array $variantIds = null): int
+    {
+        $query = CartItem::query()->where('user_id', $userId);
+
+        if ($variantIds !== null) {
+            $ids = array_values(array_unique(array_filter(array_map('intval', $variantIds))));
+            if ($ids === []) {
+                return 0;
+            }
+            $query->whereIn('shop_product_variant_id', $ids);
+        }
+
+        return $query->delete();
+    }
+
     private function findItem(int $userId, int $itemId): CartItem
     {
         $item = CartItem::query()
