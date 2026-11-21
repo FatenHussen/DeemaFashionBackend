@@ -144,11 +144,11 @@ class ProductService extends BaseService
             }
 
             if (empty($data['sale_country_id'])) {
-                $syriaId = \App\Models\SaleCountry::query()
-                    ->whereRaw("JSON_UNQUOTE(JSON_EXTRACT(name, '$.en')) = ?", ['Syria'])
+                $canadaId = \App\Models\SaleCountry::query()
+                    ->whereRaw("JSON_UNQUOTE(JSON_EXTRACT(name, '$.en')) = ?", ['Canada'])
                     ->value('id');
-                if ($syriaId) {
-                    $data['sale_country_id'] = $syriaId;
+                if ($canadaId) {
+                    $data['sale_country_id'] = $canadaId;
                 }
             }
 

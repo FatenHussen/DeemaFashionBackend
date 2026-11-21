@@ -32,7 +32,7 @@ class SettingSeeder extends Seeder
         ]);
 
         Setting::updateOrCreate(['key' => 'phone'], [
-            'value' => '+963940404018',
+            'value' => '+14165550100',
             'type'  => 'string',
         ]);
 

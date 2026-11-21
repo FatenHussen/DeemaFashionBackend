@@ -5,7 +5,7 @@
 
 **Contact Us**
 - 📧 Email: [info@deemafashion.com](mailto:info@deemafashion.com)
-- 📞 Phone: +963 999 999 999
+- 📞 Phone: +1 416 555 0100
 
 🌐 Follow us on:
 - [Instagram](https://www.instagram.com/e)

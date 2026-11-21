@@ -9,7 +9,7 @@ class SaleCountrySeeder extends Seeder
 {
     /**
      * Seed sale countries with flag icons.
-     * Syria is first / default market.
+     * Canada is first / default market.
      * Safe to re-run: matches by English name.
      */
     public function run(): void
@@ -38,8 +38,8 @@ class SaleCountrySeeder extends Seeder
     {
         return [
             [
-                'name' => ['ar' => 'سوريا', 'en' => 'Syria'],
-                'icon' => '🇸🇾',
+                'name' => ['ar' => 'كندا', 'en' => 'Canada'],
+                'icon' => '🇨🇦',
                 'is_active' => true,
             ],
             [
@@ -96,6 +96,11 @@ class SaleCountrySeeder extends Seeder
                 'name' => ['ar' => 'تركيا', 'en' => 'Turkey'],
                 'icon' => '🇹🇷',
                 'is_active' => true,
+            ],
+            [
+                'name' => ['ar' => 'سوريا', 'en' => 'Syria'],
+                'icon' => '🇸🇾',
+                'is_active' => false,
             ],
         ];
     }

@@ -29,12 +29,20 @@ class CurrencySeeder extends Seeder
                 'is_active'     => true,
             ],
             [
+                'code'          => 'CAD',
+                'name'          => ['en' => 'Canadian Dollar', 'ar' => 'دولار كندي'],
+                'symbol'        => 'C$',
+                'exchange_rate' => 1.370000,   // 1 USD ≈ 1.37 CAD
+                'is_default'    => false,
+                'is_active'     => true,
+            ],
+            [
                 'code'          => 'SYP',
                 'name'          => ['en' => 'Syrian Pound', 'ar' => 'ليرة سورية'],
                 'symbol'        => 'ل.س',
                 'exchange_rate' => 13000.000000,   // 1 USD ≈ 13000 SYP
                 'is_default'    => false,
-                'is_active'     => true,
+                'is_active'     => false,
             ],
             [
                 'code'          => 'AED',

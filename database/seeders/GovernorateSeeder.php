@@ -12,209 +12,229 @@ class GovernorateSeeder extends Seeder
     public function run(): void
     {
         $data = [
-            // 1. Damascus
-            'Damascus' => [
-                'ar' => 'دمشق',
+            // 1. Ontario
+            'Ontario' => [
+                'ar' => 'أونتاريو',
                 'cities' => [
-                    'Damascus City' => [
-                        'ar' => 'مدينة دمشق',
+                    'Toronto' => [
+                        'ar' => 'تورونتو',
                         'areas' => [
-                            ['ar' => 'المزة', 'en' => 'Al-Mazzeh', 'lat' => 33.5138, 'lng' => 36.2765],
-                            ['ar' => 'كفرسوسة', 'en' => 'Kafr Sousa', 'lat' => 33.4897, 'lng' => 36.2695],
-                            ['ar' => 'المالكي', 'en' => 'Al-Malki', 'lat' => 33.5216, 'lng' => 36.2914],
-                            ['ar' => 'أبو رمانة', 'en' => 'Abu Rummaneh', 'lat' => 33.5050, 'lng' => 36.2850],
-                            ['ar' => 'المهاجرين', 'en' => 'Al-Muhajirin', 'lat' => 33.5200, 'lng' => 36.2900],
+                            ['ar' => 'وسط المدينة', 'en' => 'Downtown', 'lat' => 43.6532, 'lng' => -79.3832],
+                            ['ar' => 'نورث يورك', 'en' => 'North York', 'lat' => 43.7615, 'lng' => -79.4111],
+                            ['ar' => 'سكاربورو', 'en' => 'Scarborough', 'lat' => 43.7764, 'lng' => -79.2318],
+                            ['ar' => 'إيتوبيكوك', 'en' => 'Etobicoke', 'lat' => 43.6205, 'lng' => -79.5132],
+                            ['ar' => 'يوركفيل', 'en' => 'Yorkville', 'lat' => 43.6709, 'lng' => -79.3932],
+                        ],
+                    ],
+                    'Ottawa' => [
+                        'ar' => 'أوتاوا',
+                        'areas' => [
+                            ['ar' => 'سنترتاون', 'en' => 'Centretown', 'lat' => 45.4112, 'lng' => -75.6981],
+                            ['ar' => 'كاناتا', 'en' => 'Kanata', 'lat' => 45.3088, 'lng' => -75.8980],
+                            ['ar' => 'أورلينز', 'en' => 'Orleans', 'lat' => 45.4542, 'lng' => -75.5060],
+                        ],
+                    ],
+                    'Mississauga' => [
+                        'ar' => 'ميسيساغا',
+                        'areas' => [
+                            ['ar' => 'سيتي سنتر', 'en' => 'City Centre', 'lat' => 43.5890, 'lng' => -79.6441],
+                            ['ar' => 'بورت كريديت', 'en' => 'Port Credit', 'lat' => 43.5517, 'lng' => -79.5856],
                         ],
                     ],
                 ],
             ],
 
-            // 2. Rif Damascus
-            'Rif Damascus' => [
-                'ar' => 'ريف دمشق',
+            // 2. Quebec
+            'Quebec' => [
+                'ar' => 'كيبيك',
                 'cities' => [
-                    'Douma' => [
-                        'ar' => 'دوما',
+                    'Montreal' => [
+                        'ar' => 'مونتريال',
                         'areas' => [
-                            ['ar' => 'العب', 'en' => 'Al-Ebb', 'lat' => 33.5712, 'lng' => 36.4022],
-                            ['ar' => 'حرستا', 'en' => 'Harasta', 'lat' => 33.5582, 'lng' => 36.3667],
+                            ['ar' => 'وسط المدينة', 'en' => 'Downtown', 'lat' => 45.5017, 'lng' => -73.5673],
+                            ['ar' => 'الهضبة', 'en' => 'Plateau', 'lat' => 45.5200, 'lng' => -73.5800],
+                            ['ar' => 'ويستماونت', 'en' => 'Westmount', 'lat' => 45.4850, 'lng' => -73.5950],
                         ],
                     ],
-                    'Qudsaya' => [
-                        'ar' => 'قدسيا',
+                    'Quebec City' => [
+                        'ar' => 'مدينة كيبيك',
                         'areas' => [
-                            ['ar' => 'قدسيا البلد', 'en' => 'Qudsaya Town'],
-                            ['ar' => 'ضاحية قدسيا', 'en' => 'Qudsaya Suburb'],
-                        ],
-                    ],
-                ],
-            ],
-
-            // 3. Aleppo
-            'Aleppo' => [
-                'ar' => 'حلب',
-                'cities' => [
-                    'Aleppo City' => [
-                        'ar' => 'مدينة حلب',
-                        'areas' => [
-                            ['ar' => 'الحمدانية', 'en' => 'Al-Hamdaniyah', 'lat' => 36.2500, 'lng' => 37.1000],
-                            ['ar' => 'السكري', 'en' => 'Al-Sukkari', 'lat' => 36.1800, 'lng' => 37.1200],
-                            ['ar' => 'صلاح الدين', 'en' => 'Salah al-Din', 'lat' => 36.2000, 'lng' => 37.1500],
+                            ['ar' => 'البلدة القديمة', 'en' => 'Old Quebec', 'lat' => 46.8139, 'lng' => -71.2080],
+                            ['ar' => 'سانت فوي', 'en' => 'Sainte-Foy', 'lat' => 46.7800, 'lng' => -71.3000],
                         ],
                     ],
                 ],
             ],
 
-            // 4. Homs
-            'Homs' => [
-                'ar' => 'حمص',
+            // 3. British Columbia
+            'British Columbia' => [
+                'ar' => 'كولومبيا البريطانية',
                 'cities' => [
-                    'Homs City' => [
-                        'ar' => 'مدينة حمص',
+                    'Vancouver' => [
+                        'ar' => 'فانكوفر',
                         'areas' => [
-                            ['ar' => 'الزهراء', 'en' => 'Al-Zahraa', 'lat' => 34.7300, 'lng' => 36.7200],
-                            ['ar' => 'الوعر', 'en' => 'Al-Waer', 'lat' => 34.7000, 'lng' => 36.6800],
-                            ['ar' => 'الخالدية', 'en' => 'Al-Khalidiyah', 'lat' => 34.7400, 'lng' => 36.7100],
+                            ['ar' => 'وسط المدينة', 'en' => 'Downtown', 'lat' => 49.2827, 'lng' => -123.1207],
+                            ['ar' => 'كيتسيلانو', 'en' => 'Kitsilano', 'lat' => 49.2680, 'lng' => -123.1650],
+                            ['ar' => 'برنابي', 'en' => 'Burnaby', 'lat' => 49.2488, 'lng' => -122.9805],
+                        ],
+                    ],
+                    'Victoria' => [
+                        'ar' => 'فيكتوريا',
+                        'areas' => [
+                            ['ar' => 'وسط المدينة', 'en' => 'Downtown', 'lat' => 48.4284, 'lng' => -123.3656],
+                            ['ar' => 'أوك باي', 'en' => 'Oak Bay', 'lat' => 48.4260, 'lng' => -123.3160],
                         ],
                     ],
                 ],
             ],
 
-            // 5. Latakia
-            'Latakia' => [
-                'ar' => 'اللاذقية',
+            // 4. Alberta
+            'Alberta' => [
+                'ar' => 'ألبرتا',
                 'cities' => [
-                    'Latakia City' => [
-                        'ar' => 'مدينة اللاذقية',
+                    'Calgary' => [
+                        'ar' => 'كالجاري',
                         'areas' => [
-                            ['ar' => 'الرمل الجنوبي', 'en' => 'Al-Raml Al-Janoubi', 'lat' => 35.5200, 'lng' => 35.7800],
-                            ['ar' => 'مشروع الصليبة', 'en' => 'Al-Salibah Project', 'lat' => 35.5300, 'lng' => 35.7900],
-                            ['ar' => 'الزراعة', 'en' => 'Al-Ziraa', 'lat' => 35.5100, 'lng' => 35.7700],
+                            ['ar' => 'وسط المدينة', 'en' => 'Downtown', 'lat' => 51.0447, 'lng' => -114.0719],
+                            ['ar' => 'نورت إيست', 'en' => 'Northeast', 'lat' => 51.0800, 'lng' => -113.9800],
+                        ],
+                    ],
+                    'Edmonton' => [
+                        'ar' => 'إدمونتون',
+                        'areas' => [
+                            ['ar' => 'وسط المدينة', 'en' => 'Downtown', 'lat' => 53.5461, 'lng' => -113.4938],
+                            ['ar' => 'ساوث سايد', 'en' => 'South Side', 'lat' => 53.4800, 'lng' => -113.5000],
                         ],
                     ],
                 ],
             ],
 
-            // 6. Hama
-            'Hama' => [
-                'ar' => 'حماة',
+            // 5. Manitoba
+            'Manitoba' => [
+                'ar' => 'مانيتوبا',
                 'cities' => [
-                    'Hama City' => [
-                        'ar' => 'مدينة حماة',
+                    'Winnipeg' => [
+                        'ar' => 'وينيبيغ',
                         'areas' => [
-                            ['ar' => 'الحاضر', 'en' => 'Al-Hadir', 'lat' => 35.1330, 'lng' => 36.7500],
-                            ['ar' => 'الحميدية', 'en' => 'Al-Hamidiyah', 'lat' => 35.1400, 'lng' => 36.7600],
+                            ['ar' => 'وسط المدينة', 'en' => 'Downtown', 'lat' => 49.8951, 'lng' => -97.1384],
+                            ['ar' => 'أسبن', 'en' => 'Osborne Village', 'lat' => 49.8770, 'lng' => -97.1450],
                         ],
                     ],
                 ],
             ],
 
-            // 7. Tartus
-            'Tartus' => [
-                'ar' => 'طرطوس',
+            // 6. Saskatchewan
+            'Saskatchewan' => [
+                'ar' => 'ساسكاتشوان',
                 'cities' => [
-                    'Tartus City' => [
-                        'ar' => 'مدينة طرطوس',
+                    'Saskatoon' => [
+                        'ar' => 'ساسكاتون',
                         'areas' => [
-                            ['ar' => 'الثورة', 'en' => 'Al-Thawra', 'lat' => 34.8900, 'lng' => 35.8867],
-                            ['ar' => 'الكورنيش', 'en' => 'Corniche', 'lat' => 34.8950, 'lng' => 35.8900],
+                            ['ar' => 'وسط المدينة', 'en' => 'Downtown', 'lat' => 52.1332, 'lng' => -106.6700],
+                        ],
+                    ],
+                    'Regina' => [
+                        'ar' => 'ريجينا',
+                        'areas' => [
+                            ['ar' => 'وسط المدينة', 'en' => 'Downtown', 'lat' => 50.4452, 'lng' => -104.6189],
                         ],
                     ],
                 ],
             ],
 
-            // 8. Idlib
-            'Idlib' => [
-                'ar' => 'إدلب',
+            // 7. Nova Scotia
+            'Nova Scotia' => [
+                'ar' => 'نوفا سكوشا',
                 'cities' => [
-                    'Idlib City' => [
-                        'ar' => 'مدينة إدلب',
+                    'Halifax' => [
+                        'ar' => 'هاليفاكس',
                         'areas' => [
-                            ['ar' => 'المدينة', 'en' => 'City Center', 'lat' => 35.9300, 'lng' => 36.6300],
-                            ['ar' => 'الشرقية', 'en' => 'Eastern District', 'lat' => 35.9350, 'lng' => 36.6350],
+                            ['ar' => 'وسط المدينة', 'en' => 'Downtown', 'lat' => 44.6488, 'lng' => -63.5752],
+                            ['ar' => 'دارتموث', 'en' => 'Dartmouth', 'lat' => 44.6650, 'lng' => -63.5670],
                         ],
                     ],
                 ],
             ],
 
-            // 9. Daraa
-            'Daraa' => [
-                'ar' => 'درعا',
+            // 8. New Brunswick
+            'New Brunswick' => [
+                'ar' => 'نيو برونزويك',
                 'cities' => [
-                    'Daraa City' => [
-                        'ar' => 'مدينة درعا',
+                    'Moncton' => [
+                        'ar' => 'مونكتون',
                         'areas' => [
-                            ['ar' => 'درعا البلد', 'en' => 'Daraa Al-Balad', 'lat' => 32.6189, 'lng' => 36.1022],
-                            ['ar' => 'درعا المحطة', 'en' => 'Daraa Al-Mahatta', 'lat' => 32.6200, 'lng' => 36.1050],
+                            ['ar' => 'وسط المدينة', 'en' => 'Downtown', 'lat' => 46.0878, 'lng' => -64.7782],
+                        ],
+                    ],
+                    'Saint John' => [
+                        'ar' => 'سانت جون',
+                        'areas' => [
+                            ['ar' => 'وسط المدينة', 'en' => 'Downtown', 'lat' => 45.2733, 'lng' => -66.0633],
                         ],
                     ],
                 ],
             ],
 
-            // 10. Deir ez-Zor
-            'Deir ez-Zor' => [
-                'ar' => 'دير الزور',
+            // 9. Newfoundland and Labrador
+            'Newfoundland and Labrador' => [
+                'ar' => 'نيوفاوندلاند ولابرادور',
                 'cities' => [
-                    'Deir ez-Zor City' => [
-                        'ar' => 'مدينة دير الزور',
+                    "St. John's" => [
+                        'ar' => 'سانت جونز',
                         'areas' => [
-                            ['ar' => 'الجورة', 'en' => 'Al-Joura', 'lat' => 35.3333, 'lng' => 40.1400],
-                            ['ar' => 'القصور', 'en' => 'Al-Qusour', 'lat' => 35.3400, 'lng' => 40.1450],
+                            ['ar' => 'وسط المدينة', 'en' => 'Downtown', 'lat' => 47.5615, 'lng' => -52.7126],
                         ],
                     ],
                 ],
             ],
 
-            // 11. Al-Hasakah
-            'Al-Hasakah' => [
-                'ar' => 'الحسكة',
+            // 10. Prince Edward Island
+            'Prince Edward Island' => [
+                'ar' => 'جزيرة الأمير إدوارد',
                 'cities' => [
-                    'Al-Hasakah City' => [
-                        'ar' => 'مدينة الحسكة',
+                    'Charlottetown' => [
+                        'ar' => 'شارلوت تاون',
                         'areas' => [
-                            ['ar' => 'غويران', 'en' => 'Ghweran', 'lat' => 36.5000, 'lng' => 40.7500],
-                            ['ar' => 'الناصرة', 'en' => 'Al-Nasira', 'lat' => 36.5050, 'lng' => 40.7550],
+                            ['ar' => 'وسط المدينة', 'en' => 'Downtown', 'lat' => 46.2382, 'lng' => -63.1311],
                         ],
                     ],
                 ],
             ],
 
-            // 12. Raqqa
-            'Raqqa' => [
-                'ar' => 'الرقة',
+            // 11. Northwest Territories
+            'Northwest Territories' => [
+                'ar' => 'الأقاليم الشمالية الغربية',
                 'cities' => [
-                    'Raqqa City' => [
-                        'ar' => 'مدينة الرقة',
+                    'Yellowknife' => [
+                        'ar' => 'يلونايف',
                         'areas' => [
-                            ['ar' => 'الرشيد', 'en' => 'Al-Rashid', 'lat' => 35.9500, 'lng' => 39.0100],
-                            ['ar' => 'الثكنة', 'en' => 'Al-Thakana', 'lat' => 35.9550, 'lng' => 39.0150],
+                            ['ar' => 'وسط المدينة', 'en' => 'Downtown', 'lat' => 62.4540, 'lng' => -114.3718],
                         ],
                     ],
                 ],
             ],
 
-            // 13. As-Suwayda
-            'As-Suwayda' => [
-                'ar' => 'السويداء',
+            // 12. Yukon
+            'Yukon' => [
+                'ar' => 'يوكون',
                 'cities' => [
-                    'As-Suwayda City' => [
-                        'ar' => 'مدينة السويداء',
+                    'Whitehorse' => [
+                        'ar' => 'وايت هورس',
                         'areas' => [
-                            ['ar' => 'المدينة', 'en' => 'City Center', 'lat' => 32.7089, 'lng' => 36.5694],
-                            ['ar' => 'الكرامة', 'en' => 'Al-Karama', 'lat' => 32.7100, 'lng' => 36.5700],
+                            ['ar' => 'وسط المدينة', 'en' => 'Downtown', 'lat' => 60.7212, 'lng' => -135.0568],
                         ],
                     ],
                 ],
             ],
 
-            // 14. Quneitra
-            'Quneitra' => [
-                'ar' => 'القنيطرة',
+            // 13. Nunavut
+            'Nunavut' => [
+                'ar' => 'نونافوت',
                 'cities' => [
-                    'Quneitra City' => [
-                        'ar' => 'مدينة القنيطرة',
+                    'Iqaluit' => [
+                        'ar' => 'إيكالويت',
                         'areas' => [
-                            ['ar' => 'المدينة', 'en' => 'City Center', 'lat' => 33.1256, 'lng' => 35.8244],
+                            ['ar' => 'وسط المدينة', 'en' => 'Downtown', 'lat' => 63.7467, 'lng' => -68.5170],
                         ],
                     ],
                 ],
@@ -247,7 +267,7 @@ class GovernorateSeeder extends Seeder
                         'lat' => $area['lat'] ?? null,
                         'lng' => $area['lng'] ?? null,
                         'city_id' => $city->id,
-                        'base_fee' => 4
+                        'base_fee' => 4,
                     ]);
                 }
             }

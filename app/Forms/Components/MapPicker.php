@@ -10,8 +10,8 @@ class MapPicker extends Field
 
     protected string | \Closure | null $latitudeField = null;
     protected string | \Closure | null $longitudeField = null;
-    protected float | \Closure | null $defaultLatitude = 33.5138; // Damascus default
-    protected float | \Closure | null $defaultLongitude = 36.2765;
+    protected float | \Closure | null $defaultLatitude = 43.6532; // Toronto default
+    protected float | \Closure | null $defaultLongitude = -79.3832;
     protected int | \Closure $defaultZoom = 13;
 
     public function latitudeField(string | \Closure | null $field): static
