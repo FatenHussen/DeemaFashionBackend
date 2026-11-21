@@ -22,6 +22,7 @@ class AllResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'phone' => $this->phone,
+            'area_id' => $this->area_id,
             'area' => $this?->area?->name,
             'address' => $defaultAddress?->full_address,
             'is_active' => (bool) $this->is_active,

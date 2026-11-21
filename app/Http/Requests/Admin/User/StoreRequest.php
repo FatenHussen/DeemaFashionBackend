@@ -12,6 +12,25 @@ class StoreRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        if (!$this->exists('area_id')) {
+            return;
+        }
+
+        $value = $this->input('area_id');
+        if (
+            $value === '' ||
+            $value === null ||
+            $value === 0 ||
+            $value === 0.0 ||
+            $value === '0' ||
+            (is_string($value) && trim($value) === '')
+        ) {
+            $this->merge(['area_id' => null]);
+        }
+    }
+
     public function rules(): array
     {
         return [
@@ -40,6 +59,7 @@ class StoreRequest extends FormRequest
 
             'area_id' => [
                 'nullable',
+                'integer',
                 'exists:areas,id'
             ],
 
