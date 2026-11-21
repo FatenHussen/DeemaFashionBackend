@@ -1,13 +1,14 @@
 # الويب — السلة: أقل طلب + طريقة التوصيل
 
 > **أرسلوا هذا الملف لفريق الويب فقط.**  
-> **آخر تحديث:** 8 تشرين الأول 2026  
+> **آخر تحديث:** 21 تشرين الثاني 2026  
 > Base: `/api/user` + `Accept-Language: ar|en`  
+> **واجهة الخطوتين (جدول · عنوان · نقاط · كود · تفاصيل):** [`WEB_CART_CHECKOUT_UI.md`](./WEB_CART_CHECKOUT_UI.md)  
 > Flutter: [`FLUTTER_CART_CHECKOUT_DELIVERY.md`](./FLUTTER_CART_CHECKOUT_DELIVERY.md)  
 > الداشبورد: [`DASHBOARD_CART_CHECKOUT_DELIVERY.md`](./DASHBOARD_CART_CHECKOUT_DELIVERY.md)  
 > هوية ديما: [`WEB_BRAND_IDENTITY.md`](./WEB_BRAND_IDENTITY.md) — المشروع منفصل عن تيك مارت
 
-السلة قائمة واحدة. تحتها ثلاثة سطور من `checkout`: أقرب توصيل، أقل طلب، وسعر التوصيل. بعدها خيار توصيل واحد للطلب كله.
+السلة قائمة واحدة. تحتها من `checkout`: أقرب توصيل، أقل طلب، سعر التوصيل، و`grand_total`. بعدها خيار توصيل واحد للطلب كله (في خطوة الدفع والتوصيل).
 
 `product.delivery_time` (مثل «3–5 أيام») يبقى على **صفحة المنتج** فقط. لا ترسموه في السلة.  
 هذا مو جدولة السلة (`start_date` + `delivery_time` بصيغة `HH:mm`).

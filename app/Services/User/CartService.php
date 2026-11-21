@@ -53,6 +53,13 @@ class CartService
 
         $summary = $this->checkoutPolicy->summarize($this->checkoutPolicy->forShops($shops), $subtotal);
         $summary['delivery_price'] = $this->resolveCartDeliveryPrice($userId, $items);
+        $summary['shops'] = $shops
+            ->map(fn ($shop) => [
+                'id' => $shop->id,
+                'name' => $shop->name,
+            ])
+            ->values()
+            ->all();
 
         return $this->presentCheckout($summary);
     }
@@ -60,13 +67,20 @@ class CartService
     public function presentCheckout(array $summary): array
     {
         $remaining = (float) $summary['remaining_amount'];
+        $deliveryPrice = array_key_exists('delivery_price', $summary)
+            ? $summary['delivery_price']
+            : null;
+        $subtotal = (float) $summary['subtotal'];
+        $grandTotal = $deliveryPrice === null ? $subtotal : $subtotal + (float) $deliveryPrice;
 
         $payload = [
             'source' => $summary['source'],
             'shop_id' => $summary['shop_id'],
+            'shops' => $summary['shops'] ?? [],
             'min_order_amount' => $this->convertPrice($summary['min_order_amount']),
-            'subtotal' => $this->convertPrice($summary['subtotal']),
+            'subtotal' => $this->convertPrice($subtotal),
             'remaining_amount' => $this->convertPrice($remaining),
+            'grand_total' => $this->convertPrice($grandTotal),
             'can_checkout' => (bool) $summary['can_checkout'],
             'delivery_min_hours' => (int) $summary['delivery_min_hours'],
             'delivery_max_hours' => (int) $summary['delivery_max_hours'],
@@ -82,9 +96,9 @@ class CartService
         ];
 
         if (array_key_exists('delivery_price', $summary)) {
-            $payload['delivery_price'] = $summary['delivery_price'] === null
+            $payload['delivery_price'] = $deliveryPrice === null
                 ? null
-                : $this->convertPrice($summary['delivery_price']);
+                : $this->convertPrice($deliveryPrice);
         }
 
         return $payload;

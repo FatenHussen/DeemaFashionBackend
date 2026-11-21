@@ -253,19 +253,25 @@ class OrderService extends BaseService
             $totalQuantity,
             $orderItems
         ] = $this->addItemsToOrder(null, $data);
-        $policy = $this->checkoutPolicy->forShops(
-            $this->checkoutPolicy->shopsFromVariantIds(
-                collect($data['items'] ?? [])->pluck('shop_product_variant_id')->all()
-            )
+        $shops = $this->checkoutPolicy->shopsFromVariantIds(
+            collect($data['items'] ?? [])->pluck('shop_product_variant_id')->all()
         );
-        $checkout = $this->cartService->presentCheckout(
-            $this->checkoutPolicy->summarize($policy, (float) $subtotalAfterProductDiscount)
-        );
+        $policy = $this->checkoutPolicy->forShops($shops);
+        $checkoutSummary = $this->checkoutPolicy->summarize($policy, (float) $subtotalAfterProductDiscount);
+        $checkoutSummary['shops'] = $shops
+            ->map(fn ($shop) => [
+                'id' => $shop->id,
+                'name' => $shop->name,
+            ])
+            ->values()
+            ->all();
+        $checkout = $this->cartService->presentCheckout($checkoutSummary);
         $checkout['delivery_error'] = $this->deliveryChoiceError($data, $policy);
         if ($checkout['delivery_error'] !== null) {
             $checkout['can_checkout'] = false;
         }
         $promotionService = app(PromotionService::class);
+        // delivery_price / grand_total on checkout are refreshed after discounts below.
         // خصومات عامة + نقاط + اشتراك
         $discounts = $this->applyExternalDiscounts(
             null,
@@ -326,6 +332,8 @@ class OrderService extends BaseService
         $formattedItems = array_map(function ($item) {
             return [
                 "shop_product_variant_id" => $item["shop_product_variant_id"],
+                "shop_id" => $item["shop_id"] ?? null,
+                "shop_name" => $item["shop_name"] ?? null,
                 "product_name" => $item["product_name"],
                 "product_image" => $item["product_image"] ?? null,
                 "quantity" => $item["quantity"],
@@ -338,12 +346,39 @@ class OrderService extends BaseService
             ];
         }, $orderItems->toArray());
 
+        $stores = $orderItems
+            ->filter(fn ($item) => ! empty($item['shop_id']))
+            ->unique('shop_id')
+            ->map(fn ($item) => [
+                'id' => $item['shop_id'],
+                'name' => $item['shop_name'] ?? null,
+            ])
+            ->values()
+            ->all();
+
+        $pointsDiscount = (float) ($discounts['coupon_discount_from_points'] ?? 0);
+        $couponDiscount = (float) ($discounts['coupon_discount'] ?? 0);
+        // Tax is not calculated by the backend yet — always 0 for the checkout UI.
+        $taxAmount = 0.0;
+
+        $checkout['delivery_price'] = $this->convertPrice((float) $deliveryPrice);
+        $checkout['grand_total'] = $this->convertPrice($finalTotal);
+
         return [
             'discounts' => $formattedDiscounts,
             'subtotal_before_discount' => $this->convertFormattedPrice($subtotalBeforeDiscount),
             'subtotal_after_product_discount' => $this->convertFormattedPrice($subtotalAfterProductDiscount),
             'total_quantity' => $totalQuantity,
             'total' => $this->convertFormattedPrice($finalTotal),
+            'order_details' => [
+                'stores' => $stores,
+                'subtotal' => $this->convertPrice($subtotalAfterProductDiscount),
+                'tax' => $this->convertPrice($taxAmount),
+                'points_discount' => $this->convertPrice($pointsDiscount),
+                'coupon_discount' => $this->convertPrice($couponDiscount),
+                'delivery_fees' => $this->convertPrice((float) $deliveryPrice),
+                'grand_total' => $this->convertPrice($finalTotal),
+            ],
             'available_promotions' => $availablePromotions,
             'automatic_promotions' => array_merge($automaticPromotions, [
                 'free_shipping_applies' => $promotionService->hasActiveAutomaticFreeShipping(
@@ -781,7 +816,7 @@ class OrderService extends BaseService
 
         foreach ($data['items'] as $item) {
 
-            $shopVariant = ShopProductVariant::with('productVariant.product')
+            $shopVariant = ShopProductVariant::with(['productVariant.product', 'shop'])
                 ->findOrFail($item['shop_product_variant_id']);
 
             $productVariant = $shopVariant->productVariant;
@@ -914,6 +949,7 @@ class OrderService extends BaseService
             $orderItems->push([
                 'shop_product_variant_id' => $shopVariant->id,
                 'shop_id' => $shopVariant->shop_id,
+                'shop_name' => $shopVariant->shop?->name,
                 'product_name' => $product->name,
                 'product_image' => $product->image_url,
                 'note' => $item['note'] ?? null,
@@ -927,8 +963,7 @@ class OrderService extends BaseService
                 'vendor_id' => $product->vendor_id,
                 'category_id' => $product->category_id,
                 'product_id' => $product->id,
-                'variant' => $productVariant->attributes_values->pluck('name')->toArray()
-
+                'variant' => $productVariant->attributes_values->pluck('name')->toArray(),
             ]);
         }
 

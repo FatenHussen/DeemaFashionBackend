@@ -29,7 +29,13 @@ class OrderService extends BaseService
         $this->resource   = OneResource::class;
         $this->collection = AllResource::class;
         $this->pagination = true;
-        $this->relations = ['driver', 'user', 'items'];
+        $this->relations = [
+            'driver',
+            'user',
+            'items.extras.extraDetail',
+            'items.shopProductVariant.shop',
+            'items.shopProductVariant.productVariant.product',
+        ];
         $this->searchableFields = ['id'];
     }
 

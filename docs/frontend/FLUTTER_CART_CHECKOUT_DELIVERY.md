@@ -1,13 +1,14 @@
 # Flutter — السلة: أقل طلب + طريقة التوصيل
 
 > **أرسلوا هذا الملف لفريق Flutter فقط.**  
-> **آخر تحديث:** 8 تشرين الأول 2026  
+> **آخر تحديث:** 21 تشرين الثاني 2026  
 > Base: `/api/user` + `Accept-Language: ar|en`  
+> **واجهة الشاشتين (جدول · عنوان · نقاط · كود · تفاصيل):** [`FLUTTER_CART_CHECKOUT_UI.md`](./FLUTTER_CART_CHECKOUT_UI.md)  
 > ويب: [`WEB_CART_CHECKOUT_DELIVERY.md`](./WEB_CART_CHECKOUT_DELIVERY.md)  
 > الداشبورد: [`DASHBOARD_CART_CHECKOUT_DELIVERY.md`](./DASHBOARD_CART_CHECKOUT_DELIVERY.md)  
 > هوية ديما: [`FLUTTER_BRAND_IDENTITY.md`](./FLUTTER_BRAND_IDENTITY.md) — المشروع منفصل عن تيك مارت
 
-السلة قائمة واحدة. تحتها ثلاثة سطور من `checkout`: أقرب توصيل، أقل طلب، وسعر التوصيل. بعدها خيار توصيل واحد للطلب كله.
+السلة قائمة واحدة. تحتها من `checkout`: أقرب توصيل، أقل طلب، سعر التوصيل، و`grand_total`. بعدها خيار توصيل واحد للطلب كله (في شاشة الدفع والتوصيل).
 
 `product.deliveryTime` (مثل «3–5 أيام») يبقى على **صفحة المنتج** فقط.  
 هذا مو جدولة السلة (`startDate` + `deliveryTime` بصيغة `HH:mm`).
