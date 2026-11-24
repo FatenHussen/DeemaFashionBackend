@@ -1,6 +1,6 @@
 # ديما فاشن — الهوية البصرية (مرجع الكل)
 
-> **آخر تحديث:** 8 تشرين الأول 2026  
+> **آخر تحديث:** 24 تشرين الثاني 2026  
 > المشروع **منفصل عن تيك مارت / Tikmool**. هذا الملف مرجع مشترك؛ أرسلوا ملف الفريق المناسب:
 
 | الفريق | الملف |
@@ -13,11 +13,11 @@
 
 ## ماذا تغيّر؟
 
-| قبل (تيك مارت / Tikmool) | بعد (ديما فاشن) |
-|--------------------------|-----------------|
+| قبل | بعد (ديما فاشن — هوية أرضية) |
+|-----|------------------------------|
 | اسم TikMart / Tikmool / تيك مارت | **Deema Fashion** / **ديما فاشن** |
-| أساسي فيروزي `#00aed1` | أساسي ماجنتا `#c720a4` |
-| ثانوي برتقالي `#FFA000` | ثانوي وردي `#ff1493` |
+| أساسي فيروزي `#00aed1` ثم ماجنتا `#c720a4` | أساسي بني `#5A3A2E` |
+| ثانوي برتقالي / وردي `#ff1493` | ثانوي طيني `#8B5E4A` |
 | نطاقات tickmartsy / tikmool | `deemafashion.com` |
 | بريد tikmool | `info@deemafashion.com` |
 
@@ -25,27 +25,37 @@
 
 ---
 
-## لوحة الألوان
+## لوحة الألوان (Color Identity)
 
-### فاتح (`color`)
+| الدور | Hex | الاستخدام |
+|-------|-----|-----------|
+| Primary | `#5A3A2E` | Brand · Headers · Primary buttons |
+| Secondary | `#8B5E4A` | Sections · Highlights · Secondary CTAs |
+| Accent | `#D4B39A` | Soft buttons · Key elements · Dark-mode brand |
+| Background | `#EAD8C7` | Page wash / warm canvas |
+| Surface | `#F7F5F2` | Cards · Content areas |
+| Highlight | `#A9B07A` | Emphasis · Logo butterfly · Dark secondary |
+| Text & Icons | `#1F1F1F` | Primary text · Icons |
+
+### فاتح (`color`) — من الـ API
 
 | الدور | Hex |
 |-------|-----|
-| أساسي | `#c720a4` |
-| ثانوي | `#ff1493` |
-| نص | `#1F2937` |
+| أساسي `main_color` | `#5A3A2E` |
+| ثانوي `second_color` | `#8B5E4A` |
+| نص `text_color` | `#1F1F1F` |
 
 ### داكن (`dark_color`)
 
 | الدور | Hex |
 |-------|-----|
-| أساسي | `#1a0a16` |
-| ثانوي | `#a020f0` |
-| نص | `#fce7f3` |
+| أساسي | `#D4B39A` |
+| ثانوي | `#A9B07A` |
+| نص | `#F7F5F2` |
 
 المصدر: `GET /api/user/settings` → `color` · `dark_color` · `welcome` · `login` · `contact`.
 
-لوحة البائع Filament: `primary = #c720a4`.
+لوحة البائع Filament: `primary = #5A3A2E`.
 
 ---
 

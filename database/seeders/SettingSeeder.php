@@ -81,34 +81,34 @@ class SettingSeeder extends Seeder
             'type' => 'json',
         ]);
 
-        // ألوان الواجهة — Deema Fashion rebrand (magenta / pink)
+        // ألوان الواجهة — Deema Fashion visual identity (earthy / warm)
         Setting::updateOrCreate(['key' => 'main_color'], [
-            'value' => '#c720a4',
+            'value' => '#5A3A2E',
             'type'  => 'string',
         ]);
 
         Setting::updateOrCreate(['key' => 'text_color'], [
-            'value' => '#1F2937',
+            'value' => '#1F1F1F',
             'type'  => 'string',
         ]);
 
         Setting::updateOrCreate(['key' => 'second_color'], [
-            'value' => '#ff1493',
+            'value' => '#8B5E4A',
             'type'  => 'string',
         ]);
 
         Setting::updateOrCreate(['key' => 'dark_main_color'], [
-            'value' => '#1a0a16',
+            'value' => '#D4B39A',
             'type'  => 'string',
         ]);
 
         Setting::updateOrCreate(['key' => 'dark_text_color'], [
-            'value' => '#fce7f3',
+            'value' => '#F7F5F2',
             'type'  => 'string',
         ]);
 
         Setting::updateOrCreate(['key' => 'dark_second_color'], [
-            'value' => '#a020f0',
+            'value' => '#A9B07A',
             'type'  => 'string',
         ]);
 
