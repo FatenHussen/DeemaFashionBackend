@@ -92,8 +92,9 @@ class SettingSeeder extends Seeder
             'type'  => 'string',
         ]);
 
+        // Highlight as second — modern contrast vs Primary (not clay-on-brown)
         Setting::updateOrCreate(['key' => 'second_color'], [
-            'value' => '#8B5E4A',
+            'value' => '#A9B07A',
             'type'  => 'string',
         ]);
 

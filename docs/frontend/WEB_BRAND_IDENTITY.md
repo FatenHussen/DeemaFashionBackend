@@ -53,12 +53,18 @@ GET /api/user/settings
 
 | CSS variable مقترح | من | افتراضي |
 |--------------------|-----|---------|
-| `--color-main` | `color.main_color` | `#5A3A2E` |
-| `--color-second` / `--color-api-second` | `color.second_color` | `#8B5E4A` |
+| `--color-main` | `color.main_color` | `#5A3A2E` Primary |
+| `--color-second` / `--color-api-second` | `color.second_color` | `#A9B07A` Highlight (تباين حديث) |
 | `--color-text` | `color.text_color` | `#1F1F1F` |
+| `--color-brand-secondary` | ثابت من اللوحة | `#8B5E4A` Sections sparingly |
+| `--color-brand-accent` | ثابت من اللوحة | `#D4B39A` Soft buttons |
+| `--color-brand-background` | ثابت | `#EAD8C7` Wash |
+| `--color-brand-surface` | ثابت | `#F7F5F2` Canvas |
 | `--color-main-dark` | `dark_color.main_color` | `#D4B39A` |
 | `--color-second-dark` | `dark_color.second_color` | `#A9B07A` |
 | `--color-text-dark` | `dark_color.text_color` | `#F7F5F2` |
+
+**قاعدة تباين:** لا تملؤوا الصفحة ببني+طيني متقارب — Primary للأزرار الرئيسية، Highlight للتأكيد، Accent للكروت الناعمة، Surface للخلفية.
 
 اسحبوا الألوان عند تحميل التطبيق واحقنوها كـ CSS variables.  
 لا تثبتوا `#00aed1` / `#FFA000` / `#c720a4` / `#ff1493`.

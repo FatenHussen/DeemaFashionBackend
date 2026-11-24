@@ -103,7 +103,7 @@ class HelpCenterController extends Controller
                     : '#1F1F1F',
                 'second_color' => isset($settings['second_color'])
                     ? $settings['second_color']->value
-                    : '#8B5E4A',
+                    : '#A9B07A',
             ],
             'dark_color' => [
                 'main_color' => isset($settings['dark_main_color'])
