@@ -1,13 +1,13 @@
 # الداشبورد — هوية ديما فاشن البصرية (منفصل عن تيك مارت)
 
 > **أرسلوا هذا الملف لفريق الداشبورد فقط.**  
-> **آخر تحديث:** 8 تشرين الأول 2026  
+> **آخر تحديث:** 24 تشرين الثاني 2026  
 > Flutter: [`FLUTTER_BRAND_IDENTITY.md`](./FLUTTER_BRAND_IDENTITY.md)  
 > ويب: [`WEB_BRAND_IDENTITY.md`](./WEB_BRAND_IDENTITY.md)  
 > المرجع العام: [`DEEMA_BRAND_IDENTITY.md`](./DEEMA_BRAND_IDENTITY.md)
 
 **المشروع صار ديما فاشن — منفصل عن تيك مارت.**  
-لوحة الأدمن تعرض اسم **ديما فاشن** وألوانها. لا تيك مارت في العناوين أو التسميات الظاهرة.
+لوحة الأدمن تعرض اسم **ديما فاشن** وألوانها الأرضية. لا تيك مارت في العناوين أو التسميات الظاهرة.
 
 ---
 
@@ -34,16 +34,18 @@
 
 | مفتاح | لون ديما الافتراضي |
 |-------|---------------------|
-| `main_color` | `#c720a4` |
-| `second_color` | `#ff1493` |
-| `text_color` | `#1F2937` |
-| `dark_main_color` | `#1a0a16` |
-| `dark_second_color` | `#a020f0` |
-| `dark_text_color` | `#fce7f3` |
+| `main_color` | `#5A3A2E` |
+| `second_color` | `#8B5E4A` |
+| `text_color` | `#1F1F1F` |
+| `dark_main_color` | `#D4B39A` |
+| `dark_second_color` | `#A9B07A` |
+| `dark_text_color` | `#F7F5F2` |
 
 بعد الحفظ، التطبيق والموقع يأخذون القيم من `GET /api/user/settings`.
 
 صور: `login_image` · `welcome_image` · تواصل `email` = `info@deemafashion.com`.
+
+مرجع بصري موسّع: Accent `#D4B39A` · Background `#EAD8C7` · Surface `#F7F5F2` · Highlight `#A9B07A` — انظر [`DEEMA_BRAND_IDENTITY.md`](./DEEMA_BRAND_IDENTITY.md).
 
 ---
 
@@ -52,7 +54,7 @@
 - [ ] عنوان اللوحة / login = ديما فاشن
 - [ ] تسميات `tikmart_*` تظهر كـ «المنصة / ديما فاشن»
 - [ ] لا شعار تيك مارت في الهيدر
-- [ ] ألوان الإعدادات الافتراضية وردي/ماجنتا ديما
+- [ ] ألوان الإعدادات الافتراضية بني/طيني (`#5A3A2E` / `#8B5E4A`) — مو ماجنتا
 - [ ] روابط التواصل deemafashion
 
 **الباك جاهز — الداشبورد يتبع هذا الملف.**

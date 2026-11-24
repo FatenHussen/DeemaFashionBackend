@@ -2,9 +2,11 @@
 
 > **أرسلوا هذا الملف لفريق Flutter.**  
 > Base: `/api/user` + `Accept-Language: ar|en`  
-> **آخر تحديث | Last Updated:** 2026-11-21  
+> **آخر تحديث | Last Updated:** 2026-11-24  
 > الملف الشامل السابق يبقى: [`flutter.md`](./flutter.md)  
 > **المشروع منفصل عن تيك مارت** — الهوية البصرية: [`FLUTTER_BRAND_IDENTITY.md`](./FLUTTER_BRAND_IDENTITY.md)
+
+**اليوم (24 تشرين الثاني):** هوية بصرية أرضية — `#5A3A2E` / `#8B5E4A` (فاتح) · `#D4B39A` / `#A9B07A` (داكن) من `GET /settings` — بدل الماجنتا — [`FLUTTER_BRAND_IDENTITY.md`](./FLUTTER_BRAND_IDENTITY.md)
 
 **اليوم (21 تشرين الثاني):** السلة = شاشتان حسب المواصفات: (1) جدول منتجات + مجموع + انتقل للدفع (2) عنوان · وقت توصيل · دفع · نقاط · كود · تفاصيل الطلب · تأكيد. الباك يرجّع `items` كاملة و`order_details` من preview — [`FLUTTER_CART_CHECKOUT_UI.md`](./FLUTTER_CART_CHECKOUT_UI.md) (يلغي تخطيط المراجعة القديم)
 
@@ -14,7 +16,7 @@
 
 **اليوم (29 تشرين الأول):** دوائر اللون من `hex` فقط. ما في طلب جديد على التطبيق: الدرجة تُحفظ من الداشبورد (متغير الفئة أو باليت المنتج)، و`hex: null` دائرة رمادية `Color(0xFFA1A1AA)` بلا تخمين من الاسم. التطبيق ما يرسل `color_id`. الاختيار بـ `options[].id` والسلة بـ `shop_variants[].id` — [`FLUTTER_PRODUCT_COLOR_HEX.md`](./FLUTTER_PRODUCT_COLOR_HEX.md)
 
-**اليوم (8 تشرين الأول):** هوية ديما فاشن البصرية — ألوان ماجنتا/وردي من `GET /settings` · لا تيك مارت في الواجهة — [`FLUTTER_BRAND_IDENTITY.md`](./FLUTTER_BRAND_IDENTITY.md) · المرجع [`DEEMA_BRAND_IDENTITY.md`](./DEEMA_BRAND_IDENTITY.md)
+**اليوم (سابقاً — 8 تشرين الأول):** هوية ديما فاشن الأولى (ماجنتا) — استُبدلت 24 تشرين الثاني بالهوية الأرضية — [`FLUTTER_BRAND_IDENTITY.md`](./FLUTTER_BRAND_IDENTITY.md)
 
 **اليوم (سابقاً — 5 تشرين الأول):** دفع Stripe للطلبات — [`../api/STRIPE_PAYMENTS.md`](../api/STRIPE_PAYMENTS.md) (`PaymentSheet` · `merchantDisplayName: 'Deema'`)
 
@@ -101,7 +103,7 @@
 |-------|---------|
 | الاسم | **ديما فاشن** / **Deema Fashion** — مو تيك مارت / Tikmool |
 | الألوان | من `GET /api/user/settings` → `color` / `dark_color` |
-| أساسي / ثانوي | `#c720a4` / `#ff1493` |
+| أساسي / ثانوي | `#5A3A2E` / `#8B5E4A` |
 | ممنوع | `#00aed1` · `#FFA000` · شعار تيك مارت · كلمة «تيك مارت» في UI |
 | API قديم | `source: "tikmart"` = منصة ديما — اعرضوا «المنصة» / «ديما فاشن» |
 | Stripe | `merchantDisplayName: 'Deema'` |
@@ -665,10 +667,10 @@ GET /api/user/settings
 
 | حقل | استخدام | افتراضي |
 |-----|---------|---------|
-| `color.main_color` | أزرار · AppBar | `#c720a4` |
-| `color.second_color` | CTA ثانوي | `#ff1493` |
-| `color.text_color` | نص | `#1F2937` |
-| `dark_color.*` | الوضع الداكن | `#1a0a16` / `#a020f0` / `#fce7f3` |
+| `color.main_color` | أزرار · AppBar | `#5A3A2E` |
+| `color.second_color` | CTA ثانوي | `#8B5E4A` |
+| `color.text_color` | نص | `#1F1F1F` |
+| `dark_color.*` | الوضع الداكن | `#D4B39A` / `#A9B07A` / `#F7F5F2` |
 | `login.image` / `welcome.image` | شعار / ترحيب | من السيرفر |
 | `contact.*` | تواصل | `info@deemafashion.com` |
 

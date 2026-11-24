@@ -17,7 +17,7 @@
 | الاسم في الوثائق | **Deema Fashion** (منفصل عن تيك مارت / Tikmool) |
 | المستودع | DeemaFashionBackend |
 | النطاق | `deemafashion.com` |
-| الألوان الأساسية | `#c720a4` (ماجنتا) · `#ff1493` (وردي) — من `GET /api/user/settings` |
+| الألوان الأساسية | `#5A3A2E` (بني) · `#8B5E4A` (طيني) — من `GET /api/user/settings` |
 | النوع | منصة تجارة إلكترونية / ماركت بليس متعدد الأطراف |
 | السوق | سوريا — عملتان (USD / SYP) — محافظات / مدن / مناطق — توصيل |
 | التقنيات الأساسية | Laravel 12 · PHP 8.2+ · Sanctum · Spatie Permission · Spatie Translatable · Filament (بائع) · Reverb · Excel · PDF |

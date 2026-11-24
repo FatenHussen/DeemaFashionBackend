@@ -117,7 +117,7 @@ class SettingSeeder extends Seeder
             ['key' => 'quick_order_enabled', 'value' => true, 'type' => 'boolean'],
             ['key' => 'quick_order_header_enabled', 'value' => true, 'type' => 'boolean'],
             ['key' => 'quick_order_background_image', 'value' => null, 'type' => 'file'],
-            ['key' => 'quick_order_background_color', 'value' => '#FFE8D6', 'type' => 'string'],
+            ['key' => 'quick_order_background_color', 'value' => '#EAD8C7', 'type' => 'string'],
             ['key' => 'quick_order_card_background_color', 'value' => '#FFFFFF', 'type' => 'string'],
             ['key' => 'quick_order_card_variant', 'value' => 'horizontal', 'type' => 'string'],
             ['key' => 'quick_order_badge', 'value' => ['ar' => 'طلب عاجل', 'en' => 'Urgent order'], 'type' => 'json'],

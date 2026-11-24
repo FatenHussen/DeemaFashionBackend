@@ -7,6 +7,7 @@ return new class extends Migration
 {
     /**
      * Apply Deema Fashion earthy visual identity to stored UI color settings.
+     * settings.value is a JSON column — always store json_encode()'d scalars.
      */
     public function up(): void
     {
@@ -23,7 +24,7 @@ return new class extends Migration
             DB::table('settings')->updateOrInsert(
                 ['key' => $key],
                 [
-                    'value' => $value,
+                    'value' => json_encode($value),
                     'type' => 'string',
                     'updated_at' => now(),
                     'created_at' => now(),
@@ -45,7 +46,7 @@ return new class extends Migration
 
         foreach ($previous as $key => $value) {
             DB::table('settings')->where('key', $key)->update([
-                'value' => $value,
+                'value' => json_encode($value),
                 'updated_at' => now(),
             ]);
         }

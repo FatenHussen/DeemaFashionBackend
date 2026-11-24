@@ -1,14 +1,14 @@
 # Flutter — هوية ديما فاشن البصرية (منفصل عن تيك مارت)
 
 > **أرسلوا هذا الملف لفريق Flutter فقط.**  
-> **آخر تحديث:** 8 تشرين الأول 2026  
+> **آخر تحديث:** 24 تشرين الثاني 2026  
 > Base: `/api/user` + `Accept-Language: ar|en`  
 > ويب: [`WEB_BRAND_IDENTITY.md`](./WEB_BRAND_IDENTITY.md)  
 > داشبورد: [`DASHBOARD_BRAND_IDENTITY.md`](./DASHBOARD_BRAND_IDENTITY.md)  
 > المرجع العام: [`DEEMA_BRAND_IDENTITY.md`](./DEEMA_BRAND_IDENTITY.md)
 
 **المشروع صار ديما فاشن — منفصل عن تيك مارت / Tikmool.**  
-لا تستخدموا شعار تيك مارت ولا ألوانه القديمة (فيروزي `#00aed1` / برتقالي `#FFA000`) ولا اسم TikMart / Tikmool في الواجهة.
+لا تستخدموا شعار تيك مارت ولا ألوانه القديمة (فيروزي `#00aed1` / برتقالي `#FFA000`) ولا ماجنتا `#c720a4` / وردي `#ff1493` ولا اسم TikMart / Tikmool في الواجهة.
 
 ---
 
@@ -35,14 +35,14 @@ Accept-Language: ar
 ```json
 {
   "color": {
-    "main_color": "#c720a4",
-    "text_color": "#1F2937",
-    "second_color": "#ff1493"
+    "main_color": "#5A3A2E",
+    "text_color": "#1F1F1F",
+    "second_color": "#8B5E4A"
   },
   "dark_color": {
-    "main_color": "#1a0a16",
-    "text_color": "#fce7f3",
-    "second_color": "#a020f0"
+    "main_color": "#D4B39A",
+    "text_color": "#F7F5F2",
+    "second_color": "#A9B07A"
   },
   "welcome": { "image": ["https://…/welcome.png"], "text": "مرحبا" },
   "login": { "image": "https://…/logo.png", "link": "…" },
@@ -58,12 +58,14 @@ Accept-Language: ar
 
 | مفتاح | دور في التطبيق | افتراضي ديما |
 |--------|----------------|--------------|
-| `color.main_color` | أزرار أساسية · AppBar · روابط · محددات | `#c720a4` |
-| `color.second_color` | تأكيد · CTA ثانوي · badges | `#ff1493` |
-| `color.text_color` | نص أساسي فاتح | `#1F2937` |
-| `dark_color.*` | نفس الأدوار في الوضع الداكن | انظر الجدول فوق |
+| `color.main_color` | أزرار أساسية · AppBar · روابط · محددات | `#5A3A2E` |
+| `color.second_color` | تأكيد · CTA ثانوي · badges | `#8B5E4A` |
+| `color.text_color` | نص أساسي فاتح | `#1F1F1F` |
+| `dark_color.*` | نفس الأدوار في الوضع الداكن | `#D4B39A` / `#A9B07A` / `#F7F5F2` |
 
-**قاعدة:** ابنوا `ThemeData` من رد `settings` بعد الإقلاع. الثوابت أعلاه fallback فقط إذا المفتاح ناقص. لا تثبتوا ألوان تيك مارت في الكود.
+**قاعدة:** ابنوا `ThemeData` من رد `settings` بعد الإقلاع. الثوابت أعلاه fallback فقط إذا المفتاح ناقص. لا تثبتوا ألوان تيك مارت أو الماجنتا القديم في الكود.
+
+لوحة موسّعة (اختياري محلياً): Accent `#D4B39A` · Background `#EAD8C7` · Surface `#F7F5F2` · Highlight `#A9B07A`.
 
 ---
 
@@ -97,7 +99,7 @@ Accept-Language: ar
 ## 5) Checklist Flutter
 
 - [ ] `ThemeData` من `GET /settings` → `color` / `dark_color`
-- [ ] لا `#00aed1` ولا `#FFA000` في الثيم
+- [ ] لا `#00aed1` ولا `#FFA000` ولا `#c720a4` / `#ff1493` في الثيم
 - [ ] اسم التطبيق / Splash / About = ديما فاشن / Deema Fashion
 - [ ] شعار من `login.image` أو `welcome.image`
 - [ ] نصوص السلة: «المنصة» / «ديما» مو «تيك مارت»

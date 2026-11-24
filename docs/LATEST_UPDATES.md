@@ -1,10 +1,12 @@
 # آخر التعديلات والتحديثات — Deema Fashion Backend
 
 > **أرسلوا هذا الملف** — آخر نسخة شاملة (كل الفرق)  
-> **تاريخ:** 5 تشرين الثاني 2026  
+> **تاريخ:** 24 تشرين الثاني 2026  
 > **النطاق:** من منتصف آب حتى اليوم — باك + داشبورد + ويب + Flutter  
-> **الحالة:** الباك جاهز بعد `git pull` + `php artisan config:clear`  
+> **الحالة:** الباك جاهز بعد `git pull` + `php artisan migrate` + `php artisan config:clear`  
 > **مهم:** المشروع **ديما فاشن** منفصل عن تيك مارت — الهوية البصرية [`frontend/DEEMA_BRAND_IDENTITY.md`](./frontend/DEEMA_BRAND_IDENTITY.md)
+
+**آخر ما نزل (24 تشرين الثاني):** هوية بصرية أرضية لديما فاشن — Primary `#5A3A2E` · Secondary `#8B5E4A` · Accent `#D4B39A` · Background `#EAD8C7` · Surface `#F7F5F2` · Highlight `#A9B07A` · Text `#1F1F1F` (بدل الماجنتا/الوردي). باك settings + migration · ويب CSS/ثيم · أدلة [`frontend/DEEMA_BRAND_IDENTITY.md`](./frontend/DEEMA_BRAND_IDENTITY.md) · [`WEB_BRAND_IDENTITY.md`](./frontend/WEB_BRAND_IDENTITY.md) · [`FLUTTER_BRAND_IDENTITY.md`](./frontend/FLUTTER_BRAND_IDENTITY.md) · [`DASHBOARD_BRAND_IDENTITY.md`](./frontend/DASHBOARD_BRAND_IDENTITY.md)
 
 **آخر ما نزل (5 تشرين الثاني):** صفحة المنتج بمتغيّرات — **لا** اختيار افتراضي لأول متغيّر (ويب/Flutter). أول فتح = صور المنتج؛ السلة بدون اختيار → رسالة؛ بعد الاختيار تتبدل الصور. داشبورد: لا شغل — توضيح فقط. ويب [`frontend/WEB_NO_DEFAULT_VARIANT_SELECTION.md`](./frontend/WEB_NO_DEFAULT_VARIANT_SELECTION.md) · Flutter [`frontend/FLUTTER_NO_DEFAULT_VARIANT_SELECTION.md`](./frontend/FLUTTER_NO_DEFAULT_VARIANT_SELECTION.md) · داش [`frontend/DASHBOARD_NO_DEFAULT_VARIANT_SELECTION.md`](./frontend/DASHBOARD_NO_DEFAULT_VARIANT_SELECTION.md)
 

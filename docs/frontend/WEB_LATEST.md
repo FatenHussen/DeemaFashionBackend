@@ -2,9 +2,11 @@
 
 > **أرسلوا هذا الملف لفريق الويب.**  
 > Base: `/api/user` + `Accept-Language: ar|en`  
-> **آخر تحديث | Last Updated:** 2026-11-21  
+> **آخر تحديث | Last Updated:** 2026-11-24  
 > الملف الشامل السابق يبقى: [`web.md`](./web.md)  
 > **المشروع منفصل عن تيك مارت** — الهوية البصرية: [`WEB_BRAND_IDENTITY.md`](./WEB_BRAND_IDENTITY.md)
+
+**اليوم (24 تشرين الثاني):** هوية بصرية أرضية — Primary `#5A3A2E` · Secondary `#8B5E4A` · Accent `#D4B39A` · Background `#EAD8C7` · Surface `#F7F5F2` · Highlight `#A9B07A` · Text `#1F1F1F` (بدل الماجنتا) — [`WEB_BRAND_IDENTITY.md`](./WEB_BRAND_IDENTITY.md)
 
 **اليوم (21 تشرين الثاني):** السلة = خطوتان حسب المواصفات: (1) جدول منتجات + مجموع + انتقل للدفع (2) عنوان · وقت توصيل · دفع · نقاط · كود · تفاصيل الطلب · تأكيد. الباك يرجّع `items` كاملة و`order_details` من preview — [`WEB_CART_CHECKOUT_UI.md`](./WEB_CART_CHECKOUT_UI.md) (يلغي تخطيط المراجعة القديم)
 
@@ -14,7 +16,7 @@
 
 **اليوم (29 تشرين الأول):** دوائر اللون من `hex` فقط. ما في طلب جديد على الموقع: الدرجة تُحفظ من الداشبورد (متغير الفئة أو باليت المنتج)، و`hex: null` دائرة رمادية `rgb(161 161 170)` بلا تخمين من الاسم. الاختيار بـ `options[].id` والسلة بـ `shop_variants[].id` — [`WEB_PRODUCT_COLOR_HEX.md`](./WEB_PRODUCT_COLOR_HEX.md)
 
-**اليوم (8 تشرين الأول):** هوية ديما فاشن البصرية — ألوان ماجنتا/وردي من `GET /settings` · لا تيك مارت — [`WEB_BRAND_IDENTITY.md`](./WEB_BRAND_IDENTITY.md)
+**اليوم (سابقاً — 8 تشرين الأول):** هوية ديما فاشن البصرية الأولى (ماجنتا) — استُبدلت 24 تشرين الثاني بالهوية الأرضية — [`WEB_BRAND_IDENTITY.md`](./WEB_BRAND_IDENTITY.md)
 
 **اليوم (سابقاً — 5 تشرين الأول):** دفع Stripe — [`../api/STRIPE_PAYMENTS.md`](../api/STRIPE_PAYMENTS.md)
 
@@ -106,14 +108,14 @@
 
 ---
 
-## 0d) هوية ديما فاشن (8 تشرين الأول 2026)
+## 0d) هوية ديما فاشن (24 تشرين الثاني 2026)
 
 | البند | المطلوب |
 |-------|---------|
 | الاسم | **ديما فاشن** / **Deema Fashion** — مو تيك مارت |
 | الألوان | `GET /api/user/settings` → CSS vars من `color` / `dark_color` |
-| أساسي / ثانوي | `#c720a4` / `#ff1493` |
-| ممنوع | `#00aed1` · `#FFA000` · اسم TikMart في الواجهة |
+| أساسي / ثانوي | `#5A3A2E` / `#8B5E4A` (هوية أرضية) |
+| ممنوع | `#00aed1` · `#FFA000` · `#c720a4` · `#ff1493` · اسم TikMart في الواجهة |
 | API | `source: "tikmart"` = منصة ديما — النص الظاهر «المنصة» / «ديما فاشن» |
 
 الدليل: [`WEB_BRAND_IDENTITY.md`](./WEB_BRAND_IDENTITY.md).

@@ -12,7 +12,7 @@
 
 **اليوم (8 تشرين الأول):** صلاحيات الأدمن — أخفوا السايدبار حسب `permissions` بعد Login (مو قائمة ثابتة). موظف `navmenuitem.*` فقط → يظهر شريط التنقّل فقط — [`DASHBOARD_PERMISSIONS.md`](./DASHBOARD_PERMISSIONS.md)
 
-**اليوم (8 تشرين الأول):** هوية ديما فاشن — تسميات المنصة مو «تيك مارت» · ألوان `#c720a4` / `#ff1493` — [`DASHBOARD_BRAND_IDENTITY.md`](./DASHBOARD_BRAND_IDENTITY.md)
+**اليوم (24 تشرين الثاني):** هوية ديما فاشن الأرضية — تسميات المنصة مو «تيك مارت» · ألوان `#5A3A2E` / `#8B5E4A` — [`DASHBOARD_BRAND_IDENTITY.md`](./DASHBOARD_BRAND_IDENTITY.md)
 
 **اليوم (سابقاً):** طلب المطعم لحاله توصيل فوري، من سائق المطعم أو عامل ديما. السعر من المسافة والساعات ما بتنضرب بالمعامل — [`DASHBOARD_CART_CHECKOUT_DELIVERY.md`](./DASHBOARD_CART_CHECKOUT_DELIVERY.md)
 
